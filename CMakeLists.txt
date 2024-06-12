@@ -23,13 +23,18 @@ endif()
 
 find_package(Qore 2.0 REQUIRED)
 
-# libv8_base.a and libv8_snapshot
-find_library(V8_BASE_WITHOUT_COMPILER NAMES libv8_base_without_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
-find_library(V8_LIBBASE_LIB NAMES libv8_libbase.a HINTS ENV V8_LIB_DIR REQUIRED)
-find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
-find_library(V8_LIBPLATFORM_LIB NAMES libv8_libplatform.a HINTS ENV V8_LIB_DIR REQUIRED)
-find_library(V8_LIBSAMPLER_LIB NAMES libv8_libsampler.a HINTS ENV V8_LIB_DIR REQUIRED)
-find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+if (APPLE)
+    find_library(V8_BASE_WITHOUT_COMPILER NAMES libv8_base_without_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_LIBBASE_LIB NAMES libv8_libbase.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_LIBPLATFORM_LIB NAMES libv8_libplatform.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_LIBSAMPLER_LIB NAMES libv8_libsampler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+else()
+    find_library(V8 NAMES v8 HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_LIBBASE NAMES v8_libbase HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_LIBPLATFORM NAMES v8_libplatform HINTS ENV V8_LIB_DIR REQUIRED)
+endif()
 
 if (DEFINED ENV{V8_INCLUDE_DIR})
     include_directories(BEFORE "$ENV{V8_INCLUDE_DIR}")
@@ -89,14 +94,22 @@ if (DEFINED ENV{DOXYGEN_EXECUTABLE})
 endif()
 
 set(MODULE_DOX_INPUT ${CMAKE_BINARY_DIR})
-qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-    ${V8_LIBBASE_LIB}
-    ${V8_SNAPSHOT_LIB}
-    ${V8_LIBPLATFORM_LIB}
-    ${V8_BASE_WITHOUT_COMPILER}
-    ${V8_LIBSAMPLER_LIB}
-    ${V8_COMPILER_LIB}
-)
+if (APPLE)
+    qore_external_binary_module(${module_name} ${PROJECT_VERSION}
+        ${V8_LIBBASE_LIB}
+        ${V8_SNAPSHOT_LIB}
+        ${V8_LIBPLATFORM_LIB}
+        ${V8_BASE_WITHOUT_COMPILER}
+        ${V8_LIBSAMPLER_LIB}
+        ${V8_COMPILER_LIB}
+    )
+else()
+    qore_external_binary_module(${module_name} ${PROJECT_VERSION}
+        ${V8}
+        ${V8_LIBBASE}
+        ${V8_LIBPLATFORM}
+    )
+endif()
 
 qore_dist(${PROJECT_VERSION})
 

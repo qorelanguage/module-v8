@@ -21,12 +21,14 @@
 
 #include "v8-module.h"
 
-static QoreStringNode* v8_module_init();
+static std::unique_ptr<v8::Platform> platform;
+
+static QoreStringNode* v8_module_init_info(qore_module_init_info& info);
 static void v8_module_ns_init(QoreNamespace* rns, QoreNamespace* qns);
 static void v8_module_delete();
 //static void v8_module_parse_cmd(const QoreString& cmd, ExceptionSink* xsink);
 
-static QoreStringNode* v8_module_init_intern(bool repeat);
+static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool repeat);
 
 // module declaration for Qore 0.9.5+
 void v8_qore_module_desc(QoreModuleInfo& mod_info) {
@@ -37,7 +39,7 @@ void v8_qore_module_desc(QoreModuleInfo& mod_info) {
     mod_info.url = "http://qore.org";
     mod_info.api_major = QORE_MODULE_API_MAJOR;
     mod_info.api_minor = QORE_MODULE_API_MINOR;
-    mod_info.init = v8_module_init;
+    mod_info.init_info = v8_module_init_info;
     mod_info.ns_init = v8_module_ns_init;
     mod_info.del = v8_module_delete;
     //mod_info.parse_cmd = v8_module_parse_cmd;
@@ -80,28 +82,31 @@ static sig_vec_t sig_vec = {
 */
 
 static void v8_module_shutdown() {
+    //printd(5, "v8_module_shutdown()\n");
     v8::V8::Dispose();
     v8::V8::DisposePlatform();
 }
 
-static QoreStringNode* v8_module_init() {
-    return v8_module_init_intern(false);
+static QoreStringNode* v8_module_init_info(qore_module_init_info& info) {
+    return v8_module_init_intern(info, false);
 }
 
-static QoreStringNode* v8_module_init_intern(bool repeat) {
+static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool repeat) {
     if (!V8NS) {
         V8NS = new QoreNamespace("V8");
         //V8NS->addSystemClass(initV8ProgramClass(*V8NS));
     }
 
-    const char* argv0 = "v8-api-1.4.qmod";
+    const char* argv0 = info.path.c_str();
 
     // Initialize V8.
     v8::V8::InitializeICUDefaultLocation(argv0);
     v8::V8::InitializeExternalStartupData(argv0);
-    std::unique_ptr<v8::Platform> platform = v8::platform::NewDefaultPlatform();
+    platform = v8::platform::NewDefaultPlatform();
     v8::V8::InitializePlatform(platform.get());
     v8::V8::Initialize();
+
+    //printd(5, "v8_module_init_intern()\n");
 
     return nullptr;
 }

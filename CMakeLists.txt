@@ -53,12 +53,13 @@ else()
 endif()
 
 set(QPP_SRC
-    #src/QC_PythonProgram.qpp
+    src/QC_JavaScriptProgram.qpp
 )
 
 set(CPP_SRC
     src/v8-module.cpp
     src/QoreV8Program.cpp
+    src/QoreV8CallStack.cpp
 )
 
 qore_wrap_qpp_value(QPP_SOURCES ${QPP_SRC})

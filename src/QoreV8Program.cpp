@@ -27,41 +27,138 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <climits>
 
-QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, int start,
-        ExceptionSink* xsink) {
+QoreV8Program::QoreV8Program() {
     printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
-
     // Create a new Isolate
     create_params.array_buffer_allocator = v8::ArrayBuffer::Allocator::NewDefaultAllocator();
     isolate = v8::Isolate::New(create_params);
 
     // Create a new context
+    v8::Isolate::Scope isolate_scope(isolate);
+    v8::HandleScope handle_scope(isolate);
     v8::Local<v8::Context> local_context = v8::Context::New(isolate);
     context.Reset(isolate, local_context);
 }
 
+QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
+        : QoreV8Program() {
+    assert(source_code.getEncoding() == QCS_UTF8);
+    assert(source_label.getEncoding() == QCS_UTF8);
+    const v8::TryCatch tryCatch(isolate);
+    v8::Isolate::Scope isolate_scope(isolate);
+    v8::HandleScope handle_scope(isolate);
+    v8::MaybeLocal<v8::String> m_label = v8::String::NewFromUtf8(isolate, source_label.c_str(),
+        v8::NewStringType::kNormal);
+    if (m_label.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return;
+    }
+    v8::Local<v8::String> lstr = m_label.ToLocalChecked();
+    v8::ScriptOrigin origin(isolate, lstr);
+
+    v8::MaybeLocal<v8::String> m_src = v8::String::NewFromUtf8(isolate, source_code.c_str(), v8::NewStringType::kNormal);
+    if (m_src.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return;
+    }
+
+    v8::Local<v8::String> src = m_src.ToLocalChecked();
+    v8::Local<v8::Context> context = this->context.Get(isolate);
+    v8::Context::Scope context_scope(context);
+    v8::MaybeLocal<v8::Script> m_script = v8::Script::Compile(context, src);
+    if (m_script.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return;
+    }
+    label.Reset(isolate, lstr);
+    script.Reset(isolate, m_script.ToLocalChecked());
+}
+
+QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : QoreV8Program() {
+}
+
 void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
     if (isolate) {
+        script.Reset();
+        label.Reset();
         context.Reset();
         // Dispose the isolate
         isolate->Dispose();
         delete create_params.array_buffer_allocator;
+        isolate = nullptr;
     }
 }
 
 QoreValue QoreV8Program::run(ExceptionSink* xsink) {
-    assert(false);
-    return QoreValue();
+    // Run the script to get the result
+    v8::Locker locker(isolate);
+    v8::Isolate::Scope isolate_scope(isolate);
+    v8::HandleScope handle_scope(isolate);
+    const v8::TryCatch tryCatch(isolate);
+    v8::ScriptOrigin origin(isolate, label.Get(isolate));
+    v8::Local<v8::Script> script = this->script.Get(isolate);
+    v8::Local<v8::Context> context = this->context.Get(isolate);
+    v8::Context::Scope context_scope(context);
+    v8::MaybeLocal<v8::Value> m_rv = script->Run(context);
+    if (m_rv.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return QoreValue();
+    }
+    return getQoreValue(xsink, m_rv.ToLocalChecked());
+}
+
+int QoreV8Program::checkException(ExceptionSink* xsink, const v8::TryCatch& tryCatch) const {
+    if (tryCatch.HasCaught()) {
+        v8::Local<v8::Value> ex = tryCatch.Exception();
+        if (!*ex) {
+            xsink->raiseException("JAVASCRIPT-EXCEPTION", "empty exception thrown at unknown source location");
+            return -1;
+        }
+
+        // convert to a string
+        v8::String::Utf8Value exception(isolate, ex);
+
+        v8::Local<v8::Message> msg = tryCatch.Message();
+        if (msg.IsEmpty()) {
+            xsink->raiseException("JAVASCRIPT-EXCEPTION", new QoreStringNode(*exception));
+            return -1;
+        }
+
+        SimpleRefHolder<QoreStringNode> desc(new QoreStringNode(*exception));
+        desc->concat('\n');
+
+        v8::Local<v8::Context> context(isolate->GetCurrentContext());
+
+        // Print wavy underline (GetUnderline is deprecated)
+        int start = msg->GetStartColumn(context).FromJust();
+        for (int i = 0; i < start; ++i) {
+            desc->concat(' ');
+        }
+        int end = msg->GetEndColumn(context).FromJust();
+        for (int i = start; i < end; i++) {
+            desc->concat('^');
+        }
+
+        // add Java call stack to Qore call stack
+        QoreExternalProgramLocationWrapper loc;
+        QoreV8CallStack stack(*this, tryCatch, context, msg, loc);
+
+        xsink->raiseExceptionArg(loc.get(), "JAVASCRIPT-EXCEPTION", QoreValue(), new QoreStringNode(desc), stack);
+        return -1;
+    }
+    return 0;
 }
 
 QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value> val) {
-    assert(false);
-    v8::Local<v8::Context> context = v8::Local<v8::Context>::New(isolate, this->context);
+    v8::Local<v8::Context> context = this->context.Get(isolate);
 
+    const v8::TryCatch tryCatch(isolate);
     if (val->IsInt32() || val->IsUint32()) {
         v8::MaybeLocal<v8::Int32> i = val->ToInt32(context);
         if (i.IsEmpty()) {
+            checkException(xsink, tryCatch);
             return QoreValue();
         }
         return (int64)*i.ToLocalChecked();
@@ -69,6 +166,7 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
     if (val->IsUint32()) {
         v8::MaybeLocal<v8::Uint32> i = val->ToUint32(context);
         if (i.IsEmpty()) {
+            checkException(xsink, tryCatch);
             return QoreValue();
         }
         return (int64)*i.ToLocalChecked();
@@ -77,16 +175,18 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
     if (val->IsBigInt()) {
         v8::MaybeLocal<v8::BigInt> i = val->ToBigInt(context);
         if (i.IsEmpty()) {
+            checkException(xsink, tryCatch);
             return QoreValue();
         }
         v8::Local<v8::BigInt> bi = i.ToLocalChecked();
         bool lossless = true;
         int64_t v = bi->Int64Value(&lossless);
-        if (!lossless) {
-            // Convert the result to an UTF8 string
-            v8::String::Utf8Value utf8(isolate, val);
-            return new QoreNumberNode(*utf8);
+        if (lossless) {
+            return v;
         }
+        // Convert the result to an UTF8 string
+        v8::String::Utf8Value utf8(isolate, val);
+        return new QoreNumberNode(*utf8);
     }
 
     if (val->IsBoolean()) {
@@ -102,20 +202,17 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
     if (val->IsNumber()) {
         v8::MaybeLocal<v8::Number> n = val->ToNumber(context);
         if (n.IsEmpty()) {
+            checkException(xsink, tryCatch);
             return QoreValue();
         }
         // returns a double
         return QoreValue(n.ToLocalChecked()->Value());
     }
 
-    /*
-    if (val->IsDate()) {
-    }
-    */
-
     if (val->IsObject()) {
         v8::MaybeLocal<v8::Object> o = val->ToObject(context);
         if (o.IsEmpty()) {
+            checkException(xsink, tryCatch);
             return QoreValue();
         }
         ReferenceHolder<QoreHashNode> h(new QoreHashNode(autoTypeInfo), xsink);
@@ -128,16 +225,19 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
         for (uint32_t i = 0, e = props->Length(); i < e; ++i) {
             v8::MaybeLocal<v8::Value> key = props->Get(context, i);
             if (key.IsEmpty()) {
+                checkException(xsink, tryCatch);
                 return h.release();
             }
             v8::Local<v8::Value> k = key.ToLocalChecked();
             v8::MaybeLocal<v8::Value> value = obj->Get(context, k);
             if (value.IsEmpty()) {
+                checkException(xsink, tryCatch);
                 return h.release();
             }
             v8::Local<v8::Value> v = value.ToLocalChecked();
             ValueHolder qk(getQoreValue(xsink, k), xsink);
             if (*xsink) {
+                checkException(xsink, tryCatch);
                 return QoreValue();
             }
             assert(qk->getType() == NT_STRING);
@@ -174,14 +274,14 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
     v8::Local<v8::String> str = val->TypeOf(isolate);
     // Convert the result to an UTF8 string
     v8::String::Utf8Value utf8(isolate, str);
-    xsink->raiseException("V8-TYPE-ERROR", "Cannot convert v8 '%s' value to a Qore value", *utf8);
+    xsink->raiseException("JAVASCRIPT-TYPE-ERROR", "Cannot convert v8 '%s' value to a Qore value", *utf8);
     return QoreValue();
 }
 
 v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSink* xsink) {
     //printd(5, "QoreV8Program::getV8Value() type '%s'\n", val.getFullTypeName());
     // We will be creating temporary handles so we use a handle scope.
-    v8::EscapableHandleScope handle_scope(isolate);
+    //v8::EscapableHandleScope handle_scope(isolate);
 
     /*
     // Set the isolate for all operations executed within the local scope
@@ -193,6 +293,11 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
     // Enter the context for compiling and running the hello world script.
     v8::Context::Scope context_scope(context);
     */
+
+    v8::Isolate::Scope isolate_scope(isolate);
+    v8::HandleScope handle_scope(isolate);
+
+    const v8::TryCatch tryCatch(isolate);
 
     switch (val.getType()) {
         case NT_NOTHING:
@@ -215,6 +320,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
             v8::MaybeLocal<v8::String> rv = v8::String::NewFromUtf8(isolate, val.get<const QoreStringNode>()->c_str(),
                 v8::NewStringType::kNormal);
             if (rv.IsEmpty()) {
+                checkException(xsink, tryCatch);
                 return v8::Null(isolate);
             }
             return rv.ToLocalChecked();
@@ -226,6 +332,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
             val.get<const DateTimeNode>()->format(str, "IF");
             v8::MaybeLocal<v8::String> rv = v8::String::NewFromUtf8(isolate, str.c_str(), v8::NewStringType::kNormal);
             if (rv.IsEmpty()) {
+                checkException(xsink, tryCatch);
                 return v8::Null(isolate);
             }
             return rv.ToLocalChecked();
@@ -247,6 +354,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
             QoreString str(val.get<const BinaryNode>());
             v8::MaybeLocal<v8::String> rv = v8::String::NewFromUtf8(isolate, str.c_str(), v8::NewStringType::kNormal);
             if (rv.IsEmpty()) {
+                checkException(xsink, tryCatch);
                 return v8::Null(isolate);
             }
             return rv.ToLocalChecked();
@@ -267,7 +375,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
 
         case NT_HASH: {
             const QoreHashNode* h = val.get<const QoreHashNode>();
-            v8::Local<v8::Context> context = v8::Local<v8::Context>::New(isolate, this->context);
+            v8::Local<v8::Context> context = this->context.Get(isolate);
             v8::Local<v8::Map> m = v8::Map::New(isolate);
             ConstHashIterator i(h);
             while (i.next()) {
@@ -278,6 +386,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
                 v8::MaybeLocal<v8::String> key = v8::String::NewFromUtf8(isolate, i.getKey(),
                     v8::NewStringType::kNormal);
                 if (key.IsEmpty()) {
+                    checkException(xsink, tryCatch);
                     return v8::Null(isolate);
                 }
                 v8::MaybeLocal<v8::Map> maybe_map = m->Set(context, key.ToLocalChecked(), v);
@@ -289,7 +398,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
         }
 
         default:
-            xsink->raiseException("V8-TYPE-ERROR", "Cannot convert Qore values of type '%s' to a V8 value",
+            xsink->raiseException("JAVASCRIPT-TYPE-ERROR", "Cannot convert Qore values of type '%s' to a V8 value",
                 val.getFullTypeName());
     }
 

@@ -21,6 +21,8 @@
 
 #include "v8-module.h"
 
+#include "QC_JavaScriptProgram.h"
+
 static std::unique_ptr<v8::Platform> platform;
 
 static QoreStringNode* v8_module_init_info(qore_module_init_info& info);
@@ -94,10 +96,11 @@ static QoreStringNode* v8_module_init_info(qore_module_init_info& info) {
 static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool repeat) {
     if (!V8NS) {
         V8NS = new QoreNamespace("V8");
-        //V8NS->addSystemClass(initV8ProgramClass(*V8NS));
+        V8NS->addSystemClass(initJavaScriptProgramClass(*V8NS));
     }
 
     const char* argv0 = info.path.c_str();
+    //printd(5, "v8_module_init_intern() argv0: %s\n", argv0);
 
     // Initialize V8.
     v8::V8::InitializeICUDefaultLocation(argv0);

@@ -41,8 +41,9 @@
 
 class QoreV8Program : public AbstractQoreProgramExternalData {
 public:
-    DLLLOCAL QoreV8Program(const QoreString& source_code, const QoreString& source_label, int start,
-        ExceptionSink* xsink);
+    DLLLOCAL QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink);
+
+    DLLLOCAL QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm);
 
     DLLLOCAL virtual void doDeref() {
         printd(5, "QoreV8Program::doDeref() this: %p\n", this);
@@ -51,10 +52,15 @@ public:
         if (xsink) {
             throw QoreXSinkException(xsink);
         }
+        delete this;
     }
 
     DLLLOCAL void destructor(ExceptionSink* xsink) {
         deleteIntern(xsink);
+    }
+
+    DLLLOCAL virtual AbstractQoreProgramExternalData* copy(QoreProgram* pgm) const {
+        return new QoreV8Program(*this, pgm);
     }
 
     DLLLOCAL QoreValue run(ExceptionSink* xsink);
@@ -69,18 +75,32 @@ public:
     //! Returns a V8 value for the given Qore value
     DLLLOCAL v8::Local<v8::Value> getV8Value(const QoreValue val, ExceptionSink* xsink);
 
+    //! Checks if a JavaScript exception has been thrown and throws the corresponding Qore exception
+    DLLLOCAL int checkException(ExceptionSink* xsink, const v8::TryCatch& tryCatch) const;
+
 protected:
     v8::Isolate* isolate = nullptr;
     v8::Isolate::CreateParams create_params;
     v8::Global<v8::Context> context;
+    v8::Global<v8::Script> script;
+    v8::Global<v8::String> label;
+
+    //! protected constructor
+    DLLLOCAL QoreV8Program();
 
     DLLLOCAL void deleteIntern(ExceptionSink* xsink);
+
+    class QoreV8CallStack : public QoreCallStack {
+    public:
+        DLLLOCAL QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
+                v8::Local<v8::Context> context, v8::Local<v8::Message> msg, QoreExternalProgramLocationWrapper& loc);
+    };
 };
 
 class QoreV8ProgramData : public AbstractPrivateData, public QoreV8Program {
 public:
-   DLLLOCAL QoreV8ProgramData(const QoreString& source_code, const QoreString& source_label, int start,
-        ExceptionSink* xsink) : QoreV8Program(source_code, source_label, start, xsink) {
+   DLLLOCAL QoreV8ProgramData(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
+        : QoreV8Program(source_code, source_label, xsink) {
         //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
     }
 

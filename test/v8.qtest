@@ -1,0 +1,27 @@
+#!/usr/bin/env qore
+
+%new-style
+%require-types
+%strict-args
+%enable-all-warnings
+
+%requires v8
+%requires QUnit
+
+%exec-class V8Test
+
+class V8Test inherits Test {
+    public {
+    }
+
+    constructor() : Test("v8 test", "1.0") {
+        addTestCase("v8 program test", \v8ProgramTest());
+        # Set return value for compatibility with test harnesses that check the return value
+        set_return_value(main());
+    }
+
+    v8ProgramTest() {
+        JavaScriptProgram js("'hi'", "test.js");
+        assertEq("hi", js.run());
+    }
+}

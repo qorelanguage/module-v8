@@ -1,0 +1,87 @@
+/* -*- mode: c++; indent-tabs-mode: nil -*- */
+/** @file QC_JavaScriptProgram.qpp defines the %Qore JavaScriptProgram class */
+/*
+    QC_JavaScriptProgram.qpp
+
+    Qore Programming Language
+
+    Copyright 2024 Qore Technologies, s.r.o.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+#include "QC_JavaScriptProgram.h"
+
+//! Program for embedding and executing JavaScript code
+/**
+*/
+qclass JavaScriptProgram [arg=QoreV8ProgramData* jsp; ns=V8; dom=EMBEDDED_LOGIC];
+
+//! Creates the object and parses and runs the given source code
+/** @param source_code the JavaScript source to parse and compile
+    @param source_label the label or file name of the source
+*/
+JavaScriptProgram::constructor(string source_code, string source_label) {
+    ReferenceHolder<QoreV8ProgramData> jsp(new QoreV8ProgramData(*source_code, *source_label, xsink),
+        xsink);
+    if (*xsink) {
+        return;
+    }
+
+    //printd(5, "JavaScriptProgram::constructor() created %p\n", *jsp);
+    self->setPrivate(CID_JAVASCRIPTPROGRAM, jsp.release());
+}
+
+//! Destroys the interpreter context and invalidates the object
+/**
+*/
+JavaScriptProgram::destructor() {
+    //printd(5, "Qore JavaScriptProgram::destructor() this: %p\n", jsp);
+    jsp->destructor(xsink);
+    jsp->deref(xsink);
+}
+
+//! Runs the program
+/**
+    @note Exceptions parsing or compiling the JavaScript code are thrown according to @ref javascript_exceptions
+*/
+auto JavaScriptProgram::run() {
+    return jsp->run(xsink);
+}
+
+//! Call the given function and return the result
+/** @param func_name the function name to call
+    @param ... arguments to the function should follow the name converted to JavaScript values as per
+    @ref javascript_qore_to_javascript
+
+    @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
+
+    @see @ref javascript_exceptions
+*/
+auto JavaScriptProgram::callFunction(string func_name, ...) {
+    return jsp->callFunction(xsink, func_name, args, 1);
+}
+
+//! Call the given function and return the result
+/** @param func_name the function name to call
+    @param argv arguments to the function as a list converted to JavaScript values as per @ref javascript_qore_to_javascript
+
+    @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
+
+    @see @ref javascript_exceptions
+*/
+auto JavaScriptProgram::callFunctionArgs(string func_name, *softlist<auto> argv) {
+    return jsp->callFunction(xsink, func_name, argv);
+}

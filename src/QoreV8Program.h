@@ -67,7 +67,7 @@ public:
     DLLLOCAL QoreValue getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value> val);
 
     //! Returns a V8 value for the given Qore value
-    DLLLOCAL v8::Local<v8::Value> getV8Value(QoreValue val, ExceptionSink* xsink);
+    DLLLOCAL v8::Local<v8::Value> getV8Value(const QoreValue val, ExceptionSink* xsink);
 
 protected:
     v8::Isolate* isolate = nullptr;

@@ -54,6 +54,7 @@ endif()
 
 set(QPP_SRC
     src/QC_JavaScriptProgram.qpp
+    src/QC_JavaScriptObject.qpp
 )
 
 set(CPP_SRC

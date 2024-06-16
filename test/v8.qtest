@@ -23,5 +23,31 @@ class V8Test inherits Test {
     v8ProgramTest() {
         JavaScriptProgram js("'hi'", "test.js");
         assertEq("hi", js.run());
+
+        js = new JavaScriptProgram("1", "test.js");
+        assertEq(1, js.run());
+
+        js = new JavaScriptProgram("1.1", "test.js");
+        assertEq(1.1, js.run());
+
+        js = new JavaScriptProgram("true", "test.js");
+        assertEq(True, js.run());
+
+        js = new JavaScriptProgram("false", "test.js");
+        assertEq(False, js.run());
+
+        js = new JavaScriptProgram("[0, 'one', 2.1]", "test.js");
+        assertEq((0, "one", 2.1), js.run());
+
+        /*
+        js = new JavaScriptProgram("const obj = {
+   id: 1,
+   type: 't',
+};", "test.js");
+        assertEq({"id": 1, "type": "t"}, js.run());
+        */
+
+        JavaScriptObject o(js);
+        assertEq("JavaScriptObject", o.className());
     }
 }

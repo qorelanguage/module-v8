@@ -40,6 +40,7 @@
 #include <memory>
 
 class QoreV8Program : public AbstractQoreProgramExternalData {
+    friend class QoreV8ProgramHelper;
 public:
     DLLLOCAL QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink);
 
@@ -78,6 +79,11 @@ public:
     //! Checks if a JavaScript exception has been thrown and throws the corresponding Qore exception
     DLLLOCAL int checkException(ExceptionSink* xsink, const v8::TryCatch& tryCatch) const;
 
+    //! Returns the pointer to the isolate
+    v8::Isolate* getIsolate() const {
+        return isolate;
+    }
+
 protected:
     v8::Isolate* isolate = nullptr;
     v8::Isolate::CreateParams create_params;
@@ -114,6 +120,28 @@ public:
 private:
     DLLLOCAL ~QoreV8ProgramData() {
     }
+};
+
+class QoreV8ProgramHelper {
+public:
+    DLLLOCAL QoreV8ProgramHelper(QoreV8Program* pgm) :
+            locker(pgm->isolate),
+            isolate_scope(pgm->isolate),
+            handle_scope(pgm->isolate),
+            tryCatch(pgm->isolate),
+            origin(pgm->isolate, pgm->label.Get(pgm->isolate)),
+            context(pgm->context.Get(pgm->isolate)),
+            context_scope(context) {
+    }
+
+private:
+    v8::Locker locker;
+    v8::Isolate::Scope isolate_scope;
+    v8::HandleScope handle_scope;
+    v8::TryCatch tryCatch;
+    v8::ScriptOrigin origin;
+    v8::Local<v8::Context> context;
+    v8::Context::Scope context_scope;
 };
 
 #endif

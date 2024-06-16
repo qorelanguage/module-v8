@@ -1,0 +1,91 @@
+/* -*- mode: c++; indent-tabs-mode: nil -*- */
+/** @file QC_JavaScriptObject.qpp defines the %Qore JavaScriptObject class */
+/*
+    QC_JavaScriptObject.qpp
+
+    Qore Programming Language
+
+    Copyright 2024 Qore Technologies, s.r.o.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+#include "QC_JavaScriptObject.h"
+#include "QC_JavaScriptProgram.h"
+
+class QoreV8Object : public AbstractPrivateData {
+public:
+    DLLLOCAL QoreV8Object(QoreV8ProgramData* pgm, v8::Local<v8::Object> obj) {
+        this->obj.Reset(pgm->getIsolate(), obj);
+    }
+
+    DLLLOCAL void destructor(ExceptionSink* xsink) {
+        obj.Reset();
+    }
+
+private:
+    v8::Global<v8::Object> obj;
+};
+
+//! Object for embedding and executing JavaScript code
+/**
+*/
+qclass JavaScriptObject [arg=QoreV8Object* o; ns=V8];
+
+//! Creates the object and parses and runs the given source code
+/** @param pgm the JavaScriptProgram where the object will be created from
+*/
+JavaScriptObject::constructor(JavaScriptProgram[QoreV8ProgramData] pgm) {
+    ReferenceHolder<QoreV8ProgramData> holder(pgm, xsink);
+
+    v8::Isolate* isolate = pgm->getIsolate();
+
+    QoreV8ProgramHelper pv8ph(pgm);
+
+    //printd(5, "JavaScriptObject::constructor() pgm: %p isolate: %p\n", pgm, isolate);
+
+    v8::Local<v8::Object> obj = v8::Object::New(isolate);
+    //printd(5, "JavaScriptObject::constructor() created %p\n", *obj);
+    self->setPrivate(CID_JAVASCRIPTOBJECT, new QoreV8Object(pgm, obj));
+}
+
+//! Destroys the interpreter context and invalidates the object
+/**
+*/
+JavaScriptObject::destructor() {
+    //printd(5, "Qore JavaScriptObject::destructor() this: %p\n", jsp);
+    o->destructor(xsink);
+}
+
+//! Call the given function and return the result
+/** @param ... arguments to the function should follow the name converted to JavaScript values as per
+    @ref javascript_qore_to_javascript
+
+    @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
+
+    @see @ref javascript_exceptions
+*/
+auto JavaScriptObject::callAsFunction(...) {
+}
+
+//! Call the given function and return the result
+/** @param argv arguments to the function as a list converted to JavaScript values as per @ref javascript_qore_to_javascript
+
+    @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
+
+    @see @ref javascript_exceptions
+*/
+auto JavaScriptObject::callAsFunctionArgs(*softlist<auto> argv) {
+}

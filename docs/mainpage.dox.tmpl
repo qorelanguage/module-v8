@@ -9,6 +9,9 @@
     To use the module in a %Qore script, use the \c %%requires directive as follows:
     @code %requires v8 @endcode
 
+    Note that while JavaScript and v8 support threading, calls into a single
+    @ref V8::JavaScriptProgram "JavaScriptProgram" are subject to thread serialization; only one thread can be active
+
     @section v8_examples Examples
 
     @par Example:

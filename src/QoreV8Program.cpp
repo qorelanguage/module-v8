@@ -155,13 +155,15 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
     v8::Local<v8::Context> context = this->context.Get(isolate);
 
     const v8::TryCatch tryCatch(isolate);
-    if (val->IsInt32() || val->IsUint32()) {
+    if (val->IsInt32()) {
         v8::MaybeLocal<v8::Int32> i = val->ToInt32(context);
         if (i.IsEmpty()) {
             checkException(xsink, tryCatch);
             return QoreValue();
         }
-        return (int64)*i.ToLocalChecked();
+        int64 v = i.ToLocalChecked()->Value();
+        //printd(5, "int: %d", (int)v);
+        return v;
     }
     if (val->IsUint32()) {
         v8::MaybeLocal<v8::Uint32> i = val->ToUint32(context);
@@ -169,7 +171,9 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
             checkException(xsink, tryCatch);
             return QoreValue();
         }
-        return (int64)*i.ToLocalChecked();
+        int64 v = i.ToLocalChecked()->Value();
+        //printd(5, "int: %d\n", (int)v);
+        return v;
     }
 
     if (val->IsBigInt()) {
@@ -209,6 +213,25 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
         return QoreValue(n.ToLocalChecked()->Value());
     }
 
+    if (val->IsArray()) {
+        v8::Local<v8::Array> array = v8::Local<v8::Array>::Cast(val);
+        ReferenceHolder<QoreListNode> rv(new QoreListNode(autoTypeInfo), xsink);
+        for (uint32_t i = 0, e = array->Length(); i < e; ++i) {
+            v8::MaybeLocal<v8::Value> val = array->Get(context, i);
+            if (val.IsEmpty()) {
+                rv->push(QoreValue(), xsink);
+                continue;
+            }
+            v8::Local<v8::Value> v = val.ToLocalChecked();
+            ValueHolder qv(getQoreValue(xsink, v), xsink);
+            if (*xsink) {
+                return QoreValue();
+            }
+            rv->push(qv.release(), xsink);
+        }
+        return rv.release();
+    }
+
     if (val->IsObject()) {
         v8::MaybeLocal<v8::Object> o = val->ToObject(context);
         if (o.IsEmpty()) {
@@ -219,6 +242,7 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
         v8::Local<v8::Object> obj = o.ToLocalChecked();
         v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(context);
         if (maybe_props.IsEmpty()) {
+            checkException(xsink, tryCatch);
             return h.release();
         }
         v8::Local<v8::Array> props = maybe_props.ToLocalChecked();
@@ -246,25 +270,6 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
             assert(!*xsink);
         }
         return h.release();
-    }
-
-    if (val->IsArray()) {
-        v8::Local<v8::Array> array = v8::Local<v8::Array>::Cast(val);
-        ReferenceHolder<QoreListNode> rv(new QoreListNode(autoTypeInfo), xsink);
-        for (uint32_t i = 0, e = array->Length(); i < e; ++i) {
-            v8::MaybeLocal<v8::Value> val = array->Get(context, i);
-            if (val.IsEmpty()) {
-                rv->push(QoreValue(), xsink);
-                continue;
-            }
-            v8::Local<v8::Value> v = val.ToLocalChecked();
-            ValueHolder qv(getQoreValue(xsink, v), xsink);
-            if (*xsink) {
-                return QoreValue();
-            }
-            rv->push(qv.release(), xsink);
-        }
-        return rv.release();
     }
 
     if (val->IsNullOrUndefined()) {

@@ -32,7 +32,8 @@
 #include "QoreV8Program.h"
 
 QoreV8Program::QoreV8CallStack::QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
-        v8::Local<v8::Context> context, v8::Local<v8::Message> msg, QoreExternalProgramLocationWrapper& loc) {
+        v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
+        QoreExternalProgramLocationWrapper& loc) {
     assert(!msg.IsEmpty());
 
     v8::String::Utf8Value filename(v8pgm.isolate, msg->GetScriptOrigin().ResourceName());
@@ -45,7 +46,13 @@ QoreV8Program::QoreV8CallStack::QoreV8CallStack(const QoreV8Program& v8pgm, cons
     if (tryCatch.StackTrace(context).ToLocal(&st_string) &&
         st_string->IsString() && st_string.As<v8::String>()->Length() > 0) {
         v8::String::Utf8Value st(v8pgm.isolate, st_string);
-        printd(0, "QoreV8CallStack::QoreV8CallStack() stack trace to parse: '%s'\n", *st);
+        const char* str = strchr(*st, '\n');
+        if (!str) {
+            return;
+        }
+        ++str;
+
+        printd(0, "QoreV8CallStack::QoreV8CallStack() stack trace to parse: '%s'\n", str);
 
         //add(native ? CT_BUILTIN : CT_USER, file.c_str(), line, line, code.c_str(), "Java");
     }

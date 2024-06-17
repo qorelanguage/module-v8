@@ -23,6 +23,7 @@
 */
 
 #include "QC_JavaScriptProgram.h"
+#include "QC_JavaScriptObject.h"
 
 //! Program for embedding and executing JavaScript code
 /**
@@ -61,27 +62,10 @@ auto JavaScriptProgram::run() {
     return jsp->run(xsink);
 }
 
-//! Call the given function and return the result
-/** @param func_name the function name to call
-    @param ... arguments to the function should follow the name converted to JavaScript values as per
-    @ref javascript_qore_to_javascript
-
-    @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
-
-    @see @ref javascript_exceptions
+//! Returns the global proxy object
+/**
+    @return the global proxy object
 */
-auto JavaScriptProgram::callFunction(string func_name, ...) {
-    return jsp->callFunction(xsink, func_name, args, 1);
-}
-
-//! Call the given function and return the result
-/** @param func_name the function name to call
-    @param argv arguments to the function as a list converted to JavaScript values as per @ref javascript_qore_to_javascript
-
-    @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
-
-    @see @ref javascript_exceptions
-*/
-auto JavaScriptProgram::callFunctionArgs(string func_name, *softlist<auto> argv) {
-    return jsp->callFunction(xsink, func_name, argv);
+JavaScriptObject JavaScriptProgram::getGlobal() {
+    return jsp->getGlobal(xsink);
 }

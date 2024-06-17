@@ -97,6 +97,7 @@ static QoreStringNode* v8_module_init_info(qore_module_init_info& info) {
 static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool repeat) {
     if (!V8NS) {
         V8NS = new QoreNamespace("V8");
+        preinitJavaScriptObjectClass();
         V8NS->addSystemClass(initJavaScriptProgramClass(*V8NS));
         V8NS->addSystemClass(initJavaScriptObjectClass(*V8NS));
     }

@@ -93,6 +93,9 @@ public:
     //! Checks if a JavaScript exception has been thrown and throws the corresponding Qore exception
     DLLLOCAL int checkException(ExceptionSink* xsink, const v8::TryCatch& tryCatch) const;
 
+    //! Returns the global proxy object
+    DLLLOCAL QoreObject* getGlobal(ExceptionSink* xsink);
+
     //! Returns the pointer to the isolate
     v8::Isolate* getIsolate() const {
         return isolate;
@@ -128,7 +131,8 @@ protected:
     class QoreV8CallStack : public QoreCallStack {
     public:
         DLLLOCAL QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
-                v8::Local<v8::Context> context, v8::Local<v8::Message> msg, QoreExternalProgramLocationWrapper& loc);
+                v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
+                QoreExternalProgramLocationWrapper& loc);
     };
 };
 

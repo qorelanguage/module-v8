@@ -25,61 +25,6 @@
 #include "QC_JavaScriptObject.h"
 #include "QC_JavaScriptProgram.h"
 
-QoreV8Object::QoreV8Object(QoreV8Program* pgm, v8::Local<v8::Object> obj) : pgm(pgm) {
-    pgm->tRef();
-    this->obj.Reset(pgm->getIsolate(), obj);
-}
-
-QoreV8Object::~QoreV8Object() {
-    obj.Reset();
-    pgm->tDeref();
-}
-
-QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h) const {
-    ExceptionSink* xsink = v8h.getExceptionSink();
-    ReferenceHolder<QoreHashNode> h(new QoreHashNode(autoTypeInfo), xsink);
-    v8::Local<v8::Object> obj = this->obj.Get(v8h.getIsolate());
-    v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
-    if (maybe_props.IsEmpty()) {
-        v8h.checkException();
-        return h.release();
-    }
-    v8::Local<v8::Array> props = maybe_props.ToLocalChecked();
-    for (uint32_t i = 0, e = props->Length(); i < e; ++i) {
-        v8::MaybeLocal<v8::Value> key = props->Get(v8h.getContext(), i);
-        if (key.IsEmpty()) {
-            if (v8h.checkException()) {
-                return nullptr;
-            }
-            continue;
-        }
-        v8::Local<v8::Value> k = key.ToLocalChecked();
-        ValueHolder qk(v8h.getProgram()->getQoreValue(xsink, k), xsink);
-        if (*xsink) {
-            if (v8h.checkException()) {
-                return nullptr;
-            }
-            continue;
-        }
-        assert(qk->getType() == NT_STRING);
-
-        v8::MaybeLocal<v8::Value> value = obj->Get(v8h.getContext(), k);
-        if (value.IsEmpty()) {
-            if (v8h.checkException()) {
-                return nullptr;
-            }
-            h->setKeyValue(qk->get<const QoreStringNode>()->c_str(), QoreValue(), xsink);
-            assert(!*xsink);
-            continue;
-        }
-        v8::Local<v8::Value> v = value.ToLocalChecked();
-        ValueHolder qv(v8h.getProgram()->getQoreValue(xsink, v), xsink);
-        h->setKeyValue(qk->get<const QoreStringNode>()->c_str(), qv.release(), xsink);
-        assert(!*xsink);
-    }
-    return h.release();
-}
-
 //! Object for embedding and executing JavaScript code
 /**
 */
@@ -106,32 +51,58 @@ JavaScriptObject::constructor(JavaScriptProgram[QoreV8ProgramData] pgm) {
 }
 
 //! Call the given function and return the result
-/** @param ... arguments to the function should follow the name converted to JavaScript values as per
+/** @param js_this the "this" object to call the function on
+    @param ... arguments to the function should follow the name converted to JavaScript values as per
     @ref javascript_qore_to_javascript
 
     @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
 
     @see @ref javascript_exceptions
 */
-auto JavaScriptObject::callAsFunction(...) {
+auto JavaScriptObject::callAsFunction(auto js_this, ...) {
     QoreV8ProgramHelper v8h(xsink, o->getProgram());
     if (*xsink) {
         return QoreValue();
     }
+    return o->callAsFunction(v8h, js_this, 1, args);
 }
 
 //! Call the given function and return the result
-/** @param argv arguments to the function as a list converted to JavaScript values as per @ref javascript_qore_to_javascript
+/** @param js_this the "this" object to call the function on
+    @param argv arguments to the function as a list converted to JavaScript values as per @ref javascript_qore_to_javascript
 
     @return the return value of the JavaScript function converted to Qore as per @ref javascript_javascript_to_qore
 
     @see @ref javascript_exceptions
 */
-auto JavaScriptObject::callAsFunctionArgs(*softlist<auto> argv) {
+auto JavaScriptObject::callAsFunctionArgs(auto js_this, *softlist<auto> argv) {
     QoreV8ProgramHelper v8h(xsink, o->getProgram());
     if (*xsink) {
         return QoreValue();
     }
+    return o->callAsFunction(v8h, js_this, 0, argv);
+}
+
+//! Returns @ref True if the object is callable as a function
+/** @return @ref True if the object is callable as a function
+*/
+bool JavaScriptObject::isCallable() {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->isCallable(v8h);
+}
+
+//! Returns @ref True if the object is a constructor
+/** @return @ref True if the object is a constructor
+*/
+bool JavaScriptObject::isConstructor() {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->isConstructor(v8h);
 }
 
 //! Returns the object's properties as a hash
@@ -143,4 +114,30 @@ hash<auto> JavaScriptObject::toHash() {
         return QoreValue();
     }
     return o->toHash(v8h);
+}
+
+//! Returns the value for the given key, if any
+/** @return the value for the given key, if any
+*/
+auto JavaScriptObject::getKeyValue(string key) {
+    TempEncodingHelper str(key, QCS_UTF8, xsink);
+    if (*xsink) {
+        return QoreValue();
+    }
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->getKeyValue(v8h, str->c_str());
+}
+
+//! Returns the value for the array index, if any
+/** @return the value for the array index, if any
+*/
+auto JavaScriptObject::getIndexValue(int i) {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->getIndexValue(v8h, i);
 }

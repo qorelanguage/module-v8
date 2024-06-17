@@ -1,6 +1,6 @@
 /* -*- mode: c++; indent-tabs-mode: nil -*- */
 /*
-    QC_JavaScriptProgram.h
+    QoreV8Object.h
 
     Qore Programming Language
 
@@ -29,16 +29,50 @@
     information.
 */
 
-#ifndef _QORE_CLASS_JAVASCRIPTPROGRAM
+#ifndef _QORE_CLASS_V8OBJECT
 
-#define _QORE_CLASS_JAVASCRIPTPROGRAM
+#define _QORE_CLASS_V8OBJECT
 
 #include "v8-module.h"
-#include "QoreV8Program.h"
 
-DLLLOCAL extern qore_classid_t CID_JAVASCRIPTPROGRAM;
-DLLLOCAL extern QoreClass* QC_JAVASCRIPTPROGRAM;
+// forward references
+class QoreV8Program;
+class QoreV8ProgramHelper;
 
-DLLLOCAL QoreClass* initJavaScriptProgramClass(QoreNamespace& ns);
+class QoreV8Object : public AbstractPrivateData {
+public:
+    DLLLOCAL QoreV8Object(QoreV8Program* pgm, v8::Local<v8::Object> obj);
+
+    DLLLOCAL virtual ~QoreV8Object();
+
+    DLLLOCAL QoreV8Program* getProgram() {
+        return pgm;
+    }
+
+    DLLLOCAL const QoreV8Program* getProgram() const {
+        return pgm;
+    }
+
+    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h) const;
+
+    DLLLOCAL bool isCallable(QoreV8ProgramHelper& v8h) const;
+
+    DLLLOCAL bool isConstructor(QoreV8ProgramHelper& v8h) const;
+
+    DLLLOCAL QoreValue callAsFunction(QoreV8ProgramHelper& v8h, const QoreValue js_this, size_t offset = 0,
+            const QoreListNode* args = nullptr);
+
+    DLLLOCAL v8::Local<v8::Object> get() const ;
+
+    DLLLOCAL QoreValue getKeyValue(QoreV8ProgramHelper& v8h, const char* key);
+
+    DLLLOCAL QoreValue getIndexValue(QoreV8ProgramHelper& v8h, int64 i);
+
+    //DLLLOCAL v8::Local<v8::Object> get() const;
+
+private:
+    QoreV8Program* pgm;
+    v8::Global<v8::Object> obj;
+};
 
 #endif

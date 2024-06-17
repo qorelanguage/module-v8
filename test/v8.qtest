@@ -45,14 +45,38 @@ class V8Test inherits Test {
         delete js;
         assertEq("JavaScriptObject", o.className());
 
+
+        js = new JavaScriptProgram("
+var foo = function(arg) {
+    return arg + 1;
+}", "test.js");
+        js.run();
+        JavaScriptObject global = js.getGlobal();
+        auto foo = global.getKeyValue("foo");
+        assertEq(NT_OBJECT, foo.typeCode());
+        assertEq("JavaScriptObject", foo.className());
+        assertTrue(foo.isCallable());
+        assertEq(2, foo.callAsFunction(global, 1));
+
         js = new JavaScriptProgram("const obj = {
-   id: 1,
-   type: 't',
+    id: 1,
+    type: 't',
+    func: function(a) {
+        ++this.id;
+        return a + 1;
+    }
 };
 obj", "test.js");
         o = js.run();
         assertEq(NT_OBJECT, o.typeCode());
         assertEq("JavaScriptObject", o.className());
-        assertEq({"id": 1, "type": "t"}, o.toHash());
+        hash<auto> h = o.toHash();
+        assertEq({"id": 1, "type": "t"}, h - "func");
+        assertTrue(h.func.isCallable());
+        assertEq(1, o.getKeyValue("id"));
+        h.func.callAsFunction(o, 1);
+        assertEq(2, o.getKeyValue("id"));
+
+        #assertEq(2, h.func.callAsFunction(o, 1));
     }
 }

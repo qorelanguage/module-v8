@@ -60,6 +60,7 @@ set(QPP_SRC
 set(CPP_SRC
     src/v8-module.cpp
     src/QoreV8Program.cpp
+    src/QoreV8Object.cpp
     src/QoreV8CallStack.cpp
 )
 

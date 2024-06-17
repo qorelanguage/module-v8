@@ -44,7 +44,7 @@ JavaScriptProgram::constructor(string source_code, string source_label) {
     self->setPrivate(CID_JAVASCRIPTPROGRAM, jsp.release());
 }
 
-//! Destroys the interpreter context and invalidates the object
+//! Destroys the JavaScript program and invalidates the object
 /**
 */
 JavaScriptProgram::destructor() {

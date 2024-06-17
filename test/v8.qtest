@@ -39,15 +39,20 @@ class V8Test inherits Test {
         js = new JavaScriptProgram("[0, 'one', 2.1]", "test.js");
         assertEq((0, "one", 2.1), js.run());
 
-        /*
+        JavaScriptObject o(js);
+        assertEq("JavaScriptObject", o.className());
+
+        delete js;
+        assertEq("JavaScriptObject", o.className());
+
         js = new JavaScriptProgram("const obj = {
    id: 1,
    type: 't',
-};", "test.js");
-        assertEq({"id": 1, "type": "t"}, js.run());
-        */
-
-        JavaScriptObject o(js);
+};
+obj", "test.js");
+        o = js.run();
+        assertEq(NT_OBJECT, o.typeCode());
         assertEq("JavaScriptObject", o.className());
+        assertEq({"id": 1, "type": "t"}, o.toHash());
     }
 }

@@ -41,10 +41,24 @@
 
 class QoreV8Program : public AbstractQoreProgramExternalData {
     friend class QoreV8ProgramHelper;
+    friend class QoreV8ProgramOperationHelper;
+    friend class QoreV8Object;
 public:
     DLLLOCAL QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink);
 
     DLLLOCAL QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm);
+
+    DLLLOCAL ~QoreV8Program() {
+        //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
+        script.Reset();
+        label.Reset();
+        context.Reset();
+        if (isolate) {
+            // Dispose the isolate
+            isolate->Dispose();
+        }
+        delete create_params.array_buffer_allocator;
+    }
 
     DLLLOCAL virtual void doDeref() {
         printd(5, "QoreV8Program::doDeref() this: %p\n", this);
@@ -84,12 +98,27 @@ public:
         return isolate;
     }
 
+    DLLLOCAL void tRef() const {
+        tRefs.ROreference();
+    }
+
+    DLLLOCAL void tDeref() {
+        if (tRefs.ROdereference()) {
+            delete this;
+        }
+    }
+
 protected:
     v8::Isolate* isolate = nullptr;
     v8::Isolate::CreateParams create_params;
     v8::Global<v8::Context> context;
     v8::Global<v8::Script> script;
     v8::Global<v8::String> label;
+    QoreReferenceCounter tRefs;
+    QoreThreadLock m;
+    unsigned opcount = 0;
+    bool to_destroy = false;
+    bool valid = false;
 
     //! protected constructor
     DLLLOCAL QoreV8Program();
@@ -105,7 +134,7 @@ protected:
 
 class QoreV8ProgramData : public AbstractPrivateData, public QoreV8Program {
 public:
-   DLLLOCAL QoreV8ProgramData(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
+    DLLLOCAL QoreV8ProgramData(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
         : QoreV8Program(source_code, source_label, xsink) {
         //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
     }
@@ -114,17 +143,18 @@ public:
     DLLLOCAL virtual void deref(ExceptionSink* xsink) {
         if (ROdereference()) {
             deleteIntern(xsink);
+            tDeref();
         }
     }
 
 private:
-    DLLLOCAL ~QoreV8ProgramData() {
+    DLLLOCAL virtual ~QoreV8ProgramData() {
     }
 };
 
 class QoreV8ProgramHelper {
 public:
-    DLLLOCAL QoreV8ProgramHelper(QoreV8Program* pgm) :
+    DLLLOCAL QoreV8ProgramHelper(ExceptionSink* xsink, QoreV8Program* pgm, bool silent = false) :
             locker(pgm->isolate),
             isolate_scope(pgm->isolate),
             handle_scope(pgm->isolate),
@@ -132,9 +162,64 @@ public:
             origin(pgm->isolate, pgm->label.Get(pgm->isolate)),
             context(pgm->context.Get(pgm->isolate)),
             context_scope(context) {
+        AutoLocker al(pgm->m);
+        if (!pgm->valid) {
+            if (!silent) {
+                xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "The given JavaScriptProgram has been destroyed "
+                    "and can no longer be accessed");
+            }
+            return;
+        }
+        if (pgm->to_destroy) {
+            if (!silent) {
+                xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "The given JavaScriptProgram has been marked for "
+                    "destruction and can no longer be accessed");
+            }
+            return;
+        }
+        ++pgm->opcount;
+        this->xsink = xsink;
+        this->pgm = pgm;
+    }
+
+    DLLLOCAL ~QoreV8ProgramHelper() {
+        if (pgm) {
+            AutoLocker al(pgm->m);
+            if (!--pgm->opcount && pgm->to_destroy) {
+                pgm->destructor(xsink);
+            }
+        }
+    }
+
+    //! Checks if a JavaScript exception has been thrown and throws the corresponding Qore exception
+    DLLLOCAL int checkException() const {
+        return pgm->checkException(xsink, tryCatch);
+    }
+
+    DLLLOCAL operator bool() const {
+        return (bool) pgm;
+    }
+
+    DLLLOCAL QoreV8Program* getProgram() {
+        return pgm;
+    }
+
+    DLLLOCAL v8::Local<v8::Context> getContext() {
+        return context;
+    }
+
+    DLLLOCAL v8::Isolate* getIsolate() {
+        return pgm->isolate;
+    }
+
+    DLLLOCAL ExceptionSink* getExceptionSink() {
+        return xsink;
     }
 
 private:
+    QoreV8Program* pgm = nullptr;
+    ExceptionSink* xsink = nullptr;
+
     v8::Locker locker;
     v8::Isolate::Scope isolate_scope;
     v8::HandleScope handle_scope;

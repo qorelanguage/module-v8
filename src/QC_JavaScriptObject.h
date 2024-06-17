@@ -40,4 +40,29 @@ DLLLOCAL extern QoreClass* QC_JAVASCRIPTOBJECT;
 
 DLLLOCAL QoreClass* initJavaScriptObjectClass(QoreNamespace& ns);
 
+// forward references
+class QoreV8Program;
+class QoreV8ProgramHelper;
+
+class QoreV8Object : public AbstractPrivateData {
+public:
+    DLLLOCAL QoreV8Object(QoreV8Program* pgm, v8::Local<v8::Object> obj);
+
+    DLLLOCAL virtual ~QoreV8Object();
+
+    DLLLOCAL QoreV8Program* getProgram() {
+        return pgm;
+    }
+
+    DLLLOCAL const QoreV8Program* getProgram() const {
+        return pgm;
+    }
+
+    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h) const;
+
+private:
+    QoreV8Program* pgm;
+    v8::Global<v8::Object> obj;
+};
+
 #endif

@@ -22,6 +22,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "QC_JavaScriptObject.h"
 #include "QoreV8Program.h"
 
 #include <vector>
@@ -40,6 +41,7 @@ QoreV8Program::QoreV8Program() {
     v8::HandleScope handle_scope(isolate);
     v8::Local<v8::Context> local_context = v8::Context::New(isolate);
     context.Reset(isolate, local_context);
+    valid = true;
 }
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
@@ -80,30 +82,31 @@ QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : Qore
 }
 
 void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
-    if (isolate) {
-        script.Reset();
-        label.Reset();
-        context.Reset();
-        // Dispose the isolate
-        isolate->Dispose();
-        delete create_params.array_buffer_allocator;
-        isolate = nullptr;
+    AutoLocker al(m);
+    if (opcount) {
+        if (!to_destroy) {
+            to_destroy = true;
+        }
+        return;
+    }
+    if (valid) {
+        valid = false;
+        if (to_destroy) {
+            to_destroy = false;
+        }
     }
 }
 
 QoreValue QoreV8Program::run(ExceptionSink* xsink) {
-    // Run the script to get the result
-    v8::Locker locker(isolate);
-    v8::Isolate::Scope isolate_scope(isolate);
-    v8::HandleScope handle_scope(isolate);
-    const v8::TryCatch tryCatch(isolate);
-    v8::ScriptOrigin origin(isolate, label.Get(isolate));
+    QoreV8ProgramHelper v8h(xsink, this);
+    if (*xsink) {
+        return QoreValue();
+    }
+
     v8::Local<v8::Script> script = this->script.Get(isolate);
-    v8::Local<v8::Context> context = this->context.Get(isolate);
-    v8::Context::Scope context_scope(context);
-    v8::MaybeLocal<v8::Value> m_rv = script->Run(context);
+    v8::MaybeLocal<v8::Value> m_rv = script->Run(v8h.getContext());
     if (m_rv.IsEmpty()) {
-        checkException(xsink, tryCatch);
+        v8h.checkException();
         return QoreValue();
     }
     return getQoreValue(xsink, m_rv.ToLocalChecked());
@@ -238,38 +241,7 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
             checkException(xsink, tryCatch);
             return QoreValue();
         }
-        ReferenceHolder<QoreHashNode> h(new QoreHashNode(autoTypeInfo), xsink);
-        v8::Local<v8::Object> obj = o.ToLocalChecked();
-        v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(context);
-        if (maybe_props.IsEmpty()) {
-            checkException(xsink, tryCatch);
-            return h.release();
-        }
-        v8::Local<v8::Array> props = maybe_props.ToLocalChecked();
-        for (uint32_t i = 0, e = props->Length(); i < e; ++i) {
-            v8::MaybeLocal<v8::Value> key = props->Get(context, i);
-            if (key.IsEmpty()) {
-                checkException(xsink, tryCatch);
-                return h.release();
-            }
-            v8::Local<v8::Value> k = key.ToLocalChecked();
-            v8::MaybeLocal<v8::Value> value = obj->Get(context, k);
-            if (value.IsEmpty()) {
-                checkException(xsink, tryCatch);
-                return h.release();
-            }
-            v8::Local<v8::Value> v = value.ToLocalChecked();
-            ValueHolder qk(getQoreValue(xsink, k), xsink);
-            if (*xsink) {
-                checkException(xsink, tryCatch);
-                return QoreValue();
-            }
-            assert(qk->getType() == NT_STRING);
-            ValueHolder qv(getQoreValue(xsink, v), xsink);
-            h->setKeyValue(qk->get<const QoreStringNode>()->c_str(), qv.release(), xsink);
-            assert(!*xsink);
-        }
-        return h.release();
+        return new QoreObject(QC_JAVASCRIPTOBJECT, getProgram(), new QoreV8Object(this, o.ToLocalChecked()));
     }
 
     if (val->IsNullOrUndefined()) {

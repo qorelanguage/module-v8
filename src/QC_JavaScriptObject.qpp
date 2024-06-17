@@ -25,19 +25,60 @@
 #include "QC_JavaScriptObject.h"
 #include "QC_JavaScriptProgram.h"
 
-class QoreV8Object : public AbstractPrivateData {
-public:
-    DLLLOCAL QoreV8Object(QoreV8ProgramData* pgm, v8::Local<v8::Object> obj) {
-        this->obj.Reset(pgm->getIsolate(), obj);
-    }
+QoreV8Object::QoreV8Object(QoreV8Program* pgm, v8::Local<v8::Object> obj) : pgm(pgm) {
+    pgm->tRef();
+    this->obj.Reset(pgm->getIsolate(), obj);
+}
 
-    DLLLOCAL void destructor(ExceptionSink* xsink) {
-        obj.Reset();
-    }
+QoreV8Object::~QoreV8Object() {
+    obj.Reset();
+    pgm->tDeref();
+}
 
-private:
-    v8::Global<v8::Object> obj;
-};
+QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h) const {
+    ExceptionSink* xsink = v8h.getExceptionSink();
+    ReferenceHolder<QoreHashNode> h(new QoreHashNode(autoTypeInfo), xsink);
+    v8::Local<v8::Object> obj = this->obj.Get(v8h.getIsolate());
+    v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
+    if (maybe_props.IsEmpty()) {
+        v8h.checkException();
+        return h.release();
+    }
+    v8::Local<v8::Array> props = maybe_props.ToLocalChecked();
+    for (uint32_t i = 0, e = props->Length(); i < e; ++i) {
+        v8::MaybeLocal<v8::Value> key = props->Get(v8h.getContext(), i);
+        if (key.IsEmpty()) {
+            if (v8h.checkException()) {
+                return nullptr;
+            }
+            continue;
+        }
+        v8::Local<v8::Value> k = key.ToLocalChecked();
+        ValueHolder qk(v8h.getProgram()->getQoreValue(xsink, k), xsink);
+        if (*xsink) {
+            if (v8h.checkException()) {
+                return nullptr;
+            }
+            continue;
+        }
+        assert(qk->getType() == NT_STRING);
+
+        v8::MaybeLocal<v8::Value> value = obj->Get(v8h.getContext(), k);
+        if (value.IsEmpty()) {
+            if (v8h.checkException()) {
+                return nullptr;
+            }
+            h->setKeyValue(qk->get<const QoreStringNode>()->c_str(), QoreValue(), xsink);
+            assert(!*xsink);
+            continue;
+        }
+        v8::Local<v8::Value> v = value.ToLocalChecked();
+        ValueHolder qv(v8h.getProgram()->getQoreValue(xsink, v), xsink);
+        h->setKeyValue(qk->get<const QoreStringNode>()->c_str(), qv.release(), xsink);
+        assert(!*xsink);
+    }
+    return h.release();
+}
 
 //! Object for embedding and executing JavaScript code
 /**
@@ -50,23 +91,18 @@ qclass JavaScriptObject [arg=QoreV8Object* o; ns=V8];
 JavaScriptObject::constructor(JavaScriptProgram[QoreV8ProgramData] pgm) {
     ReferenceHolder<QoreV8ProgramData> holder(pgm, xsink);
 
-    v8::Isolate* isolate = pgm->getIsolate();
+    QoreV8ProgramHelper v8h(xsink, pgm);
+    if (*xsink) {
+        return;
+    }
 
-    QoreV8ProgramHelper pv8ph(pgm);
+    v8::Isolate* isolate = pgm->getIsolate();
 
     //printd(5, "JavaScriptObject::constructor() pgm: %p isolate: %p\n", pgm, isolate);
 
     v8::Local<v8::Object> obj = v8::Object::New(isolate);
     //printd(5, "JavaScriptObject::constructor() created %p\n", *obj);
     self->setPrivate(CID_JAVASCRIPTOBJECT, new QoreV8Object(pgm, obj));
-}
-
-//! Destroys the interpreter context and invalidates the object
-/**
-*/
-JavaScriptObject::destructor() {
-    //printd(5, "Qore JavaScriptObject::destructor() this: %p\n", jsp);
-    o->destructor(xsink);
 }
 
 //! Call the given function and return the result
@@ -78,6 +114,10 @@ JavaScriptObject::destructor() {
     @see @ref javascript_exceptions
 */
 auto JavaScriptObject::callAsFunction(...) {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
 }
 
 //! Call the given function and return the result
@@ -88,4 +128,19 @@ auto JavaScriptObject::callAsFunction(...) {
     @see @ref javascript_exceptions
 */
 auto JavaScriptObject::callAsFunctionArgs(*softlist<auto> argv) {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+}
+
+//! Returns the object's properties as a hash
+/** @return the object's properties as a hash
+*/
+hash<auto> JavaScriptObject::toHash() {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->toHash(v8h);
 }

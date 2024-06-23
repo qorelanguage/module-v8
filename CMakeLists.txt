@@ -31,9 +31,13 @@ if (APPLE)
     find_library(V8_LIBSAMPLER_LIB NAMES libv8_libsampler.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
 else()
-    find_library(V8 NAMES v8 HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBBASE NAMES v8_libbase HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBPLATFORM NAMES v8_libplatform HINTS ENV V8_LIB_DIR REQUIRED)
+    if (DEFINED ENV{V8_USE_LIBNODE})
+        find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
+    else()
+        find_library(V8 NAMES v8 HINTS ENV V8_LIB_DIR REQUIRED)
+        find_library(V8_LIBBASE NAMES v8_libbase HINTS ENV V8_LIB_DIR REQUIRED)
+        find_library(V8_LIBPLATFORM NAMES v8_libplatform HINTS ENV V8_LIB_DIR REQUIRED)
+    endif()
 endif()
 
 if (DEFINED ENV{V8_INCLUDE_DIR})
@@ -107,11 +111,18 @@ if (APPLE)
         ${V8_COMPILER_LIB}
     )
 else()
-    qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-        ${V8}
-        ${V8_LIBBASE}
-        ${V8_LIBPLATFORM}
-    )
+    if (DEFINED ENV{V8_USE_LIBNODE})
+        qore_external_binary_module(${module_name} ${PROJECT_VERSION}
+            ${LIBNODE}
+        )
+        find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
+    else()
+        qore_external_binary_module(${module_name} ${PROJECT_VERSION}
+            ${V8}
+            ${V8_LIBBASE}
+            ${V8_LIBPLATFORM}
+        )
+    endif()
 endif()
 
 qore_dist(${PROJECT_VERSION})

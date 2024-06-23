@@ -368,8 +368,8 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
                 return v8::Null(isolate);
             }
             if (!pd) {
-                xsink->raiseException("JAVASCRIPT-TYPE-ERROR", "Cannot convert Qore values of type '%s' to a V8 value",
-                    val.getFullTypeName());
+                xsink->raiseException("JAVASCRIPT-TYPE-ERROR", "Cannot convert Qore values of type '%s' to a V8 "
+                    "value", val.getFullTypeName());
                 return v8::Null(isolate);
             }
             return handle_scope.Escape(pd->get());

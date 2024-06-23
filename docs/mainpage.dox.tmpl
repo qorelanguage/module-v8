@@ -12,6 +12,10 @@
     Note that while JavaScript and v8 support threading, calls into a single
     @ref V8::JavaScriptProgram "JavaScriptProgram" are subject to thread serialization; only one thread can be active
 
+    Main classes:
+    - @ref V8::JavaScriptProgram "JavaScriptProgram"
+    - @ref V8::JavaScriptObject "JavaScriptObject"
+
     @section v8_examples Examples
 
     @par Example:
@@ -24,7 +28,48 @@
 %enable-all-warnings
 
 %requires v8
+
+JavaScriptProgram js("var foo = function(arg) { return arg + 1; }", "test.js");
+js.run();
+JavaScriptObject gb = js.getGlobal();
+JavaScriptObject foo = gb.getKeyValue("foo");
+int i = foo.callAsFunction(gb, 1);
     @endcode
+
+    @section javascript_javascript_to_qore JavaScript to Qore Data Conversions
+
+    |!Source JavaScript Type|!Target %Qore Type
+    |\c bool|\c bool
+    |\c int32, \c uint32, \c bigint|\c int or \c number if greater than 64-bits
+    |\c number|\c float
+    |\c array|\c list
+    |\c string|\c string
+    |\c object|@ref V8::JavaScriptObject
+    |\c null, \c undefined|\c NOTHING
+
+    Other JavaScript types cannot be converted to %Qore; attempting to convert an unsupported type will result in a
+    runtime exception.
+
+    @section javascript_qore_to_javascript Qore to JavaScript Data Conversions
+
+    |!Source %Qore Type|!Target JavaScript Type
+    |\c binary|\c string (base64-encoded value)
+    |\c bool|\c bool
+    |\c date|\c string (ISO-8601 format)
+    |\c float|\c number
+    |\c hash|\c object
+    |\c int|\c int32, \c uint32, \b bigint
+    |\c list|\c array
+    |\c string|\c string
+    |@ref V8::JavaScriptObject|\c object
+    |\c NOTHING, \c NULL|\c null
+
+    Other %Qore types cannot be converted to JavaScript; attempting to convert an unsupported type will result in a
+    runtime exception.
+
+    @section javascript_exceptions JavaScript Exceptions
+
+    Exceptions in JavaScript are propagated to %Qore as %Qore exceptions.
 
     @section v8releasenotes v8 Module Release Notes
 

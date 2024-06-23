@@ -45,7 +45,6 @@ class V8Test inherits Test {
         delete js;
         assertEq("JavaScriptObject", o.className());
 
-
         js = new JavaScriptProgram("
 var foo = function(arg) {
     return arg + 1;

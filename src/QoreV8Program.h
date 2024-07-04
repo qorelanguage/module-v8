@@ -111,6 +111,9 @@ public:
         }
     }
 
+    //! Raises an exception in the given isolate from the Qore exception
+    DLLLOCAL static void raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate);
+
 protected:
     v8::Isolate* isolate = nullptr;
     v8::Isolate::CreateParams create_params;
@@ -127,13 +130,13 @@ protected:
     DLLLOCAL QoreV8Program();
 
     DLLLOCAL void deleteIntern(ExceptionSink* xsink);
+};
 
-    class QoreV8CallStack : public QoreCallStack {
-    public:
-        DLLLOCAL QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
-                v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
-                QoreExternalProgramLocationWrapper& loc);
-    };
+class QoreV8CallStack : public QoreCallStack {
+public:
+    DLLLOCAL QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCatch,
+            v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
+            QoreExternalProgramLocationWrapper& loc);
 };
 
 class QoreV8ProgramData : public AbstractPrivateData, public QoreV8Program {

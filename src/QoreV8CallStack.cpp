@@ -31,12 +31,12 @@
 
 #include "QoreV8Program.h"
 
-QoreV8Program::QoreV8CallStack::QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
+QoreV8CallStack::QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCatch,
         v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
         QoreExternalProgramLocationWrapper& loc) {
     assert(!msg.IsEmpty());
 
-    v8::String::Utf8Value filename(v8pgm.isolate, msg->GetScriptOrigin().ResourceName());
+    v8::String::Utf8Value filename(isolate, msg->GetScriptOrigin().ResourceName());
     //const char* filename_string = ToCString(filename);
     int linenum = msg->GetLineNumber(context).FromJust();
 
@@ -45,7 +45,7 @@ QoreV8Program::QoreV8CallStack::QoreV8CallStack(const QoreV8Program& v8pgm, cons
     v8::Local<v8::Value> st_string;
     if (tryCatch.StackTrace(context).ToLocal(&st_string) &&
         st_string->IsString() && st_string.As<v8::String>()->Length() > 0) {
-        v8::String::Utf8Value st(v8pgm.isolate, st_string);
+        v8::String::Utf8Value st(isolate, st_string);
         const char* str = strchr(*st, '\n');
         if (!str) {
             return;

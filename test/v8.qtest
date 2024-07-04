@@ -75,7 +75,38 @@ obj", "test.js");
         assertEq(1, o.getKeyValue("id"));
         h.func.callAsFunction(o, 1);
         assertEq(2, o.getKeyValue("id"));
+        assertEq(2, h.func.callAsFunction(o, 1));
+        assertEq(3, o.getKeyValue("id"));
 
-        #assertEq(2, h.func.callAsFunction(o, 1));
+        js = new JavaScriptProgram("const obj = {
+    func: function(a, b) {
+        return typeof a;
+    }
+};
+obj", "test.js");
+        o = js.run();
+        global = js.getGlobal();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toHash();
+        assertTrue(h.func.isCallable());
+        code c = int sub (int i) {
+            return i + 1;
+        };
+        assertEq("function", h.func.callAsFunction(global, c, 1));
+
+        js = new JavaScriptProgram("const obj = {
+    func: function(a, b) {
+        return a(b);
+    }
+};
+obj", "test.js");
+        o = js.run();
+        global = js.getGlobal();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toHash();
+        assertTrue(h.func.isCallable());
+        assertEq(2, h.func.callAsFunction(global, c, 1));
     }
 }

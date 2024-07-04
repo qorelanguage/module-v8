@@ -25,11 +25,14 @@ find_package(Qore 2.0 REQUIRED)
 
 if (APPLE)
     find_library(V8_BASE_WITHOUT_COMPILER NAMES libv8_base_without_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_INITIALIZERS_LIB NAMES libv8_initializers.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_INSPECTOR_LIB NAMES libv8_inspector.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_LIBBASE_LIB NAMES libv8_libbase.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_LIBPLATFORM_LIB NAMES libv8_libplatform.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_LIBSAMPLER_LIB NAMES libv8_libsampler.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_TORQUE_GENERATED_LIB NAMES libv8_torque_generated.a HINTS ENV V8_LIB_DIR REQUIRED)
 else()
     if (DEFINED ENV{V8_USE_LIBNODE})
         find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
@@ -103,12 +106,15 @@ endif()
 set(MODULE_DOX_INPUT ${CMAKE_BINARY_DIR})
 if (APPLE)
     qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-        ${V8_LIBBASE_LIB}
-        ${V8_SNAPSHOT_LIB}
-        ${V8_LIBPLATFORM_LIB}
         ${V8_BASE_WITHOUT_COMPILER}
-        ${V8_LIBSAMPLER_LIB}
         ${V8_COMPILER_LIB}
+        ${V8_INITIALIZERS_LIB}
+        ${V8_INSPECTOR_LIB}
+        ${V8_LIBBASE_LIB}
+        ${V8_LIBPLATFORM_LIB}
+        ${V8_LIBSAMPLER_LIB}
+        ${V8_SNAPSHOT_LIB}
+        ${V8_TORQUE_GENERATED_LIB}
     )
 else()
     if (DEFINED ENV{V8_USE_LIBNODE})

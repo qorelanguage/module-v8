@@ -30,7 +30,7 @@
 #include <memory>
 #include <climits>
 
-QoreV8Program::QoreV8Program() {
+QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
     printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
     // Create a new Isolate
     create_params.array_buffer_allocator = v8::ArrayBuffer::Allocator::NewDefaultAllocator();
@@ -96,6 +96,78 @@ void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
             to_destroy = false;
         }
     }
+    if (save_ref_callback) {
+        save_ref_callback.release()->deref(xsink);
+    }
+}
+
+int QoreV8Program::saveQoreReference(const QoreValue& rv, ExceptionSink& xsink) {
+    {
+        qore_type_t t = rv.getType();
+        if (t != NT_OBJECT && t != NT_RUNTIME_CLOSURE && t != NT_FUNCREF) {
+            return 0;
+        }
+    }
+
+    //printd(5, "QorePythonProgram::saveQoreReference() this: %p val: %s soc: %p\n", this,
+    //    rv.getFullTypeName(), *save_ref_callback);
+
+    if (save_ref_callback) {
+        ReferenceHolder<QoreListNode> args(new QoreListNode(autoTypeInfo), &xsink);
+        args->push(rv.refSelf(), &xsink);
+        save_ref_callback->execValue(*args, &xsink);
+        if (xsink) {
+            raiseV8Exception(xsink, isolate);
+            return -1;
+        }
+        return 0;
+    }
+
+    return saveQoreReferenceDefault(rv, xsink);
+}
+
+int QoreV8Program::saveQoreReferenceDefault(const QoreValue& rv, ExceptionSink& xsink) {
+    QoreHashNode* data = qpgm->getThreadData();
+    assert(data);
+    const char* domain_name;
+    // get key name where to save the data if possible
+    QoreValue v = data->getKeyValue("_v8_save");
+    if (v.getType() != NT_STRING) {
+        domain_name = "_v8_save";
+    } else {
+        domain_name = v.get<const QoreStringNode>()->c_str();
+    }
+
+    QoreValue kv = data->getKeyValue(domain_name);
+    // ignore operation if domain exists but is not a list
+    if (!kv || kv.getType() == NT_LIST) {
+        QoreListNode* list;
+        ReferenceHolder<QoreListNode> list_holder(&xsink);
+        if (!kv) {
+            // we need to assign list in data *after* we prepend the object to the list
+            // in order to manage object counts
+            list = new QoreListNode(autoTypeInfo);
+            list_holder = list;
+        } else {
+            list = kv.get<QoreListNode>();
+        }
+
+        // prepend to list to ensure FILO destruction order
+        list->splice(0, 0, rv, &xsink);
+        if (!xsink && list_holder) {
+            data->setKeyValue(domain_name, list_holder.release(), &xsink);
+        }
+        if (xsink) {
+            raiseV8Exception(xsink, isolate);
+            return -1;
+        }
+        //printd(5, "saveQoreReferenceDefault() domain: '%s' obj: %p %s\n", domain_name, rv.get<QoreObject>(),
+        //    rv.get<QoreObject>()->getClassName());
+    } else {
+        //printd(5, "saveQoreReferenceDefault() NOT SAVING domain: '%s' HAS KEY v: %s (kv: %s)\n", domain_name,
+        //    rv.getFullTypeName(), kv.getFullTypeName());
+    }
+    return 0;
 }
 
 QoreValue QoreV8Program::run(ExceptionSink* xsink) {
@@ -299,7 +371,7 @@ struct QoreV8CallbackInfo {
     }
 };
 
-void call_callback(const v8::FunctionCallbackInfo<v8::Value>& info) {
+static void call_callref(const v8::FunctionCallbackInfo<v8::Value>& info) {
     v8::Local<v8::Value> v = info.Data();
     assert(v->IsExternal());
 
@@ -474,7 +546,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
                     "value", val.getFullTypeName());
                 return v8::Null(isolate);
             }
-            return handle_scope.Escape(pd->get());
+            return handle_scope.Escape(pd->get(xsink, isolate));
         }
 
         case NT_RUNTIME_CLOSURE:
@@ -491,9 +563,13 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
             gext.SetWeak(cbinfo, deref_callref, v8::WeakCallbackType::kParameter);
 
             v8::Local<v8::Context> context = this->context.Get(isolate);
-            v8::MaybeLocal<v8::Function> func = v8::Function::New(context, call_callback, ext);
+            v8::MaybeLocal<v8::Function> func = v8::Function::New(context, call_callref, ext);
             if (func.IsEmpty()) {
                 checkException(xsink, tryCatch);
+                return v8::Null(isolate);
+            }
+            if (saveQoreReference(ref->refSelf(), *xsink)) {
+                assert(*xsink);
                 return v8::Null(isolate);
             }
             return handle_scope.Escape(func.ToLocalChecked());

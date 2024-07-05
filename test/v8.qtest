@@ -77,6 +77,7 @@ obj", "test.js");
         assertEq(2, o.getKeyValue("id"));
         assertEq(2, h.func.callAsFunction(o, 1));
         assertEq(3, o.getKeyValue("id"));
+        assertThrows("JAVASCRIPT-PROGRAM-ERROR", \h.func.callAsFunction(), (global, 1));
 
         js = new JavaScriptProgram("const obj = {
     func: function(a, b) {
@@ -108,5 +109,26 @@ obj", "test.js");
         h = o.toHash();
         assertTrue(h.func.isCallable());
         assertEq(2, h.func.callAsFunction(global, c, 1));
+
+        js = new JavaScriptProgram("const obj = {
+    func: null,
+    store: function(a) {
+        this.func = a;
+    }
+};
+obj", "test.js");
+        o = js.run();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toHash();
+        assertNothing(h.func);
+        assertTrue(h.store.isCallable());
+        h.store.callAsFunction(o, int sub (int i) {
+            return i + 1;
+        });
+        h = o.toHash();
+        assertTrue(h.func.isCallable());
+        assertEq(2, h.func.callAsFunction(o, 1));
+        assertThrows("JAVASCRIPT-PROGRAM-ERROR", \h.func.callAsFunction(), (global, 1));
     }
 }

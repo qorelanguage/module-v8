@@ -101,14 +101,26 @@ public:
         return isolate;
     }
 
-    DLLLOCAL void tRef() const {
-        tRefs.ROreference();
+    DLLLOCAL void weakRef() const {
+        weakRefs.ROreference();
     }
 
-    DLLLOCAL void tDeref() {
-        if (tRefs.ROdereference()) {
+    DLLLOCAL void weakDeref() {
+        if (weakRefs.ROdereference()) {
             delete this;
         }
+    }
+
+    //! Sets the "save object callback" for %Qore values managed by JavaScript objects
+    DLLLOCAL void setSaveReferenceCallback(const ResolvedCallReferenceNode* save_ref_callback) {
+        //printd(5, "QorePythonProgram::setSaveObjectCallback() this: %p old: %p new: %p\n", this,
+        //  *this->save_object_callback, save_object_callback);
+        this->save_ref_callback = save_ref_callback ? save_ref_callback->refRefSelf() : nullptr;
+    }
+
+    //! Returns the "save object callback" for %Qore values managed by JavaScript objects
+    DLLLOCAL ResolvedCallReferenceNode* getSaveReferenceCallback() const {
+        return *save_ref_callback;
     }
 
     //! Raises an exception in the given isolate from the Qore exception
@@ -120,8 +132,14 @@ protected:
     v8::Global<v8::Context> context;
     v8::Global<v8::Script> script;
     v8::Global<v8::String> label;
-    QoreReferenceCounter tRefs;
+
+    QoreProgram* qpgm = getProgram();
+    QoreReferenceCounter weakRefs;
     QoreThreadLock m;
+
+    // call reference for saving Qore references
+    mutable ReferenceHolder<ResolvedCallReferenceNode> save_ref_callback;
+
     unsigned opcount = 0;
     bool to_destroy = false;
     bool valid = false;
@@ -130,6 +148,10 @@ protected:
     DLLLOCAL QoreV8Program();
 
     DLLLOCAL void deleteIntern(ExceptionSink* xsink);
+
+    DLLLOCAL int saveQoreReference(const QoreValue& rv, ExceptionSink& xsink);
+
+    DLLLOCAL int saveQoreReferenceDefault(const QoreValue& rv, ExceptionSink& xsink);
 };
 
 class QoreV8CallStack : public QoreCallStack {
@@ -150,7 +172,7 @@ public:
     DLLLOCAL virtual void deref(ExceptionSink* xsink) {
         if (ROdereference()) {
             deleteIntern(xsink);
-            tDeref();
+            weakDeref();
         }
     }
 

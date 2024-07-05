@@ -35,13 +35,13 @@
 #include <climits>
 
 QoreV8Object::QoreV8Object(QoreV8Program* pgm, v8::Local<v8::Object> obj) : pgm(pgm) {
-    pgm->tRef();
+    pgm->weakRef();
     this->obj.Reset(pgm->getIsolate(), obj);
 }
 
 QoreV8Object::~QoreV8Object() {
     obj.Reset();
-    pgm->tDeref();
+    pgm->weakDeref();
 }
 
 QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h) const {
@@ -101,6 +101,14 @@ v8::Local<v8::Object> QoreV8Object::get() const {
     return obj.Get(pgm->getIsolate());
 }
 
+v8::Local<v8::Value> QoreV8Object::get(ExceptionSink* xsink, v8::Isolate* isolate) const {
+    QoreV8ProgramHelper ph(xsink, pgm);
+    if (!ph) {
+        return v8::Null(isolate);
+    }
+    return obj.Get(pgm->getIsolate());
+}
+
 QoreValue QoreV8Object::getKeyValue(QoreV8ProgramHelper& v8h, const char* key) {
     v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(pgm->getIsolate(), key, v8::NewStringType::kNormal);
     if (m_key.IsEmpty()) {
@@ -145,7 +153,7 @@ QoreValue QoreV8Object::callAsFunction(QoreV8ProgramHelper& v8h, const QoreValue
     if (*xsink) {
         return QoreValue();
     }
-    ssize_t size = args->size() - offset;
+    ssize_t size = (args ? args->size() : 0) - offset;
     if (size < 0) {
         size = 0;
     }

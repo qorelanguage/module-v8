@@ -62,7 +62,9 @@ public:
     DLLLOCAL QoreValue callAsFunction(QoreV8ProgramHelper& v8h, const QoreValue js_this, size_t offset = 0,
             const QoreListNode* args = nullptr);
 
-    DLLLOCAL v8::Local<v8::Object> get() const ;
+    DLLLOCAL v8::Local<v8::Object> get() const;
+
+    DLLLOCAL v8::Local<v8::Value> get(ExceptionSink* xsink, v8::Isolate* isolate) const;
 
     DLLLOCAL QoreValue getKeyValue(QoreV8ProgramHelper& v8h, const char* key);
 

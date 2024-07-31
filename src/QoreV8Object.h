@@ -53,7 +53,7 @@ public:
         return pgm;
     }
 
-    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h) const;
+    DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h, bool deep = false) const;
 
     DLLLOCAL bool isCallable(QoreV8ProgramHelper& v8h) const;
 
@@ -73,6 +73,13 @@ public:
     DLLLOCAL QoreValue getIndexValue(QoreV8ProgramHelper& v8h, int64 i);
 
     //DLLLOCAL v8::Local<v8::Object> get() const;
+
+protected:
+    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len,
+            bool deep = false) const;
+
+    DLLLOCAL QoreListNode* toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len,
+            bool deep = false) const;
 
 private:
     QoreV8Program* pgm;

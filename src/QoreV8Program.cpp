@@ -24,6 +24,7 @@
 
 #include "QC_JavaScriptObject.h"
 #include "QoreV8Program.h"
+#include "QoreV8StackLocationHelper.h"
 
 #include <vector>
 #include <string>
@@ -115,6 +116,10 @@ int QoreV8Program::saveQoreReference(const QoreValue& rv, ExceptionSink& xsink) 
     if (save_ref_callback) {
         ReferenceHolder<QoreListNode> args(new QoreListNode(autoTypeInfo), &xsink);
         args->push(rv.refSelf(), &xsink);
+
+        QoreV8ProgramHelper v8h(&xsink, this);
+        QoreV8StackLocationHelper slh(v8h);
+
         save_ref_callback->execValue(*args, &xsink);
         if (xsink) {
             raiseV8Exception(xsink, isolate);
@@ -408,6 +413,10 @@ static void call_callref(const v8::FunctionCallbackInfo<v8::Value>& info) {
             assert(!xsink);
         }
     }
+
+    //QoreV8ProgramHelper v8h(&xsink, cbinfo->pgm);
+    //QoreV8StackLocationHelper slh(v8h);
+
     ValueHolder rv(cbinfo->ref->execValue(*args, &xsink), &xsink);
     if (xsink) {
         // raise JS exception

@@ -106,15 +106,17 @@ bool JavaScriptObject::isConstructor() {
     return o->isConstructor(v8h);
 }
 
-//! Returns the object's properties as a hash
-/** @return the object's properties as a hash
+//! Returns the object as data; a hash or a list
+/** @param deep if True a deep conversion to a hash or list will be made
+
+    @return the object's properties as a hash or a list
 */
-hash<auto> JavaScriptObject::toHash() {
+auto JavaScriptObject::toData(*bool deep) {
     QoreV8ProgramHelper v8h(xsink, o->getProgram());
     if (*xsink) {
         return QoreValue();
     }
-    return o->toHash(v8h);
+    return o->toData(v8h, deep);
 }
 
 //! Returns the value for the given key, if any
@@ -144,7 +146,7 @@ auto JavaScriptObject::getIndexValue(int i) {
 }
 
 //! Calls the JavaScript method and returns the response
-/** @param meth the method name
+/** @param m the method name
     @param ... any argument to the method
 
     @return the response from the JavaScript method
@@ -177,4 +179,23 @@ auto JavaScriptObject::methodGate(string m, ...) {
 
     ReferenceHolder<QoreV8Object> meth(new QoreV8Object(o->getProgram(), maybe_attrobj.ToLocalChecked()), xsink);
     return meth->callAsFunction(v8h, self, 1, args);
+}
+
+//! Returns the value of the given JavaScript object property
+/** @param m the property name
+
+    @return the value of the property
+*/
+auto JavaScriptObject::memberGate(string m, ...) {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    v8::Local<v8::Value> attr = o->getV8KeyValue(v8h, m->c_str());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    return v8h.getProgram()->getQoreValue(xsink, attr);
 }

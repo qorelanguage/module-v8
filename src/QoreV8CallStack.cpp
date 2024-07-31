@@ -31,6 +31,8 @@
 
 #include "QoreV8Program.h"
 
+#include <sstream>
+
 QoreV8CallStack::QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCatch,
         v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
         QoreExternalProgramLocationWrapper& loc) {
@@ -52,7 +54,34 @@ QoreV8CallStack::QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCa
         }
         ++str;
 
-        printd(0, "QoreV8CallStack::QoreV8CallStack() stack trace to parse: '%s'\n", str);
+        ExceptionSink xsink;
+        QoreRegexInterface re(&xsink, " at ([^\\)]+) \\(([^:]+):([0-9]+):[0-9]+\\)");
+
+        //printd(5, "QoreV8CallStack::QoreV8CallStack() stack trace to parse: '%s'\n", str);
+
+        std::string exstr(str);
+        std::string line;
+        std::stringstream ss(exstr);
+
+        unsigned c = 0;
+        while (getline(ss, line, '\n')) {
+            //printd(5, "stack trace line: '%s'\n", line.c_str());
+            QoreString targ(line);
+            ReferenceHolder<QoreListNode> l(re.extractSubstrings(targ, &xsink), &xsink);
+            if (l) {
+                QoreValue func = l->retrieveEntry(0);
+                assert(func.getType() == NT_STRING);
+                QoreValue file = l->retrieveEntry(1);
+                assert(file.getType() == NT_STRING);
+                QoreValue line = l->retrieveEntry(2);
+                assert(line.getType() == NT_STRING);
+
+                long ln = strtol(line.get<const QoreStringNode>()->c_str(), nullptr, 10);
+
+                add(CT_USER, file.get<const QoreStringNode>()->c_str(), ln, ln,
+                    func.get<const QoreStringNode>()->c_str(), "JavaScript");
+            }
+        }
 
         //add(native ? CT_BUILTIN : CT_USER, file.c_str(), line, line, code.c_str(), "Java");
     }

@@ -80,10 +80,6 @@ public:
 
     DLLLOCAL QoreValue run(ExceptionSink* xsink);
 
-    //! Call the function and return the result
-    DLLLOCAL QoreValue callFunction(ExceptionSink* xsink, const QoreString& func_name, const QoreListNode* args,
-        size_t arg_offset = 0);
-
     //! Returns a Qore value for the given V8 value
     DLLLOCAL QoreValue getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value> val);
 

@@ -206,6 +206,7 @@ int QoreV8Program::checkException(ExceptionSink* xsink, const v8::TryCatch& tryC
 
         v8::Local<v8::Context> context(isolate->GetCurrentContext());
 
+        /*
         if (!desc->empty()) {
             desc->concat('\n');
         }
@@ -218,6 +219,7 @@ int QoreV8Program::checkException(ExceptionSink* xsink, const v8::TryCatch& tryC
         for (int i = start; i < end; i++) {
             desc->concat('^');
         }
+        */
 
         // add Java call stack to Qore call stack
         QoreExternalProgramLocationWrapper loc;
@@ -513,7 +515,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
         case NT_HASH: {
             const QoreHashNode* h = val.get<const QoreHashNode>();
             v8::Local<v8::Context> context = this->context.Get(isolate);
-            v8::Local<v8::Map> m = v8::Map::New(isolate);
+            v8::Local<v8::Object> obj = v8::Object::New(isolate);
             ConstHashIterator i(h);
             while (i.next()) {
                 v8::Local<v8::Value> v = getV8Value(i.get(), xsink);
@@ -526,12 +528,14 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
                     checkException(xsink, tryCatch);
                     return v8::Null(isolate);
                 }
-                v8::MaybeLocal<v8::Map> maybe_map = m->Set(context, key.ToLocalChecked(), v);
-                if (maybe_map.IsEmpty()) {
+                v8::Maybe<bool> ok = obj->CreateDataProperty(context, key.ToLocalChecked(), v);
+                if (ok.IsNothing()) {
+                    checkException(xsink, tryCatch);
                     return v8::Null(isolate);
                 }
+                //printd(5, "object %p set \"%s\" -> %s\n", h, i.getKey(), i.get().getFullTypeName());
             }
-            return handle_scope.Escape(m);
+            return handle_scope.Escape(obj);
         }
 
         case NT_OBJECT: {
@@ -565,13 +569,16 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
             v8::Local<v8::Context> context = this->context.Get(isolate);
             v8::MaybeLocal<v8::Function> func = v8::Function::New(context, call_callref, ext);
             if (func.IsEmpty()) {
+                //printd(5, "ref: %p -> func empty\n", ref);
                 checkException(xsink, tryCatch);
                 return v8::Null(isolate);
             }
             if (saveQoreReference(ref->refSelf(), *xsink)) {
+                //printd(5, "ref: %p -> cannot save Qore reference\n", ref);
                 assert(*xsink);
                 return v8::Null(isolate);
             }
+            //printd(5, "ref: %p -> returning JS function object\n", ref);
             return handle_scope.Escape(func.ToLocalChecked());
         }
 

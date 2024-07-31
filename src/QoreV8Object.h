@@ -66,6 +66,8 @@ public:
 
     DLLLOCAL v8::Local<v8::Value> get(ExceptionSink* xsink, v8::Isolate* isolate) const;
 
+    DLLLOCAL v8::Local<v8::Value> getV8KeyValue(QoreV8ProgramHelper& v8h, const char* key) const;
+
     DLLLOCAL QoreValue getKeyValue(QoreV8ProgramHelper& v8h, const char* key);
 
     DLLLOCAL QoreValue getIndexValue(QoreV8ProgramHelper& v8h, int64 i);

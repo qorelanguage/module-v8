@@ -109,6 +109,26 @@ v8::Local<v8::Value> QoreV8Object::get(ExceptionSink* xsink, v8::Isolate* isolat
     return obj.Get(pgm->getIsolate());
 }
 
+v8::Local<v8::Value> QoreV8Object::getV8KeyValue(QoreV8ProgramHelper& v8h, const char* key) const {
+    v8::Isolate* isolate = pgm->getIsolate();
+
+    v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(isolate, key, v8::NewStringType::kNormal);
+    if (m_key.IsEmpty()) {
+        v8h.checkException();
+        return v8::Null(isolate);
+    }
+
+    v8::EscapableHandleScope handle_scope(isolate);
+
+    v8::MaybeLocal<v8::Value> m_val = get()->Get(v8h.getContext(), m_key.ToLocalChecked());
+    if (m_val.IsEmpty()) {
+        v8h.checkException();
+        return v8::Null(isolate);
+    }
+
+    return handle_scope.Escape(m_val.ToLocalChecked());
+}
+
 QoreValue QoreV8Object::getKeyValue(QoreV8ProgramHelper& v8h, const char* key) {
     v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(pgm->getIsolate(), key, v8::NewStringType::kNormal);
     if (m_key.IsEmpty()) {

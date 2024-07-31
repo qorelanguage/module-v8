@@ -7,6 +7,7 @@
 
 %requires v8
 %requires QUnit
+%requires Util
 
 %exec-class V8Test
 
@@ -16,6 +17,7 @@ class V8Test inherits Test {
 
     constructor() : Test("v8 test", "1.0") {
         addTestCase("v8 program test", \v8ProgramTest());
+        addTestCase("exception test", \v8ExceptionTest());
         # Set return value for compatibility with test harnesses that check the return value
         set_return_value(main());
     }
@@ -111,6 +113,27 @@ obj", "test.js");
         assertEq(2, h.func.callAsFunction(global, c, 1));
 
         js = new JavaScriptProgram("const obj = {
+    func: function(a, b) {
+        return a.a(b);
+    },
+    func0: function(a) {
+        return JSON.stringify(a);
+    }
+};
+obj", "test.js");
+        o = js.run();
+        global = js.getGlobal();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toHash();
+        assertTrue(h.func.isCallable());
+        hash<auto> obj = {
+            "a": c,
+        };
+        assertEq(2, o.func(obj, 1));
+        assertEq(2, h.func.callAsFunction(global, obj, 1));
+
+        js = new JavaScriptProgram("const obj = {
     func: null,
     store: function(a) {
         this.func = a;
@@ -130,5 +153,30 @@ obj", "test.js");
         assertTrue(h.func.isCallable());
         assertEq(2, h.func.callAsFunction(o, 1));
         assertThrows("JAVASCRIPT-PROGRAM-ERROR", \h.func.callAsFunction(), (global, 1));
+    }
+
+    v8ExceptionTest() {
+        hash<ExceptionInfo> ex;
+        try {
+            JavaScriptProgram js("const obj = {
+    func1: function(a, b) {
+        return a.a(b);
+    },
+    func0: function(a, b) {
+        return this.func1(a, b);
+    }
+};
+obj", "test.js");
+            JavaScriptObject o = js.run();
+            o.toHash().func0.callAsFunction(o, 1, 1);
+            assertFalse(True);
+        } catch (hash<ExceptionInfo> ex0) {
+            ex = ex0;
+        }
+        on_error printf("source exception: %s\n", get_exception_string(ex));
+        assertEq("Object.func1", ex.callstack[0].function);
+        assertEq(3, ex.callstack[0].line);
+        assertEq("Object.func0", ex.callstack[1].function);
+        assertEq(6, ex.callstack[1].line);
     }
 }

@@ -40,6 +40,7 @@ class QoreV8Program;
 class QoreV8ProgramHelper;
 
 class QoreV8Object : public AbstractPrivateData {
+friend class QoreV8CallReference;
 public:
     DLLLOCAL QoreV8Object(QoreV8Program* pgm, v8::Local<v8::Object> obj);
 
@@ -53,7 +54,9 @@ public:
         return pgm;
     }
 
-    DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h, bool deep = false) const;
+    DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h) const;
+
+    DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent) const;
 
     DLLLOCAL bool isCallable(QoreV8ProgramHelper& v8h) const;
 
@@ -61,6 +64,9 @@ public:
 
     DLLLOCAL QoreValue callAsFunction(QoreV8ProgramHelper& v8h, const QoreValue js_this, size_t offset = 0,
             const QoreListNode* args = nullptr);
+
+    DLLLOCAL QoreValue callAsFunction(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> recv, size_t offset = 0,
+        const QoreListNode* args = nullptr);
 
     DLLLOCAL v8::Local<v8::Object> get() const;
 
@@ -72,16 +78,16 @@ public:
 
     DLLLOCAL QoreValue getIndexValue(QoreV8ProgramHelper& v8h, int64 i);
 
-    //DLLLOCAL v8::Local<v8::Object> get() const;
+    DLLLOCAL QoreV8Object* refSelf() const {
+        ref();
+        return const_cast<QoreV8Object*>(this);
+    }
 
 protected:
-    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len,
-            bool deep = false) const;
+    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len) const;
 
-    DLLLOCAL QoreListNode* toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len,
-            bool deep = false) const;
+    DLLLOCAL QoreListNode* toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len) const;
 
-private:
     QoreV8Program* pgm;
     v8::Global<v8::Object> obj;
 };

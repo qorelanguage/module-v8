@@ -106,17 +106,18 @@ bool JavaScriptObject::isConstructor() {
     return o->isConstructor(v8h);
 }
 
-//! Returns the object as data; a hash or a list
-/** @param deep if True a deep conversion to a hash or list will be made
+//! Returns the object as data; a hash, list, or call reference
+/** @return converts the object to Qore data; a hash, list, or call reference
 
-    @return the object's properties as a hash or a list
+    @note if the current object is a callable object, it will be returned as a call reference to a JavaScript call
+    without a context for JavaScript \c this
 */
-auto JavaScriptObject::toData(*bool deep) {
+auto JavaScriptObject::toData() {
     QoreV8ProgramHelper v8h(xsink, o->getProgram());
     if (*xsink) {
         return QoreValue();
     }
-    return o->toData(v8h, deep);
+    return o->toData(v8h);
 }
 
 //! Returns the value for the given key, if any

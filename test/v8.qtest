@@ -56,8 +56,8 @@ var foo = function(arg) {
         auto foo = global.getKeyValue("foo");
         assertEq(NT_OBJECT, foo.typeCode());
         assertEq("JavaScriptObject", foo.className());
-        assertTrue(foo.isCallable());
-        assertEq(2, foo.callAsFunction(global, 1));
+        assertTrue(foo.toData().callp());
+        assertEq(2, foo.callAsFunction(NOTHING, 1));
 
         js = new JavaScriptProgram("const obj = {
     id: 1,
@@ -73,13 +73,12 @@ obj", "test.js");
         assertEq("JavaScriptObject", o.className());
         hash<auto> h = o.toData();
         assertEq({"id": 1, "type": "t"}, h - "func");
-        assertTrue(h.func.isCallable());
+        assertTrue(h.func.callp());
         assertEq(1, o.getKeyValue("id"));
-        h.func.callAsFunction(o, 1);
+        o.func(1);
         assertEq(2, o.getKeyValue("id"));
-        assertEq(2, h.func.callAsFunction(o, 1));
+        assertEq(2, o.func(1));
         assertEq(3, o.getKeyValue("id"));
-        assertThrows("JAVASCRIPT-PROGRAM-ERROR", \h.func.callAsFunction(), (global, 1));
 
         js = new JavaScriptProgram("const obj = {
     func: function(a, b) {
@@ -92,11 +91,11 @@ obj", "test.js");
         assertEq(NT_OBJECT, o.typeCode());
         assertEq("JavaScriptObject", o.className());
         h = o.toData();
-        assertTrue(h.func.isCallable());
+        assertTrue(h.func.callp());
         code c = int sub (int i) {
             return i + 1;
         };
-        assertEq("function", h.func.callAsFunction(global, c, 1));
+        assertEq("function", o.func(c, 1));
 
         js = new JavaScriptProgram("const obj = {
     func: function(a, b) {
@@ -109,8 +108,8 @@ obj", "test.js");
         assertEq(NT_OBJECT, o.typeCode());
         assertEq("JavaScriptObject", o.className());
         h = o.toData();
-        assertTrue(h.func.isCallable());
-        assertEq(2, h.func.callAsFunction(global, c, 1));
+        assertTrue(h.func.callp());
+        assertEq(2, o.func(c, 1));
 
         js = new JavaScriptProgram("const obj = {
     func: function(a, b) {
@@ -126,12 +125,11 @@ obj", "test.js");
         assertEq(NT_OBJECT, o.typeCode());
         assertEq("JavaScriptObject", o.className());
         h = o.toData();
-        assertTrue(h.func.isCallable());
+        assertTrue(h.func.callp());
         hash<auto> obj = {
             "a": c,
         };
         assertEq(2, o.func(obj, 1));
-        assertEq(2, h.func.callAsFunction(global, obj, 1));
 
         js = new JavaScriptProgram("const obj = {
     func: null,
@@ -145,14 +143,13 @@ obj", "test.js");
         assertEq("JavaScriptObject", o.className());
         h = o.toData();
         assertNothing(h.func);
-        assertTrue(h.store.isCallable());
-        h.store.callAsFunction(o, int sub (int i) {
+        assertTrue(h.store.callp());
+        o.store(int sub (int i) {
             return i + 1;
         });
         h = o.toData();
-        assertTrue(h.func.isCallable());
-        assertEq(2, h.func.callAsFunction(o, 1));
-        assertThrows("JAVASCRIPT-PROGRAM-ERROR", \h.func.callAsFunction(), (global, 1));
+        assertTrue(h.func.callp());
+        assertEq(2, o.func(1));
 
         js = new JavaScriptProgram("const obj = {
     a: 'string',
@@ -200,7 +197,7 @@ obj", "test.js");
 };
 obj", "test.js");
             JavaScriptObject o = js.run();
-            o.toData().func0.callAsFunction(o, 1, 1);
+            o.func0(1, 1);
             assertFalse(True);
         } catch (hash<ExceptionInfo> ex0) {
             ex = ex0;

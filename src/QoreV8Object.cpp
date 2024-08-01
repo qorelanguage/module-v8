@@ -31,6 +31,7 @@
 
 #include "QoreV8Object.h"
 #include "QoreV8Program.h"
+#include "QoreV8CallReference.h"
 
 #include <climits>
 
@@ -44,9 +45,17 @@ QoreV8Object::~QoreV8Object() {
     pgm->weakDeref();
 }
 
-AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, bool deep) const {
+AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h) const {
+    return toData(v8h, v8::Null(v8h.getIsolate()));
+}
+
+AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent) const {
     ExceptionSink* xsink = v8h.getExceptionSink();
     v8::Local<v8::Object> obj = get();
+    if (obj->IsCallable()) {
+        return new QoreV8CallReference(this, parent);
+    }
+
     v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
     if (maybe_props.IsEmpty()) {
         v8h.checkException();
@@ -71,9 +80,9 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, bool deep) cons
     }
     v8::Local<v8::Value> first = first_prop.ToLocalChecked();
     if (first->IsString()) {
-        return toHash(v8h, handle_scope.Escape(props), len, deep);
+        return toHash(v8h, handle_scope.Escape(props), len);
     } else if (first->IsUint32()) {
-        return toList(v8h, handle_scope.Escape(props), len, deep);
+        return toList(v8h, handle_scope.Escape(props), len);
     }
 
     v8::Local<v8::String> str = first->TypeOf(isolate);
@@ -87,7 +96,7 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, bool deep) cons
     return nullptr;
 }
 
-QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len, bool deep)
+QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len)
         const {
     ExceptionSink* xsink = v8h.getExceptionSink();
     v8::Local<v8::Object> obj = get();
@@ -121,7 +130,7 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
             continue;
         }
         v8::Local<v8::Value> v = value.ToLocalChecked();
-        if (deep && v->IsObject()) {
+        if (v->IsObject()) {
             v8::MaybeLocal<v8::Object> o = v->ToObject(v8h.getContext());
             if (o.IsEmpty()) {
                 if (v8h.checkException()) {
@@ -130,15 +139,13 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
                 continue;
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
-            if (!obj->IsCallable()) {
-                ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), o.ToLocalChecked()), xsink);
-                ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h, true), xsink);
-                if (*xsink) {
-                    return nullptr;
-                }
-                h->setKeyValue(kstr->c_str(), h0.release(), xsink);
-                continue;
+            ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), o.ToLocalChecked()), xsink);
+            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h), xsink);
+            if (*xsink) {
+                return nullptr;
             }
+            h->setKeyValue(kstr->c_str(), h0.release(), xsink);
+            continue;
         }
         ValueHolder qv(v8h.getProgram()->getQoreValue(xsink, v), xsink);
         if (*xsink) {
@@ -152,7 +159,7 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
 
 constexpr int max_array_element = 50000000;
 
-QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len, bool deep)
+QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len)
         const {
     ExceptionSink* xsink = v8h.getExceptionSink();
     v8::Local<v8::Object> obj = get();
@@ -193,7 +200,7 @@ QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
             continue;
         }
         v8::Local<v8::Value> v = value.ToLocalChecked();
-        if (deep && v->IsObject()) {
+        if (v->IsObject()) {
             v8::MaybeLocal<v8::Object> o = v->ToObject(v8h.getContext());
             if (o.IsEmpty()) {
                 if (v8h.checkException()) {
@@ -202,15 +209,13 @@ QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
                 continue;
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
-            if (!obj->IsCallable()) {
-                ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), o.ToLocalChecked()), xsink);
-                ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h, true), xsink);
-                if (*xsink) {
-                    return nullptr;
-                }
-                elem = h0.release();
-                continue;
+            ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), o.ToLocalChecked()), xsink);
+            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h), xsink);
+            if (*xsink) {
+                return nullptr;
             }
+            elem = h0.release();
+            continue;
         }
         ValueHolder qv(v8h.getProgram()->getQoreValue(xsink, v), xsink);
         if (*xsink) {
@@ -294,6 +299,18 @@ QoreValue QoreV8Object::callAsFunction(QoreV8ProgramHelper& v8h, const QoreValue
     ExceptionSink* xsink = v8h.getExceptionSink();
     QoreV8Program* pgm = v8h.getProgram();
 
+    v8::Local<v8::Value> recv = pgm->getV8Value(js_this, xsink);
+    if (*xsink) {
+        return QoreValue();
+    }
+    return callAsFunction(v8h, recv, offset, args);
+}
+
+QoreValue QoreV8Object::callAsFunction(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> recv, size_t offset,
+        const QoreListNode* args) {
+    ExceptionSink* xsink = v8h.getExceptionSink();
+    QoreV8Program* pgm = v8h.getProgram();
+
     // JavaScript "this" object
     v8::Local<v8::Object> self = get();
     if (!self->IsFunction()) {
@@ -301,10 +318,6 @@ QoreValue QoreV8Object::callAsFunction(QoreV8ProgramHelper& v8h, const QoreValue
         return QoreValue();
     }
 
-    v8::Local<v8::Value> recv = pgm->getV8Value(js_this, xsink);
-    if (*xsink) {
-        return QoreValue();
-    }
     ssize_t size = (args ? args->size() : 0) - offset;
     if (size < 0) {
         size = 0;

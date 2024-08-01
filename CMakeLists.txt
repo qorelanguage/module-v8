@@ -70,6 +70,7 @@ set(CPP_SRC
     src/QoreV8Object.cpp
     src/QoreV8CallStack.cpp
     src/QoreV8StackLocationHelper.cpp
+    src/QoreV8CallReference.cpp
 )
 
 qore_wrap_qpp_value(QPP_SOURCES ${QPP_SRC})

@@ -43,6 +43,13 @@ QoreV8CallReference::~QoreV8CallReference() {
 }
 
 QoreValue QoreV8CallReference::execValue(const QoreListNode* args, ExceptionSink* xsink) const {
+    ValueEvalRefHolder erh(xsink);
+    if (args) {
+        if (erh.eval(args)) {
+            return QoreValue();
+        }
+        args = erh->get<const QoreListNode>();
+    }
     QoreV8ProgramHelper v8h(xsink, callable->pgm);
     if (!v8h) {
         return QoreValue();

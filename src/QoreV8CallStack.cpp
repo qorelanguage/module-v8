@@ -63,7 +63,6 @@ QoreV8CallStack::QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCa
         std::string line;
         std::stringstream ss(exstr);
 
-        unsigned c = 0;
         while (getline(ss, line, '\n')) {
             //printd(5, "stack trace line: '%s'\n", line.c_str());
             QoreString targ(line);
@@ -82,7 +81,5 @@ QoreV8CallStack::QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCa
                     func.get<const QoreStringNode>()->c_str(), "JavaScript");
             }
         }
-
-        //add(native ? CT_BUILTIN : CT_USER, file.c_str(), line, line, code.c_str(), "Java");
     }
 }

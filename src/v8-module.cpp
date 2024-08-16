@@ -24,7 +24,9 @@
 #include "QC_JavaScriptProgram.h"
 #include "QC_JavaScriptObject.h"
 
-static std::unique_ptr<v8::Platform> platform;
+//static std::unique_ptr<v8::Platform> platform;
+std::unique_ptr<node::MultiIsolatePlatform> platform;
+std::shared_ptr<node::InitializationResult> init_result;
 
 static QoreStringNode* v8_module_init_info(qore_module_init_info& info);
 static void v8_module_ns_init(QoreNamespace* rns, QoreNamespace* qns);
@@ -88,6 +90,9 @@ static void v8_module_shutdown() {
     //printd(5, "v8_module_shutdown()\n");
     v8::V8::Dispose();
     v8::V8::DisposePlatform();
+
+    node::TearDownOncePerProcess();
+    platform = nullptr;
 }
 
 static QoreStringNode* v8_module_init_info(qore_module_init_info& info) {
@@ -105,15 +110,35 @@ static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool r
     const char* argv0 = info.path.c_str();
     //printd(5, "v8_module_init_intern() argv0: %s\n", argv0);
 
+    std::vector<std::string> args = {argv0};
+    init_result =
+        node::InitializeOncePerProcess(args, {
+            node::ProcessInitializationFlags::kNoInitializeV8,
+            node::ProcessInitializationFlags::kNoInitializeNodeV8Platform,
+        });
+
+    if (!init_result->errors().empty()) {
+        SimpleRefHolder<QoreStringNode> err(new QoreStringNode);
+        for (const std::string& error : init_result->errors()) {
+            if (!err->empty()) {
+                err->concat(", ");
+            }
+            err->concat(error.c_str());
+        }
+        return err.release();
+    }
+
+    // Create a v8::Platform instance. `MultiIsolatePlatform::Create()` is a way
+    // to create a v8::Platform instance that Node.js can use when creating
+    // Worker threads. When no `MultiIsolatePlatform` instance is present,
+    // Worker threads are disabled.
+    platform = node::MultiIsolatePlatform::Create(20);
+
     // Initialize V8.
-    v8::V8::InitializeICUDefaultLocation(argv0);
-    v8::V8::InitializeExternalStartupData(argv0);
-    platform = v8::platform::NewDefaultPlatform();
     v8::V8::InitializePlatform(platform.get());
     v8::V8::Initialize();
 
     //printd(5, "v8_module_init_intern()\n");
-
     return nullptr;
 }
 

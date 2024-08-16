@@ -1,0 +1,26 @@
+{
+  "name": "qore-typescript-api",
+  "version": "0.0.1",
+  "description": "Qore Typescript Api",
+  "main": "dist/index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test",
+    "build:test": "npx tsc --noEmit",
+    "build": "npx tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.3.0",
+    "prettier": "^3.3.3"
+  }
+}

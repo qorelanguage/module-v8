@@ -139,7 +139,7 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
                 continue;
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
-            ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), o.ToLocalChecked()), xsink);
+            ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), obj), xsink);
             ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h), xsink);
             if (*xsink) {
                 return nullptr;
@@ -209,7 +209,7 @@ QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
                 continue;
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
-            ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), o.ToLocalChecked()), xsink);
+            ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), obj), xsink);
             ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h), xsink);
             if (*xsink) {
                 return nullptr;

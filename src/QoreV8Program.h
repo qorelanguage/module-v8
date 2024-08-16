@@ -52,12 +52,7 @@ public:
         //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
         script.Reset();
         label.Reset();
-        context.Reset();
-        if (isolate) {
-            // Dispose the isolate
-            isolate->Dispose();
-        }
-        delete create_params.array_buffer_allocator;
+        node::Stop(env);
     }
 
     DLLLOCAL virtual void doDeref() {
@@ -123,9 +118,9 @@ public:
     DLLLOCAL static void raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate);
 
 protected:
+    std::unique_ptr<node::CommonEnvironmentSetup> setup;
     v8::Isolate* isolate = nullptr;
-    v8::Isolate::CreateParams create_params;
-    v8::Global<v8::Context> context;
+    node::Environment* env = nullptr;
     v8::Global<v8::Script> script;
     v8::Global<v8::String> label;
 
@@ -185,7 +180,7 @@ public:
             handle_scope(pgm->isolate),
             tryCatch(pgm->isolate),
             origin(pgm->isolate, pgm->label.Get(pgm->isolate)),
-            context(pgm->context.Get(pgm->isolate)),
+            context(pgm->setup->context()),
             context_scope(context) {
         AutoLocker al(pgm->m);
         if (!pgm->valid) {

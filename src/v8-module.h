@@ -26,6 +26,7 @@
 
 #include <v8.h>
 #include <libplatform/libplatform.h>
+#include <node/node.h>
 
 /*
 #include <v8-context.h>
@@ -53,5 +54,8 @@ DLLEXPORT extern "C" void v8_qore_module_desc(QoreModuleInfo& mod_info);
 //    const char* symbol);
 
 DLLLOCAL extern QoreNamespace* V8NS;
+
+DLLLOCAL extern std::unique_ptr<node::MultiIsolatePlatform> platform;
+DLLLOCAL extern std::shared_ptr<node::InitializationResult> init_result;
 
 #endif

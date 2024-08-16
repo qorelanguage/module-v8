@@ -33,20 +33,55 @@
 
 QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
     printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
-    // Create a new Isolate
-    create_params.array_buffer_allocator = v8::ArrayBuffer::Allocator::NewDefaultAllocator();
-    isolate = v8::Isolate::New(create_params);
+    // Setup up a libuv event loop, v8::Isolate, and Node.js Environment.
+    // setup common environment
+    std::vector<std::string> errors;
+    setup = node::CommonEnvironmentSetup::Create(platform.get(), &errors, init_result->args(),
+        init_result->exec_args(), node::EnvironmentFlags::kNoCreateInspector);
+    assert(setup);
+#ifdef DEBUG
+    for (auto& i : errors) {
+        printd(0, "CommonEnvironmentSetup::Create() error: %s\n", i.c_str());
+    }
+#endif
+    /*
+    if (!setup) {
+        for (const std::string& err : errors) {
+            fprintf(stderr, "%s: %s\n", args[0].c_str(), err.c_str());
+        }
+        return;
+    }
+    */
 
-    // Create a new context
+    isolate = setup->isolate();
+    assert(isolate);
+    env = setup->env();
+    assert(env);
+
+    v8::Locker locker(isolate);
+
     v8::Isolate::Scope isolate_scope(isolate);
     v8::HandleScope handle_scope(isolate);
-    v8::Local<v8::Context> local_context = v8::Context::New(isolate);
-    context.Reset(isolate, local_context);
-    valid = true;
+    v8::Context::Scope context_scope(setup->context());
+
+    v8::MaybeLocal<v8::Value> loadenv_ret = node::LoadEnvironment(env,
+        "const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
+        "globalThis.require = publicRequire;");
+    valid = !loadenv_ret.IsEmpty();
+    if (valid) {
+        int exit_code = node::SpinEventLoop(env).FromMaybe(1);
+        assert(!exit_code);
+        if (exit_code) {
+            valid = false;
+        }
+        //printd(5, "exit code: %d\n", exit_code);
+    }
 }
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
         : QoreV8Program() {
+    assert(valid);
+    v8::Locker locker(isolate);
     assert(source_code.getEncoding() == QCS_UTF8);
     assert(source_label.getEncoding() == QCS_UTF8);
     const v8::TryCatch tryCatch(isolate);
@@ -69,7 +104,7 @@ QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& so
     }
 
     v8::Local<v8::String> src = m_src.ToLocalChecked();
-    v8::Local<v8::Context> context = this->context.Get(isolate);
+    v8::Local<v8::Context> context = setup->context(); // this->context.Get(isolate);
     v8::Context::Scope context_scope(context);
     v8::MaybeLocal<v8::Script> m_script = v8::Script::Compile(context, src, &origin);
     if (m_script.IsEmpty()) {
@@ -237,7 +272,8 @@ int QoreV8Program::checkException(ExceptionSink* xsink, const v8::TryCatch& tryC
 }
 
 QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value> val) {
-    v8::Local<v8::Context> context = this->context.Get(isolate);
+    v8::Local<v8::Context> context = setup->context(); //this->context.Get(isolate);
+
     const v8::TryCatch tryCatch(isolate);
     if (val->IsInt32() || val->IsUint32()) {
         v8::MaybeLocal<v8::Integer> i = val->ToInteger(context);
@@ -396,8 +432,6 @@ static void call_callref(const v8::FunctionCallbackInfo<v8::Value>& info) {
         return;
     }
 
-    v8::Local<v8::Context> context = isolate->GetCurrentContext();
-
     ReferenceHolder<QoreListNode> args(&xsink);
     int len = info.Length();
     if (len) {
@@ -523,7 +557,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
 
         case NT_HASH: {
             const QoreHashNode* h = val.get<const QoreHashNode>();
-            v8::Local<v8::Context> context = this->context.Get(isolate);
+            v8::Local<v8::Context> context = setup->context(); //this->context.Get(isolate);
             v8::Local<v8::Object> obj = v8::Object::New(isolate);
             ConstHashIterator i(h);
             while (i.next()) {
@@ -575,7 +609,7 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
             gext.Reset(isolate, ext);
             gext.SetWeak(cbinfo, deref_callref, v8::WeakCallbackType::kParameter);
 
-            v8::Local<v8::Context> context = this->context.Get(isolate);
+            v8::Local<v8::Context> context = setup->context();
             v8::MaybeLocal<v8::Function> func = v8::Function::New(context, call_callref, ext);
             if (func.IsEmpty()) {
                 //printd(5, "ref: %p -> func empty\n", ref);
@@ -606,6 +640,6 @@ QoreObject* QoreV8Program::getGlobal(ExceptionSink* xsink) {
         return nullptr;
     }
 
-    v8::Local<v8::Object> g = this->context.Get(isolate)->Global();
+    v8::Local<v8::Object> g = setup->context()->Global();
     return new QoreObject(QC_JAVASCRIPTOBJECT, getProgram(), new QoreV8Object(this, g));
 }

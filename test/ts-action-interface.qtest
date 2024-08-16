@@ -1,0 +1,65 @@
+#!/usr/bin/env qore
+# -*- mode: qore; indent-tabs-mode: nil -*-
+
+%require-types
+%enable-all-warnings
+%new-style
+%strict-args
+
+%requires QUnit
+%requires ../qlib/TypeScriptActionInterface
+%requires v8
+
+%exec-class TypeScriptActionInterfaceTest
+
+public class TypeScriptActionInterfaceTest inherits QUnit::Test {
+    constructor() : Test("TypeScriptActionInterfaceTest", "1.0") {
+        addTestCase("sanity", \sanityTest());
+        addTestCase("js", \jsTest());
+
+        # Return for compatibility with test harnesses that check the script's return value
+        set_return_value(main());
+    }
+
+    private sanityTest() {
+        string name = "TestApp-" + get_random_string();
+        hash<auto> app = {
+            "name": name,
+            "display_name": "TestApp",
+            "short_desc": "Test",
+            "desc": "Test",
+            "logo": make_base64_string(<00>),
+            "logo_file_name": "test.svg",
+            "logo_mime_type": MimeTypeSvg,
+        };
+        TypeScriptActionInterface::registerApp(app);
+        hash<DataProviderAppInfo> appinfo = DataProviderActionCatalog::getAppEx(name);
+        assertEq(name, appinfo.name);
+
+        hash<auto> action = {
+            "app": name,
+            "action": "test-api",
+            "display_name": "Test API",
+            "short_desc": "Test API",
+            "desc": "Test API",
+            "action_code": DPAT_API,
+            "api_function": sub () {},
+        };
+        TypeScriptActionInterface::registerAction(action);
+        hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx(name, "test-api");
+        assertEq("test-api", actioninfo.action);
+    }
+
+    private jsTest() {
+        JavaScriptProgram js(File::readTextFile(get_script_dir() + "example.js"), "example.js");
+        JavaScriptObject obj = js.run();
+
+        obj.appActionInit(TypeScriptActionInterface::Api);
+
+        hash<DataProviderAppInfo> appinfo = DataProviderActionCatalog::getAppEx("js-test");
+        assertEq("js-test", appinfo.name);
+
+        hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx("js-test", "test-api");
+        assertEq("test-api", actioninfo.action);
+    }
+}

@@ -34,11 +34,19 @@ class TypeScriptActionInterfacePriv {
     static init() {
         *string scripts = ENV.QORE_TYPESCRIPT_ACTION_SCRIPTS;
         if (scripts.val()) {
+            string cwd = getcwd();
             foreach string path in (scripts.split(":")) {
                 try {
-                    JavaScriptProgram js(File::readTextFile(path), path);
+                    string dir = dirname(path);
+                    if (dir.val()) {
+                        chdir(dir);
+                    }
+                    on_exit if (dir.val()) {
+                        chdir(cwd);
+                    }
+                    JavaScriptProgram js(File::readTextFile(basename(path)), path);
                     JavaScriptObject obj = js.run();
-                    obj.appActionInit(TypeScriptActionInterface::Api);
+                    obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
                     pstore{js.uniqueHash()} = js;
                 } catch (hash<ExceptionInfo> ex) {
                     stderr.printf("Error loading TypeScript action script %y: %s", path, get_exception_string(ex));

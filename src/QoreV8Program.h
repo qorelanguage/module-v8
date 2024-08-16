@@ -52,12 +52,7 @@ public:
         //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
         script.Reset();
         label.Reset();
-        context.Reset();
-        if (isolate) {
-            // Dispose the isolate
-            isolate->Dispose();
-        }
-        delete create_params.array_buffer_allocator;
+        node::Stop(env);
     }
 
     DLLLOCAL virtual void doDeref() {
@@ -80,10 +75,6 @@ public:
 
     DLLLOCAL QoreValue run(ExceptionSink* xsink);
 
-    //! Call the function and return the result
-    DLLLOCAL QoreValue callFunction(ExceptionSink* xsink, const QoreString& func_name, const QoreListNode* args,
-        size_t arg_offset = 0);
-
     //! Returns a Qore value for the given V8 value
     DLLLOCAL QoreValue getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value> val);
 
@@ -101,24 +92,45 @@ public:
         return isolate;
     }
 
-    DLLLOCAL void tRef() const {
-        tRefs.ROreference();
+    DLLLOCAL void weakRef() const {
+        weakRefs.ROreference();
     }
 
-    DLLLOCAL void tDeref() {
-        if (tRefs.ROdereference()) {
+    DLLLOCAL void weakDeref() {
+        if (weakRefs.ROdereference()) {
             delete this;
         }
     }
 
+    //! Sets the "save object callback" for %Qore values managed by JavaScript objects
+    DLLLOCAL void setSaveReferenceCallback(const ResolvedCallReferenceNode* save_ref_callback) {
+        //printd(5, "QorePythonProgram::setSaveObjectCallback() this: %p old: %p new: %p\n", this,
+        //  *this->save_object_callback, save_object_callback);
+        this->save_ref_callback = save_ref_callback ? save_ref_callback->refRefSelf() : nullptr;
+    }
+
+    //! Returns the "save object callback" for %Qore values managed by JavaScript objects
+    DLLLOCAL ResolvedCallReferenceNode* getSaveReferenceCallback() const {
+        return *save_ref_callback;
+    }
+
+    //! Raises an exception in the given isolate from the Qore exception
+    DLLLOCAL static void raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate);
+
 protected:
+    std::unique_ptr<node::CommonEnvironmentSetup> setup;
     v8::Isolate* isolate = nullptr;
-    v8::Isolate::CreateParams create_params;
-    v8::Global<v8::Context> context;
+    node::Environment* env = nullptr;
     v8::Global<v8::Script> script;
     v8::Global<v8::String> label;
-    QoreReferenceCounter tRefs;
+
+    QoreProgram* qpgm = getProgram();
+    QoreReferenceCounter weakRefs;
     QoreThreadLock m;
+
+    // call reference for saving Qore references
+    mutable ReferenceHolder<ResolvedCallReferenceNode> save_ref_callback;
+
     unsigned opcount = 0;
     bool to_destroy = false;
     bool valid = false;
@@ -128,12 +140,16 @@ protected:
 
     DLLLOCAL void deleteIntern(ExceptionSink* xsink);
 
-    class QoreV8CallStack : public QoreCallStack {
-    public:
-        DLLLOCAL QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
-                v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
-                QoreExternalProgramLocationWrapper& loc);
-    };
+    DLLLOCAL int saveQoreReference(const QoreValue& rv, ExceptionSink& xsink);
+
+    DLLLOCAL int saveQoreReferenceDefault(const QoreValue& rv, ExceptionSink& xsink);
+};
+
+class QoreV8CallStack : public QoreCallStack {
+public:
+    DLLLOCAL QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCatch,
+            v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
+            QoreExternalProgramLocationWrapper& loc);
 };
 
 class QoreV8ProgramData : public AbstractPrivateData, public QoreV8Program {
@@ -147,7 +163,7 @@ public:
     DLLLOCAL virtual void deref(ExceptionSink* xsink) {
         if (ROdereference()) {
             deleteIntern(xsink);
-            tDeref();
+            weakDeref();
         }
     }
 
@@ -164,7 +180,7 @@ public:
             handle_scope(pgm->isolate),
             tryCatch(pgm->isolate),
             origin(pgm->isolate, pgm->label.Get(pgm->isolate)),
-            context(pgm->context.Get(pgm->isolate)),
+            context(pgm->setup->context()),
             context_scope(context) {
         AutoLocker al(pgm->m);
         if (!pgm->valid) {

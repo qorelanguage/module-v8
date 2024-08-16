@@ -1,0 +1,34 @@
+dist
+out
+node_modules
+test-resources
+*.swp
+*.vsix
+ui-test/node_modules
+ui-test/test_project/*
+ui-test/extensions
+api.http
+.idea/*
+storybook-static
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

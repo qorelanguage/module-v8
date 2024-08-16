@@ -69,3 +69,31 @@ auto JavaScriptProgram::run() {
 JavaScriptObject JavaScriptProgram::getGlobal() {
     return jsp->getGlobal(xsink);
 }
+
+//! Sets the "save reference" callback for %Qore data stored in JavaScript objects
+/** @par Example:
+    @code{.py}
+hash<auto> ref_cache;
+code callback = sub (auto v) {
+    # save reference to value in cache, so it doesn't go out of scope
+    object_cache{v.uniqueHash()} = v;
+}
+v8pgm.setSaveReferenceCallback(callback);
+    @endcode
+
+    @param save_ref_callback the callback to save any %Qore values stored in Python code
+
+    Due to the differences in garbage collection approaches between %Qore and JavaScript, %Qore objects must be
+    managed with a deterministic life cycle; JavaScript objects have only weak references to %Qore values due to the
+    lack of destructors in JavaScript and the lack of determinism in the JavaScript runtime for object lifecycle
+    management.
+
+    The callback set here will be called any time a %Qore reference is stored in a Python object; if no callback is
+    set, then the standard thread-local implementation is used where %Qore references are saved in a thread-local
+    hash.
+
+    @see @ref v8_qore_reference_lifecycle_management for more information
+*/
+JavaScriptProgram::setSaveReferenceCallback(*code save_ref_callback) [dom=PROCESS] {
+    jsp->setSaveReferenceCallback(save_ref_callback);
+}

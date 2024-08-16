@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.13)
 project(qore-v8-module)
 
 set (VERSION_MAJOR 1)
-set (VERSION_MINOR 2)
+set (VERSION_MINOR 0)
 set (VERSION_PATCH 0)
 
 set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
@@ -25,15 +25,22 @@ find_package(Qore 2.0 REQUIRED)
 
 if (APPLE)
     find_library(V8_BASE_WITHOUT_COMPILER NAMES libv8_base_without_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_INITIALIZERS_LIB NAMES libv8_initializers.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_INSPECTOR_LIB NAMES libv8_inspector.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_LIBBASE_LIB NAMES libv8_libbase.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_LIBPLATFORM_LIB NAMES libv8_libplatform.a HINTS ENV V8_LIB_DIR REQUIRED)
     find_library(V8_LIBSAMPLER_LIB NAMES libv8_libsampler.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
+    find_library(V8_TORQUE_GENERATED_LIB NAMES libv8_torque_generated.a HINTS ENV V8_LIB_DIR REQUIRED)
 else()
-    find_library(V8 NAMES v8 HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBBASE NAMES v8_libbase HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBPLATFORM NAMES v8_libplatform HINTS ENV V8_LIB_DIR REQUIRED)
+    if (DEFINED ENV{V8_USE_LIBNODE})
+        find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
+    else()
+        find_library(V8 NAMES v8 HINTS ENV V8_LIB_DIR REQUIRED)
+        find_library(V8_LIBBASE NAMES v8_libbase HINTS ENV V8_LIB_DIR REQUIRED)
+        find_library(V8_LIBPLATFORM NAMES v8_libplatform HINTS ENV V8_LIB_DIR REQUIRED)
+    endif()
 endif()
 
 if (DEFINED ENV{V8_INCLUDE_DIR})
@@ -62,6 +69,8 @@ set(CPP_SRC
     src/QoreV8Program.cpp
     src/QoreV8Object.cpp
     src/QoreV8CallStack.cpp
+    src/QoreV8StackLocationHelper.cpp
+    src/QoreV8CallReference.cpp
 )
 
 qore_wrap_qpp_value(QPP_SOURCES ${QPP_SRC})
@@ -99,19 +108,29 @@ endif()
 set(MODULE_DOX_INPUT ${CMAKE_BINARY_DIR})
 if (APPLE)
     qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-        ${V8_LIBBASE_LIB}
-        ${V8_SNAPSHOT_LIB}
-        ${V8_LIBPLATFORM_LIB}
         ${V8_BASE_WITHOUT_COMPILER}
-        ${V8_LIBSAMPLER_LIB}
         ${V8_COMPILER_LIB}
+        ${V8_INITIALIZERS_LIB}
+        ${V8_INSPECTOR_LIB}
+        ${V8_LIBBASE_LIB}
+        ${V8_LIBPLATFORM_LIB}
+        ${V8_LIBSAMPLER_LIB}
+        ${V8_SNAPSHOT_LIB}
+        ${V8_TORQUE_GENERATED_LIB}
     )
 else()
-    qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-        ${V8}
-        ${V8_LIBBASE}
-        ${V8_LIBPLATFORM}
-    )
+    if (DEFINED ENV{V8_USE_LIBNODE})
+        qore_external_binary_module(${module_name} ${PROJECT_VERSION}
+            ${LIBNODE}
+        )
+        find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
+    else()
+        qore_external_binary_module(${module_name} ${PROJECT_VERSION}
+            ${V8}
+            ${V8_LIBBASE}
+            ${V8_LIBPLATFORM}
+        )
+    endif()
 endif()
 
 qore_dist(${PROJECT_VERSION})

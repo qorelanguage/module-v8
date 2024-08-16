@@ -8,7 +8,7 @@
 Name:           qore-v8-module
 Version:        1.0.0
 Release:        1
-Summary:        Qore V8 module
+Summary:        Qorus Integration Engine - Qore v8 module
 License:        MIT
 Group:          Productivity/Networking/Other
 Url:            https://qoretechnologies.com
@@ -18,8 +18,8 @@ BuildRequires:  gcc-c++
 BuildRequires:  devtoolset-7-gcc-c++
 %endif
 BuildRequires:  cmake >= 3.5
-BuildRequires:  v8-devel >= 3.8
-Requires:       v8 >= 3.8
+BuildRequires:  v8-11.3-devel
+Requires:       nodejs-libs
 BuildRequires:  qore-devel >= 2.0
 BuildRequires:  qore-stdlib >= 2.0
 BuildRequires:  qore >= 2.0
@@ -38,10 +38,9 @@ This package contains the v8 module for the Qore Programming Language.
 %if 0%{?el7}
 # enable devtoolset7
 . /opt/rh/devtoolset-7/enable
-unset V8PATH
+unset v8PATH
 %endif
 export CXXFLAGS="%{?optflags}"
-alias v8=/usr/bin/v83
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=RELWITHDEBINFO -DCMAKE_SKIP_RPATH=1 -DCMAKE_SKIP_INSTALL_RPATH=1 -DCMAKE_SKIP_BUILD_RPATH=1 -DCMAKE_PREFIX_PATH=${_prefix}/lib64/cmake/Qore .
 make %{?_smp_mflags}
 make %{?_smp_mflags} docs
@@ -70,5 +69,5 @@ This RPM provides API documentation, test and example programs
 %doc docs/v8 test/*.qtest
 
 %changelog
-* Tue Jun 11 2024 David Nichols <david@qore.org>
+* Thu Jul 25 2024 David Nichols <david@qore.org>
 - initial version

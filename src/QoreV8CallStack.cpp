@@ -31,12 +31,14 @@
 
 #include "QoreV8Program.h"
 
-QoreV8Program::QoreV8CallStack::QoreV8CallStack(const QoreV8Program& v8pgm, const v8::TryCatch& tryCatch,
+#include <sstream>
+
+QoreV8CallStack::QoreV8CallStack(v8::Isolate* isolate, const v8::TryCatch& tryCatch,
         v8::Local<v8::Context> context, v8::Local<v8::Message> msg,
         QoreExternalProgramLocationWrapper& loc) {
     assert(!msg.IsEmpty());
 
-    v8::String::Utf8Value filename(v8pgm.isolate, msg->GetScriptOrigin().ResourceName());
+    v8::String::Utf8Value filename(isolate, msg->GetScriptOrigin().ResourceName());
     //const char* filename_string = ToCString(filename);
     int linenum = msg->GetLineNumber(context).FromJust();
 
@@ -45,14 +47,41 @@ QoreV8Program::QoreV8CallStack::QoreV8CallStack(const QoreV8Program& v8pgm, cons
     v8::Local<v8::Value> st_string;
     if (tryCatch.StackTrace(context).ToLocal(&st_string) &&
         st_string->IsString() && st_string.As<v8::String>()->Length() > 0) {
-        v8::String::Utf8Value st(v8pgm.isolate, st_string);
+        v8::String::Utf8Value st(isolate, st_string);
         const char* str = strchr(*st, '\n');
         if (!str) {
             return;
         }
         ++str;
 
-        printd(0, "QoreV8CallStack::QoreV8CallStack() stack trace to parse: '%s'\n", str);
+        ExceptionSink xsink;
+        QoreRegexInterface re(&xsink, " at ([^\\)]+) \\(([^:]+):([0-9]+):[0-9]+\\)");
+
+        //printd(5, "QoreV8CallStack::QoreV8CallStack() stack trace to parse: '%s'\n", str);
+
+        std::string exstr(str);
+        std::string line;
+        std::stringstream ss(exstr);
+
+        unsigned c = 0;
+        while (getline(ss, line, '\n')) {
+            //printd(5, "stack trace line: '%s'\n", line.c_str());
+            QoreString targ(line);
+            ReferenceHolder<QoreListNode> l(re.extractSubstrings(targ, &xsink), &xsink);
+            if (l) {
+                QoreValue func = l->retrieveEntry(0);
+                assert(func.getType() == NT_STRING);
+                QoreValue file = l->retrieveEntry(1);
+                assert(file.getType() == NT_STRING);
+                QoreValue line = l->retrieveEntry(2);
+                assert(line.getType() == NT_STRING);
+
+                long ln = strtol(line.get<const QoreStringNode>()->c_str(), nullptr, 10);
+
+                add(CT_USER, file.get<const QoreStringNode>()->c_str(), ln, ln,
+                    func.get<const QoreStringNode>()->c_str(), "JavaScript");
+            }
+        }
 
         //add(native ? CT_BUILTIN : CT_USER, file.c_str(), line, line, code.c_str(), "Java");
     }

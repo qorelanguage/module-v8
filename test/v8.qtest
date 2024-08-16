@@ -7,6 +7,7 @@
 
 %requires v8
 %requires QUnit
+%requires Util
 
 %exec-class V8Test
 
@@ -16,6 +17,7 @@ class V8Test inherits Test {
 
     constructor() : Test("v8 test", "1.0") {
         addTestCase("v8 program test", \v8ProgramTest());
+        addTestCase("exception test", \v8ExceptionTest());
         # Set return value for compatibility with test harnesses that check the return value
         set_return_value(main());
     }
@@ -54,8 +56,8 @@ var foo = function(arg) {
         auto foo = global.getKeyValue("foo");
         assertEq(NT_OBJECT, foo.typeCode());
         assertEq("JavaScriptObject", foo.className());
-        assertTrue(foo.isCallable());
-        assertEq(2, foo.callAsFunction(global, 1));
+        assertTrue(foo.toData().callp());
+        assertEq(2, foo.callAsFunction(NOTHING, 1));
 
         js = new JavaScriptProgram("const obj = {
     id: 1,
@@ -69,13 +71,158 @@ obj", "test.js");
         o = js.run();
         assertEq(NT_OBJECT, o.typeCode());
         assertEq("JavaScriptObject", o.className());
-        hash<auto> h = o.toHash();
+        hash<auto> h = o.toData();
         assertEq({"id": 1, "type": "t"}, h - "func");
-        assertTrue(h.func.isCallable());
+        assertTrue(h.func.callp());
         assertEq(1, o.getKeyValue("id"));
-        h.func.callAsFunction(o, 1);
+        o.func(1);
         assertEq(2, o.getKeyValue("id"));
+        assertEq(2, o.func(1));
+        assertEq(3, o.getKeyValue("id"));
 
-        #assertEq(2, h.func.callAsFunction(o, 1));
+        js = new JavaScriptProgram("const obj = {
+    func: function(a, b) {
+        return typeof a;
+    }
+};
+obj", "test.js");
+        o = js.run();
+        global = js.getGlobal();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toData();
+        assertTrue(h.func.callp());
+        code c = int sub (int i) {
+            return i + 1;
+        };
+        assertEq("function", o.func(c, 1));
+
+        js = new JavaScriptProgram("const obj = {
+    func: function(a, b) {
+        return a(b);
+    }
+};
+obj", "test.js");
+        o = js.run();
+        global = js.getGlobal();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toData();
+        assertTrue(h.func.callp());
+        assertEq(2, o.func(c, 1));
+
+        js = new JavaScriptProgram("const obj = {
+    func: function(a, b) {
+        return a.a(b);
+    },
+    func0: function(a) {
+        return JSON.stringify(a);
+    }
+};
+obj", "test.js");
+        o = js.run();
+        global = js.getGlobal();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toData();
+        assertTrue(h.func.callp());
+        hash<auto> obj = {
+            "a": c,
+        };
+        assertEq(2, o.func(obj, 1));
+
+        js = new JavaScriptProgram("const obj = {
+    func: null,
+    store: function(a) {
+        this.func = a;
+    }
+};
+obj", "test.js");
+        o = js.run();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        h = o.toData();
+        assertNothing(h.func);
+        assertTrue(h.store.callp());
+        o.store(int sub (int i) {
+            return i + 1;
+        });
+        h = o.toData();
+        assertTrue(h.func.callp());
+        assertEq(2, o.func(1));
+
+        js = new JavaScriptProgram("const obj = {
+    a: 'string',
+    b: 1,
+    c: {
+      d: {
+        e: 'hi',
+      }
+    }
+};
+obj", "test.js");
+        o = js.run();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        assertEq("string", o.a);
+        assertEq(1, o.b);
+        assertEq("hi", o.c.d.e);
+        h = o.toData();
+        assertEq("string", h.a);
+        assertEq(1, h.b);
+        assertEq("hi", h.c.d.e);
+
+        js = new JavaScriptProgram("const obj = {
+    a: [1, 2, 3]
+};
+obj", "test.js");
+        o = js.run();
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        assertEq((1, 2, 3), o.a);
+        h = o.toData();
+        assertEq((1, 2, 3), h.a);
+    }
+
+    v8ExceptionTest() {
+        hash<ExceptionInfo> ex;
+        try {
+            JavaScriptProgram js("const obj = {
+    func1: function(a, b) {
+        return a.a(b);
+    },
+    func0: function(a, b) {
+        return this.func1(a, b);
+    }
+};
+obj", "test.js");
+            JavaScriptObject o = js.run();
+            o.func0(1, 1);
+            assertFalse(True);
+        } catch (hash<ExceptionInfo> ex0) {
+            ex = ex0;
+        }
+        on_error printf("source exception: %s\n", get_exception_string(ex));
+        assertEq("Object.func1", ex.callstack[0].function);
+        assertEq(3, ex.callstack[0].line);
+        assertEq("Object.func0", ex.callstack[1].function);
+        assertEq(6, ex.callstack[1].line);
+
+        try {
+            JavaScriptProgram js("const obj = {
+    func: function(a) {
+        return a();
+    },
+};
+obj", "test.js");
+            JavaScriptObject o = js.run();
+            o.func.callAsFunction(o, sub () {
+                throw "ERR", "err";
+            });
+            assertFalse(True);
+        } catch (hash<ExceptionInfo> ex0) {
+            ex = ex0;
+        }
+        #printf("%s\n", get_exception_string(ex));
     }
 }

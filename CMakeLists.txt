@@ -59,6 +59,14 @@ else()
     message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++17 support. Please use a different C++ compiler.")
 endif()
 
+#add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/ts/dist/index.js
+#    COMMAND yarn install
+#    COMMAND yarn build
+#    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/ts
+#    COMMENT "Building typescript API"
+#    VERBATIM
+#)
+
 set(QPP_SRC
     src/QC_JavaScriptProgram.qpp
     src/QC_JavaScriptObject.qpp
@@ -71,6 +79,10 @@ set(CPP_SRC
     src/QoreV8CallStack.cpp
     src/QoreV8StackLocationHelper.cpp
     src/QoreV8CallReference.cpp
+)
+
+set(QMOD
+    qlib/TypeScriptActionInterface
 )
 
 qore_wrap_qpp_value(QPP_SOURCES ${QPP_SRC})
@@ -132,6 +144,8 @@ else()
         )
     endif()
 endif()
+qore_user_modules("${QMOD}")
+qore_external_user_module("qlib/TypeScriptActionInterface" "")
 
 qore_dist(${PROJECT_VERSION})
 

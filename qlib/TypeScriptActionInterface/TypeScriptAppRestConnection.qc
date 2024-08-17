@@ -36,7 +36,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     #! creates the TypeScriptAppRestConnection object
     /** @param name the name of the connection
         @param description connection description
-        @param url this aargument is ignored; the default Google API is always used
+        @param url the URL for the connection
         @param attributes various attributes. See below
         @param options connection options
 
@@ -137,7 +137,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         return info;
     }
 
-    #! returns options for @ref GoogleRestConnection::constructor()
+    #! Returns options for @ref TypeScriptAppRestConnection::constructor()
     static private hash<auto> getOptions(string url, hash<auto> opts) {
         *string app = (url =~ x/^tsrest-(.+):\/\//)[0];
         if (!exists app) {

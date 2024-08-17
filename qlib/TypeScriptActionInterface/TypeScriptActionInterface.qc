@@ -202,13 +202,6 @@ public class TypeScriptActionInterface {
                         "\"get_allowed_values\" attribute; got type %y; expecting a callable value", action.app,
                         action.action, i.key, get_allowed_values.fullType());
                 }
-                if (app.scheme) {
-                    if (i.value.depends_on.val()) {
-                        i.value.depends_on = ("qorus_app_connection",) + i.value.depends_on;
-                    } else {
-                        i.value.depends_on = ("qorus_app_connection",);
-                    };
-                }
                 omap{i.key} = get_allowed_values;
             }
             if (i.value.required && !i.value.preselected && !exists i.value.default_value) {
@@ -220,11 +213,14 @@ public class TypeScriptActionInterface {
     }
 
     static hash<ActionOptionInfo> getOptionInfo(hash<auto> opt) {
-        opt.type = TypeScriptActionInterface::getType(opt.type);
+        opt.type = TypeScriptActionInterface::getType(opt.type, opt.required);
         return cast<hash<ActionOptionInfo>>(opt);
     }
 
-    static AbstractDataProviderType getType(string name) {
+    static AbstractDataProviderType getType(string name, *bool required) {
+        if (!required) {
+            name = "*" + name;
+        }
         *AbstractDataProviderType type = AbstractDataProviderTypeMap{name};
         if (!type) {
             throw "TYPE-ERROR", sprintf("Cannot match type %y to a known Qore type", name);
@@ -232,9 +228,9 @@ public class TypeScriptActionInterface {
         return type;
     }
 
-    static AbstractDataProviderType getType(hash<auto> h) {
+    static AbstractDataProviderType getType(hash<auto> h, *bool required) {
         on_error rethrow $1.err, sprintf("%s (type: %y)", $1.desc, h);
-        HashDataType type();
+        HashDataType type(required ? AutoHashType : AutoHashOrNothingType);
         type.addQoreFields(map {$1.key: TypeScriptActionInterface::getField($1.value)}, h.pairIterator());
         return type;
     }
@@ -246,7 +242,7 @@ public class TypeScriptActionInterface {
 
     static hash<auto> getField(hash<auto> h) {
         on_error rethrow $1.err, sprintf("%s (field: %y)", $1.desc, h);
-        h.type = TypeScriptActionInterface::getType(h.type);
+        h.type = TypeScriptActionInterface::getType(h.type, h.required);
         return h;
     }
 

@@ -223,6 +223,7 @@ const obj = {
                         "short_desc": "A count of something",
                         "desc": "A count of something",
                         "example_value": 1,
+                        "required": true,
                     },
                     "status": {
                         "type": "string",
@@ -243,6 +244,7 @@ const obj = {
                                 "value": "Error",
                             },
                         ],
+                        "required": true,
                     },
                 },
             });

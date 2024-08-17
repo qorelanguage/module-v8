@@ -103,6 +103,7 @@ export const MockApps = {
             short_desc: 'A count of something',
             desc: 'A count of something',
             example_value: 1,
+            required: true,
           },
           status: {
             type: 'string',
@@ -123,6 +124,7 @@ export const MockApps = {
                 value: 'Error',
               },
             ],
+            required: true,
           },
         },
       },

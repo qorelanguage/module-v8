@@ -28,8 +28,11 @@ export const MockApps = {
         desc: 'Test API',
         action_code: 2,
         api_function: function (obj, _opts, _ctx) {
+          if (!obj.count) {
+            obj.count = 0;
+          }
           obj.count += 1;
-          console.log('obj + 1 = %d (%s)', obj, obj.note);
+          console.log('obj + 1 = %d (OK)', obj);
           return {
             result: obj.count,
             status: 'OK',

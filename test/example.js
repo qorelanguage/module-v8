@@ -104,8 +104,11 @@ const obj = {
                     @note the function here will be called with no "this" context; "this" cannot be used in this function
                 */
                 "api_function": function(obj, opts, ctx) {
+                    if (!obj.count) {
+                        obj.count = 0;
+                    }
                     obj.count += 1;
-                    console.log('obj + 1 = %d (%s)', obj, obj.note);
+                    console.log('obj + 1 = %d (OK)', obj);
                     return {
                         "result": obj.count,
                         "status": "OK",

@@ -26,7 +26,7 @@
 
 #include <v8.h>
 #include <libplatform/libplatform.h>
-#include <node/node.h>
+#include <node.h>
 
 /*
 #include <v8-context.h>

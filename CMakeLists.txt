@@ -45,6 +45,8 @@ endif()
 
 if (DEFINED ENV{V8_INCLUDE_DIR})
     include_directories(BEFORE "$ENV{V8_INCLUDE_DIR}")
+elseif(EXISTS /usr/include/node/node.h)
+    include_directories(BEFORE "/usr/include/node")
 endif()
 
 #set(V8_COMPILE_FLAGS "-DV8_COMPRESS_POINTERS -DV8_31BIT_SMIS_ON_64BIT_ARCH")

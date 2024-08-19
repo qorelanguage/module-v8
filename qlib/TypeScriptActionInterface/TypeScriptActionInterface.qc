@@ -231,7 +231,7 @@ public class TypeScriptActionInterface {
     static AbstractDataProviderType getType(hash<auto> h, *bool required) {
         on_error rethrow $1.err, sprintf("%s (type: %y)", $1.desc, h);
         HashDataType type(required ? AutoHashType : AutoHashOrNothingType);
-        type.addQoreFields(map {$1.key: TypeScriptActionInterface::getField($1.value)}, h.pairIterator());
+        type.addQoreFields(map {$1.key: TypeScriptActionInterface::getField($1.key, $1.value)}, h.pairIterator());
         return type;
     }
 
@@ -240,8 +240,9 @@ public class TypeScriptActionInterface {
             "instead", v.fullType());
     }
 
-    static hash<auto> getField(hash<auto> h) {
+    static hash<auto> getField(string name, hash<auto> h) {
         on_error rethrow $1.err, sprintf("%s (field: %y)", $1.desc, h);
+        h.name = name;
         h.type = TypeScriptActionInterface::getType(h.type, h.required);
         return h;
     }

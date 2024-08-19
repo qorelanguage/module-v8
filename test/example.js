@@ -128,8 +128,7 @@ const obj = {
                         "byte", "*byte", "softbyte", "*softbyte", "ubyte", "*ubyte", "softubyte", "*softubyte"]
                     or
                     - hash: which describes a data object; each key describes a data property; field objects can have the
-                    following keys:
-                    - name: string - the technical name of the field
+                    following keys (note that they key itself is the technical name for the field):
                     - display_name?: string - the user-friendly display name for the field
                     - short_desc?: string - a short plain-text description of the field
                     - desc?: string - a longer description for the field that supports markdown formatting

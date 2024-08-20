@@ -23,42 +23,25 @@ endif()
 
 find_package(Qore 2.0 REQUIRED)
 
-if (APPLE)
-    find_library(V8_BASE_WITHOUT_COMPILER NAMES libv8_base_without_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_COMPILER_LIB NAMES libv8_compiler.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_INITIALIZERS_LIB NAMES libv8_initializers.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_INSPECTOR_LIB NAMES libv8_inspector.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBBASE_LIB NAMES libv8_libbase.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBPLATFORM_LIB NAMES libv8_libplatform.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_LIBSAMPLER_LIB NAMES libv8_libsampler.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_SNAPSHOT_LIB NAMES libv8_snapshot.a HINTS ENV V8_LIB_DIR REQUIRED)
-    find_library(V8_TORQUE_GENERATED_LIB NAMES libv8_torque_generated.a HINTS ENV V8_LIB_DIR REQUIRED)
-else()
-    if (DEFINED ENV{V8_USE_LIBNODE})
-        find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
-    else()
-        find_library(V8 NAMES v8 HINTS ENV V8_LIB_DIR REQUIRED)
-        find_library(V8_LIBBASE NAMES v8_libbase HINTS ENV V8_LIB_DIR REQUIRED)
-        find_library(V8_LIBPLATFORM NAMES v8_libplatform HINTS ENV V8_LIB_DIR REQUIRED)
-    endif()
-endif()
+find_library(LIBNODE NAMES node HINTS ENV NODE_LIB_DIR REQUIRED)
 
-if (DEFINED ENV{V8_INCLUDE_DIR})
-    include_directories(BEFORE "$ENV{V8_INCLUDE_DIR}")
-    if (DEFINED ENV{V8_CPPGC_INCLUDE_DIR})
-        include_directories(BEFORE "$ENV{V8_CPPGC_INCLUDE_DIR}")
-    endif()
+if (DEFINED ENV{NODE_INCLUDE_DIR})
+    include_directories(BEFORE "$ENV{NODE_INCLUDE_DIR}")
 elseif(EXISTS /usr/include/node/node.h)
     include_directories(BEFORE "/usr/include/node")
+endif()
+
+if (DEFINED ENV{V8_CPPGC_INCLUDE_DIR})
+    include_directories(BEFORE "$ENV{V8_CPPGC_INCLUDE_DIR}")
 endif()
 
 #set(V8_COMPILE_FLAGS "-DV8_COMPRESS_POINTERS -DV8_31BIT_SMIS_ON_64BIT_ARCH")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${V8_COMPILE_FLAGS}")
 
-# Check for C++11.
+# Check for C++17
 include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++17" COMPILER_SUPPORTS_CXX11)
-if(COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++17" COMPILER_SUPPORTS_CXX17)
+if(COMPILER_SUPPORTS_CXX17)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 else()
     message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++17 support. Please use a different C++ compiler.")
@@ -123,32 +106,8 @@ if (DEFINED ENV{DOXYGEN_EXECUTABLE})
 endif()
 
 set(MODULE_DOX_INPUT ${CMAKE_BINARY_DIR})
-if (APPLE)
-    qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-        ${V8_BASE_WITHOUT_COMPILER}
-        ${V8_COMPILER_LIB}
-        ${V8_INITIALIZERS_LIB}
-        ${V8_INSPECTOR_LIB}
-        ${V8_LIBBASE_LIB}
-        ${V8_LIBPLATFORM_LIB}
-        ${V8_LIBSAMPLER_LIB}
-        ${V8_SNAPSHOT_LIB}
-        ${V8_TORQUE_GENERATED_LIB}
-    )
-else()
-    if (DEFINED ENV{V8_USE_LIBNODE})
-        qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-            ${LIBNODE}
-        )
-        find_library(LIBNODE NAMES node HINTS ENV V8_LIB_DIR REQUIRED)
-    else()
-        qore_external_binary_module(${module_name} ${PROJECT_VERSION}
-            ${V8}
-            ${V8_LIBBASE}
-            ${V8_LIBPLATFORM}
-        )
-    endif()
-endif()
+qore_external_binary_module(${module_name} ${PROJECT_VERSION} ${LIBNODE})
+
 qore_user_modules("${QMOD}")
 qore_external_user_module("qlib/TypeScriptActionInterface" "")
 

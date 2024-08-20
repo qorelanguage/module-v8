@@ -200,3 +200,10 @@ auto JavaScriptObject::memberGate(string m, ...) {
 
     return v8h.getProgram()->getQoreValue(xsink, attr);
 }
+
+//! Returns the QoreV8Object that contains this object
+/** @return the QoreV8Object that contains this object
+*/
+JavaScriptProgram JavaScriptObject::getProgram() {
+    return o->getReferencedProgram();
+}

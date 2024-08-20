@@ -45,6 +45,10 @@ QoreV8Object::~QoreV8Object() {
     pgm->weakDeref();
 }
 
+QoreObject* QoreV8Object::getReferencedProgram() {
+    return pgm->getReferencedObject();
+}
+
 AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h) const {
     return toData(v8h, v8::Null(v8h.getIsolate()));
 }

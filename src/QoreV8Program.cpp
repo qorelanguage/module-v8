@@ -116,6 +116,7 @@ QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& so
 }
 
 QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : QoreV8Program() {
+    self = old.self;
 }
 
 void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
@@ -398,6 +399,12 @@ void QoreV8Program::raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate)
         isolate->ThrowException(exstr.ToLocalChecked());
     }
     xsink.clear();
+}
+
+int QoreV8Program::spinEventLoop() {
+    v8::Locker locker(isolate);
+    v8::Isolate::Scope isolate_scope(isolate);
+    return node::SpinEventLoop(env).FromMaybe(1);
 }
 
 struct QoreV8CallbackInfo {

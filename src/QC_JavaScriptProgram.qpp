@@ -41,6 +41,8 @@ JavaScriptProgram::constructor(string source_code, string source_label) {
         return;
     }
 
+    jsp->setObject(self);
+
     //printd(5, "JavaScriptProgram::constructor() created %p\n", *jsp);
     self->setPrivate(CID_JAVASCRIPTPROGRAM, jsp.release());
 }
@@ -96,4 +98,11 @@ v8pgm.setSaveReferenceCallback(callback);
 */
 JavaScriptProgram::setSaveReferenceCallback(*code save_ref_callback) [dom=PROCESS] {
     jsp->setSaveReferenceCallback(save_ref_callback);
+}
+
+//! Spins the event loop the program
+/**
+*/
+int JavaScriptProgram::spinEventLoop() {
+    return jsp->spinEventLoop();
 }

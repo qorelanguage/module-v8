@@ -83,6 +83,8 @@ public:
         return const_cast<QoreV8Object*>(this);
     }
 
+    DLLLOCAL QoreObject* getReferencedProgram();
+
 protected:
     DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len) const;
 

@@ -45,7 +45,9 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
             "action_code": DPAT_API,
             "api_function": sub () {},
         };
-        TypeScriptActionInterface::registerAction(action);
+        TypeScriptActionInterface::registerAction(action, new JavaScriptProgram("async function runAsync(a, b, args) {
+    b.result = await a(...args);
+}", "pgm.js"));
         hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx(name, "test-api");
         assertEq("test-api", actioninfo.action);
     }
@@ -54,7 +56,7 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
         JavaScriptProgram js(File::readTextFile(get_script_dir() + "example.js"), "example.js");
         JavaScriptObject obj = js.run();
 
-        obj.appActionInit(TypeScriptActionInterface::Api);
+        obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
 
         hash<DataProviderAppInfo> appinfo = DataProviderActionCatalog::getAppEx("js-test");
         assertEq("js-test", appinfo.name);

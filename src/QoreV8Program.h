@@ -114,6 +114,18 @@ public:
         return *save_ref_callback;
     }
 
+    DLLLOCAL int spinEventLoop();
+
+    DLLLOCAL void setObject(QoreObject* self) {
+        assert(!this->self);
+        this->self = self;
+    }
+
+    DLLLOCAL QoreObject* getReferencedObject() {
+        assert(self);
+        return self->objectRefSelf();
+    }
+
     //! Raises an exception in the given isolate from the Qore exception
     DLLLOCAL static void raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate);
 
@@ -124,6 +136,7 @@ protected:
     v8::Global<v8::Script> script;
     v8::Global<v8::String> label;
 
+    QoreObject* self = nullptr;
     QoreProgram* qpgm = getProgram();
     QoreReferenceCounter weakRefs;
     QoreThreadLock m;

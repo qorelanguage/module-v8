@@ -99,7 +99,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         @return the response to the request
     */
     private auto doRequestImpl(auto req, *hash<auto> request_options) {
-        return api_function(req, request_options, getCallContextInfo()).toData();
+        return api_function(req, request_options, getCallContextInfo());
     }
 
     #! Returns reference data of the given kind if available

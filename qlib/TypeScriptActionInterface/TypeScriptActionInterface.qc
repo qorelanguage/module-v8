@@ -86,7 +86,7 @@ public class TypeScriptActionInterface {
     }
 
     static registerAction(JavaScriptObject action) {
-        TypeScriptActionInterface::registerAction(action.toData());
+        TypeScriptActionInterface::registerAction(action.toData(), action.getProgram());
     }
 
     static registerApp(hash<auto> app) {
@@ -119,13 +119,13 @@ public class TypeScriptActionInterface {
         DataProviderActionCatalog::registerApp(cast<hash<DataProviderAppInfo>>(app0));
     }
 
-    static registerAction(hash<auto> action) {
-        TypeScriptActionInterface::generateDataProvider(\action);
+    static registerAction(hash<auto> action, JavaScriptProgram pgm) {
+        TypeScriptActionInterface::generateDataProvider(\action, pgm);
         DataProviderActionCatalog::registerAction(cast<hash<DataProviderActionInfo>>(action));
     }
 
     #! Returns the path to the data provider
-    static generateDataProvider(reference<hash<auto>> action) {
+    static generateDataProvider(reference<hash<auto>> action, JavaScriptProgram pgm) {
         hash<DataProviderAppInfo> app;
         {
             on_error rethrow "TYPESCRIPT-ACTION-ERROR", sprintf("Error registering action %y: %s: %s", action.action,
@@ -134,7 +134,7 @@ public class TypeScriptActionInterface {
         }
         switch (action.action_code) {
             case DPAT_API: {
-                TypeScriptActionInterface::generateApiDataProvider(app, \action);
+                TypeScriptActionInterface::generateApiDataProvider(app, \action, pgm);
                 break;
             }
 
@@ -144,7 +144,7 @@ public class TypeScriptActionInterface {
         }
     }
 
-    static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action) {
+    static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action, JavaScriptProgram pgm) {
         auto api_function = remove action.api_function;
         if (!api_function.callp()) {
             throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"api_function\" "
@@ -158,7 +158,7 @@ public class TypeScriptActionInterface {
         if (*hash<auto> opts = remove action.options) {
             request_type = TypeScriptActionInterface::getType(map {$1.key: $1.value{TypeKeys}},
                 opts.pairIterator());
-            action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap);
+            action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pgm);
         }
         *AbstractDataProviderType response_type;
         if (action.response_type) {
@@ -170,8 +170,9 @@ public class TypeScriptActionInterface {
         TypeScriptActionAppDataProvider prov = TypeScriptActionInterface::getAppDataProvider(action.app,
             action.action);
 
-        prov.registerChild(action.action, new TypeScriptActionApiDataProvider(action.action, api_function,
-            request_type, response_type, omap));
+        prov.registerChild(action.action, new TypeScriptActionApiDataProvider(action.action, auto sub () {
+            return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv);
+        }, request_type, response_type, omap));
 
         action.path = action.action;
     }
@@ -193,7 +194,7 @@ public class TypeScriptActionInterface {
     }
 
     static *hash<string, hash<ActionOptionInfo>> getOptions(hash<DataProviderAppInfo> app, hash<auto> action,
-            hash<auto> opts, reference<hash<string, code>> omap) {
+            hash<auto> opts, reference<hash<string, code>> omap, JavaScriptProgram pgm) {
         hash<string, hash<ActionOptionInfo>> rv;
         foreach hash<auto> i in (opts.pairIterator()) {
             if (exists (auto get_allowed_values = remove i.value.get_allowed_values)) {
@@ -202,12 +203,26 @@ public class TypeScriptActionInterface {
                         "\"get_allowed_values\" attribute; got type %y; expecting a callable value", action.app,
                         action.action, i.key, get_allowed_values.fullType());
                 }
-                omap{i.key} = get_allowed_values;
+                omap{i.key} = *list<hash<AllowedValueInfo>> sub () {
+                    return TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv);
+                };
             }
             if (i.value.required && !i.value.preselected && !exists i.value.default_value) {
                 i.value.preselected = True;
             }
             rv{i.key} = TypeScriptActionInterface::getOptionInfo(i.value);
+        }
+        return rv;
+    }
+
+    static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args) {
+        code async_wrapper = pgm.getGlobal().getKeyValue("runAsync").toData();
+        JavaScriptObject jsval(pgm);
+        auto v = async_wrapper(async_callback, jsval, args);
+        pgm.spinEventLoop();
+        auto rv = jsval.result;
+        if (rv instanceof JavaScriptObject) {
+            rv = rv.toData();
         }
         return rv;
     }

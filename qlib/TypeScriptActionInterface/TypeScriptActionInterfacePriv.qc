@@ -44,7 +44,10 @@ class TypeScriptActionInterfacePriv {
                     on_exit if (dir.val()) {
                         chdir(cwd);
                     }
-                    JavaScriptProgram js("var exports = {};\n" + File::readTextFile(basename(path)), path);
+                    JavaScriptProgram js("async function runAsync(a, b, args) {
+    b.result = await a(...args);
+}
+var exports = {};\n" + File::readTextFile(basename(path)), path);
                     JavaScriptObject obj = js.run();
                     obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
                     pstore{js.uniqueHash()} = js;

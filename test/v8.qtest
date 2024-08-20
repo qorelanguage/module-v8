@@ -16,10 +16,35 @@ class V8Test inherits Test {
     }
 
     constructor() : Test("v8 test", "1.0") {
+        addTestCase("async test", \v8AsyncTest());
         addTestCase("v8 program test", \v8ProgramTest());
         addTestCase("exception test", \v8ExceptionTest());
         # Set return value for compatibility with test harnesses that check the return value
         set_return_value(main());
+    }
+
+    v8AsyncTest() {
+        JavaScriptProgram js("
+function doPromise() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(100);
+    }, 1)
+  });
+}
+
+async function runAsync(a, b) {
+    b.result = await a();
+}
+", "test.js");
+        js.run();
+        JavaScriptObject global = js.getGlobal();
+        auto f = global.getKeyValue("doPromise");
+        code a = global.getKeyValue("runAsync").toData();
+        JavaScriptObject rv(js);
+        auto v = a(f, rv);
+        js.spinEventLoop();
+        assertEq(100, rv.toData().result);
     }
 
     v8ProgramTest() {

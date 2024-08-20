@@ -108,7 +108,7 @@ const obj = {
                         obj.count = 0;
                     }
                     obj.count += 1;
-                    console.log('obj + 1 = %d (OK)', obj);
+                    //console.log('obj: %d + 1 = %d (OK)', obj.count - 1, obj.count);
                     return {
                         "result": obj.count,
                         "status": "OK",

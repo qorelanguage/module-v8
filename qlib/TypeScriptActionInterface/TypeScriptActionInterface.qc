@@ -33,7 +33,7 @@ public class TypeScriptActionInterface {
 
         const TypeKeys = (
             "name", "display_name", "short_desc", "desc", "type", "example_value",
-            "default_value", "allowed_values", "attr"
+            "default_value", "allowed_values", "attr", "required"
         );
 
         const TypeScriptAppRestConnectionOptions = RestConnection::ConnectionScheme.options;
@@ -204,7 +204,8 @@ public class TypeScriptActionInterface {
                         action.action, i.key, get_allowed_values.fullType());
                 }
                 omap{i.key} = *list<hash<AllowedValueInfo>> sub () {
-                    return TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv);
+                    return map cast<hash<AllowedValueInfo>>($1.toData()),
+                        TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv);
                 };
             }
             if (i.value.required && !i.value.preselected && !exists i.value.default_value) {
@@ -245,7 +246,7 @@ public class TypeScriptActionInterface {
 
     static AbstractDataProviderType getType(hash<auto> h, *bool required) {
         on_error rethrow $1.err, sprintf("%s (type: %y)", $1.desc, h);
-        HashDataType type(required ? AutoHashType : AutoHashOrNothingType);
+        HashDataType type(required ?? h.required ? AutoHashType : AutoHashOrNothingType);
         type.addQoreFields(map {$1.key: TypeScriptActionInterface::getField($1.key, $1.value)}, h.pairIterator());
         return type;
     }

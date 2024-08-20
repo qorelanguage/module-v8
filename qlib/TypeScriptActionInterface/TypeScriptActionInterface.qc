@@ -207,6 +207,7 @@ public class TypeScriptActionInterface {
                     return map cast<hash<AllowedValueInfo>>($1.toData()),
                         TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv);
                 };
+                i.value.ref_data = i.key;
             }
             if (i.value.required && !i.value.preselected && !exists i.value.default_value) {
                 i.value.preselected = True;

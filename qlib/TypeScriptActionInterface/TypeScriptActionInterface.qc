@@ -236,7 +236,12 @@ public class TypeScriptActionInterface {
 
     static AbstractDataProviderType getType(string name, *bool required) {
         if (!required) {
-            name = "*" + name;
+            if (name !~ /^\*/) {
+                name = "*" + name;
+            }
+        } else if (name =~ /^\*/) {
+            throw "TYPE-ERROR", sprintf("Cannot use an \"or-nothing\" type like %y when \"required\" is set; use "
+                "type %y instead", name, name[1..]);
         }
         *AbstractDataProviderType type = AbstractDataProviderTypeMap{name};
         if (!type) {

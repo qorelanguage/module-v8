@@ -231,6 +231,9 @@ public class TypeScriptActionInterface {
 
     static hash<ActionOptionInfo> getOptionInfo(hash<auto> opt) {
         opt.type = TypeScriptActionInterface::getType(opt.type, opt.required);
+        if (opt.allowed_values) {
+            opt.allowed_values = map cast<hash<AllowedValueInfo>>($1), opt.allowed_values;
+        }
         return cast<hash<ActionOptionInfo>>(opt);
     }
 

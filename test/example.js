@@ -128,30 +128,31 @@ const obj = {
                         "byte", "*byte", "softbyte", "*softbyte", "ubyte", "*ubyte", "softubyte", "*softubyte"]
                     or
                     - hash: which describes a data object; each key describes a data property; field objects can have the
-                    following keys (note that they key itself is the technical name for the field):
-                    - display_name?: string - the user-friendly display name for the field
-                    - short_desc?: string - a short plain-text description of the field
-                    - desc?: string - a longer description for the field that supports markdown formatting
-                    - type - same as this - either a string or a data object again
-                    - example_value?: any - (values must use the field's type) any example value to use when generating
-                        example data etc
-                    - default_value?: any - (values must use the field's type) the default value if none is provided by
-                        the user
-                    - allowed_values?: AllowedValues[] - an array of objects providing the only values allowed for the
-                        field - with the following properties
-                        - display_name?: string - the user-friendly display name for the field
-                        - short_desc?: string - a short plain-text description of the field
-                        - value: any - (must be present and must use the field's type); one of the allowed values
-                        - desc: string - a description of the value (if unknown just use the value again)
-                    - depends_on?: string[] - an optional list of other options that must be set before this option can
+                      following keys (note that they key itself is the technical name for the field):
+                      - display_name?: string - the user-friendly display name for the field
+                      - short_desc?: string - a short plain-text description of the field
+                      - desc?: string - a longer description for the field that supports markdown formatting
+                      - type - same as this - either a string or a data object again
+                      - example_value?: any - (values must use the field's type) any example value to use when generating
+                          example data etc
+                      - default_value?: any - (values must use the field's type) the default value if none is provided by
+                          the user
+                      - allowed_values?: AllowedValues[] - an array of objects providing the only values allowed for the
+                          field - with the following properties
+                          - display_name?: string - the user-friendly display name for the field
+                          - short_desc?: string - a short plain-text description of the field
+                          - value: any - (must be present and must use the field's type); one of the allowed values
+                          - desc: string - a description of the value (if unknown just use the value again)
+                      - depends_on?: string[] - an optional list of other options that must be set before this option can
                         be set
-                    - get_allowed_values?: function (ctx?: object): AllowedValues[] | undefined - a function that will
+                      - get_allowed_values?: function (ctx?: object): AllowedValues[] | undefined - a function that will
                         return the allowed values when called; the 'ctx' parameter has the same format as the third
                         argument to 'api_function' above:
                         - conn_name?: string -> the connection name, if any is defined
                         - conn_opts?: object -> connection options; for REST connections, see the 'rest' object definition
                         - opts?: object -> a data object with option values set for the current action
-                    - attr?: Attributes - an optional data object with any properties
+                      - attr?: Attributes - an optional data object with any properties
+                      - required?: bool -> if the hash itself is required or optional
 
                     Note that this data will also be used to create the API request type
                 */

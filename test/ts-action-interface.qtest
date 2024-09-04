@@ -53,7 +53,8 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
     }
 
     private jsTest() {
-        JavaScriptProgram js(File::readTextFile(get_script_dir() + "example.js"), "example.js");
+        chdir(get_script_dir());
+        JavaScriptProgram js(File::readTextFile("example.js"), "example.js");
         JavaScriptObject obj = js.run();
 
         obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
@@ -63,5 +64,21 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
 
         hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx("js-test", "test-api");
         assertEq("test-api", actioninfo.action);
+
+        appinfo = DataProviderActionCatalog::getAppEx("js-swagger-test");
+        assertEq("js-swagger-test", appinfo.name);
+
+        actioninfo = DataProviderActionCatalog::getAppActionEx("js-swagger-test", "create-pet");
+        assertEq("create-pet", actioninfo.action);
+
+        TypeScriptAppRestConnection conn({
+            "name": "test",
+            "url": "tsrest-js-swagger-test://localhost",
+        });
+
+        AbstractDataProvider prov =
+            TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("create-pet");
+        AbstractDataProviderType t = prov.getRequestType();
+        assertEq(6, t.getField("body").getType().getFields().size());
     }
 }

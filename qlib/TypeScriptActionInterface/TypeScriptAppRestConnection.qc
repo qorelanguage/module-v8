@@ -138,7 +138,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     }
 
     #! Returns options for @ref TypeScriptAppRestConnection::constructor()
-    static private hash<auto> getOptions(string url, hash<auto> opts) {
+    static private hash<auto> getOptions(string url, *hash<auto> opts) {
         *string app = (url =~ x/^tsrest-(.+):\/\//)[0];
         if (!exists app) {
             throw "TYPESCRIPT-REST-CONNECTION-ERROR", sprintf("Cannot determine TypeScript REST app from URL %y",

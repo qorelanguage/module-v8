@@ -2,6 +2,10 @@
 const obj = {
     actionsCatalogue: {
         registerAppActions: function(api) {
+            /* registerApp() takes the same arguments as DataProviderActionCatalog::registerApp() plus:
+                - rest?: object -> documented below
+                - swagger? string -> a location to a Swagger 2.0 schema = OpenAPI 2.0
+            */
             api.registerApp({
                 "name": "js-test",
                 "display_name": "JavaScript Test",
@@ -89,7 +93,7 @@ const obj = {
                 "desc": "Test API",
                 "action_code": 2,  // DPAT_API == 2
 
-                /* "api_code" is required when "action_code" == DPAT_API
+                /* "api_function" is required when "action_code" == DPAT_API
                     @param obj: any - is the main argument used to call the API and must correspond to the request
                     type, which can be any serializable data type (including no value). It is normally a data object
                     @param opts?: object - currently unused
@@ -250,6 +254,37 @@ const obj = {
                         "required": true,
                     },
                 },
+            });
+
+            api.registerApp({
+                "name": "js-swagger-test",
+                "display_name": "JavaScript Swagger Test",
+                "short_desc": "Test",
+                "desc": "Test",
+                // "logo" is a base64-encoded string
+                "logo": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+Cjxzdmcgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDUyIDYzIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MjsiPgogICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsMSwtMTYuNjUsLTIzLjAxNzIpIj4KICAgICAgICA8cGF0aCBkPSJNNjguMzYzLDYzLjk3M0w2OC4zNjMsNDAuMTA5QzY4LjM2Myw0MC4xMDkgNjguMzYzLDM3LjExMyA2NS43NjgsMzUuNjE1TDQ1LjEwMiwyMy42ODNDNDUuMTAyLDIzLjY4MyA0Mi41MDcsMjIuMTg1IDM5LjkxMiwyMy42ODNMMTkuMjQ1LDM1LjYxNUMxOS4yNDUsMzUuNjE1IDE2LjY1LDM3LjExMyAxNi42NSw0MC4xMDlMMTYuNjUsNjMuOTczQzE2LjY1LDYzLjk3MyAxNi42NSw2Ni45NjkgMTkuMjQ1LDY4LjQ2N0w0Ny44MzksODQuODIyQzQ3LjgzOSw4NC44MjIgNTAuNDM0LDg2LjM2OCA1My4wMjksODQuODdMNjQuNjUyLDc4LjExMkw0Mi41Miw2NS41MDNMNDIuNTA3LDY1LjUxMUwzMC44NDMsNTguNzc2TDMwLjg0Myw0NS4zMDdMNDIuNTA3LDM4LjU3M0w1NC4xNzEsNDUuMzA3TDU0LjE3MSw1OC43NzZMNDUuMjEzLDYzLjk0OEw1OS41NjUsNzIuMDVMNjUuNzY4LDY4LjQ2OUM2NS43NjksNjguNDY4IDY4LjM2Myw2Ni45NyA2OC4zNjMsNjMuOTczIiBzdHlsZT0iZmlsbDpyZ2IoMCwyMzEsMjU1KTtmaWxsLXJ1bGU6bm9uemVybzsiLz4KICAgIDwvZz4KPC9zdmc+Cg==",
+                "logo_file_name": "test-swagger.svg",
+                "logo_mime_type": "image/svg+xml",
+                "swagger": "PetStore.swagger.yaml",
+                "rest": {
+                    "data": "json",
+                    "oauth2_auth_url":  "https://example.com/oauth2/auth",
+                    "oauth2_grant_type": "authorization_code",
+                    "oauth2_token_url": "https://example.com/token",
+                    "url": "tsrest-js-swagger-test://www.example.com/api",
+                },
+            });
+
+            api.registerAction({
+                "app": "js-swagger-test",
+                "action": "create-pet",
+                "display_name": "Create Pet",
+                "short_desc": "Create pet",
+                "desc": "Create pet",
+                "action_code": 2,  // DPAT_API == 2
+                "api_function": function(obj, opts, ctx) {
+                },
+                "swagger_path": "pet/POST"
             });
         }
     }

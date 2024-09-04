@@ -79,6 +79,9 @@ public class TypeScriptActionInterface {
 
         #! Maps from app names to rest getOptions
         static hash<string, hash<auto>> armap;
+
+        #! Maps from app names to Swagger schemas
+        static hash<string, SwaggerSchema> app_swagger_map;
     }
 
     static registerApp(JavaScriptObject app) {
@@ -90,6 +93,10 @@ public class TypeScriptActionInterface {
     }
 
     static registerApp(hash<auto> app) {
+        SwaggerSchema schema;
+        if ((*string swagger_loc = remove app.swagger).val()) {
+            schema = SwaggerLoader::fromString(FileLocationHandler::getTextFileFromLocation(swagger_loc));
+        }
         hash<auto> app0 += app;
         if (app.logo) {
             app0.logo = parse_base64_string(app.logo);
@@ -117,6 +124,9 @@ public class TypeScriptActionInterface {
             app0.scheme = sname;
         }
         DataProviderActionCatalog::registerApp(cast<hash<DataProviderAppInfo>>(app0));
+        if (schema) {
+            app_swagger_map{app.name} = schema;
+        }
     }
 
     static registerAction(hash<auto> action, JavaScriptProgram pgm) {
@@ -132,9 +142,11 @@ public class TypeScriptActionInterface {
                 $1.err, $1.desc);
             app = DataProviderActionCatalog::getAppEx(action.app);
         }
+        *SwaggerSchema schema = app_swagger_map{action.app};
+
         switch (action.action_code) {
             case DPAT_API: {
-                TypeScriptActionInterface::generateApiDataProvider(app, \action, pgm);
+                TypeScriptActionInterface::generateApiDataProvider(app, \action, pgm, schema);
                 break;
             }
 
@@ -144,35 +156,49 @@ public class TypeScriptActionInterface {
         }
     }
 
-    static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action, JavaScriptProgram pgm) {
+    static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action, JavaScriptProgram pgm,
+            *SwaggerSchema schema) {
         auto api_function = remove action.api_function;
         if (!api_function.callp()) {
             throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"api_function\" "
                 "attribute; got type %y; expecting a callable value", action.app, action.action,
                 api_function.fullType());
         }
+        code api_code = auto sub (...) {
+            return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv);
+        };
 
-        # maps from options to "get_allowed_values" code for each option
-        hash<string, code> omap;
-        *AbstractDataProviderType request_type;
-        if (*hash<auto> opts = remove action.options) {
-            request_type = TypeScriptActionInterface::getType(map {$1.key: $1.value{TypeKeys}},
-                opts.pairIterator());
-            action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pgm);
-        }
-        *AbstractDataProviderType response_type;
-        if (action.response_type) {
-            action.response_type = action.response_type;
-            response_type = TypeScriptActionInterface::getType(remove action.response_type);
-            action.output_type = response_type;
+        TypeScriptActionApiDataProvider child;
+        if ((*string swagger_path = remove action.swagger_path).val()) {
+            if (schema) {
+                child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code);
+            } else {
+                throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"swagger_path\" "
+                    "attribute %y; this attribute can only been used when the application declares a Swagger schema",
+                    action.app, action.action, swagger_path);
+            }
+        } else {
+            # maps from options to "get_allowed_values" code for each option
+            hash<string, code> omap;
+            *AbstractDataProviderType request_type;
+            if (*hash<auto> opts = remove action.options) {
+                request_type = TypeScriptActionInterface::getType(map {$1.key: $1.value{TypeKeys}},
+                    opts.pairIterator());
+                action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pgm);
+            }
+            *AbstractDataProviderType response_type;
+            if (action.response_type) {
+                action.response_type = action.response_type;
+                response_type = TypeScriptActionInterface::getType(remove action.response_type);
+                action.output_type = response_type;
+            }
+
+            child = new TypeScriptActionApiDataProvider(action.action, api_code, request_type, response_type, omap);
         }
 
         TypeScriptActionAppDataProvider prov = TypeScriptActionInterface::getAppDataProvider(action.app,
             action.action);
-
-        prov.registerChild(action.action, new TypeScriptActionApiDataProvider(action.action, auto sub () {
-            return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv);
-        }, request_type, response_type, omap));
+        prov.registerChild(action.action, child);
 
         action.path = action.action;
     }

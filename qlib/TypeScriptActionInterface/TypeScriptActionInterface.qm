@@ -36,6 +36,9 @@
 %requires(reexport) DataProvider
 %requires ConnectionProvider
 %requires RestClient
+%requires Swagger
+%requires SwaggerDataProvider
+%requires FileLocationHandler
 %requires v8
 
 module TypeScriptActionInterface {

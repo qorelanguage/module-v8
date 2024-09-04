@@ -77,11 +77,14 @@ public class TypeScriptActionInterface {
         #! Maps from scheme names to apps
         static hash<string, string> samap;
 
-        #! Maps from app names to rest getOptions
+        #! Maps from app names to REST getOptions
         static hash<string, hash<auto>> armap;
 
         #! Maps from app names to Swagger schemas
         static hash<string, SwaggerSchema> app_swagger_map;
+
+        #! Maps from app names to REST template options; app -> option -> True
+        static hash<string, hash<string, bool>> atmap;
     }
 
     static registerApp(JavaScriptObject app) {
@@ -101,8 +104,26 @@ public class TypeScriptActionInterface {
         if (app.logo) {
             app0.logo = parse_base64_string(app.logo);
         }
+        hash<string, bool> url_template_options;
         if (*hash<auto> rest = remove app0.rest) {
             string sname = "tsrest-" + app.name;
+
+            hash<string, hash<ConnectionOptionInfo>> opts = TypeScriptAppRestConnectionOptions;
+            *string required_options;
+            if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {
+                foreach hash<auto> i in (rest_modifiers.options.pairIterator()) {
+                    if (i.value.allowed_values) {
+                        i.value.allowed_values = map cast<hash<AllowedValueInfo>>($1), i.value.allowed_values;
+                    }
+                    opts{i.key} = cast<hash<ConnectionOptionInfo>>(i.value);
+                }
+                if (rest_modifiers.required_options.val()) {
+                    required_options = rest_modifiers.required_options;
+                }
+                if (rest_modifiers.url_template_options) {
+                    url_template_options = map {$1: True}, rest_modifiers.url_template_options;
+                }
+            }
             hash<ConnectionSchemeInfo> scheme = <ConnectionSchemeInfo>{
                 "display_name": app.display_name,
                 "short_desc": app.short_desc,
@@ -114,7 +135,8 @@ public class TypeScriptActionInterface {
                 "base_scheme_map": {
                     "https": sname,
                 },
-                "options": TypeScriptAppRestConnectionOptions,
+                "options": opts,
+                "required_options": required_options,
                 "auto_url": exists rest.url,
             };
             ConnectionSchemeCache::registerScheme(sname, scheme);
@@ -126,6 +148,9 @@ public class TypeScriptActionInterface {
         DataProviderActionCatalog::registerApp(cast<hash<DataProviderAppInfo>>(app0));
         if (schema) {
             app_swagger_map{app.name} = schema;
+        }
+        if (url_template_options) {
+            atmap{app.name} = url_template_options;
         }
     }
 
@@ -307,12 +332,20 @@ public class TypeScriptActionInterface {
     }
 
     #! Returns REST options for the given app
-    static hash<auto> getRestOptions(string app) {
+    static hash<auto> getRestOptions(string app, *hash<auto> opts) {
         *hash<auto> rv = armap{app};
         if (!rv) {
             throw "TYPESCRIPT-APP-ERROR", sprintf("Cannot find any REST options for app %y", app);
         }
-        return rv;
+        if (*hash<string, bool> url_template_options = atmap{app}) {
+            foreach string opt in ("url", "oauth2_auth_url", "oauth2_token_url") {
+                if ((*string url = rv{opt} ?? opts{opt}).val()) {
+                    map url = replace(url, "{{" + $1 + "}}", opts{$1}), keys url_template_options, opts{$1}.val();
+                    opts{opt} = url;
+                }
+            }
+        }
+        return rv + opts;
     }
 }
 }

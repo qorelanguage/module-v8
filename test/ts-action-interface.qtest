@@ -73,8 +73,12 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
 
         TypeScriptAppRestConnection conn({
             "name": "test",
-            "url": "tsrest-js-swagger-test://localhost",
+            "url": "tsrest-js-swagger-test://",
+            "opts": {
+                "subdomain": "test",
+            },
         });
+        assertEq("tsrest-js-swagger-test://test.example.com/api", conn.getUrl());
 
         AbstractDataProvider prov =
             TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("create-pet");

@@ -144,7 +144,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
             throw "TYPESCRIPT-REST-CONNECTION-ERROR", sprintf("Cannot determine TypeScript REST app from URL %y",
                 url);
         }
-        return TypeScriptActionInterface::getRestOptions(app) + opts;
+        return TypeScriptActionInterface::getRestOptions(app, opts);
     }
 }
 }

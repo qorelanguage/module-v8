@@ -268,10 +268,24 @@ const obj = {
                 "swagger": "PetStore.swagger.yaml",
                 "rest": {
                     "data": "json",
-                    "oauth2_auth_url":  "https://example.com/oauth2/auth",
+                    "oauth2_auth_url":  "https://{{subdomain}}.example.com/oauth2/auth",
                     "oauth2_grant_type": "authorization_code",
-                    "oauth2_token_url": "https://example.com/token",
-                    "url": "tsrest-js-swagger-test://www.example.com/api",
+                    "oauth2_token_url": "https://{{subdomain}}.example.com/token",
+                    "url": "tsrest-js-swagger-test://{{subdomain}}.example.com/api",
+                },
+                "rest_modifiers": {
+                    "options": {
+                        "subdomain": {
+                            "display_name": "Subdomain",
+                            "short_desc": "The subdomain for the URL",
+                            "desc": "The subdomain for the URL",
+                            "type": "string",
+                        },
+                    },
+                    "required_options": "subdomain",
+                    "url_template_options": [
+                        "subdomain",
+                    ],
                 },
             });
 

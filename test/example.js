@@ -289,6 +289,7 @@ const obj = {
                 },
             });
 
+            // NOTE: this action will be executed as a REST call, no code is necessary
             api.registerAction({
                 "app": "js-swagger-test",
                 "action": "create-pet",
@@ -296,8 +297,6 @@ const obj = {
                 "short_desc": "Create pet",
                 "desc": "Create pet",
                 "action_code": 2,  // DPAT_API == 2
-                "api_function": function(obj, opts, ctx) {
-                },
                 "swagger_path": "pet/POST"
             });
         }

@@ -74,6 +74,13 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         self.omap = omap;
     }
 
+    private constructor(string name, *code api_function) {
+        self.name = name;
+        if (api_function) {
+            self.api_function = api_function;
+        }
+    }
+
     #! Sets the connection
     setConnection(AbstractConnection conn) {
         self.conn = conn;

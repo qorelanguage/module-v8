@@ -108,6 +108,11 @@ public class TypeScriptActionInterface {
         if (*hash<auto> rest = remove app0.rest) {
             string sname = "tsrest-" + app.name;
 
+            if (rest.url =~ /^https?:\/\//) {
+                string scheme = "tsrest-" + app.name;
+                rest.url = regex_subst(rest.url, "^https?", scheme);
+            }
+
             hash<string, hash<ConnectionOptionInfo>> opts = TypeScriptAppRestConnectionOptions;
             *string required_options;
             if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {
@@ -183,15 +188,20 @@ public class TypeScriptActionInterface {
 
     static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action, JavaScriptProgram pgm,
             *SwaggerSchema schema) {
-        auto api_function = remove action.api_function;
-        if (!api_function.callp()) {
-            throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"api_function\" "
-                "attribute; got type %y; expecting a callable value", action.app, action.action,
-                api_function.fullType());
+        code api_code;
+        {
+            auto api_function = remove action.api_function;
+            if (!api_function.callp() && !schema) {
+                throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"api_function\" "
+                    "attribute; got type %y; expecting a callable value", action.app, action.action,
+                    api_function.fullType());
+            }
+            if (api_function) {
+                api_code = auto sub (...) {
+                    return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv);
+                };
+            }
         }
-        code api_code = auto sub (...) {
-            return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv);
-        };
 
         TypeScriptActionApiDataProvider child;
         if ((*string swagger_path = remove action.swagger_path).val()) {
@@ -216,6 +226,8 @@ public class TypeScriptActionInterface {
                 action.response_type = action.response_type;
                 response_type = TypeScriptActionInterface::getType(remove action.response_type);
                 action.output_type = response_type;
+            } else if (action.hasKey("response_type")) {
+                remove action.response_type;
             }
 
             child = new TypeScriptActionApiDataProvider(action.action, api_code, request_type, response_type, omap);

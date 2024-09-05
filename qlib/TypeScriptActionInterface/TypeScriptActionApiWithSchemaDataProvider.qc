@@ -45,15 +45,30 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
 
         #! Swagger path
         string swagger_path;
+
+        #! API data provider
+        AbstractDataProvider prov;
     }
 
-    constructor(string name, SwaggerSchema schema, string swagger_path, code api_function)
+    constructor(string name, SwaggerSchema schema, string swagger_path, *code api_function)
             : TypeScriptActionApiDataProvider(name, api_function) {
         # set request and response types
-        SwaggerDataProviderCommon prov = new SwaggerDataProvider(schema);
-        prov = prov.getChildProviderPath(swagger_path);
+        prov = new SwaggerDataProvider(schema).getChildProviderPath(swagger_path);
         request_type = prov.getRequestType();
         response_type = prov.getResponseType();
+    }
+
+    #! Makes a request and returns the response
+    /** @param req the request to serialize and make according to the request type
+        @param request_options the request options; will be processed by validateRequestOptions()
+
+        @return the response to the request
+    */
+    private auto doRequestImpl(auto req, *hash<auto> request_options) {
+        if (!api_function) {
+            return prov.doRequest(req, request_options);
+        }
+        return api_function(req, request_options, getCallContextInfo());
     }
 
     #! Returns data provider static info

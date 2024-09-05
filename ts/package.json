@@ -1,6 +1,6 @@
 {
   "name": "qore-typescript-api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Qore Typescript Api",
   "main": "dist/index.js",
   "directories": {
@@ -15,6 +15,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@qoretechnologies/qorus-actions-catalogue": "^0.1.2",
     "lodash": "^4.17.21",
     "typescript": "^5.5.4"
   },

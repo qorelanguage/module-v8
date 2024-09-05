@@ -108,6 +108,11 @@ public class TypeScriptActionInterface {
         if (*hash<auto> rest = remove app0.rest) {
             string sname = "tsrest-" + app.name;
 
+            if (rest.url =~ /^https?:\/\//) {
+                string scheme = "tsrest-" + app.name;
+                rest.url = regex_subst(rest.url, "^https?", scheme);
+            }
+
             hash<string, hash<ConnectionOptionInfo>> opts = TypeScriptAppRestConnectionOptions;
             *string required_options;
             if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {

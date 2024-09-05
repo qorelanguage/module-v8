@@ -271,7 +271,7 @@ const obj = {
                     "oauth2_auth_url":  "https://{{subdomain}}.example.com/oauth2/auth",
                     "oauth2_grant_type": "authorization_code",
                     "oauth2_token_url": "https://{{subdomain}}.example.com/token",
-                    "url": "tsrest-js-swagger-test://{{subdomain}}.example.com/api",
+                    "url": "https://{{subdomain}}.example.com/api",
                 },
                 "rest_modifiers": {
                     "options": {

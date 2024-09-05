@@ -567,10 +567,10 @@
   dependencies:
     make-plural "^7.0.0"
 
-"@qoretechnologies/qorus-actions-catalogue@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@qoretechnologies/qorus-actions-catalogue/-/qorus-actions-catalogue-0.1.3.tgz#1b0f1212ba913cba7877008f759ef3a74d1a22d6"
-  integrity sha512-VlJ4J5M0Wp2j26cDXIjJCEZzToAE47H4S1WWXpSis0KM7dwxBRcWp5Ja4AJfQDRRFQVHSG+XwvvqritYfUZSUA==
+"@qoretechnologies/qorus-actions-catalogue@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@qoretechnologies/qorus-actions-catalogue/-/qorus-actions-catalogue-0.1.4.tgz#151e8ce9bd546d0f6bfa5a02a38b3a51ea3adf98"
+  integrity sha512-tI6H36TKEOJUzoUYFBkZSxpGoVsr6BoLxsI8umTSPN1iJFSHEA3MjgDaurExMVyYuWriiOvMwUoAS3gSXGHrIg==
   dependencies:
     "@qoretechnologies/ts-toolkit" "^0.4.2"
     "@sinclair/typebox" "^0.33.0"

@@ -153,7 +153,7 @@ public class TypeScriptActionInterface {
                 },
                 "options": opts,
                 "required_options": required_options,
-                "auto_url": exists rest.url,
+                "auto_url": exists url,
             };
             ConnectionSchemeCache::registerScheme(sname, scheme);
             asmap{app.name} = sname;

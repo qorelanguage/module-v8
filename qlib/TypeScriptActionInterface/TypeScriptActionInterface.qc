@@ -85,6 +85,9 @@ public class TypeScriptActionInterface {
 
         #! Maps from app names to REST template options; app -> option -> True
         static hash<string, hash<string, bool>> atmap;
+
+        #! Maps from app names to default URL
+        static hash<string, string> aumap;
     }
 
     static registerApp(JavaScriptObject app) {
@@ -108,12 +111,20 @@ public class TypeScriptActionInterface {
         if (*hash<auto> rest = remove app0.rest) {
             string sname = "tsrest-" + app.name;
 
-            if (rest.url =~ /^https?:\/\//) {
+            *string url = remove rest.url;
+            if (url =~ /^https?:\/\//) {
                 string scheme = "tsrest-" + app.name;
-                rest.url = regex_subst(rest.url, "^https?", scheme);
+                url = regex_subst(url, "^https?", scheme);
             }
 
             hash<string, hash<ConnectionOptionInfo>> opts = TypeScriptAppRestConnectionOptions;
+            foreach hash<auto> i in (rest.pairIterator()) {
+                if (!opts{i.key}) {
+                    throw "TYPESCRIPT-REST-OPTION-ERROR", sprintf("Unknown REST connection option %y; known "
+                        "options: %y", i.key, keys opts);
+                }
+                opts{i.key}.default_value = i.value;
+            }
             *string required_options;
             if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {
                 foreach hash<auto> i in (rest_modifiers.options.pairIterator()) {
@@ -149,6 +160,9 @@ public class TypeScriptActionInterface {
             samap{sname} = app.name;
             armap{app.name} = rest{TypeScriptAppRestOptionKeys};
             app0.scheme = sname;
+            if (exists url) {
+                aumap{app.name} = url;
+            }
         }
         DataProviderActionCatalog::registerApp(cast<hash<DataProviderAppInfo>>(app0));
         if (schema) {
@@ -348,6 +362,9 @@ public class TypeScriptActionInterface {
         *hash<auto> rv = armap{app};
         if (!rv) {
             throw "TYPESCRIPT-APP-ERROR", sprintf("Cannot find any REST options for app %y", app);
+        }
+        if ((*string url = aumap{app}).val()) {
+            opts.url = url;
         }
         if (*hash<string, bool> url_template_options = atmap{app}) {
             foreach string opt in ("url", "oauth2_auth_url", "oauth2_token_url") {

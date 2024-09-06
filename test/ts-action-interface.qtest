@@ -7,6 +7,7 @@
 %strict-args
 
 %requires QUnit
+%requires RestClient
 %requires ../qlib/TypeScriptActionInterface
 %requires v8
 
@@ -79,6 +80,10 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
             },
         });
         assertEq("tsrest-js-swagger-test://test.example.com/api", conn.getUrl());
+
+        *hash<string, bool> fh = conn.getFeatures();
+        on_error printf("fh: %y\n", fh);
+        assertTrue(fh{RestConnection::RCF_OAUTH2_AUTH_CODE});
 
         AbstractDataProvider prov =
             TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("create-pet");

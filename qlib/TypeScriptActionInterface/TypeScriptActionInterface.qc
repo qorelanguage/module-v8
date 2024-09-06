@@ -253,11 +253,12 @@ public class TypeScriptActionInterface {
     }
 
     static TypeScriptActionAppDataProvider getAppDataProvider(string app, string action) {
-        if (*AbstractDataProvider app_prov = root.getChildProvider(app)) {
+        string appname = app.lwr();
+        if (*AbstractDataProvider app_prov = root.getChildProvider(appname)) {
             return cast<TypeScriptActionAppDataProvider>(app_prov);
         }
-        TypeScriptActionAppDataProvider prov(app);
-        root.registerChild(app, prov);
+        TypeScriptActionAppDataProvider prov(appname);
+        root.registerChild(appname, prov);
         return prov;
     }
 
@@ -365,7 +366,7 @@ public class TypeScriptActionInterface {
         if (!opts) {
             throw "TYPESCRIPT-APP-ERROR", sprintf("Cannot find any REST options for app %y", app);
         }
-        config.opts = config.opts + opts;
+        config.opts = config.opts + (map {$1.key: $1.value}, opts.pairIterator(), exists $1.value);
         if (*hash<string, bool> url_template_options = atmap{appname}) {
             if (config.url.val()) {
                 config.url = TypeScriptActionInterface::processUrl(config.url, config.opts, url_template_options);

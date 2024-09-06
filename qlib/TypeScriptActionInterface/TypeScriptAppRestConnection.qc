@@ -45,8 +45,11 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         @throw CONNECTION-OPTION-ERROR missing or invalid connection option
     */
     constructor(string name, string description, string url, hash<auto> attributes = {}, hash<auto> options = {})
-            : RestConnection(name, description, url, attributes,
-                TypeScriptAppRestConnection::getOptions(url, options)) {
+            : RestConnection(TypeScriptAppRestConnection::getConfig({
+                "url": url,
+                "desc": description,
+                "opts": options,
+            }), attributes) {
     }
 
     #! creates the TypeScriptAppRestConnection object
@@ -68,7 +71,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         @throw CONNECTION-OPTION-ERROR missing or invalid connection option or attribute
     */
     constructor(hash<auto> config, *hash<auto> attr)
-            : RestConnection(config + TypeScriptAppRestConnection::getOptions(config.url, config.opts), attr) {
+            : RestConnection(TypeScriptAppRestConnection::getConfig(config), attr) {
     }
 
     #! returns the type
@@ -138,13 +141,17 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     }
 
     #! Returns options for @ref TypeScriptAppRestConnection::constructor()
-    static private hash<auto> getOptions(string url, *hash<auto> opts) {
+    static private hash<auto> getConfig(hash<auto> config) {
+        *string url = config.url;
+        if (!url.val()) {
+            throw "TYPESCRIPT-REST-CONNECTION-ERROR", "Cannot determine TypeScript REST app; missing URL";
+        }
         *string app = (url =~ x/^tsrest-(.+):\/\//)[0];
         if (!exists app) {
             throw "TYPESCRIPT-REST-CONNECTION-ERROR", sprintf("Cannot determine TypeScript REST app from URL %y",
                 url);
         }
-        return TypeScriptActionInterface::getRestOptions(app, opts);
+        return config + TypeScriptActionInterface::getRestConfig(app, config);
     }
 }
 }

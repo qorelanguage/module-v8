@@ -38,6 +38,7 @@ public class TypeScriptActionInterface {
 
         const TypeScriptAppRestConnectionOptions = RestConnection::ConnectionScheme.options;
 
+        #! This provides all supported REST connection option names
         const TypeScriptAppRestOptionKeys = (
             "content_encoding",
             "data",
@@ -65,15 +66,11 @@ public class TypeScriptActionInterface {
             "ssl_verify_cert",
             "token",
             "token_type",
-            "url",
             "username",
         );
     }
 
     private {
-        #! Maps from app names to schemes
-        static hash<string, string> asmap;
-
         #! Maps from scheme names to apps
         static hash<string, string> samap;
 
@@ -107,14 +104,14 @@ public class TypeScriptActionInterface {
         if (app.logo) {
             app0.logo = parse_base64_string(app.logo);
         }
+        string appname = app.name.lwr();
         hash<string, bool> url_template_options;
         if (*hash<auto> rest = remove app0.rest) {
-            string sname = "tsrest-" + app.name;
+            string sname = "tsrest-" + app.name.lwr();
 
             *string url = remove rest.url;
             if (url =~ /^https?:\/\//) {
-                string scheme = "tsrest-" + app.name;
-                url = regex_subst(url, "^https?", scheme);
+                url = regex_subst(url, "^https?", sname);
             }
 
             hash<string, hash<ConnectionOptionInfo>> opts = TypeScriptAppRestConnectionOptions;
@@ -123,7 +120,9 @@ public class TypeScriptActionInterface {
                     throw "TYPESCRIPT-REST-OPTION-ERROR", sprintf("Unknown REST connection option %y; known "
                         "options: %y", i.key, keys opts);
                 }
-                opts{i.key}.default_value = i.value;
+                if (exists i.value) {
+                    opts{i.key}.default_value = i.value;
+                }
             }
             *string required_options;
             if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {
@@ -156,20 +155,19 @@ public class TypeScriptActionInterface {
                 "auto_url": exists url,
             };
             ConnectionSchemeCache::registerScheme(sname, scheme);
-            asmap{app.name} = sname;
             samap{sname} = app.name;
-            armap{app.name} = rest{TypeScriptAppRestOptionKeys};
+            armap{appname} = map {$1.key: $1.value}, rest{TypeScriptAppRestOptionKeys}.pairIterator(), exists $1.value;
             app0.scheme = sname;
             if (exists url) {
-                aumap{app.name} = url;
+                aumap{appname} = url;
             }
         }
         DataProviderActionCatalog::registerApp(cast<hash<DataProviderAppInfo>>(app0));
         if (schema) {
-            app_swagger_map{app.name} = schema;
+            app_swagger_map{appname} = schema;
         }
         if (url_template_options) {
-            atmap{app.name} = url_template_options;
+            atmap{appname} = url_template_options;
         }
     }
 
@@ -358,23 +356,32 @@ public class TypeScriptActionInterface {
     }
 
     #! Returns REST options for the given app
-    static hash<auto> getRestOptions(string app, *hash<auto> opts) {
-        *hash<auto> rv = armap{app};
-        if (!rv) {
+    static hash<auto> getRestConfig(string app, *hash<auto> config) {
+        string appname = app.lwr();
+        if ((*string url = aumap{appname}).val()) {
+            config.url = url;
+        }
+        *hash<auto> opts = armap{appname};
+        if (!opts) {
             throw "TYPESCRIPT-APP-ERROR", sprintf("Cannot find any REST options for app %y", app);
         }
-        if ((*string url = aumap{app}).val()) {
-            opts.url = url;
-        }
-        if (*hash<string, bool> url_template_options = atmap{app}) {
-            foreach string opt in ("url", "oauth2_auth_url", "oauth2_token_url") {
-                if ((*string url = rv{opt} ?? opts{opt}).val()) {
-                    map url = replace(url, "{{" + $1 + "}}", opts{$1}), keys url_template_options, opts{$1}.val();
-                    opts{opt} = url;
+        config.opts = config.opts + opts;
+        if (*hash<string, bool> url_template_options = atmap{appname}) {
+            if (config.url.val()) {
+                config.url = TypeScriptActionInterface::processUrl(config.url, config.opts, url_template_options);
+            }
+            foreach string opt in ("oauth2_auth_url", "oauth2_token_url") {
+                if ((*string url = config.opts{opt}).val()) {
+                    config.opts{opt} = TypeScriptActionInterface::processUrl(url, config.opts, url_template_options);
                 }
             }
         }
-        return rv + opts;
+        return config;
+    }
+
+    static string processUrl(string url, hash<auto> opts, hash<string, bool> url_template_options) {
+        map url = replace(url, "{{" + $1 + "}}", opts{$1}), keys url_template_options, opts{$1}.val();
+        return url;
     }
 }
 }

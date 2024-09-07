@@ -366,7 +366,7 @@ public class TypeScriptActionInterface {
         if (!opts) {
             throw "TYPESCRIPT-APP-ERROR", sprintf("Cannot find any REST options for app %y", app);
         }
-        config.opts = config.opts + (map {$1.key: $1.value}, opts.pairIterator(), exists $1.value);
+        config.opts = (map {$1.key: $1.value}, opts.pairIterator(), exists $1.value) + config.opts;
         if (*hash<string, bool> url_template_options = atmap{appname}) {
             if (config.url.val()) {
                 config.url = TypeScriptActionInterface::processUrl(config.url, config.opts, url_template_options);

@@ -29,7 +29,7 @@ class ActionsCatalogue {
 
       // Register the actions
       actions.forEach((action) => {
-        if (action.action === 'create-ticket') {
+        if (action.action === 'create_ticket') {
           const { api_function, ...rest } = action;
 
           api.registerAction({

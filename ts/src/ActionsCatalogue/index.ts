@@ -33,7 +33,7 @@ class ActionsCatalogue {
           ...action,
           api_function: async (...args) => {
             console.log('Executing action', action.action, 'with params', args);
-            const result = action.api_function?.(args);
+            const result = await action.api_function?.(args);
             console.log('Action', action.action, 'executed with result', result);
             return result;
           },

@@ -29,16 +29,7 @@ class ActionsCatalogue {
 
       // Register the actions
       actions.forEach((action) => {
-        if (action.action === 'create_ticket') {
-          const { api_function, ...rest } = action;
-
-          api.registerAction({
-            ...rest,
-            swagger_path: 'api/v2/tickets/POST',
-          });
-        } else {
-          api.registerAction(action);
-        }
+        api.registerAction(action);
       });
     });
   }

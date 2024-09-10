@@ -36,7 +36,7 @@ class ActionsCatalogue {
             console.log('Executing action', action.action, 'with params', args);
 
             try {
-              result = await action.api_function?.(args);
+              result = await action.api_function?.(...args);
               console.log('Action', action.action, 'executed with result', result);
             } catch (error) {
               console.error('Error executing action', action.action, error);

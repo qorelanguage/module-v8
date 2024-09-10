@@ -29,23 +29,11 @@ class ActionsCatalogue {
 
       // Register the actions
       actions.forEach((action) => {
+        const { api_function, ...rest } = action;
+
         api.registerAction({
-          ...action,
-          api_function: async (...args) => {
-            let result;
-            console.log('Executing action', action.action, 'with params', args);
-
-            try {
-              result = await action.api_function?.(...args);
-              console.log('Action', action.action, 'executed with result', result);
-            } catch (error) {
-              console.error('Error executing action', action.action, error);
-            } finally {
-              console.log('Action', action.action, 'finished');
-            }
-
-            return result;
-          },
+          ...rest,
+          swagger_path: 'api/v2/tickets/POST',
         });
       });
     });

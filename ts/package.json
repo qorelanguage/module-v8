@@ -10,7 +10,8 @@
   "scripts": {
     "test": "test",
     "build:test": "npx tsc --noEmit",
-    "build": "npx tsc",
+    "build": "rm -rf /dist && npx tsc && yarn copy-schemas",
+    "copy-schemas": "copyfiles -u 5 node_modules/@qoretechnologies/qorus-actions-catalogue/src/schemas/* dist/schemas",
     "update-catalogue": "yarn add @qoretechnologies/qorus-actions-catalogue@beta"
   },
   "author": "",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^22.3.0",
+    "copyfiles": "^2.4.1",
     "prettier": "^3.3.3"
   }
 }

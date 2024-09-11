@@ -48,9 +48,13 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
 
         #! API data provider
         SwaggerDataProviderCommon prov;
+
+        #! Path vars
+        *hash<string, bool> path_vars;
     }
 
-    constructor(string name, SwaggerSchema schema, string swagger_path, *code api_function)
+    constructor(string name, SwaggerSchema schema, string swagger_path, *code api_function,
+            *hash<string, bool> path_vars)
             : TypeScriptActionApiDataProvider(name, api_function) {
         # set request and response types
         {
@@ -60,6 +64,31 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         }
         request_type = prov.getRequestType();
         response_type = prov.getResponseType();
+
+        if (path_vars) {
+            self.path_vars = path_vars;
+            if (!request_type) {
+                request_type = new HashDataType();
+            } else if (!(request_type instanceof HashDataType)) {
+                HashDataType h();
+                string fname = "data";
+                int i;
+                while (path_vars{fname}) {
+                    fname = sprintf("data-%d", ++i);
+                }
+                h.addField(new QoreDataField({
+                    "name": fname,
+                    "type": request_type,
+                    "desc": "API request type",
+                }));
+                request_type = h;
+            }
+            map request_type.addField(new QoreDataField({
+                "name": $1,
+                "type": AbstractDataProviderTypeMap."softstring",
+                "desc": sprintf("URI path variable %y", $1),
+            })), keys path_vars;
+        }
     }
 
     #! Makes a request and returns the response
@@ -72,6 +101,10 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         if (!api_function) {
             if (!prov.tryGetRestClient()) {
                 prov.setRestClient(conn.get());
+            }
+            if (path_vars && (*hash<auto> vars = req{keys path_vars})) {
+                req -= keys path_vars;
+                request_options.path_vars = vars;
             }
             return prov.doRequest(req, request_options);
         }

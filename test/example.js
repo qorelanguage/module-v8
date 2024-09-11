@@ -303,6 +303,17 @@ const obj = {
                 "action_code": 2,  // DPAT_API == 2
                 "swagger_path": "pet/POST"
             });
+
+            // NOTE: this action will be executed as a REST call, no code is necessary
+            api.registerAction({
+                "app": "js-swagger-test",
+                "action": "get-pet",
+                "display_name": "Get Pet",
+                "short_desc": "Get pet",
+                "desc": "Get pet",
+                "action_code": 2,  // DPAT_API == 2
+                "swagger_path": "pet/{id}/GET"
+            });
         }
     }
 };

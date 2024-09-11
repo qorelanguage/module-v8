@@ -217,15 +217,17 @@ public class TypeScriptActionInterface {
 
         TypeScriptActionApiDataProvider child;
         if ((*string swagger_path = remove action.swagger_path).val()) {
-            if (schema) {
-                child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code);
-            } else {
+            if (!schema) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"swagger_path\" "
                     "attribute %y; this attribute can only been used when the application declares a Swagger schema",
                     action.app, action.action, swagger_path);
             }
-            remove action{"request_type", "response_type"};
-            /*
+
+            # check for path vars
+            *hash<string, bool> path_vars = map {$1: True}, (swagger_path =~ x/\{([^\}]*)}/g);
+            child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code,
+                path_vars);
+
             if (action.request_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"request_type\" property; "
                     "this property cannot be defined when \"swagger_path\" (%y) is also defined for the action",
@@ -237,7 +239,6 @@ public class TypeScriptActionInterface {
                     "property; this property cannot be defined when \"swagger_path\" (%y) is also defined for the "
                     "action", action.app, action.action, swagger_path);
             }
-            */
         } else {
             # maps from options to "get_allowed_values" code for each option
             hash<string, code> omap;

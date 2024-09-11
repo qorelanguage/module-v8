@@ -44,15 +44,22 @@ class TypeScriptActionInterfacePriv {
                     on_exit if (dir.val()) {
                         chdir(cwd);
                     }
-                    JavaScriptProgram js("async function runAsync(a, b, args) {
-    b.result = await a(...args);
+                    JavaScriptProgram js("async function runAsync(a, enqueue, args) {
+    try {
+        enqueue({'result': await a(...args)});
+    } catch (e) {
+        enqueue({'error': {
+            'message': e.message,
+            'stack': e.stack,
+        }});
+    }
 }
 var exports = {};\n" + File::readTextFile(basename(path)), path);
                     JavaScriptObject obj = js.run();
                     obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
                     pstore{js.uniqueHash()} = js;
                 } catch (hash<ExceptionInfo> ex) {
-                    stderr.printf("Error loading TypeScript action script %y: %s", path, get_exception_string(ex));
+                    stderr.printf("Error loading TypeScript action script %y: %s\n", path, get_exception_string(ex));
                 }
             }
         }

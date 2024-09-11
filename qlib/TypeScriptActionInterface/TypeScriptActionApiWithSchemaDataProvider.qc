@@ -47,13 +47,17 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         string swagger_path;
 
         #! API data provider
-        AbstractDataProvider prov;
+        SwaggerDataProviderCommon prov;
     }
 
     constructor(string name, SwaggerSchema schema, string swagger_path, *code api_function)
             : TypeScriptActionApiDataProvider(name, api_function) {
         # set request and response types
-        prov = new SwaggerDataProvider(schema).getChildProviderPath(swagger_path);
+        {
+            swagger_path =~ s/^\///;
+            on_error rethrow $1.err, sprintf("%s (Swagger path: %y)", $1.desc, swagger_path);
+            prov = new SwaggerDataProvider(schema).getChildProviderPath(swagger_path);
+        }
         request_type = prov.getRequestType();
         response_type = prov.getResponseType();
     }
@@ -66,6 +70,9 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
     */
     private auto doRequestImpl(auto req, *hash<auto> request_options) {
         if (!api_function) {
+            if (!prov.tryGetRestClient()) {
+                prov.setRestClient(conn.get());
+            }
             return prov.doRequest(req, request_options);
         }
         return api_function(req, request_options, getCallContextInfo());

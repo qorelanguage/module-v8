@@ -144,7 +144,7 @@ const obj = {
                       - default_value?: any - (values must use the field's type) the default value if none is provided by
                           the user
                       - allowed_values?: AllowedValues[] - an array of objects providing the only values allowed for the
-                          field - with the following properties
+                        field - with the following properties
                           - display_name?: string - the user-friendly display name for the field
                           - short_desc?: string - a short plain-text description of the field
                           - value: any - (must be present and must use the field's type); one of the allowed values

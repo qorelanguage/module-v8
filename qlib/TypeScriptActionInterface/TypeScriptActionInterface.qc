@@ -184,7 +184,7 @@ public class TypeScriptActionInterface {
                 $1.err, $1.desc);
             app = DataProviderActionCatalog::getAppEx(action.app);
         }
-        *SwaggerSchema schema = app_swagger_map{action.app};
+        *SwaggerSchema schema = app_swagger_map{action.app.lwr()};
 
         switch (action.action_code) {
             case DPAT_API: {
@@ -224,6 +224,20 @@ public class TypeScriptActionInterface {
                     "attribute %y; this attribute can only been used when the application declares a Swagger schema",
                     action.app, action.action, swagger_path);
             }
+            remove action{"request_type", "response_type"};
+            /*
+            if (action.request_type) {
+                throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"request_type\" property; "
+                    "this property cannot be defined when \"swagger_path\" (%y) is also defined for the action",
+                    action.app, action.action, swagger_path);
+
+            }
+            if (action.response_type) {
+                throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"response_type\" "
+                    "property; this property cannot be defined when \"swagger_path\" (%y) is also defined for the "
+                    "action", action.app, action.action, swagger_path);
+            }
+            */
         } else {
             # maps from options to "get_allowed_values" code for each option
             hash<string, code> omap;
@@ -234,8 +248,7 @@ public class TypeScriptActionInterface {
                 action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pgm);
             }
             *AbstractDataProviderType response_type;
-            if (action.response_type) {
-                action.response_type = action.response_type;
+            if (action.response_type.val()) {
                 response_type = TypeScriptActionInterface::getType(remove action.response_type);
                 action.output_type = response_type;
             } else if (action.hasKey("response_type")) {
@@ -279,7 +292,7 @@ public class TypeScriptActionInterface {
                         "\"get_allowed_values\" attribute; got type %y; expecting a callable value", action.app,
                         action.action, i.key, get_allowed_values.fullType());
                 }
-                omap{i.key} = *list<hash<AllowedValueInfo>> sub () {
+                omap{i.key} = *list<hash<AllowedValueInfo>> sub (...) {
                     return map cast<hash<AllowedValueInfo>>($1.toData()),
                         TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv);
                 };
@@ -295,14 +308,31 @@ public class TypeScriptActionInterface {
 
     static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args) {
         code async_wrapper = pgm.getGlobal().getKeyValue("runAsync").toData();
-        JavaScriptObject jsval(pgm);
-        auto v = async_wrapper(async_callback, jsval, args);
-        pgm.spinEventLoop();
-        auto rv = jsval.result;
-        if (rv instanceof JavaScriptObject) {
-            rv = rv.toData();
+
+        Queue q();
+        code enqueue = sub (auto v) {
+            q.push(v);
+        };
+
+        auto v = async_wrapper(async_callback, enqueue, args);
+
+        auto rv;
+        while (True) {
+            try {
+                rv = q.get(100ms).toData();
+                break;
+            } catch (hash<ExceptionInfo> ex) {
+                if (ex.err != "QUEUE-TIMEOUT") {
+                    rethrow;
+                }
+            }
+            pgm.spinEventLoop();
         }
-        return rv;
+
+        if (rv.error) {
+            throw "JAVASCRIPT-ERROR", rv.error.message, rv.error.stack;
+        }
+        return rv.result;
     }
 
     static hash<ActionOptionInfo> getOptionInfo(hash<auto> opt) {
@@ -356,6 +386,11 @@ public class TypeScriptActionInterface {
         };
     }
 
+    #! Returns any URL template options for the given application
+    static *hash<string, bool> getUrlTemplateOptions(string app) {
+        return atmap{app.lwr()};
+    }
+
     #! Returns REST options for the given app
     static hash<auto> getRestConfig(string app, *hash<auto> config) {
         string appname = app.lwr();
@@ -371,11 +406,13 @@ public class TypeScriptActionInterface {
             if (config.url.val()) {
                 config.url = TypeScriptActionInterface::processUrl(config.url, config.opts, url_template_options);
             }
+            /*
             foreach string opt in ("oauth2_auth_url", "oauth2_token_url") {
                 if ((*string url = config.opts{opt}).val()) {
                     config.opts{opt} = TypeScriptActionInterface::processUrl(url, config.opts, url_template_options);
                 }
             }
+            */
         }
         return config;
     }

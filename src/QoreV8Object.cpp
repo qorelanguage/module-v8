@@ -60,14 +60,45 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
         return new QoreV8CallReference(this, parent);
     }
 
+    v8::Isolate* isolate = v8h.getIsolate();
+    v8::EscapableHandleScope handle_scope(isolate);
+
+    if (obj->IsPromise()) {
+        v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(isolate, "then", v8::NewStringType::kNormal);
+        if (m_key.IsEmpty()) {
+            v8h.checkException();
+            return nullptr;
+        }
+
+        v8::MaybeLocal<v8::Value> m_then = obj->Get(v8h.getContext(), m_key.ToLocalChecked());
+        if (m_then.IsEmpty()) {
+            v8h.checkException();
+            return nullptr;
+        }
+        v8::Local<v8::Value> then = m_then.ToLocalChecked();
+        if (!then->IsObject()) {
+            xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is an object");
+            return nullptr;
+        }
+        /*
+        if (!then->IsCallable()) {
+            xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is not callable");
+            return nullptr;
+        }
+        */
+
+        printf("GOT PROMISE!\n");
+        //obj->Get("then").As<Function>();
+    }
+
     v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
     if (maybe_props.IsEmpty()) {
-        v8h.checkException();
+        if (v8h.checkException()) {
+            return nullptr;
+        }
         return new QoreHashNode(autoTypeInfo);
     }
 
-    v8::Isolate* isolate = v8h.getIsolate();
-    v8::EscapableHandleScope handle_scope(isolate);
     v8::Local<v8::Array> props = maybe_props.ToLocalChecked();
     // check the first prop; if it's an integer, then it's an array
     uint32_t len = props->Length();
@@ -92,9 +123,6 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
     v8::Local<v8::String> str = first->TypeOf(isolate);
     // Convert the result to an UTF8 string
     v8::String::Utf8Value utf8(isolate, str);
-    xsink->raiseException("JAVASCRIPT-TYPE-ERROR", "Cannot convert v8 '%s' value to a Qore value", *utf8);
-
-
     xsink->raiseException("OBJECT-TO-DATA-ERROR", "Cannot handle objects with property key type \"%s\"; expecting "
         "\"string\" or \"int\"", *utf8);
     return nullptr;

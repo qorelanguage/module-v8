@@ -24,27 +24,244 @@ class V8Test inherits Test {
     }
 
     v8AsyncTest() {
-        JavaScriptProgram js("
+        {
+            JavaScriptProgram js("
 function doPromise() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve(100);
-    }, 1)
-  });
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(100);
+        }, 1)
+    });
+}
+
+async function runAsync(a, enqueue) {
+    enqueue(await a());
+}
+", "test.js");
+            js.run();
+            JavaScriptObject global = js.getGlobal();
+            auto f = global.getKeyValue("doPromise");
+            code a = global.getKeyValue("runAsync").toData();
+            Queue q();
+            code enqueue = sub (auto v) {
+                q.push(v);
+            };
+            auto v = a(f, enqueue);
+            int ec = js.spinEventLoop();
+            assertEq(0, ec);
+            assertEq(100, q.get());
+        }
+
+        {
+            JavaScriptProgram js("
+function doPromise() {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(100);
+        }, 1)
+    });
+}
+
+async function runAsync(a, enqueue) {
+    enqueue(await a());
+}
+", "test.js");
+            js.run();
+            JavaScriptObject global = js.getGlobal();
+            auto f = global.getKeyValue("doPromise");
+            code a = global.getKeyValue("runAsync").toData();
+            Queue q();
+            code enqueue = sub (auto v) {
+                q.push(v);
+            };
+            auto v = a(f, enqueue);
+
+            Queue bgq();
+            Counter c(1);
+            background sub () {
+                c.dec();
+                bgq.push(js.spinEventLoop());
+            }();
+            c.waitForZero();
+
+            assertEq(0, bgq.get());
+            assertEq(100, q.get());
+        }
+
+        {
+            JavaScriptProgram js("
+const EventEmitter = require('node:events');
+const eventEmitter = new EventEmitter();
+
+async function doPromise() {
+    return new Promise(function (resolve) {
+        eventEmitter.on('async_event', (v) => {
+            resolve(v);
+        })
+    });
+}
+
+function setValue(v) {
+    eventEmitter.emit('async_event', v);
+}
+
+async function runAsync(a, enqueue) {
+    enqueue(await a());
+}
+", "test.js");
+            js.run();
+
+            JavaScriptObject global = js.getGlobal();
+
+            auto doPromise = global.getKeyValue("doPromise");
+            code setValue = global.getKeyValue("setValue").toData();
+            code runAsync = global.getKeyValue("runAsync").toData();
+
+            Queue data_queue();
+            code enqueue = sub (auto v) {
+                data_queue.push(v);
+            };
+            auto v = runAsync(doPromise, enqueue);
+            #js.spinEventLoop();
+
+            string str = get_random_string();
+            setValue(str);
+            int ec = js.spinEventLoop();
+            assertEq(0, ec);
+            string str0 = data_queue.get();
+            assertEq(str, str0);
+        }
+
+        {
+            JavaScriptProgram js("
+function doPromise() {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve(100);
+        }, 1)
+    });
 }
 
 async function runAsync(a, b) {
     b.result = await a();
 }
 ", "test.js");
-        js.run();
-        JavaScriptObject global = js.getGlobal();
-        auto f = global.getKeyValue("doPromise");
-        code a = global.getKeyValue("runAsync").toData();
-        JavaScriptObject rv(js);
-        auto v = a(f, rv);
-        js.spinEventLoop();
-        assertEq(100, rv.toData().result);
+            js.run();
+            JavaScriptObject global = js.getGlobal();
+            auto f = global.getKeyValue("doPromise");
+            code a = global.getKeyValue("runAsync").toData();
+            JavaScriptObject rv(js);
+            auto v = a(f, rv);
+            int ec = js.spinEventLoop();
+            assertEq(0, ec);
+            assertEq(100, rv.toData().result);
+        }
+
+        {
+            JavaScriptProgram js("
+async function doPromise() {
+    setTimeout(function() {}, 1);
+    return 100;
+}
+
+async function runAsync(a, b) {
+    b.result = await a();
+}
+", "test.js");
+            js.run();
+            JavaScriptObject global = js.getGlobal();
+            auto f = global.getKeyValue("doPromise");
+            code a = global.getKeyValue("runAsync").toData();
+            JavaScriptObject rv(js);
+            auto v = a(f, rv);
+            int ec = js.spinEventLoop();
+            assertEq(0, ec);
+            assertEq(100, rv.toData().result);
+        }
+
+        {
+            JavaScriptProgram js("
+async function doPromise() {
+    setTimeout(function() {}, 1);
+    throw new Error('Test error');
+}
+
+async function runAsync(a, b) {
+    try {
+        b.result = await a();
+    } catch (e) {
+        b.error = {
+            'message': e.message,
+            'stack': e.stack,
+        };
+    }
+}
+", "test.js");
+            js.run();
+            int ec = js.spinEventLoop();
+            assertEq(0, ec);
+            JavaScriptObject global = js.getGlobal();
+            auto f = global.getKeyValue("doPromise");
+            code a = global.getKeyValue("runAsync").toData();
+            JavaScriptObject rv(js);
+            auto v = a(f, rv);
+            ec = js.spinEventLoop();
+            assertEq(0, ec);
+            hash<auto> h = rv.toData();
+            assertEq("Test error", h.error.message);
+            assertEq(Type::String, h.error.stack.type());
+        }
+
+        {
+            setenv("NODE_TLS_REJECT_UNAUTHORIZED", "0");
+            JavaScriptProgram js("
+const Https = require('https');
+const Agent = new Https.Agent({
+    rejectUnauthorized: false
+})
+
+async function doPromise() {
+    try {
+        let response = await fetch('https://localhost:8011/api/public/info', {Agent});
+        let data = await response.json();
+        return data;
+    } catch (e) {
+        return {
+            'message': e.message,
+            'stack': e.stack,
+        };
+    }
+}
+
+async function runAsync(a, enqueue) {
+    enqueue(await a());
+}
+", "test.js");
+            js.run();
+            JavaScriptObject global = js.getGlobal();
+            auto f = global.getKeyValue("doPromise");
+            code runAsync = global.getKeyValue("runAsync").toData();
+
+            Queue q();
+            code enqueue = sub (auto v) {
+                q.push(v);
+            };
+            auto v = runAsync(f, enqueue);
+            auto rv;
+            while (True) {
+                try {
+                    rv = q.get(100ms).toData();
+                    break;
+                } catch (hash<ExceptionInfo> ex) {
+                    if (ex.err != "QUEUE-TIMEOUT") {
+                        rethrow;
+                    }
+                }
+                int ec = js.spinEventLoop();
+                assertEq(0, ec);
+            }
+            assertEq(Type::Hash, rv.type());
+        }
     }
 
     v8ProgramTest() {

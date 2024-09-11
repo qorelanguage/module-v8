@@ -50,9 +50,7 @@ public:
 
     DLLLOCAL ~QoreV8Program() {
         //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
-        script.Reset();
-        label.Reset();
-        node::Stop(env);
+        assert(!weakRefs.reference_count());
     }
 
     DLLLOCAL virtual void doDeref() {
@@ -62,7 +60,7 @@ public:
         if (xsink) {
             throw QoreXSinkException(xsink);
         }
-        delete this;
+        weakDeref();
     }
 
     DLLLOCAL void destructor(ExceptionSink* xsink) {
@@ -92,16 +90,6 @@ public:
         return isolate;
     }
 
-    DLLLOCAL void weakRef() const {
-        weakRefs.ROreference();
-    }
-
-    DLLLOCAL void weakDeref() {
-        if (weakRefs.ROdereference()) {
-            delete this;
-        }
-    }
-
     //! Sets the "save object callback" for %Qore values managed by JavaScript objects
     DLLLOCAL void setSaveReferenceCallback(const ResolvedCallReferenceNode* save_ref_callback) {
         //printd(5, "QorePythonProgram::setSaveObjectCallback() this: %p old: %p new: %p\n", this,
@@ -124,6 +112,22 @@ public:
     DLLLOCAL QoreObject* getReferencedObject() {
         assert(self);
         return self->objectRefSelf();
+    }
+
+    DLLLOCAL void weakRef() {
+        weakRefs.ROreference();
+        //printd(5, "QoreV8Program::weakRef() this %p %d -> %d\n", this, weakRefs.reference_count() - 1,
+        //    weakRefs.reference_count());
+    }
+
+    DLLLOCAL bool weakDeref() {
+        //printd(5, "QoreV8Program::weakDeref() this %p %d -> %d\n", this, weakRefs.reference_count(),
+        //    weakRefs.reference_count() - 1);
+        if (weakRefs.ROdereference()) {
+            delete this;
+            return true;
+        }
+        return false;
     }
 
     //! Raises an exception in the given isolate from the Qore exception
@@ -172,10 +176,14 @@ public:
         //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
     }
 
-    using AbstractPrivateData::deref;
     DLLLOCAL virtual void deref(ExceptionSink* xsink) {
         if (ROdereference()) {
-            deleteIntern(xsink);
+            weakDeref();
+        }
+    }
+
+    DLLLOCAL virtual void deref() {
+        if (ROdereference()) {
             weakDeref();
         }
     }

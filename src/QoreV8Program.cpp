@@ -32,26 +32,18 @@
 #include <climits>
 
 QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
-    printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
+    //printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
     // Setup up a libuv event loop, v8::Isolate, and Node.js Environment.
     // setup common environment
     std::vector<std::string> errors;
     setup = node::CommonEnvironmentSetup::Create(platform.get(), &errors, init_result->args(),
         init_result->exec_args(), node::EnvironmentFlags::kNoCreateInspector);
-    assert(setup);
-#ifdef DEBUG
-    for (auto& i : errors) {
-        printd(0, "CommonEnvironmentSetup::Create() error: %s\n", i.c_str());
-    }
-#endif
-    /*
     if (!setup) {
         for (const std::string& err : errors) {
-            fprintf(stderr, "%s: %s\n", args[0].c_str(), err.c_str());
+            fprintf(stderr, "v8 module init error: %s: %s\n", init_result->args()[0].c_str(), err.c_str());
         }
         return;
     }
-    */
 
     isolate = setup->isolate();
     assert(isolate);
@@ -62,12 +54,24 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
 
     v8::Isolate::Scope isolate_scope(isolate);
     v8::HandleScope handle_scope(isolate);
+    // The v8::Context needs to be entered when node::CreateEnvironment() and
+    // node::LoadEnvironment() are being called.
     v8::Context::Scope context_scope(setup->context());
 
+    // Set up the Node.js instance for execution, and run code inside of it.
+    // There is also a variant that takes a callback and provides it with
+    // the `require` and `process` objects, so that it can manually compile
+    // and run scripts as needed.
+    // The `require` function inside this script does *not* access the file
+    // system, and can only load built-in Node.js modules.
+    // `module.createRequire()` is being used to create one that is able to
+    // load files from the disk, and uses the standard CommonJS file loader
+    // instead of the internal-only `require` function.
     v8::MaybeLocal<v8::Value> loadenv_ret = node::LoadEnvironment(env,
         "const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
         "globalThis.require = publicRequire;");
     valid = !loadenv_ret.IsEmpty();
+    /*
     if (valid) {
         int exit_code = node::SpinEventLoop(env).FromMaybe(1);
         assert(!exit_code);
@@ -76,11 +80,15 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
         }
         //printd(5, "exit code: %d\n", exit_code);
     }
+    */
 }
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
         : QoreV8Program() {
-    assert(valid);
+    if (!valid) {
+        xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Could not initialize JavaScript program");
+        return;
+    }
     v8::Locker locker(isolate);
     assert(source_code.getEncoding() == QCS_UTF8);
     assert(source_label.getEncoding() == QCS_UTF8);
@@ -120,22 +128,31 @@ QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : Qore
 }
 
 void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
-    AutoLocker al(m);
-    if (opcount) {
-        if (!to_destroy) {
-            to_destroy = true;
+    printd(5, "QoreV8Program::deleteIntern() this: %p\n", this);
+    {
+        AutoLocker al(m);
+        if (opcount) {
+            if (!to_destroy) {
+                to_destroy = true;
+            }
+            return;
         }
-        return;
-    }
-    if (valid) {
-        valid = false;
-        if (to_destroy) {
-            to_destroy = false;
+        if (valid) {
+            valid = false;
+            if (to_destroy) {
+                to_destroy = false;
+            }
+        }
+        if (save_ref_callback) {
+            save_ref_callback.release()->deref(xsink);
         }
     }
-    if (save_ref_callback) {
-        save_ref_callback.release()->deref(xsink);
+    if (env) {
+        node::Stop(env);
+        env = nullptr;
     }
+    script.Reset();
+    label.Reset();
 }
 
 int QoreV8Program::saveQoreReference(const QoreValue& rv, ExceptionSink& xsink) {

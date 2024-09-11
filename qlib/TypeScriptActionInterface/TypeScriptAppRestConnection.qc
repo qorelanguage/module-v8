@@ -30,6 +30,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         string scheme;
         string app;
         hash<ConnectionSchemeInfo> info;
+        *hash<string, bool> url_template_options;
     }
 
     #! Creates the object
@@ -46,8 +47,9 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     */
     constructor(string name, string description, string url, hash<auto> attributes = {}, hash<auto> options = {})
             : RestConnection(TypeScriptAppRestConnection::getConfig({
-                "url": url,
+                "name": name,
                 "desc": description,
+                "url": url,
                 "opts": options,
             }), attributes) {
     }
@@ -88,6 +90,24 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         return TypeScriptActionInterface::getDataProvider(app, self);
     }
 
+    #! Return OAuth2 options
+    /** @return a hash of OAuth2 options
+
+        @since RestClient 2.2
+    */
+    hash<auto> getOAuth2Options() {
+        hash<auto> rv = RestConnection::getOAuth2Options();
+        if (url_template_options) {
+            foreach string opt in ("oauth2_auth_url", "oauth2_token_url") {
+                hash<auto> opts = getConnectionOptions();
+                if ((*string url = rv{opt}).val()) {
+                    rv{opt} = TypeScriptActionInterface::processUrl(url, opts, url_template_options);
+                }
+            }
+        }
+        return rv;
+    }
+
     #! performs options validation in the constructor
     /** @param options a hash with options from the constructor
         @param check_required check that all required options are set
@@ -117,6 +137,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
                 "in URL %y", scheme, url);
         }
         self.app = app;
+        url_template_options = TypeScriptActionInterface::getUrlTemplateOptions(app);
         info = ConnectionSchemeCache::getSchemeEx(scheme);
     }
 
@@ -132,12 +153,37 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         @return a @ref TypeScriptAppRestConnection object
     */
     private RestClient getImpl(bool connect = True, *hash<auto> rtopts) {
-        return new RestClient(getConnectionOptions(), !connect);
+        *hash<auto> opts = getConnectionOptions();
+        if (url_template_options) {
+            foreach string opt in ("oauth2_auth_url", "oauth2_token_url") {
+                if ((*string url = opts{opt}).val()) {
+                    opts{opt} = TypeScriptActionInterface::processUrl(url, opts, url_template_options);
+                }
+            }
+        }
+        return new RestClient(opts, !connect);
     }
 
     #! Returns the ConnectionSchemeInfo hash for this object
     private hash<ConnectionSchemeInfo> getConnectionSchemeInfoImpl() {
         return info;
+    }
+
+    string getAuthUrl(*bool allow_relative) {
+        return getUrlOption("oauth2_auth_url", allow_relative);
+    }
+
+    #! Returns the value of a URL option or throws an exception if not set
+    /*  @param opt the URL option name
+        @param allow_relative if @ref True then a relative URL (path only) can be returned; the default (@ref False)
+        is to return a full URL
+    */
+    private string getUrlOption(string opt, *bool allow_relative) {
+        string url = RestConnection::getUrlOption(opt, allow_relative);
+        if (url_template_options && (opt == "oauth2_auth_url" || opt == "oauth2_token_url")) {
+            url = TypeScriptActionInterface::processUrl(url, getConnectionOptions(), url_template_options);
+        }
+        return url;
     }
 
     #! Returns options for @ref TypeScriptAppRestConnection::constructor()

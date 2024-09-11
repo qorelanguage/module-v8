@@ -81,22 +81,22 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
         };
         TypeScriptAppRestConnection conn(config);
         assertEq("tsrest-js-swagger-test://test.example.com/api", conn.getUrl());
-        assertEq("https://test.example.com/oauth2/auth", conn.getRealOptions().oauth2_auth_url);
+        assertEq("https://{{subdomain}}.example.com/oauth2/auth", conn.getRealOptions().oauth2_auth_url);
         assertEq("https://test.example.com/oauth2/auth", conn.getAuthUrl());
         assertEq("https://test.example.com/oauth2/auth?scope=&redirect_uri=auto&client_id=x&response_type=code",
             conn.getAuthorizationCodeRequest());
         assertEq("https://test.example.com/oauth2/auth", conn.getOAuth2Options().oauth2_auth_url);
-        assertEq("https://test.example.com/oauth2/auth", conn.orig_opts.oauth2_auth_url);
+        assertEq("https://{{subdomain}}.example.com/oauth2/auth", conn.orig_opts.oauth2_auth_url);
 
         hash<ConnectionSchemeInfo> scheme = ConnectionSchemeCache::getSchemeEx("tsrest-js-swagger-test");
         conn = scheme.cls.newObject(config);
         assertEq("tsrest-js-swagger-test://test.example.com/api", conn.getUrl());
-        assertEq("https://test.example.com/oauth2/auth", conn.getRealOptions().oauth2_auth_url);
+        assertEq("https://{{subdomain}}.example.com/oauth2/auth", conn.getRealOptions().oauth2_auth_url);
         assertEq("https://test.example.com/oauth2/auth", conn.getAuthUrl());
         assertEq("https://test.example.com/oauth2/auth?scope=&redirect_uri=auto&client_id=x&response_type=code",
             conn.getAuthorizationCodeRequest());
         assertEq("https://test.example.com/oauth2/auth", conn.getOAuth2Options().oauth2_auth_url);
-        assertEq("https://test.example.com/oauth2/auth", conn.orig_opts.oauth2_auth_url);
+        assertEq("https://{{subdomain}}.example.com/oauth2/auth", conn.orig_opts.oauth2_auth_url);
 
         *hash<string, bool> fh = conn.getFeatures();
         on_error printf("fh: %y\n", fh);

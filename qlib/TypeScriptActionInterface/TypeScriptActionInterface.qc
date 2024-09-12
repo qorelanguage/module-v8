@@ -307,7 +307,7 @@ public class TypeScriptActionInterface {
         return rv;
     }
 
-    static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args) {
+    static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args, timeout to = 30s) {
         code async_wrapper = pgm.getGlobal().getKeyValue("runAsync").toData();
 
         Queue q();
@@ -316,6 +316,8 @@ public class TypeScriptActionInterface {
         };
 
         auto v = async_wrapper(async_callback, enqueue, args);
+
+        date start = now_us();
 
         auto rv;
         while (True) {
@@ -326,6 +328,10 @@ public class TypeScriptActionInterface {
                 if (ex.err != "QUEUE-TIMEOUT") {
                     rethrow;
                 }
+            }
+            date delta = start - now_us();
+            if (delta > to) {
+                throw "JAVASCRIPT-ASYNC-TIMEOUT-ERROR", sprintf("Async callback took longer than %y to resolve", to);
             }
             pgm.spinEventLoop();
         }

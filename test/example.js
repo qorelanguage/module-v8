@@ -120,6 +120,10 @@ const obj = {
                         "status": "OK",
                     };
                 },
+                /* the I/O timeout in seconds for async operations in "api_function" (default if not present: 30)
+                */
+               "io_timeout_secs": 30,
+
                 /* "options" defines the API request type when "action_code" == DPAT_API
 
                     This is equivalent to "ActionOptionInfo" in Qore: https://qoretechnologies.com/manual/qorus/gitlab-docs/develop/qore/modules/DataProvider/html/struct_data_provider_1_1_action_option_info.html
@@ -140,15 +144,15 @@ const obj = {
                       - desc?: string - a longer description for the field that supports markdown formatting
                       - type - same as this - either a string or a data object again
                       - example_value?: any - (values must use the field's type) any example value to use when generating
-                          example data etc
+                        example data etc
                       - default_value?: any - (values must use the field's type) the default value if none is provided by
-                          the user
+                        the user
                       - allowed_values?: AllowedValues[] - an array of objects providing the only values allowed for the
                         field - with the following properties
-                          - display_name?: string - the user-friendly display name for the field
-                          - short_desc?: string - a short plain-text description of the field
-                          - value: any - (must be present and must use the field's type); one of the allowed values
-                          - desc: string - a description of the value (if unknown just use the value again)
+                        - display_name?: string - the user-friendly display name for the field
+                        - short_desc?: string - a short plain-text description of the field
+                        - value: any - (must be present and must use the field's type); one of the allowed values
+                        - desc: string - a description of the value (if unknown just use the value again)
                       - depends_on?: string[] - an optional list of other options that must be set before this option can
                         be set
                       - get_allowed_values?: function (ctx?: object): AllowedValues[] | undefined - a function that will
@@ -157,6 +161,8 @@ const obj = {
                         - conn_name?: string -> the connection name, if any is defined
                         - conn_opts?: object -> connection options; for REST connections, see the 'rest' object definition
                         - opts?: object -> a data object with option values set for the current action
+                      - io_timeout_secs?: int  - an optional I/O timeout in seconds for any "get_allowed_values"
+                        function; if not present, the timeout is 30
                       - attr?: Attributes - an optional data object with any properties
                       - required?: bool -> if the hash itself is required or optional
 

@@ -68,6 +68,9 @@ public class TypeScriptActionInterface {
             "token_type",
             "username",
         );
+
+        #! Default I/O timeout in seconds
+        const DefaultIoTimeoutSecs = 30;
     }
 
     private {
@@ -208,9 +211,10 @@ public class TypeScriptActionInterface {
                     "attribute; got type %y; expecting a callable value", action.app, action.action,
                     api_function.fullType());
             }
+            timeout io_timeout = seconds(remove action.io_timeout_secs ?? DefaultIoTimeoutSecs);
             if (api_function) {
                 api_code = auto sub (...) {
-                    return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv);
+                    return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv, io_timeout);
                 };
             }
         }
@@ -287,6 +291,7 @@ public class TypeScriptActionInterface {
             hash<auto> opts, reference<hash<string, code>> omap, JavaScriptProgram pgm) {
         hash<string, hash<ActionOptionInfo>> rv;
         foreach hash<auto> i in (opts.pairIterator()) {
+            timeout io_timeout = seconds(remove i.value.io_timeout_secs ?? DefaultIoTimeoutSecs);
             if (exists (auto get_allowed_values = remove i.value.get_allowed_values)) {
                 if (!get_allowed_values.callp()) {
                     throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y option %y has an invalid "
@@ -295,7 +300,7 @@ public class TypeScriptActionInterface {
                 }
                 omap{i.key} = *list<hash<AllowedValueInfo>> sub (...) {
                     return map cast<hash<AllowedValueInfo>>($1.toData()),
-                        TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv);
+                        TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv, io_timeout);
                 };
                 i.value.ref_data = i.key;
             }
@@ -307,7 +312,7 @@ public class TypeScriptActionInterface {
         return rv;
     }
 
-    static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args, timeout to = 30s) {
+    static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args, timeout to) {
         code async_wrapper = pgm.getGlobal().getKeyValue("runAsync").toData();
 
         Queue q();

@@ -1,8 +1,8 @@
 import {
   IQoreApp,
-  IQoreAppActionWithFunction,
   IQoreAppWithActions,
   QorusAppsCatalogue,
+  TQoreAppAction,
 } from '@qoretechnologies/qorus-actions-catalogue';
 
 // This will be replaced by the real implementation
@@ -11,7 +11,7 @@ import { DebugLevels } from '../utils/Debugger';
 
 export interface IQoreApi {
   registerApp: (app: IQoreApp) => void;
-  registerAction: (action: IQoreAppActionWithFunction) => void;
+  registerAction: (action: TQoreAppAction) => void;
 }
 
 class ActionsCatalogue {

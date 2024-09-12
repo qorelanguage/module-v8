@@ -122,11 +122,12 @@ const obj = {
                 },
                 /* the I/O timeout in seconds for async operations in "api_function" (default if not present: 30)
                 */
-               "io_timeout_secs": 30,
+                "io_timeout_secs": 30,
 
                 /* "options" defines the API request type when "action_code" == DPAT_API
 
-                    This is equivalent to "ActionOptionInfo" in Qore: https://qoretechnologies.com/manual/qorus/gitlab-docs/develop/qore/modules/DataProvider/html/struct_data_provider_1_1_action_option_info.html
+                    This is equivalent to "ActionOptionInfo" in Qore:
+                    https://qoretechnologies.com/manual/qorus/gitlab-docs/develop/qore/modules/DataProvider/html/struct_data_provider_1_1_action_option_info.html
                     except that "type" is created from either a:
                     - string: giving the name of a simple type - one of:
                         ["int", "integer", "string", "boolean", "bool", "double", "float", "number", "binary", "list",
@@ -161,7 +162,7 @@ const obj = {
                         - conn_name?: string -> the connection name, if any is defined
                         - conn_opts?: object -> connection options; for REST connections, see the 'rest' object definition
                         - opts?: object -> a data object with option values set for the current action
-                      - io_timeout_secs?: int  - an optional I/O timeout in seconds for any "get_allowed_values"
+                      - io_timeout_secs?: int - an optional I/O timeout in seconds for any "get_allowed_values"
                         function; if not present, the timeout is 30
                       - attr?: Attributes - an optional data object with any properties
                       - required?: bool -> if the hash itself is required or optional

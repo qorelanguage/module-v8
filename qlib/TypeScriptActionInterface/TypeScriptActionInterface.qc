@@ -232,6 +232,15 @@ public class TypeScriptActionInterface {
             child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code,
                 path_vars);
 
+            map action.options{$1} = <ActionOptionInfo>{
+                "type": AbstractDataProviderTypeMap."softstring",
+                "display_name": AbstractDataField::getDisplayName($1),
+                "short_desc": sprintf("URI path variable %y", $1),
+                "desc": sprintf("URI path variable %y", $1),
+                "required": True,
+                "preselected": True,
+            }, keys path_vars;
+
             if (remove action.request_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"request_type\" property; "
                     "this property cannot be defined when \"swagger_path\" (%y) is also defined for the action",

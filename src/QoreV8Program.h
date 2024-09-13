@@ -138,6 +138,7 @@ protected:
     node::Environment* env = nullptr;
     v8::Global<v8::Script> script;
     v8::Global<v8::String> label;
+    v8::Global<v8::Object> global;
 
     QoreObject* self = nullptr;
     QoreProgram* qpgm = getProgram();

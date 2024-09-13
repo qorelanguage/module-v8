@@ -118,6 +118,7 @@ QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& so
     }
     label.Reset(isolate, lstr);
     script.Reset(isolate, m_script.ToLocalChecked());
+    global.Reset(isolate, setup->context()->Global());
 }
 
 QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : QoreV8Program() {
@@ -169,6 +170,7 @@ void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
     }
     script.Reset();
     label.Reset();
+    global.Reset();
 }
 
 int QoreV8Program::saveQoreReference(const QoreValue& rv, ExceptionSink& xsink) {
@@ -680,6 +682,6 @@ QoreObject* QoreV8Program::getGlobal(ExceptionSink* xsink) {
         return nullptr;
     }
 
-    v8::Local<v8::Object> g = setup->context()->Global();
+    v8::Local<v8::Object> g = global.Get(isolate);
     return new QoreObject(QC_JAVASCRIPTOBJECT, getProgram(), new QoreV8Object(this, g));
 }

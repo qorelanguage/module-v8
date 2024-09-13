@@ -63,6 +63,7 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
     v8::Isolate* isolate = v8h.getIsolate();
     v8::EscapableHandleScope handle_scope(isolate);
 
+    /*
     if (obj->IsPromise()) {
         v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(isolate, "then", v8::NewStringType::kNormal);
         if (m_key.IsEmpty()) {
@@ -80,16 +81,24 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
             xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is an object");
             return nullptr;
         }
-        /*
-        if (!then->IsCallable()) {
+
+        v8::MaybeLocal<v8::Object> mothen = then->ToObject(v8h.getContext());
+        if (mothen.IsEmpty()) {
+            if (!v8h.checkException()) {
+                xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is not an object");
+            }
+            return nullptr;
+        }
+        v8::Local<v8::Object> othen = mothen.ToLocalChecked();
+        if (!othen->IsCallable()) {
             xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is not callable");
             return nullptr;
         }
-        */
 
         printf("GOT PROMISE!\n");
         //obj->Get("then").As<Function>();
     }
+    */
 
     v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
     if (maybe_props.IsEmpty()) {

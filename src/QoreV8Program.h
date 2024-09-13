@@ -48,10 +48,7 @@ public:
 
     DLLLOCAL QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm);
 
-    DLLLOCAL ~QoreV8Program() {
-        //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
-        assert(!weakRefs.reference_count());
-    }
+    DLLLOCAL ~QoreV8Program();
 
     DLLLOCAL virtual void doDeref() {
         printd(5, "QoreV8Program::doDeref() this: %p\n", this);
@@ -133,6 +130,8 @@ public:
     //! Raises an exception in the given isolate from the Qore exception
     DLLLOCAL static void raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate);
 
+    DLLLOCAL static void shutdown();
+
 protected:
     std::unique_ptr<node::CommonEnvironmentSetup> setup;
     v8::Isolate* isolate = nullptr;
@@ -151,6 +150,10 @@ protected:
     unsigned opcount = 0;
     bool to_destroy = false;
     bool valid = false;
+
+    static QoreThreadLock global_lock;
+    typedef std::set<QoreV8Program*> pset_t;
+    static pset_t pset;
 
     //! protected constructor
     DLLLOCAL QoreV8Program();

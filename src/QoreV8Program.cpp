@@ -31,6 +31,9 @@
 #include <memory>
 #include <climits>
 
+QoreThreadLock QoreV8Program::global_lock;
+QoreV8Program::pset_t QoreV8Program::pset;
+
 QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
     //printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
     // Setup up a libuv event loop, v8::Isolate, and Node.js Environment.
@@ -71,16 +74,10 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
         "const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
         "globalThis.require = publicRequire;");
     valid = !loadenv_ret.IsEmpty();
-    /*
     if (valid) {
-        int exit_code = node::SpinEventLoop(env).FromMaybe(1);
-        assert(!exit_code);
-        if (exit_code) {
-            valid = false;
-        }
-        //printd(5, "exit code: %d\n", exit_code);
+        AutoLocker al(global_lock);
+        pset.insert(this);
     }
-    */
 }
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
@@ -125,6 +122,25 @@ QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& so
 
 QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : QoreV8Program() {
     self = old.self;
+}
+
+QoreV8Program::~QoreV8Program() {
+    //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
+    assert(!weakRefs.reference_count());
+
+    AutoLocker al(global_lock);
+    pset_t::iterator i = pset.find(this);
+    if (i != pset.end()) {
+        pset.erase(i);
+    }
+}
+
+void QoreV8Program::shutdown() {
+    ExceptionSink xsink;
+    for (auto& i : pset) {
+        i->deleteIntern(&xsink);
+        i->setup = nullptr;
+    }
 }
 
 void QoreV8Program::deleteIntern(ExceptionSink* xsink) {

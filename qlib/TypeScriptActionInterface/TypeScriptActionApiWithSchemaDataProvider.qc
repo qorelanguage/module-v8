@@ -67,7 +67,8 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         }
         request_type = prov.getRequestType();
         response_type = prov.getResponseType();
-        if ((*hash<string, AbstractDataField> fields = response_type.getFields()) && fields.size() == 1 && fields.body) {
+        if (response_type && (*hash<string, AbstractDataField> fields = response_type.getFields())
+            && fields.size() == 1 && fields.body) {
             only_body = True;
             response_type = fields.body.getType();
         }

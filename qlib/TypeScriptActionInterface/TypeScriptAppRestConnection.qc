@@ -108,6 +108,11 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         return rv;
     }
 
+    #! Returns the logger interface for logging
+    *LoggerInterface getLogger() {
+        return logger;
+    }
+
     #! performs options validation in the constructor
     /** @param options a hash with options from the constructor
         @param check_required check that all required options are set

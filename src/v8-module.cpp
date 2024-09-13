@@ -23,6 +23,7 @@
 
 #include "QC_JavaScriptProgram.h"
 #include "QC_JavaScriptObject.h"
+#include "QoreV8Program.h"
 
 //static std::unique_ptr<v8::Platform> platform;
 std::unique_ptr<node::MultiIsolatePlatform> platform;
@@ -88,6 +89,8 @@ static sig_vec_t sig_vec = {
 
 static void v8_module_shutdown() {
     //printd(5, "v8_module_shutdown()\n");
+    QoreV8Program::shutdown();
+
     v8::V8::Dispose();
     v8::V8::DisposePlatform();
 

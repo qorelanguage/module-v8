@@ -232,7 +232,8 @@ public class TypeScriptActionInterface {
             child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code,
                 path_vars);
 
-            if (*hash<string, AbstractDataField> fields = child.getRequestType().getFields()) {
+            if ((*AbstractDataProviderType t = child.getRequestType())
+                && (*hash<string, AbstractDataField> fields = t.getFields())) {
                 action.options = DataProviderActionCatalog::getActionOptionFromFields(fields);
             }
             action.output_type = child.getResponseType();

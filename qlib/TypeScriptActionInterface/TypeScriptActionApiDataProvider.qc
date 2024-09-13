@@ -86,6 +86,11 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         self.conn = conn;
     }
 
+    #! Returns the logger interface for logging
+    *LoggerInterface getLogger() {
+        return logger;
+    }
+
     #! Returns the data provider name
     string getName() {
         return name;

@@ -64,9 +64,12 @@ class TypeScriptActionAppDataProvider inherits AbstractDataProvider {
     }
 
     #! Sets the connection
-    setConnection(AbstractConnection conn) {
+    setConnection(TypeScriptAppRestConnection conn) {
         self.conn = conn;
         map $1.setConnection(conn), childMap.iterator();
+        if (!getLogger() && (*LoggerInterface logger = conn.getLogger())) {
+            setLogger(logger);
+        }
     }
 
     #! Returns the data provider name
@@ -102,7 +105,12 @@ class TypeScriptActionAppDataProvider inherits AbstractDataProvider {
         @see getChildProviderEx()
     */
     private *AbstractDataProvider getChildProviderImpl(string name) {
-        return childMap{name};
+        if (*TypeScriptActionApiDataProvider prov = childMap{name}) {
+            if (!prov.getLogger() && logger) {
+                prov.setLogger(logger);
+            }
+            return prov;
+        }
     }
 
     #! Returns data provider static info

@@ -124,6 +124,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
     */
     private *list<hash<AllowedValueInfo>> getReferenceDataImpl(string type, *hash<auto> action_opts) {
         if (*code get_ref_data = omap{type}) {
+            info("Retrieving reference data for data provider %y type %y", getName(), type);
             return get_ref_data(getCallContextInfo(action_opts));
         }
     }

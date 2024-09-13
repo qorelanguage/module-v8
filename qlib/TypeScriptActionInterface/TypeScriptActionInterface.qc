@@ -304,7 +304,7 @@ public class TypeScriptActionInterface {
                         action.action, i.key, get_allowed_values.fullType());
                 }
                 omap{i.key} = *list<hash<AllowedValueInfo>> sub (...) {
-                    return map cast<hash<AllowedValueInfo>>($1.toData()),
+                    return map cast<hash<AllowedValueInfo>>($1 instanceof JavaScriptObject ? $1.toData() : $1),
                         TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv, io_timeout);
                 };
                 i.value.ref_data = i.key;

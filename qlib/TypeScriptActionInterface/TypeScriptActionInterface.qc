@@ -235,6 +235,7 @@ public class TypeScriptActionInterface {
             if (*hash<string, AbstractDataField> fields = child.getRequestType().getFields()) {
                 action.options = DataProviderActionCatalog::getActionOptionFromFields(fields);
             }
+            action.output_type = child.getResponseType();
             if (remove action.request_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"request_type\" property; "
                     "this property cannot be defined when \"swagger_path\" (%y) is also defined for the action",

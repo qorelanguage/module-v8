@@ -51,6 +51,9 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
 
         #! Path vars
         *hash<string, bool> path_vars;
+
+        #! If the response only has a body key
+        bool only_body;
     }
 
     constructor(string name, SwaggerSchema schema, string swagger_path, *code api_function,
@@ -64,6 +67,10 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         }
         request_type = prov.getRequestType();
         response_type = prov.getResponseType();
+        if ((*hash<string, AbstractDataField> fields = response_type.getFields()) && fields.size() == 1 && fields.body) {
+            only_body = True;
+            response_type = fields.body.getType();
+        }
 
         if (path_vars) {
             self.path_vars = path_vars;
@@ -106,7 +113,8 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
                 req -= keys path_vars;
                 request_options.path_vars = vars;
             }
-            return prov.doRequest(req, request_options);
+            auto rv = prov.doRequest(req, request_options);
+            return only_body ? rv.body : rv;
         }
         return api_function(req, request_options, getCallContextInfo());
     }

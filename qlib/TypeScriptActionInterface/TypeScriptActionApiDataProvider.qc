@@ -56,28 +56,28 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
 
     private {
         string name;
-        code api_function;
+        hash<AsyncCallInfo> api;
         *AbstractDataProviderType request_type;
         *AbstractDataProviderType response_type;
-        *hash<string, code> omap;
+        *hash<string, hash<AsyncCallInfo>> omap;
 
         #! connection for the action
         AbstractConnection conn;
     }
 
-    constructor(string name, code api_function, *AbstractDataProviderType request_type,
-            *AbstractDataProviderType response_type, *hash<string, code> omap) {
+    constructor(string name, hash<AsyncCallInfo> api, *AbstractDataProviderType request_type,
+            *AbstractDataProviderType response_type, *hash<string, hash<AsyncCallInfo>> omap) {
         self.name = name;
-        self.api_function = api_function;
+        self.api = api;
         self.request_type = request_type;
         self.response_type = response_type;
         self.omap = omap;
     }
 
-    private constructor(string name, *code api_function) {
+    private constructor(string name, *hash<AsyncCallInfo> api) {
         self.name = name;
-        if (api_function) {
-            self.api_function = api_function;
+        if (api) {
+            self.api = api;
         }
     }
 
@@ -111,7 +111,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         @return the response to the request
     */
     private auto doRequestImpl(auto req, *hash<auto> request_options) {
-        return api_function(req, request_options, getCallContextInfo());
+        return getAsyncValue(api, req, request_options, getCallContextInfo());
     }
 
     #! Returns reference data of the given kind if available
@@ -123,9 +123,10 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         @since DataProvider 3.0
     */
     private *list<hash<AllowedValueInfo>> getReferenceDataImpl(string type, *hash<auto> action_opts) {
-        if (*code get_ref_data = omap{type}) {
+        if (*hash<AsyncCallInfo> ref_api = omap{type}) {
             info("Retrieving reference data for data provider %y type %y", getName(), type);
-            return get_ref_data(getCallContextInfo(action_opts));
+            return map cast<hash<AllowedValueInfo>>($1 instanceof JavaScriptObject ? $1.toData() : $1),
+                getAsyncValue(ref_api, getCallContextInfo(action_opts));
         }
     }
 
@@ -157,6 +158,47 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
                 "opts": action_opts,
             };
         }
+    }
+
+    auto getAsyncValue(hash<AsyncCallInfo> api, ...) {
+        on_error rethrow $1.err, sprintf("%s (context: %s)", $1.desc, api.label);
+
+        code async_wrapper = api.pgm.getGlobal().getKeyValue("runAsync").toData();
+
+        Queue q();
+        code enqueue = sub (auto v) {
+            q.push(v);
+        };
+
+        auto v = async_wrapper(api.async_call, enqueue, argv);
+
+        date start = now_us();
+
+        auto rv;
+        while (True) {
+            try {
+                rv = q.get(100ms).toData();
+                break;
+            } catch (hash<ExceptionInfo> ex) {
+                if (ex.err != "QUEUE-TIMEOUT") {
+                    rethrow;
+                }
+            }
+            date delta = now_us() - start;
+            info("TypeScriptActionApiDataProvider::getAsyncValue() %s: call: %y start: %y delta: %y to: %y",
+                api.label, api.async_call.uniqueHash(), start, delta, api.to);
+            if (delta > api.to) {
+                throw "JAVASCRIPT-ASYNC-TIMEOUT-ERROR", sprintf("Async callback took longer than %y to resolve",
+                    api.to);
+            }
+
+            api.pgm.spinEventLoop();
+        }
+
+        if (rv.error) {
+            throw "JAVASCRIPT-ERROR", rv.error.message, rv.error.stack;
+        }
+        return rv.result;
     }
 }
 }

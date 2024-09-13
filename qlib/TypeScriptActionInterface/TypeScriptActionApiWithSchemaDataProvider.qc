@@ -56,9 +56,9 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         bool only_body;
     }
 
-    constructor(string name, SwaggerSchema schema, string swagger_path, *code api_function,
+    constructor(string name, SwaggerSchema schema, string swagger_path, *hash<AsyncCallInfo> api,
             *hash<string, bool> path_vars)
-            : TypeScriptActionApiDataProvider(name, api_function) {
+            : TypeScriptActionApiDataProvider(name, api) {
         # set request and response types
         {
             swagger_path =~ s/^\///;
@@ -106,7 +106,7 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         @return the response to the request
     */
     private auto doRequestImpl(auto req, *hash<auto> request_options) {
-        if (!api_function) {
+        if (!api) {
             if (!prov.tryGetRestClient()) {
                 prov.setRestClient(conn.get());
             }
@@ -117,7 +117,7 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
             auto rv = prov.doRequest(req, request_options);
             return only_body ? rv.body : rv;
         }
-        return api_function(req, request_options, getCallContextInfo());
+        return getAsyncValue(api, req, request_options, getCallContextInfo());
     }
 
     #! Returns data provider static info

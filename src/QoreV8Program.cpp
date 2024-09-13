@@ -109,7 +109,7 @@ QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& so
     }
 
     v8::Local<v8::String> src = m_src.ToLocalChecked();
-    v8::Local<v8::Context> context = setup->context(); // this->context.Get(isolate);
+    v8::Local<v8::Context> context = setup->context();
     v8::Context::Scope context_scope(context);
     v8::MaybeLocal<v8::Script> m_script = v8::Script::Compile(context, src, &origin);
     if (m_script.IsEmpty()) {

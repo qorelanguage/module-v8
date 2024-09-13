@@ -17,7 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@qoretechnologies/qorus-actions-catalogue": "^0.1.19",
+    "@qoretechnologies/qorus-actions-catalogue": "^0.1.20",
     "lodash": "^4.17.21",
     "typescript": "^5.5.4"
   },

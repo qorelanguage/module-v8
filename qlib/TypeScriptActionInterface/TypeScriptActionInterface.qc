@@ -232,13 +232,13 @@ public class TypeScriptActionInterface {
             child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code,
                 path_vars);
 
-            if (action.request_type) {
+            if (remove action.request_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"request_type\" property; "
                     "this property cannot be defined when \"swagger_path\" (%y) is also defined for the action",
                     action.app, action.action, swagger_path);
 
             }
-            if (action.response_type) {
+            if (remove action.response_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"response_type\" "
                     "property; this property cannot be defined when \"swagger_path\" (%y) is also defined for the "
                     "action", action.app, action.action, swagger_path);

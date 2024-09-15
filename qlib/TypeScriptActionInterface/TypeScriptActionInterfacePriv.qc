@@ -27,8 +27,8 @@ namespace TypeScriptActionInterfacePriv {
 #! Internal interface class
 class TypeScriptActionInterfacePriv {
     private {
-        #! Static storage for JavaScriptProgram objects for app / actions, to ensure they do not go out of scope
-        static hash<string, JavaScriptProgram> pstore;
+        #! Static storage for JavaScriptProgramPool objects for app / actions, to ensure they do not go out of scope
+        static hash<string, JavaScriptProgramPool> pstore;
     }
 
     static init() {
@@ -44,7 +44,7 @@ class TypeScriptActionInterfacePriv {
                     on_exit if (dir.val()) {
                         chdir(cwd);
                     }
-                    JavaScriptProgram js("async function runAsync(a, enqueue, args) {
+                    JavaScriptProgramPool pool("async function runAsync(a, enqueue, args) {
     try {
         enqueue({'result': await a(...args)});
     } catch (e) {
@@ -54,10 +54,11 @@ class TypeScriptActionInterfacePriv {
         }});
     }
 }
-var exports = {};\n" + File::readTextFile(basename(path)), path);
-                    JavaScriptObject obj = js.run();
-                    obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
-                    pstore{js.uniqueHash()} = js;
+var exports = {};\n" + File::readTextFile(basename(path)), path, sub (JavaScriptProgram pgm) {
+                        JavaScriptObject g = pgm.getGlobal();
+                        pgm.getGlobal().exports.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
+                    });
+                    pstore{pool.uniqueHash()} = pool;
                 } catch (hash<ExceptionInfo> ex) {
                     stderr.printf("Error loading TypeScript action script %y: %s\n", path, get_exception_string(ex));
                 }

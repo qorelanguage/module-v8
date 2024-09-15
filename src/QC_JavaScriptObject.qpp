@@ -120,11 +120,22 @@ auto JavaScriptObject::toData() {
     return o->toData(v8h);
 }
 
+//! Returns a list of object properties, if any
+/** @return a list of object properties, if any
+*/
+*list<string> JavaScriptObject::getPropertyList() {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->getPropertyList(v8h);
+}
+
 //! Returns the value for the given key, if any
 /** @return the value for the given key, if any
 */
-auto JavaScriptObject::getKeyValue(string key) {
-    TempEncodingHelper str(key, QCS_UTF8, xsink);
+auto JavaScriptObject::getProperty(string property) {
+    TempEncodingHelper str(property, QCS_UTF8, xsink);
     if (*xsink) {
         return QoreValue();
     }
@@ -132,7 +143,23 @@ auto JavaScriptObject::getKeyValue(string key) {
     if (*xsink) {
         return QoreValue();
     }
-    return o->getKeyValue(v8h, str->c_str());
+    return o->getProperty(v8h, str->c_str());
+}
+
+//! Sets the value of the given property
+/** @param property the name of the property to set
+    @param value the value to set
+*/
+nothing JavaScriptObject::setProperty(string property, auto value) {
+    TempEncodingHelper str(property, QCS_UTF8, xsink);
+    if (*xsink) {
+        return QoreValue();
+    }
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    o->setProperty(v8h, str->c_str(), value);
 }
 
 //! Returns the value for the array index, if any

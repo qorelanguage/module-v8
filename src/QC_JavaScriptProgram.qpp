@@ -56,6 +56,13 @@ JavaScriptProgram::destructor() {
     jsp->deref(xsink);
 }
 
+//! Copies the object
+/**
+*/
+JavaScriptProgram::copy() {
+    self->setPrivate(CID_JAVASCRIPTPROGRAM, new QoreV8ProgramData(xsink, *jsp, self));
+}
+
 //! Runs the program
 /**
     @note Exceptions parsing or compiling the JavaScript code are thrown according to @ref javascript_exceptions

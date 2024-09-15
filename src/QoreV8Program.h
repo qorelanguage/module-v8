@@ -48,6 +48,8 @@ public:
 
     DLLLOCAL QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm);
 
+    DLLLOCAL QoreV8Program(ExceptionSink* xsink, const QoreV8Program& old, QoreObject* self);
+
     DLLLOCAL ~QoreV8Program();
 
     DLLLOCAL virtual void doDeref() {
@@ -137,6 +139,7 @@ protected:
     v8::Isolate* isolate = nullptr;
     node::Environment* env = nullptr;
     v8::Global<v8::Script> script;
+    v8::Global<v8::String> source;
     v8::Global<v8::String> label;
     v8::Global<v8::Object> global;
 
@@ -159,6 +162,8 @@ protected:
     //! protected constructor
     DLLLOCAL QoreV8Program();
 
+    DLLLOCAL void init(ExceptionSink* xsink, const char* source_code, const char* source_label);
+
     DLLLOCAL void deleteIntern(ExceptionSink* xsink);
 
     DLLLOCAL int saveQoreReference(const QoreValue& rv, ExceptionSink& xsink);
@@ -176,7 +181,12 @@ public:
 class QoreV8ProgramData : public AbstractPrivateData, public QoreV8Program {
 public:
     DLLLOCAL QoreV8ProgramData(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
-        : QoreV8Program(source_code, source_label, xsink) {
+            : QoreV8Program(source_code, source_label, xsink) {
+        //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
+    }
+
+    DLLLOCAL QoreV8ProgramData(ExceptionSink* xsink, const QoreV8ProgramData& old, QoreObject* self)
+            : QoreV8Program(xsink, old, self) {
         //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
     }
 

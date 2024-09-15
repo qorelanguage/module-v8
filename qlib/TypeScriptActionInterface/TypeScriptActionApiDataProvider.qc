@@ -125,8 +125,19 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
     private *list<hash<AllowedValueInfo>> getReferenceDataImpl(string type, *hash<auto> action_opts) {
         if (*hash<AsyncCallInfo> ref_api = omap{type}) {
             info("Retrieving reference data for data provider %y type %y", getName(), type);
-            return map cast<hash<AllowedValueInfo>>($1 instanceof JavaScriptObject ? $1.toData() : $1),
-                getAsyncValue(ref_api, getCallContextInfo(action_opts));
+            *softlist<auto> l = getAsyncValue(ref_api, getCallContextInfo(action_opts));
+            if (!l) {
+                return;
+            }
+            if (l[0].typeCode() != NT_HASH) {
+                return map <AllowedValueInfo>{
+                    "display_name": $1.toString(),
+                    "short_desc": $1.toString(),
+                    "desc": $1.toString(),
+                    "value": $1,
+                }, l;
+            }
+            return map cast<hash<AllowedValueInfo>>($1 instanceof JavaScriptObject ? $1.toData() : $1), l;
         }
     }
 
@@ -163,7 +174,11 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
     auto getAsyncValue(hash<AsyncCallInfo> api, ...) {
         on_error rethrow $1.err, sprintf("%s (context: %s)", $1.desc, api.label);
 
-        code async_wrapper = api.pgm.getGlobal().getKeyValue("runAsync").toData();
+        JavaScriptProgram pgm = api.pool.get();
+        on_exit api.pool.release(pgm);
+        info("TypeScriptActionApiDataProvider::getAsyncValue() pool %y", pgm.uniqueHash());
+
+        code async_wrapper = pgm.getGlobal().runAsync.toData();
 
         Queue q();
         code enqueue = sub (auto v) {
@@ -177,7 +192,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         auto rv;
         while (True) {
             try {
-                rv = q.get(100ms).toData();
+                rv = q.get(10ms).toData();
                 break;
             } catch (hash<ExceptionInfo> ex) {
                 if (ex.err != "QUEUE-TIMEOUT") {
@@ -185,14 +200,14 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
                 }
             }
             date delta = now_us() - start;
-            info("TypeScriptActionApiDataProvider::getAsyncValue() %s: call: %y start: %y delta: %y to: %y",
+            info("TypeScriptActionApiDataProvider::getAsyncValue() %s: call: %y start: %y delta: %y timeout: %y",
                 api.label, api.async_call.uniqueHash(), start, delta, api.to);
             if (delta > api.to) {
                 throw "JAVASCRIPT-ASYNC-TIMEOUT-ERROR", sprintf("Async callback took longer than %y to resolve",
                     api.to);
             }
 
-            api.pgm.spinEventLoop();
+            pgm.spinEventLoop();
         }
 
         if (rv.error) {

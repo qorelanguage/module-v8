@@ -82,43 +82,19 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
         : QoreV8Program() {
-    if (!valid) {
-        xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Could not initialize JavaScript program");
-        return;
-    }
-    v8::Locker locker(isolate);
     assert(source_code.getEncoding() == QCS_UTF8);
     assert(source_label.getEncoding() == QCS_UTF8);
-    const v8::TryCatch tryCatch(isolate);
-    v8::Isolate::Scope isolate_scope(isolate);
-    v8::HandleScope handle_scope(isolate);
-    v8::MaybeLocal<v8::String> m_label = v8::String::NewFromUtf8(isolate, source_label.c_str(),
-        v8::NewStringType::kNormal);
-    if (m_label.IsEmpty()) {
-        checkException(xsink, tryCatch);
-        return;
-    }
-    v8::Local<v8::String> lstr = m_label.ToLocalChecked();
-    v8::ScriptOrigin origin(isolate, lstr);
-    //printd(5, "QoreV8Program::QoreV8Program() using label '%s'\n", source_label.c_str());
-    v8::MaybeLocal<v8::String> m_src = v8::String::NewFromUtf8(isolate, source_code.c_str(),
-        v8::NewStringType::kNormal);
-    if (m_src.IsEmpty()) {
-        checkException(xsink, tryCatch);
-        return;
-    }
+    init(xsink, source_code.c_str(), source_label.c_str());
+}
 
-    v8::Local<v8::String> src = m_src.ToLocalChecked();
-    v8::Local<v8::Context> context = setup->context();
-    v8::Context::Scope context_scope(context);
-    v8::MaybeLocal<v8::Script> m_script = v8::Script::Compile(context, src, &origin);
-    if (m_script.IsEmpty()) {
-        checkException(xsink, tryCatch);
-        return;
-    }
-    label.Reset(isolate, lstr);
-    script.Reset(isolate, m_script.ToLocalChecked());
-    global.Reset(isolate, setup->context()->Global());
+QoreV8Program::QoreV8Program(ExceptionSink* xsink, const QoreV8Program& old, QoreObject* self) : QoreV8Program() {
+    //v8::Isolate::Scope isolate_scope(old.isolate);
+    v8::Locker locker(old.isolate);
+    v8::HandleScope handle_scope(old.isolate);
+    v8::String::Utf8Value source(old.isolate, old.source.Get(old.isolate));
+    v8::String::Utf8Value label(old.isolate, old.label.Get(old.isolate));
+    init(xsink, *source, *label);
+    this->self = self;
 }
 
 QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : QoreV8Program() {
@@ -134,6 +110,45 @@ QoreV8Program::~QoreV8Program() {
     if (i != pset.end()) {
         pset.erase(i);
     }
+}
+
+void QoreV8Program::init(ExceptionSink* xsink, const char* source_code, const char* source_label) {
+    if (!valid) {
+        xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Could not initialize JavaScript program");
+        return;
+    }
+    v8::Locker locker(isolate);
+    const v8::TryCatch tryCatch(isolate);
+    v8::Isolate::Scope isolate_scope(isolate);
+    v8::HandleScope handle_scope(isolate);
+    v8::MaybeLocal<v8::String> m_label = v8::String::NewFromUtf8(isolate, source_label,
+        v8::NewStringType::kNormal);
+    if (m_label.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return;
+    }
+    v8::Local<v8::String> lstr = m_label.ToLocalChecked();
+    v8::ScriptOrigin origin(isolate, lstr);
+    //printd(5, "QoreV8Program::QoreV8Program() using label '%s'\n", source_label.c_str());
+    v8::MaybeLocal<v8::String> m_src = v8::String::NewFromUtf8(isolate, source_code,
+        v8::NewStringType::kNormal);
+    if (m_src.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return;
+    }
+
+    v8::Local<v8::String> src = m_src.ToLocalChecked();
+    v8::Local<v8::Context> context = setup->context();
+    v8::Context::Scope context_scope(context);
+    v8::MaybeLocal<v8::Script> m_script = v8::Script::Compile(context, src, &origin);
+    if (m_script.IsEmpty()) {
+        checkException(xsink, tryCatch);
+        return;
+    }
+    source.Reset(isolate, src);
+    label.Reset(isolate, lstr);
+    script.Reset(isolate, m_script.ToLocalChecked());
+    global.Reset(isolate, setup->context()->Global());
 }
 
 void QoreV8Program::shutdown() {

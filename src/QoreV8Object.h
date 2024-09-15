@@ -35,6 +35,8 @@
 
 #include "v8-module.h"
 
+#include <set>
+
 // forward references
 class QoreV8Program;
 class QoreV8ProgramHelper;
@@ -56,8 +58,6 @@ public:
 
     DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h) const;
 
-    DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent) const;
-
     DLLLOCAL bool isCallable(QoreV8ProgramHelper& v8h) const;
 
     DLLLOCAL bool isConstructor(QoreV8ProgramHelper& v8h) const;
@@ -74,9 +74,13 @@ public:
 
     DLLLOCAL v8::Local<v8::Value> getV8KeyValue(QoreV8ProgramHelper& v8h, const char* key) const;
 
-    DLLLOCAL QoreValue getKeyValue(QoreV8ProgramHelper& v8h, const char* key);
+    DLLLOCAL QoreValue getProperty(QoreV8ProgramHelper& v8h, const char* property);
+
+    DLLLOCAL int setProperty(QoreV8ProgramHelper& v8h, const char* property, const QoreValue value);
 
     DLLLOCAL QoreValue getIndexValue(QoreV8ProgramHelper& v8h, int64 i);
+
+    DLLLOCAL QoreListNode* getPropertyList(QoreV8ProgramHelper& v8h);
 
     DLLLOCAL QoreV8Object* refSelf() const {
         ref();
@@ -86,9 +90,13 @@ public:
     DLLLOCAL QoreObject* getReferencedProgram();
 
 protected:
-    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len) const;
+    DLLLOCAL AbstractQoreNode* toData(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent, v8::Set& objset) const;
 
-    DLLLOCAL QoreListNode* toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len) const;
+    DLLLOCAL QoreHashNode* toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent, v8::Set& objset,
+            v8::Local<v8::Array> props, uint32_t len) const;
+
+    DLLLOCAL QoreListNode* toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent, v8::Set& objset,
+            v8::Local<v8::Array> props, uint32_t len) const;
 
     QoreV8Program* pgm;
     v8::Global<v8::Object> obj;

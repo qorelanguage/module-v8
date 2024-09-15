@@ -40,8 +40,8 @@ async function runAsync(a, enqueue) {
 ", "test.js");
             js.run();
             JavaScriptObject global = js.getGlobal();
-            auto f = global.getKeyValue("doPromise");
-            code a = global.getKeyValue("runAsync").toData();
+            auto f = global.getProperty("doPromise");
+            code a = global.getProperty("runAsync").toData();
             Queue q();
             code enqueue = sub (auto v) {
                 q.push(v);
@@ -68,8 +68,8 @@ async function runAsync(a, enqueue) {
 ", "test.js");
             js.run();
             JavaScriptObject global = js.getGlobal();
-            auto f = global.getKeyValue("doPromise");
-            code a = global.getKeyValue("runAsync").toData();
+            auto f = global.getProperty("doPromise");
+            code a = global.getProperty("runAsync").toData();
             Queue q();
             code enqueue = sub (auto v) {
                 q.push(v);
@@ -113,9 +113,9 @@ async function runAsync(a, enqueue) {
 
             JavaScriptObject global = js.getGlobal();
 
-            auto doPromise = global.getKeyValue("doPromise");
-            code setValue = global.getKeyValue("setValue").toData();
-            code runAsync = global.getKeyValue("runAsync").toData();
+            auto doPromise = global.getProperty("doPromise");
+            code setValue = global.getProperty("setValue").toData();
+            code runAsync = global.getProperty("runAsync").toData();
 
             Queue data_queue();
             code enqueue = sub (auto v) {
@@ -148,8 +148,8 @@ async function runAsync(a, b) {
 ", "test.js");
             js.run();
             JavaScriptObject global = js.getGlobal();
-            auto f = global.getKeyValue("doPromise");
-            code a = global.getKeyValue("runAsync").toData();
+            auto f = global.getProperty("doPromise");
+            code a = global.getProperty("runAsync").toData();
             JavaScriptObject rv(js);
             auto v = a(f, rv);
             int ec = js.spinEventLoop();
@@ -170,8 +170,8 @@ async function runAsync(a, b) {
 ", "test.js");
             js.run();
             JavaScriptObject global = js.getGlobal();
-            auto f = global.getKeyValue("doPromise");
-            code a = global.getKeyValue("runAsync").toData();
+            auto f = global.getProperty("doPromise");
+            code a = global.getProperty("runAsync").toData();
             JavaScriptObject rv(js);
             auto v = a(f, rv);
             int ec = js.spinEventLoop();
@@ -201,8 +201,8 @@ async function runAsync(a, b) {
             int ec = js.spinEventLoop();
             assertEq(0, ec);
             JavaScriptObject global = js.getGlobal();
-            auto f = global.getKeyValue("doPromise");
-            code a = global.getKeyValue("runAsync").toData();
+            auto f = global.getProperty("doPromise");
+            code a = global.getProperty("runAsync").toData();
             JavaScriptObject rv(js);
             auto v = a(f, rv);
             ec = js.spinEventLoop();
@@ -239,8 +239,8 @@ async function runAsync(a, enqueue) {
 ", "test.js");
             js.run();
             JavaScriptObject global = js.getGlobal();
-            auto f = global.getKeyValue("doPromise");
-            code runAsync = global.getKeyValue("runAsync").toData();
+            auto f = global.getProperty("doPromise");
+            code runAsync = global.getProperty("runAsync").toData();
 
             Queue q();
             code enqueue = sub (auto v) {
@@ -295,7 +295,7 @@ var foo = function(arg) {
 }", "test.js");
         js.run();
         JavaScriptObject global = js.getGlobal();
-        auto foo = global.getKeyValue("foo");
+        auto foo = global.getProperty("foo");
         assertEq(NT_OBJECT, foo.typeCode());
         assertEq("JavaScriptObject", foo.className());
         assertTrue(foo.toData().callp());
@@ -316,11 +316,11 @@ obj", "test.js");
         hash<auto> h = o.toData();
         assertEq({"id": 1, "type": "t"}, h - "func");
         assertTrue(h.func.callp());
-        assertEq(1, o.getKeyValue("id"));
+        assertEq(1, o.getProperty("id"));
         o.func(1);
-        assertEq(2, o.getKeyValue("id"));
+        assertEq(2, o.getProperty("id"));
         assertEq(2, o.func(1));
-        assertEq(3, o.getKeyValue("id"));
+        assertEq(3, o.getProperty("id"));
 
         js = new JavaScriptProgram("const obj = {
     func: function(a, b) {

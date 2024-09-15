@@ -135,7 +135,7 @@ static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool r
     // to create a v8::Platform instance that Node.js can use when creating
     // Worker threads. When no `MultiIsolatePlatform` instance is present,
     // Worker threads are disabled.
-    platform = node::MultiIsolatePlatform::Create(4);
+    platform = node::MultiIsolatePlatform::Create(20);
 
     // Initialize V8.
     v8::V8::InitializePlatform(platform.get());

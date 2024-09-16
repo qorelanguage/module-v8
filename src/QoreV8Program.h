@@ -145,11 +145,6 @@ protected:
     v8::Isolate* isolate = nullptr;
     node::Environment* env = nullptr;
 
-    /*
-    v8::Global<v8::Script> script;
-    v8::Global<v8::String> source;
-    v8::Global<v8::String> v8label;
-    */
     QoreString source;
     QoreString label;
 

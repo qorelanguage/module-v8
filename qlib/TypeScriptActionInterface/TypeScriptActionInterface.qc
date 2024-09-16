@@ -239,6 +239,7 @@ public class TypeScriptActionInterface {
                     "attribute; got type %y; expecting a callable value", action.app, action.action,
                     api_function.fullType());
             }
+            timeout io_timeout = seconds(remove action.io_timeout_secs ?? DefaultIoTimeoutSecs);
             if (api_function) {
                 api = <AsyncCallInfo>{
                     "label": sprintf("API function for app %y action %y", app.name, action.action),

@@ -57,34 +57,6 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
     assert(isolate);
     env = setup->env();
     assert(env);
-
-    /*
-    v8::Locker locker(isolate);
-
-    v8::Isolate::Scope isolate_scope(isolate);
-    v8::HandleScope handle_scope(isolate);
-    // The v8::Context needs to be entered when node::CreateEnvironment() and
-    // node::LoadEnvironment() are being called.
-    v8::Context::Scope context_scope(setup->context());
-
-    // Set up the Node.js instance for execution, and run code inside of it.
-    // There is also a variant that takes a callback and provides it with
-    // the `require` and `process` objects, so that it can manually compile
-    // and run scripts as needed.
-    // The `require` function inside this script does *not* access the file
-    // system, and can only load built-in Node.js modules.
-    // `module.createRequire()` is being used to create one that is able to
-    // load files from the disk, and uses the standard CommonJS file loader
-    // instead of the internal-only `require` function.
-    v8::MaybeLocal<v8::Value> loadenv_ret = node::LoadEnvironment(env,
-        "const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
-        "globalThis.require = publicRequire;");
-    valid = !loadenv_ret.IsEmpty();
-    if (valid) {
-        AutoLocker al(global_lock);
-        pset.insert(this);
-    }
-    */
 }
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
@@ -139,10 +111,6 @@ int QoreV8Program::init(ExceptionSink* xsink) {
         v8::Context::Scope context_scope(setup->context());
         v8::TryCatch tryCatch(isolate);
 
-        QoreStringMaker envstr("const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
-            "globalThis.require = publicRequire;\n"
-            "publicRequire('node:vm').runInThisContext('%s', {'filename': '%s'});", source.c_str(), label.c_str());
-
         // Set up the Node.js instance for execution, and run code inside of it.
         // There is also a variant that takes a callback and provides it with
         // the `require` and `process` objects, so that it can manually compile
@@ -152,6 +120,9 @@ int QoreV8Program::init(ExceptionSink* xsink) {
         // `module.createRequire()` is being used to create one that is able to
         // load files from the disk, and uses the standard CommonJS file loader
         // instead of the internal-only `require` function.
+        QoreStringMaker envstr("const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
+            "globalThis.require = publicRequire;\n"
+            "publicRequire('node:vm').runInThisContext('%s', {'filename': '%s'});", source.c_str(), label.c_str());
         v8::MaybeLocal<v8::Value> loadenv_ret = node::LoadEnvironment(env, envstr.c_str());
         valid = !loadenv_ret.IsEmpty();
         if (!valid) {
@@ -160,16 +131,6 @@ int QoreV8Program::init(ExceptionSink* xsink) {
             }
             return -1;
         }
-
-        /*
-        int exit_code = node::SpinEventLoop(env).FromMaybe(1);
-        if (exit_code) {
-            if (!checkException(xsink, tryCatch)) {
-                xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Unknown error executing program");
-            }
-            valid = false;
-        }
-        */
 
         global.Reset(isolate, setup->context()->Global());
     }
@@ -231,11 +192,7 @@ void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
         node::Stop(env);
         env = nullptr;
     }
-    /*
-    script.Reset();
-    label.Reset();
     global.Reset();
-    */
 }
 
 int QoreV8Program::saveQoreReference(const QoreValue& rv, ExceptionSink& xsink) {

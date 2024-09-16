@@ -23,8 +23,11 @@
 */
 
 #include "QC_JavaScriptObject.h"
+#include "QC_JavaScriptPromise.h"
 #include "QoreV8Program.h"
 #include "QoreV8StackLocationHelper.h"
+
+#include <uv.h>
 
 #include <vector>
 #include <string>
@@ -33,6 +36,7 @@
 
 QoreThreadLock QoreV8Program::global_lock;
 QoreV8Program::pset_t QoreV8Program::pset;
+QoreString QoreV8Program::scont("\\n");
 
 QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
     //printd(5, "QoreV8Program::QoreV8Program() this: %p\n", this);
@@ -49,10 +53,12 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
     }
 
     isolate = setup->isolate();
+    //isolate->SetMicrotasksPolicy(v8::MicrotasksPolicy::kAuto);
     assert(isolate);
     env = setup->env();
     assert(env);
 
+    /*
     v8::Locker locker(isolate);
 
     v8::Isolate::Scope isolate_scope(isolate);
@@ -78,23 +84,29 @@ QoreV8Program::QoreV8Program() : save_ref_callback(nullptr) {
         AutoLocker al(global_lock);
         pset.insert(this);
     }
+    */
 }
 
 QoreV8Program::QoreV8Program(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
         : QoreV8Program() {
     assert(source_code.getEncoding() == QCS_UTF8);
     assert(source_label.getEncoding() == QCS_UTF8);
-    init(xsink, source_code.c_str(), source_label.c_str());
+
+    source = source_code;
+    label = source_label;
+    escapeSingle(source);
+    escapeSingle(label);
+
+    init(xsink);
 }
 
 QoreV8Program::QoreV8Program(ExceptionSink* xsink, const QoreV8Program& old, QoreObject* self) : QoreV8Program() {
-    //v8::Isolate::Scope isolate_scope(old.isolate);
-    v8::Locker locker(old.isolate);
-    v8::HandleScope handle_scope(old.isolate);
-    v8::String::Utf8Value source(old.isolate, old.source.Get(old.isolate));
-    v8::String::Utf8Value label(old.isolate, old.label.Get(old.isolate));
-    init(xsink, *source, *label);
-    this->self = self;
+    source = old.source;
+    label = old.label;
+
+    if (!init(xsink)) {
+        this->self = self;
+    }
 }
 
 QoreV8Program::QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm) : QoreV8Program() {
@@ -112,43 +124,79 @@ QoreV8Program::~QoreV8Program() {
     }
 }
 
-void QoreV8Program::init(ExceptionSink* xsink, const char* source_code, const char* source_label) {
+int QoreV8Program::init(ExceptionSink* xsink) {
     if (!valid) {
         xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Could not initialize JavaScript program");
-        return;
+        return -1;
     }
-    v8::Locker locker(isolate);
-    const v8::TryCatch tryCatch(isolate);
-    v8::Isolate::Scope isolate_scope(isolate);
-    v8::HandleScope handle_scope(isolate);
-    v8::MaybeLocal<v8::String> m_label = v8::String::NewFromUtf8(isolate, source_label,
-        v8::NewStringType::kNormal);
-    if (m_label.IsEmpty()) {
-        checkException(xsink, tryCatch);
-        return;
-    }
-    v8::Local<v8::String> lstr = m_label.ToLocalChecked();
-    v8::ScriptOrigin origin(isolate, lstr);
-    //printd(5, "QoreV8Program::QoreV8Program() using label '%s'\n", source_label.c_str());
-    v8::MaybeLocal<v8::String> m_src = v8::String::NewFromUtf8(isolate, source_code,
-        v8::NewStringType::kNormal);
-    if (m_src.IsEmpty()) {
-        checkException(xsink, tryCatch);
-        return;
+    {
+        v8::Locker locker(isolate);
+
+        v8::Isolate::Scope isolate_scope(isolate);
+        v8::HandleScope handle_scope(isolate);
+        // The v8::Context needs to be entered when node::CreateEnvironment() and
+        // node::LoadEnvironment() are being called.
+        v8::Context::Scope context_scope(setup->context());
+        v8::TryCatch tryCatch(isolate);
+
+        QoreStringMaker envstr("const publicRequire = require('module').createRequire(process.cwd() + '/');\n"
+            "globalThis.require = publicRequire;\n"
+            "publicRequire('node:vm').runInThisContext('%s', {'filename': '%s'});", source.c_str(), label.c_str());
+
+        // Set up the Node.js instance for execution, and run code inside of it.
+        // There is also a variant that takes a callback and provides it with
+        // the `require` and `process` objects, so that it can manually compile
+        // and run scripts as needed.
+        // The `require` function inside this script does *not* access the file
+        // system, and can only load built-in Node.js modules.
+        // `module.createRequire()` is being used to create one that is able to
+        // load files from the disk, and uses the standard CommonJS file loader
+        // instead of the internal-only `require` function.
+        v8::MaybeLocal<v8::Value> loadenv_ret = node::LoadEnvironment(env, envstr.c_str());
+        valid = !loadenv_ret.IsEmpty();
+        if (!valid) {
+            if (!checkException(xsink, tryCatch)) {
+                xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Unknown error initializing program");
+            }
+            return -1;
+        }
+
+        /*
+        int exit_code = node::SpinEventLoop(env).FromMaybe(1);
+        if (exit_code) {
+            if (!checkException(xsink, tryCatch)) {
+                xsink->raiseException("JAVASCRIPT-PROGRAM-ERROR", "Unknown error executing program");
+            }
+            valid = false;
+        }
+        */
+
+        global.Reset(isolate, setup->context()->Global());
     }
 
-    v8::Local<v8::String> src = m_src.ToLocalChecked();
-    v8::Local<v8::Context> context = setup->context();
-    v8::Context::Scope context_scope(context);
-    v8::MaybeLocal<v8::Script> m_script = v8::Script::Compile(context, src, &origin);
-    if (m_script.IsEmpty()) {
-        checkException(xsink, tryCatch);
-        return;
+    AutoLocker al(global_lock);
+    pset.insert(this);
+
+    return 0;
+}
+
+void QoreV8Program::escapeSingle(QoreString& str) {
+    ExceptionSink xsink;
+    for (size_t i = 0; i < str.size(); ++i) {
+        switch (str[i]) {
+            case '\\':
+            case '\'':
+                str.insertch('\\', i, 1);
+                ++i;
+                break;
+
+            case '\n':
+                str.splice(str.getByteOffset(i, &xsink), 1, scont, &xsink);
+                assert(!xsink);
+                i += (scont.size() - 1);
+                break;
+        }
     }
-    source.Reset(isolate, src);
-    label.Reset(isolate, lstr);
-    script.Reset(isolate, m_script.ToLocalChecked());
-    global.Reset(isolate, setup->context()->Global());
 }
 
 void QoreV8Program::shutdown() {
@@ -183,9 +231,11 @@ void QoreV8Program::deleteIntern(ExceptionSink* xsink) {
         node::Stop(env);
         env = nullptr;
     }
+    /*
     script.Reset();
     label.Reset();
     global.Reset();
+    */
 }
 
 int QoreV8Program::saveQoreReference(const QoreValue& rv, ExceptionSink& xsink) {
@@ -259,21 +309,6 @@ int QoreV8Program::saveQoreReferenceDefault(const QoreValue& rv, ExceptionSink& 
         //    rv.getFullTypeName(), kv.getFullTypeName());
     }
     return 0;
-}
-
-QoreValue QoreV8Program::run(ExceptionSink* xsink) {
-    QoreV8ProgramHelper v8h(xsink, this);
-    if (*xsink) {
-        return QoreValue();
-    }
-
-    v8::Local<v8::Script> script = this->script.Get(isolate);
-    v8::MaybeLocal<v8::Value> m_rv = script->Run(v8h.getContext());
-    if (m_rv.IsEmpty()) {
-        v8h.checkException();
-        return QoreValue();
-    }
-    return getQoreValue(xsink, m_rv.ToLocalChecked());
 }
 
 int QoreV8Program::checkException(ExceptionSink* xsink, const v8::TryCatch& tryCatch) const {
@@ -395,6 +430,15 @@ QoreValue QoreV8Program::getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value>
         return rv.release();
     }
 
+    if (val->IsPromise()) {
+        v8::Local<v8::Promise> p = v8::Local<v8::Promise>::Cast(val);
+        ReferenceHolder<QoreV8Promise> pd(new QoreV8Promise(xsink, this, p), xsink);
+        if (*xsink) {
+            return QoreValue();
+        }
+        return new QoreObject(QC_JAVASCRIPTPROMISE, getProgram(), pd.release());
+    }
+
     if (val->IsObject()) {
         v8::MaybeLocal<v8::Object> o = val->ToObject(context);
         if (o.IsEmpty()) {
@@ -449,6 +493,17 @@ void QoreV8Program::raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate)
         isolate->ThrowException(exstr.ToLocalChecked());
     }
     xsink.clear();
+}
+
+int QoreV8Program::spinOnce() {
+    uv_loop_t* loop = setup->event_loop();
+
+    v8::Locker locker(isolate);
+    v8::Isolate::Scope isolate_scope(isolate);
+
+    uv_run(loop, UV_RUN_DEFAULT);
+
+    return 0;
 }
 
 int QoreV8Program::spinEventLoop() {
@@ -656,30 +711,11 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
         case NT_RUNTIME_CLOSURE:
         case NT_FUNCREF: {
             const ResolvedCallReferenceNode* ref = val.get<const ResolvedCallReferenceNode>();
-
-            QoreV8CallbackInfo* cbinfo = new QoreV8CallbackInfo(ref, this);
-
-            v8::Local<v8::External> ext = v8::External::New(isolate, (void*)cbinfo);
-
-            // add callback to external object
-            v8::Global<v8::External> gext;
-            gext.Reset(isolate, ext);
-            gext.SetWeak(cbinfo, deref_callref, v8::WeakCallbackType::kParameter);
-
-            v8::Local<v8::Context> context = setup->context();
-            v8::MaybeLocal<v8::Function> func = v8::Function::New(context, call_callref, ext);
-            if (func.IsEmpty()) {
-                //printd(5, "ref: %p -> func empty\n", ref);
-                checkException(xsink, tryCatch);
+            v8::MaybeLocal<v8::Function> rv = getV8Function(xsink, ref, tryCatch, handle_scope);
+            if (rv.IsEmpty()) {
                 return v8::Null(isolate);
             }
-            if (saveQoreReference(ref->refSelf(), *xsink)) {
-                //printd(5, "ref: %p -> cannot save Qore reference\n", ref);
-                assert(*xsink);
-                return v8::Null(isolate);
-            }
-            //printd(5, "ref: %p -> returning JS function object\n", ref);
-            return handle_scope.Escape(func.ToLocalChecked());
+            return rv.ToLocalChecked();
         }
 
         default:
@@ -689,6 +725,32 @@ v8::Local<v8::Value> QoreV8Program::getV8Value(const QoreValue val, ExceptionSin
 
 
     return v8::Null(isolate);
+}
+
+v8::MaybeLocal<v8::Function> QoreV8Program::getV8Function(ExceptionSink* xsink, const ResolvedCallReferenceNode* call,
+        const v8::TryCatch& tryCatch, v8::EscapableHandleScope& handle_scope) {
+    QoreV8CallbackInfo* cbinfo = new QoreV8CallbackInfo(call, this);
+    v8::Local<v8::External> ext = v8::External::New(isolate, (void*)cbinfo);
+
+    // add callback to external object
+    v8::Global<v8::External> gext;
+    gext.Reset(isolate, ext);
+    gext.SetWeak(cbinfo, deref_callref, v8::WeakCallbackType::kParameter);
+
+    v8::Local<v8::Context> context = setup->context();
+    v8::MaybeLocal<v8::Function> func = v8::Function::New(context, call_callref, ext);
+    if (func.IsEmpty()) {
+        //printd(5, "call: %p -> func empty\n", call);
+        checkException(xsink, tryCatch);
+        return v8::MaybeLocal<v8::Function>();
+    }
+    if (saveQoreReference(call->refSelf(), *xsink)) {
+        //printd(5, "call: %p -> cannot save Qore reference\n", call);
+        assert(*xsink);
+        return v8::MaybeLocal<v8::Function>();
+    }
+    //printd(5, "call: %p -> returning JS function object\n", call);
+    return v8::MaybeLocal<v8::Function>(handle_scope.Escape(func.ToLocalChecked()));
 }
 
 QoreObject* QoreV8Program::getGlobal(ExceptionSink* xsink) {

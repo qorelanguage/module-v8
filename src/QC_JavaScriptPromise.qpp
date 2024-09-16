@@ -1,0 +1,123 @@
+/* -*- mode: c++; indent-tabs-mode: nil -*- */
+/** @file QC_JavaScriptPromise.qpp defines the %Qore JavaScriptPromise class */
+/*
+    QC_JavaScriptPromise.qpp
+
+    Qore Programming Language
+
+    Copyright 2024 Qore Technologies, s.r.o.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+#include "QC_JavaScriptPromise.h"
+#include "QC_JavaScriptObject.h"
+#include "QC_JavaScriptProgram.h"
+
+/** @defgroup promise_states Promise States
+*/
+///@{
+namespace V8;
+
+//! for pending Promises
+const Pending = qore(QoreValue(v8::Promise::PromiseState::kPending));
+
+//! for fulfilled Promises
+const Fulfilled = qore(QoreValue(v8::Promise::PromiseState::kFulfilled));
+
+//! for rejected Promises
+const Rejected = qore(QoreValue(v8::Promise::PromiseState::kRejected));
+//@}
+
+//! Promise for embedding and executing JavaScript code
+/**
+*/
+qclass JavaScriptPromise [arg=QoreV8Promise* p; ns=V8; vparent=JavaScriptObject];
+
+//! Runs the given code asynchronously when the Promise resolves
+/** @param then_code the code to run when the Promise resolves, the value of the Promise is used as the argument to
+    the code
+    @param reject_code the code to run if the Promise is rejected
+*/
+JavaScriptPromise JavaScriptPromise::then(code then_code, *code reject_code) {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return !p->then(v8h, then_code, reject_code) ? self->objectRefSelf() : QoreValue();
+}
+
+//! Runs the given code asynchronously if the Promise throws an asynchronous error
+/** @param catch_code the code to run if the Promise throws an asynchronous error
+*/
+JavaScriptPromise JavaScriptPromise::doCatch(code catch_code) {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return !p->doCatch(v8h, catch_code) ? self->objectRefSelf() : QoreValue();
+}
+
+//! Returns @ref True if the Promise has a handler
+/** @return @ref True if the Promise has a handler
+*/
+bool JavaScriptPromise::hasHandler() {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return p->hasHandler(v8h);
+}
+
+//! Returns the state of the Promise
+/** @return the state of the Promise'; see @ref promise_states for possible values
+*/
+int JavaScriptPromise::getState() {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return p->getState(v8h);
+}
+
+//! Waits for the promise to resolve
+/**
+*/
+JavaScriptPromise::wait() {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    p->wait(v8h);
+}
+
+//! Calls the JavaScript method and returns the response
+/** @param m the method name
+    @param ... any argument to the method
+
+    @return the response from the JavaScript method
+*/
+auto JavaScriptPromise::methodGate(string m, ...) {
+    return p->methodGate(xsink, self, m, args);
+}
+
+//! Returns the value of the given JavaScript promise property
+/** @param m the property name
+
+    @return the value of the property
+*/
+auto JavaScriptPromise::memberGate(string m) {
+    return p->memberGate(xsink, m);
+}

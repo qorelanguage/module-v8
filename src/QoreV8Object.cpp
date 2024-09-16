@@ -81,43 +81,6 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
     v8::Isolate* isolate = v8h.getIsolate();
     v8::EscapableHandleScope handle_scope(isolate);
 
-    /*
-    if (obj->IsPromise()) {
-        v8::MaybeLocal<v8::String> m_prop = v8::String::NewFromUtf8(isolate, "then", v8::NewStringType::kNormal);
-        if (m_prop.IsEmpty()) {
-            v8h.checkException();
-            return nullptr;
-        }
-
-        v8::MaybeLocal<v8::Value> m_then = obj->Get(v8h.getContext(), m_prop.ToLocalChecked());
-        if (m_then.IsEmpty()) {
-            v8h.checkException();
-            return nullptr;
-        }
-        v8::Local<v8::Value> then = m_then.ToLocalChecked();
-        if (!then->IsObject()) {
-            xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is an object");
-            return nullptr;
-        }
-
-        v8::MaybeLocal<v8::Object> mothen = then->ToObject(v8h.getContext());
-        if (mothen.IsEmpty()) {
-            if (!v8h.checkException()) {
-                xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is not an object");
-            }
-            return nullptr;
-        }
-        v8::Local<v8::Object> othen = mothen.ToLocalChecked();
-        if (!othen->IsCallable()) {
-            xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is not callable");
-            return nullptr;
-        }
-
-        printf("GOT PROMISE!\n");
-        //obj->Get("then").As<Function>();
-    }
-    */
-
     v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
     if (maybe_props.IsEmpty()) {
         if (v8h.checkException()) {
@@ -213,6 +176,51 @@ QoreListNode* QoreV8Object::getPropertyList(QoreV8ProgramHelper& v8h) {
     return rv.release();
 }
 
+QoreValue QoreV8Object::methodGate(ExceptionSink* xsink, QoreObject* self, const QoreStringNode* m,
+        const QoreListNode* args) {
+    QoreV8ProgramHelper v8h(xsink, getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    v8::Local<v8::Value> attr = getV8KeyValue(v8h, m->c_str());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    if (!attr->IsObject()) {
+        v8::Local<v8::String> str = attr->TypeOf(v8h.getIsolate());
+        // Convert the result to an UTF8 string
+        v8::String::Utf8Value utf8(v8h.getIsolate(), str);
+        xsink->raiseException("JAVASCRIPT-METHODCALL-ERROR", "Object key '%s' is v8 type '%s'; must be a callable "
+            "object to make a method call", m->c_str(), *utf8);
+        return QoreValue();
+    }
+
+    v8::MaybeLocal<v8::Object> maybe_attrobj = attr->ToObject(v8h.getContext());
+    if (maybe_attrobj.IsEmpty()) {
+        v8h.checkException();
+        return QoreValue();
+    }
+
+    ReferenceHolder<QoreV8Object> meth(new QoreV8Object(getProgram(), maybe_attrobj.ToLocalChecked()), xsink);
+    return meth->callAsFunction(v8h, self, 1, args);
+}
+
+QoreValue QoreV8Object::memberGate(ExceptionSink* xsink, const QoreStringNode* m) {
+    QoreV8ProgramHelper v8h(xsink, getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    v8::Local<v8::Value> attr = getV8KeyValue(v8h, m->c_str());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    return v8h.getProgram()->getQoreValue(xsink, attr);
+}
+
 QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent, v8::Set& objset,
         v8::Local<v8::Array> props, uint32_t len) const {
     ExceptionSink* xsink = v8h.getExceptionSink();
@@ -257,7 +265,7 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Value
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
             ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), obj), xsink);
-            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h, parent, objset), xsink);
+            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h, obj, objset), xsink);
             if (*xsink) {
                 return nullptr;
             }

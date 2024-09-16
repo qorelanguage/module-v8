@@ -44,20 +44,14 @@ class TypeScriptActionInterfacePriv {
                     on_exit if (dir.val()) {
                         chdir(cwd);
                     }
-                    JavaScriptProgramPool pool("async function runAsync(a, enqueue, args) {
-    try {
-        enqueue({'result': await a(...args)});
-    } catch (e) {
-        enqueue({'error': {
-            'message': e.message,
-            'stack': e.stack,
-        }});
-    }
-}
-var exports = {};\n" + File::readTextFile(basename(path)), path, sub (JavaScriptProgram pgm) {
-                        JavaScriptObject g = pgm.getGlobal();
-                        pgm.getGlobal().exports.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
-                    });
+                    JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
+                        sub (JavaScriptProgram pgm) {
+                            JavaScriptObject g = pgm.getGlobal();
+                            pgm.getGlobal().exports.actionsCatalogue.registerAppActions(
+                                TypeScriptActionInterface::Api
+                            );
+                        }, 1
+                    );
                     pstore{pool.uniqueHash()} = pool;
                 } catch (hash<ExceptionInfo> ex) {
                     stderr.printf("Error loading TypeScript action script %y: %s\n", path, get_exception_string(ex));

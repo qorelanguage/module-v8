@@ -51,13 +51,18 @@ public class JavaScriptProgramPool {
 
         # indicates the first program unique hash for each pool
         static hash<string, bool> firstmap;
+
+        int max;
+        int waiting;
+        Condition cond();
     }
 
     #! Creates the object and the initial template program
-    constructor(string source, string path, code init) {
+    constructor(string source, string path, code init, int max = -1) {
         self.source = source;
         self.path = path;
         self.init = init;
+        self.max = max;
         getNewIntern(True);
     }
 
@@ -65,23 +70,39 @@ public class JavaScriptProgramPool {
         m.lock();
         on_exit m.unlock();
 
-        if (fmap) {
-            string k = fmap.firstKey();
-            remove fmap{k};
-            return cache{k};
+        while (True) {
+            if (fmap) {
+                string k = fmap.firstKey();
+                remove fmap{k};
+                return cache{k};
+            }
+            if (cache.size() == max) {
+                do {
+                    ++waiting;
+                    cond.wait(m);
+                    --waiting;
+                } while (!fmap);
+                continue;
+            }
+            return getNewIntern();
         }
-        return getNewIntern();
     }
 
     release(JavaScriptProgram pgm) {
         string k = pgm.uniqueHash();
         if (!cache{k}) {
-            throw "INVALID-PROGRAM", sprintf("The JavaScriptProgram passed (%y) was not provided from the cache", k);
+            throw "INVALID-PROGRAM", sprintf("The JavaScriptProgram passed (%y) was not provided from the pool", k);
         }
 
         m.lock();
         on_exit m.unlock();
+        if (fmap{k}) {
+            throw "INVALID-PROGRAM", sprintf("The JavaScriptProgram passed (%y) was not allocated from the pool", k);
+        }
         fmap{k} = True;
+        if (waiting) {
+            cond.signal();
+        }
     }
 
     int size() {
@@ -108,7 +129,6 @@ public class JavaScriptProgramPool {
         on_exit chdir(olddir);
 
         JavaScriptProgram pgm(source, path);
-        pgm.run();
         string h0 = pgm.uniqueHash();
         pmap{h0} = self;
         cache{h0} = pgm;

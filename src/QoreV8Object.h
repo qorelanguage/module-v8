@@ -82,6 +82,11 @@ public:
 
     DLLLOCAL QoreListNode* getPropertyList(QoreV8ProgramHelper& v8h);
 
+    DLLLOCAL QoreValue methodGate(ExceptionSink* xsink, QoreObject* self, const QoreStringNode* m,
+            const QoreListNode* args);
+
+    DLLLOCAL QoreValue memberGate(ExceptionSink* xsink, const QoreStringNode* m);
+
     DLLLOCAL QoreV8Object* refSelf() const {
         ref();
         return const_cast<QoreV8Object*>(this);

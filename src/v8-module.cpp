@@ -23,6 +23,7 @@
 
 #include "QC_JavaScriptProgram.h"
 #include "QC_JavaScriptObject.h"
+#include "QC_JavaScriptPromise.h"
 #include "QoreV8Program.h"
 
 //static std::unique_ptr<v8::Platform> platform;
@@ -108,6 +109,7 @@ static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool r
         preinitJavaScriptObjectClass();
         V8NS->addSystemClass(initJavaScriptProgramClass(*V8NS));
         V8NS->addSystemClass(initJavaScriptObjectClass(*V8NS));
+        V8NS->addSystemClass(initJavaScriptPromiseClass(*V8NS));
     }
 
     const char* argv0 = info.path.c_str();
@@ -135,7 +137,7 @@ static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool r
     // to create a v8::Platform instance that Node.js can use when creating
     // Worker threads. When no `MultiIsolatePlatform` instance is present,
     // Worker threads are disabled.
-    platform = node::MultiIsolatePlatform::Create(20);
+    platform = node::MultiIsolatePlatform::Create(4);
 
     // Initialize V8.
     v8::V8::InitializePlatform(platform.get());

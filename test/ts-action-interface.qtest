@@ -24,16 +24,7 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
     }
 
     private poolTest() {
-        JavaScriptProgramPool pool("async function runAsync(a, enqueue, args) {
-    try {
-        enqueue({'result': await a(...args)});
-    } catch (e) {
-        enqueue({'error': {
-            'message': e.message,
-            'stack': e.stack,
-        }});
-    }
-}
+        JavaScriptProgramPool pool("
 var exports = {};
 
 var obj = {
@@ -62,8 +53,7 @@ var obj = {
             });
         }
     }
-};
-        ", "test.js", sub (JavaScriptProgram pgm) {
+};", "test.js", sub (JavaScriptProgram pgm) {
             pgm.getGlobal().obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
         });
 

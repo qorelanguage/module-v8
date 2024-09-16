@@ -175,18 +175,31 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         on_error rethrow $1.err, sprintf("%s (context: %s)", $1.desc, api.label);
 
         JavaScriptProgram pgm = api.pool.get();
-        on_exit api.pool.release(pgm);
-        info("TypeScriptActionApiDataProvider::getAsyncValue() pool %y", pgm.uniqueHash());
+        on_exit {
+            api.pool.release(pgm);
+            info("TypeScriptActionApiDataProvider::getAsyncValue() released pgm %y", pgm.uniqueHash());
+        }
+        info("TypeScriptActionApiDataProvider::getAsyncValue() acquired pgm %y", pgm.uniqueHash());
 
-        code async_wrapper = pgm.getGlobal().runAsync.toData();
+        auto v = call_function_args(api.async_call, argv);
+        auto rv;
+        if (v instanceof JavaScriptPromise) {
+            v.then(sub (auto val) {
+                rv = val;
+            });
+            pgm.spinOnce();
+            v.wait();
+        } else {
+            rv = v;
+        }
 
-        Queue q();
-        code enqueue = sub (auto v) {
-            q.push(v);
-        };
+        if (rv instanceof JavaScriptObject) {
+            rv = rv.toData();
+        } else if (rv.typeCode() == NT_LIST && (rv[0] instanceof JavaScriptObject)) {
+            rv = map $1.toData(), rv;
+        }
 
-        auto v = async_wrapper(api.async_call, enqueue, argv);
-
+        /*
         date start = now_us();
 
         auto rv;
@@ -213,7 +226,8 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         if (rv.error) {
             throw "JAVASCRIPT-ERROR", rv.error.message, rv.error.stack;
         }
-        return rv.result;
+        */
+        return rv;
     }
 }
 }

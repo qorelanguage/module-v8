@@ -58,12 +58,14 @@ endif()
 set(QPP_SRC
     src/QC_JavaScriptProgram.qpp
     src/QC_JavaScriptObject.qpp
+    src/QC_JavaScriptPromise.qpp
 )
 
 set(CPP_SRC
     src/v8-module.cpp
     src/QoreV8Program.cpp
     src/QoreV8Object.cpp
+    src/QoreV8Promise.cpp
     src/QoreV8CallStack.cpp
     src/QoreV8StackLocationHelper.cpp
     src/QoreV8CallReference.cpp

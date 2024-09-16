@@ -48,10 +48,9 @@ public:
 
     DLLLOCAL QoreV8Program(const QoreV8Program& old, QoreProgram* qpgm);
 
-    DLLLOCAL ~QoreV8Program() {
-        //printd(5, "QoreV8Program::~QoreV8Program() this: %p\n", this);
-        assert(!weakRefs.reference_count());
-    }
+    DLLLOCAL QoreV8Program(ExceptionSink* xsink, const QoreV8Program& old, QoreObject* self);
+
+    DLLLOCAL ~QoreV8Program();
 
     DLLLOCAL virtual void doDeref() {
         printd(5, "QoreV8Program::doDeref() this: %p\n", this);
@@ -71,13 +70,15 @@ public:
         return new QoreV8Program(*this, pgm);
     }
 
-    DLLLOCAL QoreValue run(ExceptionSink* xsink);
-
     //! Returns a Qore value for the given V8 value
     DLLLOCAL QoreValue getQoreValue(ExceptionSink* xsink, v8::Local<v8::Value> val);
 
     //! Returns a V8 value for the given Qore value
     DLLLOCAL v8::Local<v8::Value> getV8Value(const QoreValue val, ExceptionSink* xsink);
+
+    //! Returns a callable function object for the given Qore callable data
+    DLLLOCAL v8::MaybeLocal<v8::Function> getV8Function(ExceptionSink* xsink, const ResolvedCallReferenceNode* call,
+            const v8::TryCatch& tryCatch, v8::EscapableHandleScope& handle_scope);
 
     //! Checks if a JavaScript exception has been thrown and throws the corresponding Qore exception
     DLLLOCAL int checkException(ExceptionSink* xsink, const v8::TryCatch& tryCatch) const;
@@ -101,6 +102,8 @@ public:
     DLLLOCAL ResolvedCallReferenceNode* getSaveReferenceCallback() const {
         return *save_ref_callback;
     }
+
+    DLLLOCAL int spinOnce();
 
     DLLLOCAL int spinEventLoop();
 
@@ -133,12 +136,19 @@ public:
     //! Raises an exception in the given isolate from the Qore exception
     DLLLOCAL static void raiseV8Exception(ExceptionSink& xsink, v8::Isolate* isolate);
 
+    DLLLOCAL static void shutdown();
+
+    DLLLOCAL int saveQoreReference(const QoreValue& rv, ExceptionSink& xsink);
+
 protected:
     std::unique_ptr<node::CommonEnvironmentSetup> setup;
     v8::Isolate* isolate = nullptr;
     node::Environment* env = nullptr;
-    v8::Global<v8::Script> script;
-    v8::Global<v8::String> label;
+
+    QoreString source;
+    QoreString label;
+
+    v8::Global<v8::Object> global;
 
     QoreObject* self = nullptr;
     QoreProgram* qpgm = getProgram();
@@ -150,16 +160,24 @@ protected:
 
     unsigned opcount = 0;
     bool to_destroy = false;
-    bool valid = false;
+    bool valid = true;
+
+    static QoreThreadLock global_lock;
+    typedef std::set<QoreV8Program*> pset_t;
+    static pset_t pset;
+
+    static QoreString scont;
 
     //! protected constructor
     DLLLOCAL QoreV8Program();
 
+    DLLLOCAL int init(ExceptionSink* xsink);
+
     DLLLOCAL void deleteIntern(ExceptionSink* xsink);
 
-    DLLLOCAL int saveQoreReference(const QoreValue& rv, ExceptionSink& xsink);
-
     DLLLOCAL int saveQoreReferenceDefault(const QoreValue& rv, ExceptionSink& xsink);
+
+    DLLLOCAL static void escapeSingle(QoreString& str);
 };
 
 class QoreV8CallStack : public QoreCallStack {
@@ -172,7 +190,12 @@ public:
 class QoreV8ProgramData : public AbstractPrivateData, public QoreV8Program {
 public:
     DLLLOCAL QoreV8ProgramData(const QoreString& source_code, const QoreString& source_label, ExceptionSink* xsink)
-        : QoreV8Program(source_code, source_label, xsink) {
+            : QoreV8Program(source_code, source_label, xsink) {
+        //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
+    }
+
+    DLLLOCAL QoreV8ProgramData(ExceptionSink* xsink, const QoreV8ProgramData& old, QoreObject* self)
+            : QoreV8Program(xsink, old, self) {
         //printd(5, "QoreV8ProgramData::QoreV8ProgramData() this: %p\n", this);
     }
 
@@ -200,7 +223,7 @@ public:
             isolate_scope(pgm->isolate),
             handle_scope(pgm->isolate),
             tryCatch(pgm->isolate),
-            origin(pgm->isolate, pgm->label.Get(pgm->isolate)),
+            //origin(pgm->isolate, pgm->label.Get(pgm->isolate)),
             context(pgm->setup->context()),
             context_scope(context) {
         AutoLocker al(pgm->m);
@@ -265,7 +288,7 @@ private:
     v8::Isolate::Scope isolate_scope;
     v8::HandleScope handle_scope;
     v8::TryCatch tryCatch;
-    v8::ScriptOrigin origin;
+    //v8::ScriptOrigin origin;
     v8::Local<v8::Context> context;
     v8::Context::Scope context_scope;
 };

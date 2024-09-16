@@ -1,33 +1,35 @@
-/* HERE WE WILL IMPORT THE ACTIONS CATALOGUE FROM @qoretechnologies/qorus-actions-catalogue
- * FOR NOW WE NEED TO FAKE IT
- * import { ActionsCatalogue } from '@qoretechnologies/qorus-actions-catalogue';
- */
+import {
+  IQoreApp,
+  IQoreAppWithActions,
+  QorusAppsCatalogue,
+  TQoreAppAction,
+} from '@qoretechnologies/qorus-actions-catalogue';
 
 // This will be replaced by the real implementation
 import { Log } from '../decorators/Logger';
 import { DebugLevels } from '../utils/Debugger';
-import { MockApps } from './mock';
-
-// Types are now ANY because they will come from '@qoretechnologies/qorus-actions-catalogue' when it's ready
-export type TApp = Record<string, any>;
-export type TAction = Record<string, any>;
 
 export interface IQoreApi {
-  registerApp: (app: TApp) => void;
-  registerAction: (action: TAction) => void;
+  registerApp: (app: IQoreApp) => void;
+  registerAction: (action: TQoreAppAction) => void;
 }
 
 class ActionsCatalogue {
   @Log('Initializing the Actions Catalogue', DebugLevels.Info)
-  registerAppActions(qoreApi: IQoreApi) {
-    Object.keys(MockApps).forEach((appName) => {
-      const { actions, ...app } = MockApps[appName];
+  registerAppActions(api: IQoreApi) {
+    // Initialize the Qorus Apps Catalogue, this will load all the apps
+    QorusAppsCatalogue.registerApps();
+
+    // Go through all the apps and register them
+    Object.keys(QorusAppsCatalogue.apps).forEach((appName) => {
+      const { actions, ...app }: IQoreAppWithActions = QorusAppsCatalogue.apps[appName];
 
       // Register the app
-      qoreApi.registerApp(app);
+      api.registerApp(app);
 
+      // Register the actions
       actions.forEach((action) => {
-        qoreApi.registerAction(action);
+        api.registerAction(action);
       });
     });
   }

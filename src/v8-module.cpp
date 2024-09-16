@@ -23,6 +23,8 @@
 
 #include "QC_JavaScriptProgram.h"
 #include "QC_JavaScriptObject.h"
+#include "QC_JavaScriptPromise.h"
+#include "QoreV8Program.h"
 
 //static std::unique_ptr<v8::Platform> platform;
 std::unique_ptr<node::MultiIsolatePlatform> platform;
@@ -88,6 +90,8 @@ static sig_vec_t sig_vec = {
 
 static void v8_module_shutdown() {
     //printd(5, "v8_module_shutdown()\n");
+    QoreV8Program::shutdown();
+
     v8::V8::Dispose();
     v8::V8::DisposePlatform();
 
@@ -105,6 +109,7 @@ static QoreStringNode* v8_module_init_intern(qore_module_init_info& info, bool r
         preinitJavaScriptObjectClass();
         V8NS->addSystemClass(initJavaScriptProgramClass(*V8NS));
         V8NS->addSystemClass(initJavaScriptObjectClass(*V8NS));
+        V8NS->addSystemClass(initJavaScriptPromiseClass(*V8NS));
     }
 
     const char* argv0 = info.path.c_str();

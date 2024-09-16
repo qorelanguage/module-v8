@@ -15,11 +15,58 @@
 
 public class TypeScriptActionInterfaceTest inherits QUnit::Test {
     constructor() : Test("TypeScriptActionInterfaceTest", "1.0") {
+        addTestCase("pool", \poolTest());
         addTestCase("sanity", \sanityTest());
         addTestCase("js", \jsTest());
 
         # Return for compatibility with test harnesses that check the script's return value
         set_return_value(main());
+    }
+
+    private poolTest() {
+        JavaScriptProgramPool pool("
+var exports = {};
+
+var obj = {
+    'actionsCatalogue': {
+        'registerAppActions': function (api) {
+            api.registerApp({
+                'name': 'TestApp',
+                'display_name': 'TestApp',
+                'short_desc': 'test',
+                'desc': 'test',
+                'logo': 'AA==',
+                'logo_file_name': 'test.svg',
+                'logo_mime_type': 'image/svg+xml',
+            });
+
+            api.registerAction({
+                'app': 'TestApp',
+                'action': 'test-api',
+                'display_name': 'test-api',
+                'short_desc': 'Test API',
+                'desc': 'Test API',
+                'action_code': 2,
+                'api_function': function (a, b, c) {
+                    return 1;
+                },
+            });
+        }
+    }
+};", "test.js", sub (JavaScriptProgram pgm) {
+            pgm.getGlobal().obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
+        });
+
+        JavaScriptProgram js = pool.get();
+        on_exit pool.release(js);
+        JavaScriptObject obj = js.getGlobal().getProperty("obj");
+
+        AbstractDataProvider prov = TypeScriptActionInterface::getAppDataProvider("TestApp").
+            getChildProviderEx("test-api");
+        assertEq(1, prov.doRequest());
+        JavaScriptProgram pgm0 = pool.get();
+        on_exit pool.release(pgm0);
+        assertEq(1, prov.doRequest());
     }
 
     private sanityTest() {
@@ -46,17 +93,26 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
             "action_code": DPAT_API,
             "api_function": sub () {},
         };
-        TypeScriptActionInterface::registerAction(action, new JavaScriptProgram("async function runAsync(a, b, args) {
+        JavaScriptProgramPool pool("async function runAsync(a, b, args) {
     b.result = await a(...args);
-}", "pgm.js"));
+}", "pgm.js", sub (JavaScriptProgram pgm) {});
+        TypeScriptActionInterface::registerAction(action, pool);
         hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx(name, "test-api");
         assertEq("test-api", actioninfo.action);
+
+        JavaScriptProgram pgm0 = pool.get();
+        on_exit pool.release(pgm0);
+        JavaScriptProgram pgm1 = pool.get();
+        on_exit pool.release(pgm1);
+        assertEq(2, pool.size());
     }
 
     private jsTest() {
         chdir(get_script_dir());
-        JavaScriptProgram js(File::readTextFile("example.js"), "example.js");
-        JavaScriptObject obj = js.run();
+        JavaScriptProgramPool pool(File::readTextFile("example.js"), "example.js", sub (JavaScriptProgram pgm) {});
+        JavaScriptProgram pgm = pool.get();
+        on_exit pool.release(pgm);
+        JavaScriptObject obj = pgm.getGlobal().obj;
 
         obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
 

@@ -1,5 +1,5 @@
 
-const obj = {
+var obj = {
     actionsCatalogue: {
         registerAppActions: function(api) {
             /* registerApp() takes the same arguments as DataProviderActionCatalog::registerApp() plus:

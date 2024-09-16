@@ -24,6 +24,21 @@
 
 #! Main namespace for the TypeScriptActionInterface module
 public namespace TypeScriptActionInterface {
+#! Async call info
+public hashdecl AsyncCallInfo {
+    #! Label for the call
+    string label;
+
+    #! Javascript program pool
+    JavaScriptProgramPool pool;
+
+    #! Call to make
+    code async_call;
+
+    #! Timeout
+    date to;
+}
+
 #! Interface class
 public class TypeScriptActionInterface {
     public {
@@ -91,11 +106,24 @@ public class TypeScriptActionInterface {
     }
 
     static registerApp(JavaScriptObject app) {
+        if (!JavaScriptProgramPool::isFirst(app.getProgram())) {
+            return;
+        }
         TypeScriptActionInterface::registerApp(app.toData());
     }
 
     static registerAction(JavaScriptObject action) {
-        TypeScriptActionInterface::registerAction(action.toData(), action.getProgram());
+        JavaScriptProgram pgm = action.getProgram();
+        JavaScriptProgramPool pool;
+        bool first;
+        {
+            on_error rethrow "ACTION-ERROR", sprintf("Error registering app %y action %y: %s",
+                action.app, action.action, $1.desc);
+            pool = JavaScriptProgramPool::getPool(pgm, \first);
+        }
+        if (first) {
+            TypeScriptActionInterface::registerAction(action.toData(), pool);
+        }
     }
 
     static registerApp(hash<auto> app) {
@@ -174,13 +202,13 @@ public class TypeScriptActionInterface {
         }
     }
 
-    static registerAction(hash<auto> action, JavaScriptProgram pgm) {
-        TypeScriptActionInterface::generateDataProvider(\action, pgm);
+    static registerAction(hash<auto> action, JavaScriptProgramPool pool) {
+        TypeScriptActionInterface::generateDataProvider(\action, pool);
         DataProviderActionCatalog::registerAction(cast<hash<DataProviderActionInfo>>(action));
     }
 
     #! Returns the path to the data provider
-    static generateDataProvider(reference<hash<auto>> action, JavaScriptProgram pgm) {
+    static generateDataProvider(reference<hash<auto>> action, JavaScriptProgramPool pool) {
         hash<DataProviderAppInfo> app;
         {
             on_error rethrow "TYPESCRIPT-ACTION-ERROR", sprintf("Error registering action %y: %s: %s", action.action,
@@ -191,7 +219,7 @@ public class TypeScriptActionInterface {
 
         switch (action.action_code) {
             case DPAT_API: {
-                TypeScriptActionInterface::generateApiDataProvider(app, \action, pgm, schema);
+                TypeScriptActionInterface::generateApiDataProvider(app, \action, pool, schema);
                 break;
             }
 
@@ -201,9 +229,9 @@ public class TypeScriptActionInterface {
         }
     }
 
-    static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action, JavaScriptProgram pgm,
-            *SwaggerSchema schema) {
-        code api_code;
+    static generateApiDataProvider(hash<DataProviderAppInfo> app, reference<hash<auto>> action,
+            JavaScriptProgramPool pool, *SwaggerSchema schema) {
+        hash<AsyncCallInfo> api;
         {
             auto api_function = remove action.api_function;
             if (!api_function.callp() && !schema) {
@@ -213,8 +241,11 @@ public class TypeScriptActionInterface {
             }
             timeout io_timeout = seconds(remove action.io_timeout_secs ?? DefaultIoTimeoutSecs);
             if (api_function) {
-                api_code = auto sub (...) {
-                    return TypeScriptActionInterface::getAsyncValue(pgm, api_function, argv, io_timeout);
+                api = <AsyncCallInfo>{
+                    "label": sprintf("API function for app %y action %y", app.name, action.action),
+                    "pool": pool,
+                    "async_call": api_function,
+                    "to": seconds(remove action.io_timeout_secs ?? DefaultIoTimeoutSecs),
                 };
             }
         }
@@ -229,28 +260,33 @@ public class TypeScriptActionInterface {
 
             # check for path vars
             *hash<string, bool> path_vars = map {$1: True}, (swagger_path =~ x/\{([^\}]*)}/g);
-            child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api_code,
+            child = new TypeScriptActionApiWithSchemaDataProvider(action.action, schema, swagger_path, api,
                 path_vars);
 
-            if (action.request_type) {
+            if ((*AbstractDataProviderType t = child.getRequestType())
+                && (*hash<string, AbstractDataField> fields = t.getFields())) {
+                action.options = DataProviderActionCatalog::getActionOptionFromFields(fields);
+            }
+            action.output_type = child.getResponseType();
+            if (remove action.request_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"request_type\" property; "
                     "this property cannot be defined when \"swagger_path\" (%y) is also defined for the action",
                     action.app, action.action, swagger_path);
 
             }
-            if (action.response_type) {
+            if (remove action.response_type) {
                 throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y has an invalid \"response_type\" "
                     "property; this property cannot be defined when \"swagger_path\" (%y) is also defined for the "
                     "action", action.app, action.action, swagger_path);
             }
         } else {
             # maps from options to "get_allowed_values" code for each option
-            hash<string, code> omap;
+            hash<string, hash<AsyncCallInfo>> omap;
             *AbstractDataProviderType request_type;
             if (*hash<auto> opts = remove action.options) {
                 request_type = TypeScriptActionInterface::getType(map {$1.key: $1.value{TypeKeys}},
                     opts.pairIterator());
-                action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pgm);
+                action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pool);
             }
             *AbstractDataProviderType response_type;
             if (action.response_type.val()) {
@@ -260,17 +296,16 @@ public class TypeScriptActionInterface {
                 remove action.response_type;
             }
 
-            child = new TypeScriptActionApiDataProvider(action.action, api_code, request_type, response_type, omap);
+            child = new TypeScriptActionApiDataProvider(action.action, api, request_type, response_type, omap);
         }
 
-        TypeScriptActionAppDataProvider prov = TypeScriptActionInterface::getAppDataProvider(action.app,
-            action.action);
+        TypeScriptActionAppDataProvider prov = TypeScriptActionInterface::getAppDataProvider(action.app);
         prov.registerChild(action.action, child);
 
         action.path = action.action;
     }
 
-    static TypeScriptActionAppDataProvider getAppDataProvider(string app, string action) {
+    static TypeScriptActionAppDataProvider getAppDataProvider(string app) {
         string appname = app.lwr();
         if (*AbstractDataProvider app_prov = root.getChildProvider(appname)) {
             return cast<TypeScriptActionAppDataProvider>(app_prov);
@@ -288,19 +323,22 @@ public class TypeScriptActionInterface {
     }
 
     static *hash<string, hash<ActionOptionInfo>> getOptions(hash<DataProviderAppInfo> app, hash<auto> action,
-            hash<auto> opts, reference<hash<string, code>> omap, JavaScriptProgram pgm) {
+            hash<auto> opts, reference<hash<string, hash<AsyncCallInfo>>> omap, JavaScriptProgramPool pool) {
         hash<string, hash<ActionOptionInfo>> rv;
         foreach hash<auto> i in (opts.pairIterator()) {
-            timeout io_timeout = seconds(remove i.value.io_timeout_secs ?? DefaultIoTimeoutSecs);
+            date io_timeout = seconds(remove i.value.io_timeout_secs ?? DefaultIoTimeoutSecs);
             if (exists (auto get_allowed_values = remove i.value.get_allowed_values)) {
                 if (!get_allowed_values.callp()) {
                     throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y option %y has an invalid "
                         "\"get_allowed_values\" attribute; got type %y; expecting a callable value", action.app,
                         action.action, i.key, get_allowed_values.fullType());
                 }
-                omap{i.key} = *list<hash<AllowedValueInfo>> sub (...) {
-                    return map cast<hash<AllowedValueInfo>>($1.toData()),
-                        TypeScriptActionInterface::getAsyncValue(pgm, get_allowed_values, argv, io_timeout);
+                omap{i.key} = <AsyncCallInfo>{
+                    "label": sprintf("Reference data function for app %y action %y option %y", app.name,
+                        action.action, i.key),
+                    "pool": pool,
+                    "async_call": get_allowed_values,
+                    "to": io_timeout,
                 };
                 i.value.ref_data = i.key;
             }
@@ -310,41 +348,6 @@ public class TypeScriptActionInterface {
             rv{i.key} = TypeScriptActionInterface::getOptionInfo(i.value);
         }
         return rv;
-    }
-
-    static auto getAsyncValue(JavaScriptProgram pgm, code async_callback, *list<auto> args, timeout to) {
-        code async_wrapper = pgm.getGlobal().getKeyValue("runAsync").toData();
-
-        Queue q();
-        code enqueue = sub (auto v) {
-            q.push(v);
-        };
-
-        auto v = async_wrapper(async_callback, enqueue, args);
-
-        date start = now_us();
-
-        auto rv;
-        while (True) {
-            try {
-                rv = q.get(100ms).toData();
-                break;
-            } catch (hash<ExceptionInfo> ex) {
-                if (ex.err != "QUEUE-TIMEOUT") {
-                    rethrow;
-                }
-            }
-            date delta = start - now_us();
-            if (delta > to) {
-                throw "JAVASCRIPT-ASYNC-TIMEOUT-ERROR", sprintf("Async callback took longer than %y to resolve", to);
-            }
-            pgm.spinEventLoop();
-        }
-
-        if (rv.error) {
-            throw "JAVASCRIPT-ERROR", rv.error.message, rv.error.stack;
-        }
-        return rv.result;
     }
 
     static hash<ActionOptionInfo> getOptionInfo(hash<auto> opt) {
@@ -418,13 +421,6 @@ public class TypeScriptActionInterface {
             if (config.url.val()) {
                 config.url = TypeScriptActionInterface::processUrl(config.url, config.opts, url_template_options);
             }
-            /*
-            foreach string opt in ("oauth2_auth_url", "oauth2_token_url") {
-                if ((*string url = config.opts{opt}).val()) {
-                    config.opts{opt} = TypeScriptActionInterface::processUrl(url, config.opts, url_template_options);
-                }
-            }
-            */
         }
         return config;
     }

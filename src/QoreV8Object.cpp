@@ -50,46 +50,36 @@ QoreObject* QoreV8Object::getReferencedProgram() {
 }
 
 AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h) const {
-    return toData(v8h, v8::Null(v8h.getIsolate()));
+    // the set is to ensure that we only report each object once
+    v8::Local<v8::Set> objset = v8::Set::New(v8h.getIsolate());
+    return toData(v8h, v8::Null(v8h.getIsolate()), **objset);
 }
 
-AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent) const {
+AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent,
+        v8::Set& objset) const {
     ExceptionSink* xsink = v8h.getExceptionSink();
     v8::Local<v8::Object> obj = get();
+    {
+        v8::Maybe<bool> b = objset.Has(v8h.getContext(), obj);
+        if (b.IsNothing()) {
+            v8h.checkException();
+            return nullptr;
+        }
+        if (b.ToChecked()) {
+            return nullptr;
+        }
+        v8::MaybeLocal<v8::Set> v = objset.Add(v8h.getContext(), obj);
+        if (v.IsEmpty()) {
+            v8h.checkException();
+            return nullptr;
+        }
+    }
     if (obj->IsCallable()) {
         return new QoreV8CallReference(this, parent);
     }
 
     v8::Isolate* isolate = v8h.getIsolate();
     v8::EscapableHandleScope handle_scope(isolate);
-
-    if (obj->IsPromise()) {
-        v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(isolate, "then", v8::NewStringType::kNormal);
-        if (m_key.IsEmpty()) {
-            v8h.checkException();
-            return nullptr;
-        }
-
-        v8::MaybeLocal<v8::Value> m_then = obj->Get(v8h.getContext(), m_key.ToLocalChecked());
-        if (m_then.IsEmpty()) {
-            v8h.checkException();
-            return nullptr;
-        }
-        v8::Local<v8::Value> then = m_then.ToLocalChecked();
-        if (!then->IsObject()) {
-            xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is an object");
-            return nullptr;
-        }
-        /*
-        if (!then->IsCallable()) {
-            xsink->raiseException("OBJECT-TO-DATA-ERROR", "'then' property of promise is not callable");
-            return nullptr;
-        }
-        */
-
-        printf("GOT PROMISE!\n");
-        //obj->Get("then").As<Function>();
-    }
 
     v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
     if (maybe_props.IsEmpty()) {
@@ -115,9 +105,9 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
     }
     v8::Local<v8::Value> first = first_prop.ToLocalChecked();
     if (first->IsString()) {
-        return toHash(v8h, handle_scope.Escape(props), len);
+        return toHash(v8h, parent, objset, handle_scope.Escape(props), len);
     } else if (first->IsUint32()) {
-        return toList(v8h, handle_scope.Escape(props), len);
+        return toList(v8h, parent, objset, handle_scope.Escape(props), len);
     }
 
     v8::Local<v8::String> str = first->TypeOf(isolate);
@@ -128,8 +118,111 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
     return nullptr;
 }
 
-QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len)
-        const {
+QoreListNode* QoreV8Object::getPropertyList(QoreV8ProgramHelper& v8h) {
+    v8::Local<v8::Object> obj = get();
+
+    v8::Isolate* isolate = v8h.getIsolate();
+    v8::EscapableHandleScope handle_scope(isolate);
+
+    v8::MaybeLocal<v8::Array> maybe_props = obj->GetPropertyNames(v8h.getContext());
+    if (maybe_props.IsEmpty()) {
+        v8h.checkException();
+        return nullptr;
+    }
+
+    v8::Local<v8::Array> props = maybe_props.ToLocalChecked();
+    // check the first prop; if it's an integer, then it's an array
+    uint32_t len = props->Length();
+    if (!len) {
+        return nullptr;
+    }
+    ExceptionSink* xsink = v8h.getExceptionSink();
+    v8::MaybeLocal<v8::Value> first_prop = props->Get(v8h.getContext(), 0);
+    if (first_prop.IsEmpty()) {
+        if (v8h.checkException()) {
+            return nullptr;
+        }
+        xsink->raiseException("OBJECT-GET-PROPERTIES-ERROR", "Initial property value is missing");
+        return nullptr;
+    }
+    v8::Local<v8::Value> first = first_prop.ToLocalChecked();
+    if (!first->IsString()) {
+        return nullptr;
+    }
+
+    ReferenceHolder<QoreListNode> rv(new QoreListNode(stringTypeInfo), xsink);
+
+    for (uint32_t i = 0, e = len; i < e; ++i) {
+        v8::MaybeLocal<v8::Value> key = props->Get(v8h.getContext(), i);
+        if (key.IsEmpty()) {
+            if (v8h.checkException()) {
+                return nullptr;
+            }
+            continue;
+        }
+        v8::Local<v8::Value> k = key.ToLocalChecked();
+        ValueHolder qk(v8h.getProgram()->getQoreValue(xsink, k), xsink);
+        if (*xsink) {
+            if (v8h.checkException()) {
+                return nullptr;
+            }
+            continue;
+        }
+        QoreStringNodeValueHelper kstr(*qk);
+        rv->push(kstr.getReferencedValue(), xsink);
+        assert(!*xsink);
+    }
+
+    return rv.release();
+}
+
+QoreValue QoreV8Object::methodGate(ExceptionSink* xsink, QoreObject* self, const QoreStringNode* m,
+        const QoreListNode* args) {
+    QoreV8ProgramHelper v8h(xsink, getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    v8::Local<v8::Value> attr = getV8KeyValue(v8h, m->c_str());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    if (!attr->IsObject()) {
+        v8::Local<v8::String> str = attr->TypeOf(v8h.getIsolate());
+        // Convert the result to an UTF8 string
+        v8::String::Utf8Value utf8(v8h.getIsolate(), str);
+        xsink->raiseException("JAVASCRIPT-METHODCALL-ERROR", "Object key '%s' is v8 type '%s'; must be a callable "
+            "object to make a method call", m->c_str(), *utf8);
+        return QoreValue();
+    }
+
+    v8::MaybeLocal<v8::Object> maybe_attrobj = attr->ToObject(v8h.getContext());
+    if (maybe_attrobj.IsEmpty()) {
+        v8h.checkException();
+        return QoreValue();
+    }
+
+    ReferenceHolder<QoreV8Object> meth(new QoreV8Object(getProgram(), maybe_attrobj.ToLocalChecked()), xsink);
+    return meth->callAsFunction(v8h, self, 1, args);
+}
+
+QoreValue QoreV8Object::memberGate(ExceptionSink* xsink, const QoreStringNode* m) {
+    QoreV8ProgramHelper v8h(xsink, getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    v8::Local<v8::Value> attr = getV8KeyValue(v8h, m->c_str());
+    if (*xsink) {
+        return QoreValue();
+    }
+
+    return v8h.getProgram()->getQoreValue(xsink, attr);
+}
+
+QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent, v8::Set& objset,
+        v8::Local<v8::Array> props, uint32_t len) const {
     ExceptionSink* xsink = v8h.getExceptionSink();
     v8::Local<v8::Object> obj = get();
 
@@ -172,7 +265,7 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
             ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), obj), xsink);
-            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h), xsink);
+            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h, obj, objset), xsink);
             if (*xsink) {
                 return nullptr;
             }
@@ -191,8 +284,8 @@ QoreHashNode* QoreV8Object::toHash(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
 
 constexpr int max_array_element = 50000000;
 
-QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array> props, uint32_t len)
-        const {
+QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Value> parent, v8::Set& objset,
+        v8::Local<v8::Array> props, uint32_t len) const {
     ExceptionSink* xsink = v8h.getExceptionSink();
     v8::Local<v8::Object> obj = get();
 
@@ -242,7 +335,7 @@ QoreListNode* QoreV8Object::toList(QoreV8ProgramHelper& v8h, v8::Local<v8::Array
             }
             v8::Local<v8::Object> obj = o.ToLocalChecked();
             ReferenceHolder<QoreV8Object> tmp(new QoreV8Object(v8h.getProgram(), obj), xsink);
-            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h), xsink);
+            ReferenceHolder<AbstractQoreNode> h0(tmp->toData(v8h, parent, objset), xsink);
             if (*xsink) {
                 return nullptr;
             }
@@ -281,15 +374,15 @@ v8::Local<v8::Value> QoreV8Object::get(ExceptionSink* xsink, v8::Isolate* isolat
 v8::Local<v8::Value> QoreV8Object::getV8KeyValue(QoreV8ProgramHelper& v8h, const char* key) const {
     v8::Isolate* isolate = pgm->getIsolate();
 
-    v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(isolate, key, v8::NewStringType::kNormal);
-    if (m_key.IsEmpty()) {
+    v8::MaybeLocal<v8::String> m_prop = v8::String::NewFromUtf8(isolate, key, v8::NewStringType::kNormal);
+    if (m_prop.IsEmpty()) {
         v8h.checkException();
         return v8::Null(isolate);
     }
 
     v8::EscapableHandleScope handle_scope(isolate);
 
-    v8::MaybeLocal<v8::Value> m_val = get()->Get(v8h.getContext(), m_key.ToLocalChecked());
+    v8::MaybeLocal<v8::Value> m_val = get()->Get(v8h.getContext(), m_prop.ToLocalChecked());
     if (m_val.IsEmpty()) {
         v8h.checkException();
         return v8::Null(isolate);
@@ -298,18 +391,43 @@ v8::Local<v8::Value> QoreV8Object::getV8KeyValue(QoreV8ProgramHelper& v8h, const
     return handle_scope.Escape(m_val.ToLocalChecked());
 }
 
-QoreValue QoreV8Object::getKeyValue(QoreV8ProgramHelper& v8h, const char* key) {
-    v8::MaybeLocal<v8::String> m_key = v8::String::NewFromUtf8(pgm->getIsolate(), key, v8::NewStringType::kNormal);
-    if (m_key.IsEmpty()) {
+QoreValue QoreV8Object::getProperty(QoreV8ProgramHelper& v8h, const char* property) {
+    v8::MaybeLocal<v8::String> m_prop = v8::String::NewFromUtf8(pgm->getIsolate(), property,
+        v8::NewStringType::kNormal);
+    if (m_prop.IsEmpty()) {
         v8h.checkException();
         return QoreValue();
     }
-    v8::MaybeLocal<v8::Value> m_val = get()->Get(v8h.getContext(), m_key.ToLocalChecked());
+    v8::MaybeLocal<v8::Value> m_val = get()->Get(v8h.getContext(), m_prop.ToLocalChecked());
     if (m_val.IsEmpty()) {
         v8h.checkException();
         return QoreValue();
     }
     return pgm->getQoreValue(v8h.getExceptionSink(), m_val.ToLocalChecked());
+}
+
+int QoreV8Object::setProperty(QoreV8ProgramHelper& v8h, const char* property, const QoreValue value) {
+    v8::MaybeLocal<v8::String> m_prop = v8::String::NewFromUtf8(pgm->getIsolate(), property,
+        v8::NewStringType::kNormal);
+    ExceptionSink* xsink = v8h.getExceptionSink();
+    if (m_prop.IsEmpty()) {
+        if (!v8h.checkException()) {
+            xsink->raiseException("JAVASCRIPT-SET-PROPERTY-ERROR", "Unknown error processing property string");
+        }
+        return -1;
+    }
+    v8::Local<v8::Value> v = v8h.getProgram()->getV8Value(value, xsink);
+    if (*xsink) {
+        return -1;
+    }
+    v8::Maybe<bool> b = get()->Set(v8h.getContext(), m_prop.ToLocalChecked(), v);
+    if (b.IsNothing()) {
+        if (!v8h.checkException()) {
+            xsink->raiseException("JAVASCRIPT-SET-PROPERTY-ERROR", "Unknown error setting property '%s'", property);
+        }
+        return -1;
+    }
+    return 0;
 }
 
 QoreValue QoreV8Object::getIndexValue(QoreV8ProgramHelper& v8h, int64 i) {

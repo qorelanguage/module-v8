@@ -56,12 +56,11 @@ JavaScriptProgram::destructor() {
     jsp->deref(xsink);
 }
 
-//! Runs the program
+//! Copies the object
 /**
-    @note Exceptions parsing or compiling the JavaScript code are thrown according to @ref javascript_exceptions
 */
-auto JavaScriptProgram::run() {
-    return jsp->run(xsink);
+JavaScriptProgram::copy() {
+    self->setPrivate(CID_JAVASCRIPTPROGRAM, new QoreV8ProgramData(xsink, *jsp, self));
 }
 
 //! Returns the global proxy object
@@ -98,6 +97,13 @@ v8pgm.setSaveReferenceCallback(callback);
 */
 JavaScriptProgram::setSaveReferenceCallback(*code save_ref_callback) [dom=PROCESS] {
     jsp->setSaveReferenceCallback(save_ref_callback);
+}
+
+//! Spins the event loop once for the program
+/**
+*/
+int JavaScriptProgram::spinOnce() {
+    return jsp->spinOnce();
 }
 
 //! Spins the event loop the program

@@ -120,11 +120,22 @@ auto JavaScriptObject::toData() {
     return o->toData(v8h);
 }
 
+//! Returns a list of object properties, if any
+/** @return a list of object properties, if any
+*/
+*list<string> JavaScriptObject::getPropertyList() {
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return o->getPropertyList(v8h);
+}
+
 //! Returns the value for the given key, if any
 /** @return the value for the given key, if any
 */
-auto JavaScriptObject::getKeyValue(string key) {
-    TempEncodingHelper str(key, QCS_UTF8, xsink);
+auto JavaScriptObject::getProperty(string property) {
+    TempEncodingHelper str(property, QCS_UTF8, xsink);
     if (*xsink) {
         return QoreValue();
     }
@@ -132,7 +143,23 @@ auto JavaScriptObject::getKeyValue(string key) {
     if (*xsink) {
         return QoreValue();
     }
-    return o->getKeyValue(v8h, str->c_str());
+    return o->getProperty(v8h, str->c_str());
+}
+
+//! Sets the value of the given property
+/** @param property the name of the property to set
+    @param value the value to set
+*/
+nothing JavaScriptObject::setProperty(string property, auto value) {
+    TempEncodingHelper str(property, QCS_UTF8, xsink);
+    if (*xsink) {
+        return QoreValue();
+    }
+    QoreV8ProgramHelper v8h(xsink, o->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    o->setProperty(v8h, str->c_str(), value);
 }
 
 //! Returns the value for the array index, if any
@@ -153,33 +180,7 @@ auto JavaScriptObject::getIndexValue(int i) {
     @return the response from the JavaScript method
 */
 auto JavaScriptObject::methodGate(string m, ...) {
-    QoreV8ProgramHelper v8h(xsink, o->getProgram());
-    if (*xsink) {
-        return QoreValue();
-    }
-
-    v8::Local<v8::Value> attr = o->getV8KeyValue(v8h, m->c_str());
-    if (*xsink) {
-        return QoreValue();
-    }
-
-    if (!attr->IsObject()) {
-        v8::Local<v8::String> str = attr->TypeOf(v8h.getIsolate());
-        // Convert the result to an UTF8 string
-        v8::String::Utf8Value utf8(v8h.getIsolate(), str);
-        xsink->raiseException("JAVASCRIPT-METHODCALL-ERROR", "Object key '%s' is v8 type '%s'; must be a callable "
-            "object to make a method call", m->c_str(), *utf8);
-        return QoreValue();
-    }
-
-    v8::MaybeLocal<v8::Object> maybe_attrobj = attr->ToObject(v8h.getContext());
-    if (maybe_attrobj.IsEmpty()) {
-        v8h.checkException();
-        return QoreValue();
-    }
-
-    ReferenceHolder<QoreV8Object> meth(new QoreV8Object(o->getProgram(), maybe_attrobj.ToLocalChecked()), xsink);
-    return meth->callAsFunction(v8h, self, 1, args);
+    return o->methodGate(xsink, self, m, args);
 }
 
 //! Returns the value of the given JavaScript object property
@@ -187,18 +188,8 @@ auto JavaScriptObject::methodGate(string m, ...) {
 
     @return the value of the property
 */
-auto JavaScriptObject::memberGate(string m, ...) {
-    QoreV8ProgramHelper v8h(xsink, o->getProgram());
-    if (*xsink) {
-        return QoreValue();
-    }
-
-    v8::Local<v8::Value> attr = o->getV8KeyValue(v8h, m->c_str());
-    if (*xsink) {
-        return QoreValue();
-    }
-
-    return v8h.getProgram()->getQoreValue(xsink, attr);
+auto JavaScriptObject::memberGate(string m) {
+    return o->memberGate(xsink, m);
 }
 
 //! Returns the QoreV8Object that contains this object

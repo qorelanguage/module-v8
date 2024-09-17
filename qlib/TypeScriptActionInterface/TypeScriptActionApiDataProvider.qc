@@ -242,6 +242,12 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
             case NT_NULL:
                 break;
 
+            case NT_OBJECT:
+                if (v instanceof JavaScriptObject) {
+                    return v.toData();
+                }
+                # fall down to next case
+
             default:
                 remove v;
                 break;

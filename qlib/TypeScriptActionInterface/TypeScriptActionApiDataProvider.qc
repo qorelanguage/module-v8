@@ -231,6 +231,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
                 v = map TypeScriptActionApiDataProvider::stripNonSerializableData($1), v;
                 break;
 
+            case NT_STRING:
             case NT_INT:
             case NT_BOOLEAN:
             case NT_FLOAT:

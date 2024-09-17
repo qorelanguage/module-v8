@@ -211,8 +211,21 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
             err = stripNonSerializableData(err);
 
             if (err._err{"message", "name", "code"}.size() == 3) {
-                throw "JAVASCRIPT-ASYNC-ERROR", sprintf("Error in async request: %s: %s: %s", err._err.name,
-                    err._err."code", err._err.message), err;
+                string desc = sprintf("Error in async request: %s: %s: ", err._err.name, err._err."code");
+                if (err._err.response{"status", "statusText"}.size() == 2) {
+                    desc += sprintf("%s %s: ", err._err.response.status, err._err.response.statusText);
+                }
+                if (err._err.response."data".error_summary.val()) {
+                    desc += sprintf("%y: ", err._err.response."data".error_summary);
+                }
+                desc += err._err.message;
+                hash<auto> arg;
+                if (err._err{"config", "response"}.size() == 2) {
+                    arg = err._err{"config", "response"};
+                } else {
+                    arg = err;
+                }
+                throw "JAVASCRIPT-ASYNC-ERROR", desc, arg;
             }
             throw "JAVASCRIPT-ASYNC-ERROR", "Error in async request", err;
         }

@@ -183,9 +183,12 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
 
         auto v = call_function_args(api.async_call, argv);
         auto rv;
+        auto err;
         if (v instanceof JavaScriptPromise) {
             v.then(sub (auto val) {
                 rv = val;
+            }, sub (auto e) {
+                err = e;
             });
             pgm.spinOnce();
             v.wait();
@@ -197,37 +200,52 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
             rv = rv.toData();
         } else if (rv.typeCode() == NT_LIST && (rv[0] instanceof JavaScriptObject)) {
             rv = map $1.toData(), rv;
+        } else if (err instanceof JavaScriptObject) {
+            err = err.toData();
+        } else if (err.typeCode() == NT_LIST && (err[0] instanceof JavaScriptObject)) {
+            err = map $1.toData(), err;
         }
 
-        /*
-        date start = now_us();
+        if (exists err) {
+            # strip non-serializable data from err
+            err = stripNonSerializableData(err);
 
-        auto rv;
-        while (True) {
-            try {
-                rv = q.get(10ms).toData();
-                break;
-            } catch (hash<ExceptionInfo> ex) {
-                if (ex.err != "QUEUE-TIMEOUT") {
-                    rethrow;
-                }
+            if (err._err{"message", "name", "code"}.size() == 3) {
+                throw "JAVASCRIPT-ASYNC-ERROR", sprintf("Error in async request: %s: %s: %s", err._err.name,
+                    err._err."code", err._err.message), err;
             }
-            date delta = now_us() - start;
-            info("TypeScriptActionApiDataProvider::getAsyncValue() %s: call: %y start: %y delta: %y timeout: %y",
-                api.label, api.async_call.uniqueHash(), start, delta, api.to);
-            if (delta > api.to) {
-                throw "JAVASCRIPT-ASYNC-TIMEOUT-ERROR", sprintf("Async callback took longer than %y to resolve",
-                    api.to);
-            }
-
-            pgm.spinEventLoop();
+            throw "JAVASCRIPT-ASYNC-ERROR", "Error in async request", err;
         }
 
-        if (rv.error) {
-            throw "JAVASCRIPT-ERROR", rv.error.message, rv.error.stack;
-        }
-        */
         return rv;
+    }
+
+    static auto stripNonSerializableData(auto v) {
+        switch (v.typeCode()) {
+            case NT_HASH:
+                v = map {$1.key: TypeScriptActionApiDataProvider::stripNonSerializableData($1.value)},
+                    v.pairIterator();
+                break;
+
+            case NT_LIST:
+                v = map TypeScriptActionApiDataProvider::stripNonSerializableData($1), v;
+                break;
+
+            case NT_INT:
+            case NT_BOOLEAN:
+            case NT_FLOAT:
+            case NT_NUMBER:
+            case NT_DATE:
+            case NT_BINARY:
+            case NT_NOTHING:
+            case NT_NULL:
+                break;
+
+            default:
+                remove v;
+                break;
+        }
+        return v;
     }
 }
 }

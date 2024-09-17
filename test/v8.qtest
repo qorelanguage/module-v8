@@ -34,7 +34,6 @@ async function doPromise0() {
         let response = await fetch('https://api.qoretechnologies.com/api/public/info');
         return await response.json();
     } catch (e) {
-console.error('err:', e.message);
         return {
             'message': e.message,
             'stack': e.stack,
@@ -71,7 +70,6 @@ async function doPromise0() {
         let response = await fetch('https://api.qoretechnologies.com/api/public/info');
         return await response.json();
     } catch (e) {
-console.error('err:', e.message);
         return {
             'message': e.message,
             'stack': e.stack,
@@ -84,7 +82,6 @@ async function doPromise1() {
         let response = await fetch('https://api.qoretechnologies.com/api/public/info');
         return await response.json();
     } catch (e) {
-console.error('err:', e.message);
         return {
             'message': e.message,
             'stack': e.stack,
@@ -120,6 +117,44 @@ console.error('err:', e.message);
             v1.wait();
             assertEq(Type::Hash, rv0.type());
             assertEq(Type::Hash, rv1.type());
+        }
+
+        {
+            JavaScriptProgram js("
+const Https = require('https');
+
+async function doPromise0() {
+    let response = await fetch('https://error_no_host:99999');
+    return await response.json();
+}
+", "test.js");
+            JavaScriptObject global = js.getGlobal();
+            code doPromise0 = global.doPromise0.toData();
+            JavaScriptPromise v0 = doPromise0();
+            auto rv0;
+            auto err;
+            v0.then(sub (auto v) {
+                rv0 = v.toData();
+            }, sub (auto e) {
+                err = e.toData();
+            });
+            assertTrue(v0.hasHandler());
+            assertEq(Pending, v0.getState());
+            js.spinOnce();
+            v0.wait();
+            assertEq(Type::Hash, err.type());
+
+            v0 = doPromise0();
+            v0.then(sub (auto v) {
+                rv0 = v.toData();
+            }, sub (auto e) {
+                err = e.toData();
+            });
+            assertTrue(v0.hasHandler());
+            assertEq(Pending, v0.getState());
+            js.spinOnce();
+            v0.wait();
+            assertEq(Type::Hash, err.type());
         }
     }
 

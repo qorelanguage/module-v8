@@ -44,6 +44,8 @@ public class TypeScriptActionInterface {
     public {
         static hash<string, code> Api = TypeScriptActionInterface::getInterface();
 
+        static hash<string, code> TestApi = TypeScriptActionInterface::getTestInterface();
+
         static TypeScriptActionRootDataProvider root();
 
         const TypeKeys = (
@@ -103,6 +105,9 @@ public class TypeScriptActionInterface {
 
         #! Maps from app names to default URL
         static hash<string, string> aumap;
+
+        #! Connection map for testing
+        static hash<string, TypeScriptAppRestConnection> cmap;
     }
 
     static registerApp(JavaScriptObject app) {
@@ -399,6 +404,60 @@ public class TypeScriptActionInterface {
             "registerApp": \TypeScriptActionInterface::registerApp(),
             "registerAction": \TypeScriptActionInterface::registerAction(),
         };
+    }
+
+    #! Returns a hash that can be used to access these methods in JavaScript
+    static hash<string, code> getTestInterface() {
+        return {
+            "createConnection": \TypeScriptActionInterface::createConnection(),
+            "execAppAction": \TypeScriptActionInterface::execAppAction(),
+        };
+    }
+
+    #! Creates a connection for the given app
+    static string createConnection(string app, JavaScriptObject opts) {
+        return TypeScriptActionInterface::createConnection(app, opts.toData());
+    }
+
+    #! Creates a connection for the given app
+    static string createConnection(string app, *hash<auto> opts) {
+        if (!opts.name.val()) {
+            opts.name = sprintf("app-%s", get_random_string());
+        }
+        if (!opts.url.val()) {
+            opts.url = sprintf("tsrest-%s://", app);
+        }
+        if (cmap{opts.name}) {
+            throw "TYPESCRIPT-ACTION-TEST-ERROR", sprintf("Duplicate connection name %y", opts.name);
+        }
+        TypeScriptAppRestConnection conn(opts);
+        cmap{opts.name} = conn;
+        return opts.name;
+    }
+
+    #! Executes the given app action with the given arguments
+    static auto execAppAction(string app, string action, string connection, *JavaScriptObject opts,
+            *JavaScriptObject request_options) {
+        return TypeScriptActionInterface::execAppActionIntern(app, action, connection, opts ? opts.toData() : NOTHING,
+            request_options ? request_options.toData() : NOTHING);
+    }
+
+    #! Executes the given app action with the given arguments
+    static auto execAppActionIntern(string app, string action, string connection, auto req, *hash<auto> request_options) {
+        *TypeScriptAppRestConnection conn = cmap{connection};
+        if (!conn) {
+            throw "TYPESCRIPT-ACTION-TEST-ERROR", sprintf("Unknown connection test %y; known test connections: %y",
+                connection, keys cmap);
+        }
+
+        TypeScriptActionApiDataProvider p =
+            TypeScriptActionInterface::getDataProvider(app, conn).getChildProviderEx(action);
+        try {
+            return p.doRequest(req, request_options);
+        } catch (hash<ExceptionInfo> ex) {
+            #printf("%s\n", get_exception_string(ex));
+            rethrow;
+        }
     }
 
     #! Returns any URL template options for the given application

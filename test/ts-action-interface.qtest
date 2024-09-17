@@ -18,9 +18,19 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
         addTestCase("pool", \poolTest());
         addTestCase("sanity", \sanityTest());
         addTestCase("js", \jsTest());
+        addTestCase("test API", \testApi());
 
         # Return for compatibility with test harnesses that check the script's return value
         set_return_value(main());
+    }
+
+    private testApi() {
+        chdir(get_script_dir());
+        JavaScriptProgramPool pool(File::readTextFile("test.js"), "test.js", sub (JavaScriptProgram pgm) {});
+        JavaScriptProgram pgm = pool.get();
+        on_exit pool.release(pgm);
+        code run = pgm.getGlobal().obj.tests.toData().run;
+        assertThrows("JAVASCRIPT-EXCEPTION", run, TypeScriptActionInterface::TestApi);
     }
 
     private poolTest() {

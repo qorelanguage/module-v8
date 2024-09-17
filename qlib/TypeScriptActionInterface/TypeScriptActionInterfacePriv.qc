@@ -58,6 +58,33 @@ class TypeScriptActionInterfacePriv {
                 }
             }
         }
+
+        scripts = ENV.QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS;
+        if (scripts.val()) {
+            string cwd = getcwd();
+            foreach string path in (scripts.split(":")) {
+                try {
+                    string dir = dirname(path);
+                    if (dir.val()) {
+                        chdir(dir);
+                    }
+                    on_exit if (dir.val()) {
+                        chdir(cwd);
+                    }
+                    JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
+                        sub (JavaScriptProgram pgm) {
+                            JavaScriptObject g = pgm.getGlobal();
+                            pgm.getGlobal().exports.tests.run(
+                                TypeScriptActionInterface::TestApi
+                            );
+                        }, 1
+                    );
+                    pstore{pool.uniqueHash()} = pool;
+                } catch (hash<ExceptionInfo> ex) {
+                    stderr.printf("Error loading TypeScript action test script %y: %s\n", path, get_exception_string(ex));
+                }
+            }
+        }
     }
 }
 }

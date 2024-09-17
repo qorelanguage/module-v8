@@ -1,4 +1,3 @@
-
 var obj = {
     actionsCatalogue: {
         registerAppActions: function(api) {
@@ -324,4 +323,3 @@ var obj = {
         }
     }
 };
-obj

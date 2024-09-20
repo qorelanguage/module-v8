@@ -75,6 +75,7 @@ class TypeScriptActionInterfacePriv {
                             auto v = pgm.getGlobal().exports.qtester.run(
                                 TypeScriptActionInterface::TestApi
                             );
+                            printf("qtester.run() returned: %y\n", v);
                             auto rv;
                             if (v instanceof JavaScriptPromise) {
                                 v.then(sub (auto val) {
@@ -82,7 +83,11 @@ class TypeScriptActionInterfacePriv {
                                 }, sub (auto e) {
                                     rv.error = e;
                                 });
+                                # performing I/O
+                                printf("qtester.run() performing I/O\n");
                                 pgm.spinOnce();
+                                # waiting on Promise
+                                printf("qtester.run() waiting on Promise\n");
                                 v.wait();
                             } else {
                                 rv = v;

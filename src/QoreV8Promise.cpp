@@ -32,6 +32,8 @@
 #include "QoreV8Promise.h"
 #include "QoreV8Program.h"
 
+#include <uv.h>
+
 QoreV8Promise::QoreV8Promise(ExceptionSink* xsink, QoreV8Program* pgm, v8::Local<v8::Promise> obj)
         : QoreV8Object(pgm, obj) {
 }
@@ -45,6 +47,7 @@ int QoreV8Promise::wait(QoreV8ProgramHelper& v8h) {
     v8::Local<v8::Promise> p = get();
     if (p->HasHandler()) {
         while (p->State() == v8::Promise::kPending) {
+            v8h.getProgram()->spinOnce();
             isolate->PerformMicrotaskCheckpoint();
         }
     }

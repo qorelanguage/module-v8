@@ -21,19 +21,17 @@ export default (locale: Locales) =>
       buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document, []),
       locale
     ),
-    logo:
-      'PHN2ZyBpZD0ibG9nb3NhbmR0eXBlc19jb20iIGRhdGEtbmFtZT0ibG9nb3NhbmR0eXBlcyBjb20iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy' +
-      '8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxMjciIGhlaWdodD0iMTI3IiB2aWV3' +
-      'Qm94PSIwIDAgMTUwIDE1MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOm5vbmU7fS5jbHMtMntmaWxsLXJ1bGU6ZXZlbm9kZDtmaWxsOnVybC' +
-      'gjcmFkaWFsLWdyYWRpZW50KTt9PC9zdHlsZT48cmFkaWFsR3JhZGllbnQgaWQ9InJhZGlhbC1ncmFkaWVudCIgY3g9Ii0yMjIuOTUiIGN5PSI1' +
-      'MTcuOTEiIHI9IjMuMDEiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLTE4Ljc4LCAxMS4yNSwgMTEuNDMsIDE5LjA3LCAtMTAwMzAuNjYsIC' +
-      '03Mjg5LjE5KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmYjkwMCIvPjxz' +
-      'dG9wIG9mZnNldD0iMC43NSIgc3RvcC1jb2xvcj0iI2ZhNWM4NiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2Y5NTM1MyIvPjwvcm' +
-      'FkaWFsR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTAsLjJIMTUwdjE1MEgwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUo' +
-      'MCAtMC4yKSIvPjxwYXRoIGlkPSJkb3RzIiBjbGFzcz0iY2xzLTIiIGQ9Ik0xMDIuNjgsNDMuNTZBMjcuODQsMjcuODQsMCwxLDEsNzQuODQsMT' +
-      'UuNzRhMjcuODMsMjcuODMsMCwwLDEsMjcuODQsMjcuODJabS02NCwzNC43N2EyNy44MiwyNy44MiwwLDEsMCwyNy44NCwyNy44MUEyNy44Miwy' +
-      'Ny44MiwwLDAsMCwzOC42OCw3OC4zM1ptNzIuMzIsMGEyNy44MiwyNy44MiwwLDEsMCwyNy44NCwyNy44MUEyNy44MiwyNy44MiwwLDAsMCwxMT' +
-      'EsNzguMzNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0wLjIpIi8+PC9zdmc+',
+    logo: 'PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1NDcgMTU0OSIg' +
+      'd2lkdGg9IjE1NDciIGhlaWdodD0iMTU0OSI+Cgk8dGl0bGU+ZG9jdS1zdmc8L3RpdGxlPgoJPHN0eWxlPgoJCS5zMCB7IGZpbGw6ICM0YzAw' +
+      'ZmYgfSAKCQkuczEgeyBmaWxsOiAjZmY1MjUyIH0gCgkJLnMyIHsgZmlsbDogIzAwMDAwMCB9IAoJPC9zdHlsZT4KCTxnIGlkPSJMYXllciI+' +
+      'CgkJPHBhdGggaWQ9IkxheWVyIiBjbGFzcz0iczAiIGQ9Im0xMTEzLjQgMTExNC45djM5NS42YzAgMjAuOC0xNi43IDM3LjYtMzcuNSAzNy42' +
+      'aC0xMDM4LjRjLTIwLjcgMC0zNy41LTE2LjgtMzcuNS0zNy42di0xMDM5YzAtMjAuNyAxNi44LTM3LjUgMzcuNS0zNy41aDM5NC4zdjY0My40' +
+      'YzAgMjAuNyAxNi44IDM3LjUgMzcuNSAzNy41eiIvPgoJCTxwYXRoIGlkPSJMYXllciIgY2xhc3M9InMxIiBkPSJtMTU0NiA1NTcuMWMwIDMz' +
+      'Mi40LTE5My45IDU1Ny00MzIuNiA1NTcuOHYtNDE4LjhjMC0xMi00LjgtMjQtMTMuNS0zMS45bC0yMTcuMS0yMTcuNGMtOC44LTguOC0yMC0x' +
+      'My42LTMyLTEzLjZoLTQxOC4ydi0zOTQuOGMwLTIwLjggMTYuOC0zNy42IDM3LjUtMzcuNmg1ODUuMWMyNzcuNy0wLjggNDkwLjggMjIzIDQ5' +
+      'MC44IDU1Ni4zeiIvPgoJCTxwYXRoIGlkPSJMYXllciIgY2xhc3M9InMyIiBkPSJtMTA5OS45IDY2My40YzguNyA4LjcgMTMuNSAxOS45IDEz' +
+      'LjUgMzEuOXY0MTguOGgtNjQzLjNjLTIwLjcgMC0zNy41LTE2LjgtMzcuNS0zNy41di02NDMuNGg0MTguMmMxMiAwIDI0IDQuOCAzMiAxMy42' +
+      'eiIvPgoJPC9nPgo8L3N2Zz4=',
     logo_file_name: 'esignature-logo.svg',
     logo_mime_type: 'image/svg+xml',
     swagger: 'schemas/esignature.swagger.json',

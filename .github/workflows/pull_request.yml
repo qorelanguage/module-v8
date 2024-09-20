@@ -17,11 +17,10 @@ env:
   DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
   NOTION_ACCESS_TOKEN: ${{ secrets.NOTION_ACCESS_TOKEN }}
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   PullRequestTests:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       QORUS_TOKEN: ${{ secrets.QORUS_TOKEN }}
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -68,6 +67,77 @@ jobs:
         run: |
           cd ts
           yarn test:ci
+
+      # Install system dependencies needed for building Qore and modules
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            cmake \
+            pkg-config \
+            flex \
+            bison \
+            libmpfr-dev \
+            libpcre3-dev \
+            libssl-dev \
+            zlib1g-dev \
+            libbz2-dev \
+            doxygen \
+            libnode-dev \
+            libyaml-dev
+
+      # Clone the Qore repository and build it
+      - name: Clone and Build Qore
+        run: |
+          git clone https://github.com/qorelanguage/qore.git
+          cd qore
+          mkdir build
+          cd build
+          V8_INCLUDE_DIR=/usr/include/node cmake .. -DSINGLE_COMPILATION_UNIT=1 -DCMAKE_BUILD_TYPE=release
+          make && sudo make install
+
+      #  Update library paths to ensure Qore can find its shared libraries
+      - name: Update Library Path
+        run: |
+          echo '/usr/local/lib' | sudo tee /etc/ld.so.conf.d/qore.conf
+          sudo ldconfig
+
+      # Verify Qore installation by checking the version
+      - name: Verify Qore Installation
+        run: qore --version
+
+      # Clone and build yaml-module
+      - name: Clone and build yaml module
+        run: |
+          git clone https://github.com/qorelanguage/module-yaml.git
+          cd module-yaml
+          mkdir build
+          cd build
+          cmake .. -DSINGLE_COMPILATION_UNIT=1 -DCMAKE_BUILD_TYPE=release
+          make && sudo make install
+
+      # Build V8-module
+      - name: Build V8-module
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DSINGLE_COMPILATION_UNIT=1 -DCMAKE_BUILD_TYPE=release
+          make && sudo make install
+
+      # Check catalogue actions
+      - name: Check catalogue actions
+        run: |
+          QORE_TYPESCRIPT_ACTION_SCRIPTS=./ts/dist/index.js qdp ts-actions{}
+
+      - name: Run unit tests
+        run: |
+          cd ts
+          yarn test-build
+
+      # Test catalogue actions made with schema
+      - name: Test catalogue actions
+        run: |
+          QORE_TYPESCRIPT_ACTION_SCRIPTS=./dist/index.js QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS=./dist/index.js qore -l TypeScriptActionInterface -nX 1      
 
       # - name: Serve Storybook and run tests
       #   run: |

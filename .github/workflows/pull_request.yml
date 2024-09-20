@@ -5,7 +5,7 @@ name: Pull Request Tests
 on:
   pull_request:
     branches:
-      - dev
+      - develop
 env:
   ZENDESK_TEST_DOMAIN: ${{ secrets.ZENDESK_TEST_DOMAIN }}
   ZENDESK_EMAIL: ${{ secrets.ZENDESK_EMAIL }}

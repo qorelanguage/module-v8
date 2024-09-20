@@ -358,8 +358,10 @@ export const findUserByEmailAction = createAction({
     const email = propsValue.email;
     const client = new WebClient(auth.access_token);
 
-    return await client.users.lookupByEmail({
+    const users = await client.users.lookupByEmail({
       email,
     });
+
+    return users;
   },
 });

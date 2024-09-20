@@ -72,9 +72,21 @@ class TypeScriptActionInterfacePriv {
                     }
                     JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
                         sub (JavaScriptProgram pgm) {
-                            pgm.getGlobal().exports.qtester.run(
+                            auto v = pgm.getGlobal().exports.qtester.run(
                                 TypeScriptActionInterface::TestApi
                             );
+                            auto rv;
+                            if (v instanceof JavaScriptPromise) {
+                                v.then(sub (auto val) {
+                                    rv.result = val;
+                                }, sub (auto e) {
+                                    rv.error = e;
+                                });
+                                pgm.spinOnce();
+                                v.wait();
+                            } else {
+                                rv = v;
+                            }
                         }, 1
                     );
                     pstore{pool.uniqueHash()} = pool;

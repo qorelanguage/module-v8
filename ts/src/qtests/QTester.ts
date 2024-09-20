@@ -23,7 +23,7 @@ export class QTester {
     (globalThis as any).api = api;
     console.log(process.cwd(), path.join(process.cwd(), '/jest.config.js'));
     await runJest();
-    console.log('After run JEst');
+    console.log('After run Jest');
   }
 }
 
@@ -33,6 +33,8 @@ async function runJest() {
     {
       testMatch: ['**/?(*.)+(qtest).[tj]s?(x)'],
       config: path.join(process.cwd(), '/jest.config.js'),
+      verbose: true,
+      runInBand: true,
       _: [],
       $0: '',
     },

@@ -17,7 +17,7 @@
     "typesafe-i18n": "typesafe-i18n",
     "test:ci": "dotenv -e .env -- jest --config src/jest.config.ts",
     "test": "clear && yarn test:ci",
-    "qtest": "clear && jest --testMatch '**/?(*.)+(qtest).[tj]s?(x)'",
+    "qtest": "clear && jest --config src/jest.config.ts --testMatch '**/?(*.)+(qtest).[tj]s?(x)'",
     "precheck": "yarn build:test && yarn test"
   },
   "author": "Qore Technologies s.r.o.",

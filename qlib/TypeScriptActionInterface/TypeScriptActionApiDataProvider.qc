@@ -190,7 +190,6 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
             }, sub (auto e) {
                 err = e;
             });
-            pgm.spinOnce();
             v.wait();
         } else {
             rv = v;

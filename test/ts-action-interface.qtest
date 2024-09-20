@@ -30,7 +30,7 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
             sub (JavaScriptProgram pgm) {});
         JavaScriptProgram pgm = pool.get();
         on_exit pool.release(pgm);
-        code run = pgm.getGlobal().exports.tests.toData().run;
+        code run = pgm.getGlobal().exports.qtester.toData().run;
         assertThrows("JAVASCRIPT-EXCEPTION", "authorization_code", run, TypeScriptActionInterface::TestApi);
     }
 

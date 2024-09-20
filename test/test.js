@@ -1,4 +1,4 @@
-exports.tests = {
+exports.qtester = {
     /** testapi has two properties:
         - createConnection: function (app: string, opts?: object) : string
             parameters:

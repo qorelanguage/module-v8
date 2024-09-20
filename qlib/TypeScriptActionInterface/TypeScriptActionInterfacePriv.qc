@@ -72,7 +72,7 @@ class TypeScriptActionInterfacePriv {
                     }
                     JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
                         sub (JavaScriptProgram pgm) {
-                            pgm.getGlobal().exports.tests.run(
+                            pgm.getGlobal().exports.qtester.run(
                                 TypeScriptActionInterface::TestApi
                             );
                         }, 1

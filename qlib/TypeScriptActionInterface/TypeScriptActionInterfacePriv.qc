@@ -46,7 +46,6 @@ class TypeScriptActionInterfacePriv {
                     }
                     JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
                         sub (JavaScriptProgram pgm) {
-                            JavaScriptObject g = pgm.getGlobal();
                             pgm.getGlobal().exports.actionsCatalogue.registerAppActions(
                                 TypeScriptActionInterface::Api
                             );
@@ -73,8 +72,7 @@ class TypeScriptActionInterfacePriv {
                     }
                     JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
                         sub (JavaScriptProgram pgm) {
-                            JavaScriptObject g = pgm.getGlobal();
-                            pgm.getGlobal().exports.tests.run(
+                            pgm.getGlobal().exports.qtester.run(
                                 TypeScriptActionInterface::TestApi
                             );
                         }, 1

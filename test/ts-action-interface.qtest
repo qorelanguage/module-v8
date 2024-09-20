@@ -26,11 +26,12 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
 
     private testApi() {
         chdir(get_script_dir());
-        JavaScriptProgramPool pool(File::readTextFile("test.js"), "test.js", sub (JavaScriptProgram pgm) {});
+        JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile("test.js"), "test.js",
+            sub (JavaScriptProgram pgm) {});
         JavaScriptProgram pgm = pool.get();
         on_exit pool.release(pgm);
-        code run = pgm.getGlobal().obj.tests.toData().run;
-        assertThrows("JAVASCRIPT-EXCEPTION", run, TypeScriptActionInterface::TestApi);
+        code run = pgm.getGlobal().exports.qtester.toData().run;
+        assertThrows("JAVASCRIPT-EXCEPTION", "authorization_code", run, TypeScriptActionInterface::TestApi);
     }
 
     private poolTest() {
@@ -119,10 +120,10 @@ var obj = {
 
     private jsTest() {
         chdir(get_script_dir());
-        JavaScriptProgramPool pool(File::readTextFile("example.js"), "example.js", sub (JavaScriptProgram pgm) {});
+        JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile("example.js"), "example.js", sub (JavaScriptProgram pgm) {});
         JavaScriptProgram pgm = pool.get();
         on_exit pool.release(pgm);
-        JavaScriptObject obj = pgm.getGlobal().obj;
+        JavaScriptObject obj = pgm.getGlobal().exports;
 
         obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
 
@@ -176,5 +177,18 @@ var obj = {
 
         #prov = TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("get-pet");
         #prov.doRequest({"id": 1});
+
+        config = {
+            "name": "test",
+            "url": "tsrest-js-test://",
+            "opts": {
+                "token": "x",
+            },
+        };
+        conn = new TypeScriptAppRestConnection(config);
+        prov = TypeScriptActionInterface::getDataProvider("js-test", conn).getChildProviderEx("test-api");
+        t = prov.getRequestType();
+        assertEq(("count", "other", "key", "a0", "a1"), keys t.getFields({"key": "A"}));
+        assertEq(("count", "other", "key", "b0", "b1"), keys t.getFields({"key": "B"}));
     }
 }

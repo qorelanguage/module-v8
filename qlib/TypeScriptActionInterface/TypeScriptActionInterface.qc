@@ -293,6 +293,29 @@ public class TypeScriptActionInterface {
                     opts.pairIterator());
                 action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pool);
             }
+            if (*list<auto> dependent_options = remove action.dependent_options) {
+                if (!(request_type instanceof HashDataType)) {
+                    throw "TYPE-ERROR", sprintf("Cannot add dependent options to a request type of type %y",
+                        request_type.getName());
+                }
+                # add dependent fields
+                foreach auto dp in (dependent_options) {
+                    if (dp.typeCode() != NT_HASH) {
+                        throw "TYPE-ERROR", sprintf("Each element of \"dependent_options\" must be a hash; got type %y "
+                            "instead", dp.fullType());
+                    }
+                    if (dp.options.typeCode() != NT_HASH) {
+                        throw "TYPE-ERROR", sprintf("Each element of \"dependent_options\" have an \"options\" key "
+                            "with type \"hash\"; element %d has type %y", $# + 1, dp.options.fullType());
+                    }
+                    hash<string, QoreDataField> fields = map {$1.key: new QoreDataField($1.value + {
+                        "name": $1.key,
+                        "type": TypeScriptActionInterface::getType($1.value.type),
+                    })}, dp.options.pairIterator();
+                    request_type.addDependentFields(dp.value, fields);
+                }
+            }
+
             *AbstractDataProviderType response_type;
             if (action.response_type.val()) {
                 response_type = TypeScriptActionInterface::getType(remove action.response_type);
@@ -381,8 +404,32 @@ public class TypeScriptActionInterface {
 
     static AbstractDataProviderType getType(hash<auto> h, *bool required) {
         on_error rethrow $1.err, sprintf("%s (type: %y)", $1.desc, h);
-        HashDataType type(required ?? h.required ? AutoHashType : AutoHashOrNothingType);
+        HashDataType type(required ? AutoHashType : AutoHashOrNothingType);
+        list<hash<auto>> dependent_fields;
+        if (exists (auto dps = remove h.dependent_fields)) {
+            if (dps.typeCode() != NT_LIST) {
+                throw "TYPE-ERROR", sprintf("\"dependent_fields\" must be a list; got type %y instead",
+                    dps.fullType());
+            }
+            dependent_fields = dps;
+        }
         type.addQoreFields(map {$1.key: TypeScriptActionInterface::getField($1.key, $1.value)}, h.pairIterator());
+
+        # add dependent fields
+        foreach auto dp in (dependent_fields) {
+            if (dp.typeCode() != NT_HASH) {
+                throw "TYPE-ERROR", sprintf("Each element of \"dependent_fields\" must be a hash; got type %y "
+                    "instead", dp.fullType());
+            }
+            if (dp.fields.typeCode() != NT_HASH) {
+                throw "TYPE-ERROR", sprintf("Each element of \"dependent_fields\" have a \"fields\" key with type "
+                    "\"hash\"; element %d has type %y", $# + 1, dp.fields.fullType());
+            }
+            hash<string, QoreDataField> fields = map {$1.key: new QoreDataField({"name": $1.key} + $1.value)},
+                dp.fields.pairIterator();
+            type.addDependentFields(dp.value, fields);
+        }
+
         return type;
     }
 

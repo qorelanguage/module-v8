@@ -108,6 +108,8 @@ export interface IQoreRestConnectionConfig {
 
   // The username for authentication. Not used in conjunction with OAuth2 configurations.
   username?: string;
+
+  oauth2_token_use_basic_auth?: boolean;
 }
 
 export interface IQoreConnectionOption<
@@ -347,13 +349,26 @@ export interface IQoreAllowedValue<TypeValue = unknown> extends IQoreAppShared {
 
 export interface IQoreSharedObject<TypeName extends TQoreType = TQoreType, TypeValue = unknown>
   extends IQoreAppShared {
-  type: TypeName; // either a string or a data object again
-  required?: boolean; // whether the field is required
-  example_value?: TypeValue; // (values must use the field's type) any example value to use when generating example data etc
-  default_value?: TypeValue; // (values must use the field's type) the default value if none is provided by the user
-  allowed_values?: IQoreAllowedValue<TypeValue>[]; // an array of objects providing the only values allowed for the field
-  get_allowed_values?: TQoreGetAllowedValuesFunction<TypeValue>; // a function that returns the allowed values for the field
-  io_timeout_secs?: number; // the number of seconds to wait for the action to complete before timing out
+  // either a string or a data object again
+  type: TypeName;
+
+  // whether the field is required
+  required?: boolean;
+
+  // (values must use the field's type) any example value to use when generating example data etc
+  example_value?: TypeValue;
+
+  // (values must use the field's type) the default value if none is provided by the user
+  default_value?: TypeValue;
+
+  // an array of objects providing the only values allowed for the field
+  allowed_values?: IQoreAllowedValue<TypeValue>[];
+
+  // a function that returns the allowed values for the field
+  get_allowed_values?: TQoreGetAllowedValuesFunction<TypeValue>;
+
+  // the number of seconds to wait for the action to complete before timing out
+  io_timeout_secs?: number;
 }
 
 export interface IQoreTypeObject<TypeName extends TQoreType = TQoreType, TypeValue = unknown>

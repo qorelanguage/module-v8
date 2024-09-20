@@ -19,7 +19,7 @@ export const piecePropTypeToQoreOptionTypeIndex: {
   [PropertyType.ARRAY]: 'list',
   [PropertyType.OBJECT]: 'hash',
   [PropertyType.BASIC_AUTH]: 'string',
-  [PropertyType.JSON]: 'string',
+  [PropertyType.JSON]: 'hash',
   [PropertyType.MULTI_SELECT_DROPDOWN]: 'list',
   [PropertyType.STATIC_MULTI_SELECT_DROPDOWN]: 'list',
   [PropertyType.DYNAMIC]: 'hash',

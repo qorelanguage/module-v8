@@ -1,7 +1,6 @@
 // This will be replaced by the real implementation
 import asana from '../apps/asana';
 import esignature from '../apps/esignature';
-import notion from '../apps/notion';
 import zendesk from '../apps/zendesk';
 import { Log } from '../decorators/Logger';
 import { IQoreApp, IQoreAppWithActions, TQoreAppAction, TQoreApps } from '../global/models/qore';
@@ -46,7 +45,6 @@ class ActionsCatalogue {
       this.apps[appName] = PiecesAppCatalogue.apps[appName];
     });
     this.apps['zendesk'] = zendesk(this.locale);
-    this.apps['notion'] = notion(this.locale);
     this.apps['asana'] = asana(this.locale);
     this.apps['esignature'] = esignature(this.locale);
   }

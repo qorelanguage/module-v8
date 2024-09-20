@@ -24,10 +24,10 @@ import {
 import { InputProperty } from '../core/framework/property/input';
 import { DEFAULT_LOGO } from '../global/constants';
 import { fixActionOptions } from '../global/helpers/index';
+import { Locales } from '../i18n/i18n-types';
 import { commonActionContext, piecePropTypeToQoreOptionTypeIndex } from './common/constants';
 import { TMapPieceActionToAppActionOptions } from './common/models/pieces-catalogue';
 import * as pieces from './index';
-import { Locales } from '../i18n/i18n-types';
 pieces satisfies Record<string, Piece>;
 
 class _PiecesAppCatalogue {
@@ -72,6 +72,8 @@ class _PiecesAppCatalogue {
         oauth2_auth_url: auth.authUrl,
         oauth2_token_url: auth.tokenUrl,
         oauth2_scopes: auth.scope,
+        oauth2_auth_args: auth.extra,
+        oauth2_token_use_basic_auth: auth.oauth2TokenUseBasicAuth,
       };
     }
   }
@@ -149,13 +151,14 @@ class _PiecesAppCatalogue {
 
     return {
       display_name: prop.displayName,
-      short_desc: description,
-      desc: description,
+      short_desc: description || prop.displayName,
+      desc: description || prop.displayName,
       type: piecePropTypeToQoreOptionTypeIndex[prop.type],
       get_allowed_values,
       allowed_values,
       required: prop.required,
       default_value: prop.defaultValue,
+      example_value: prop.defaultValue,
     };
   }
 

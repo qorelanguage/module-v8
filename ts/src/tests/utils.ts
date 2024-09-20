@@ -20,6 +20,7 @@ export const validateResponseProperties = (
   actualResponse: Record<string, any>
 ) => {
   Object.keys(expectedType).forEach((key) => {
+    if (expectedType[key]?.required === false) return;
     expect(actualResponse).toHaveProperty(key);
 
     const expectedFieldType = expectedType[key]?.type || expectedType[key];

@@ -41,6 +41,7 @@ const OAuth2ExtraProps = Type.Object({
   authorizationMethod: Type.Optional(Type.Enum(OAuth2AuthorizationMethod)),
   grantType: Type.Optional(Type.Enum(OAuth2GrantType)),
   extra: Type.Optional(Type.Record(Type.String(), Type.Unknown())),
+  oauth2TokenUseBasicAuth: Type.Optional(Type.Boolean()),
 });
 
 type OAuth2ExtraProps = {
@@ -55,6 +56,7 @@ type OAuth2ExtraProps = {
   authorizationMethod?: OAuth2AuthorizationMethod;
   grantType?: OAuth2GrantType;
   extra?: Record<string, unknown>;
+  oauth2TokenUseBasicAuth?: boolean;
 };
 
 export const OAuth2PropertyValue = Type.Object({

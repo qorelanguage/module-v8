@@ -1,5 +1,6 @@
-import { exec } from 'child_process';
+import { runCLI } from 'jest';
 import { IQoreConnectionOptionsValues } from '../apps/zendesk';
+import * as path from 'path';
 
 export interface IQoreTestApi {
   createConnection: (app: string, opts?: IQoreConnectionOptionsValues) => string;
@@ -18,17 +19,31 @@ export type IQoreTestFunction = (
 ) => void;
 
 export class QTester {
-  public api: IQoreTestApi;
+  public async run(api: IQoreTestApi) {
+    (globalThis as any).api = api;
+    console.log(process.cwd(), path.join(process.cwd(), '/jest.config.js'));
+    await runJest();
+    console.log('After run JEst');
+  }
+}
 
-  public run(api: IQoreTestApi) {
-    // Save the API object
-    this.api = api;
-
-    exec('yarn qtest', (error, stdout, stderr) => {
-      console.error(error);
-      console.log(stdout);
-      console.error(stderr);
-    });
+async function runJest() {
+  console.log('Run cli');
+  const { results } = await runCLI(
+    {
+      testMatch: ['**/?(*.)+(qtest).[tj]s?(x)'],
+      config: path.join(process.cwd(), '/jest.config.js'),
+      _: [],
+      $0: '',
+    },
+    [process.cwd()]
+  );
+  console.log('Run cli results', results);
+  if (results.success) {
+    console.log('Tests passed!');
+  } else {
+    console.error('Tests failed!');
+    process.exit(1);
   }
 }
 

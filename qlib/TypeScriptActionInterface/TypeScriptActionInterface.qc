@@ -106,15 +106,24 @@ public class TypeScriptActionInterface {
         #! Maps from app names to default URL
         static hash<string, string> aumap;
 
+        #! Maps from app names to connection post-auth functions
+        static hash<string, hash<AsyncCallInfo>> app_post_auth_map;
+
         #! Connection map for testing
         static hash<string, TypeScriptAppRestConnection> cmap;
     }
 
     static registerApp(JavaScriptObject app) {
-        if (!JavaScriptProgramPool::isFirst(app.getProgram())) {
-            return;
+        JavaScriptProgram pgm = app.getProgram();
+        JavaScriptProgramPool pool;
+        bool first;
+        {
+            on_error rethrow "APP-ERROR", sprintf("Error registering app %y: %s", app.name, $1.desc);
+            pool = JavaScriptProgramPool::getPool(pgm, \first);
         }
-        TypeScriptActionInterface::registerApp(app.toData());
+        if (first) {
+            TypeScriptActionInterface::registerApp(app.toData(), pool);
+        }
     }
 
     static registerAction(JavaScriptObject action) {
@@ -131,7 +140,7 @@ public class TypeScriptActionInterface {
         }
     }
 
-    static registerApp(hash<auto> app) {
+    static registerApp(hash<auto> app, JavaScriptProgramPool pool) {
         SwaggerSchema schema;
         if ((*string swagger_loc = remove app.swagger).val()) {
             schema = SwaggerLoader::fromString(FileLocationHandler::getTextFileFromLocation(swagger_loc));
@@ -161,6 +170,7 @@ public class TypeScriptActionInterface {
                 }
             }
             *string required_options;
+            hash<AsyncCallInfo> post_auth;
             if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {
                 foreach hash<auto> i in (rest_modifiers.options.pairIterator()) {
                     if (i.value.allowed_values) {
@@ -170,6 +180,19 @@ public class TypeScriptActionInterface {
                 }
                 if (rest_modifiers.required_options.val()) {
                     required_options = rest_modifiers.required_options;
+                }
+                if (rest_modifiers.set_options_post_auth.val()) {
+                    if (!rest_modifiers.set_options_post_auth.callp()) {
+                        throw "REST-MODIFIER-ERROR", sprintf("The 'set_options_post_auth' REST modifier option must "
+                            "be a callable value; got type %y instead",
+                            rest_modifiers.set_options_post_auth.fullType());
+                    }
+                    post_auth = <AsyncCallInfo>{
+                        "label": sprintf("REST post-auth option function for app %y", app.name),
+                        "pool": pool,
+                        "async_call": rest_modifiers.set_options_post_auth,
+                        "to": seconds(remove rest_modifiers.io_timeout_secs ?? DefaultIoTimeoutSecs),
+                    };
                 }
                 if (rest_modifiers.url_template_options) {
                     url_template_options = map {$1: True}, rest_modifiers.url_template_options;
@@ -196,6 +219,9 @@ public class TypeScriptActionInterface {
             app0.scheme = sname;
             if (exists url) {
                 aumap{appname} = url;
+            }
+            if (post_auth) {
+                app_post_auth_map{appname} = post_auth;
             }
         }
         DataProviderActionCatalog::registerApp(cast<hash<DataProviderAppInfo>>(app0));
@@ -287,33 +313,13 @@ public class TypeScriptActionInterface {
         } else {
             # maps from options to "get_allowed_values" code for each option
             hash<string, hash<AsyncCallInfo>> omap;
+            # maps from options to "get_dependent_options" code for each option
+            hash<string, hash<AsyncCallInfo>> dmap;
             *AbstractDataProviderType request_type;
             if (*hash<auto> opts = remove action.options) {
                 request_type = TypeScriptActionInterface::getType(map {$1.key: $1.value{TypeKeys}},
                     opts.pairIterator());
-                action.options = TypeScriptActionInterface::getOptions(app, action, opts, \omap, pool);
-            }
-            if (*list<auto> dependent_options = remove action.dependent_options) {
-                if (!(request_type instanceof HashDataType)) {
-                    throw "TYPE-ERROR", sprintf("Cannot add dependent options to a request type of type %y",
-                        request_type.getName());
-                }
-                # add dependent fields
-                foreach auto dp in (dependent_options) {
-                    if (dp.typeCode() != NT_HASH) {
-                        throw "TYPE-ERROR", sprintf("Each element of \"dependent_options\" must be a hash; got type %y "
-                            "instead", dp.fullType());
-                    }
-                    if (dp.options.typeCode() != NT_HASH) {
-                        throw "TYPE-ERROR", sprintf("Each element of \"dependent_options\" have an \"options\" key "
-                            "with type \"hash\"; element %d has type %y", $# + 1, dp.options.fullType());
-                    }
-                    hash<string, QoreDataField> fields = map {$1.key: new QoreDataField($1.value + {
-                        "name": $1.key,
-                        "type": TypeScriptActionInterface::getType($1.value.type),
-                    })}, dp.options.pairIterator();
-                    request_type.addDependentFields(dp.value, fields);
-                }
+                action.options = TypeScriptActionInterface::getOptions(app, \action, opts, \omap, \dmap, pool);
             }
 
             *AbstractDataProviderType response_type;
@@ -324,7 +330,7 @@ public class TypeScriptActionInterface {
                 remove action.response_type;
             }
 
-            child = new TypeScriptActionApiDataProvider(action.action, api, request_type, response_type, omap);
+            child = new TypeScriptActionApiDataProvider(action.action, api, request_type, response_type, omap, dmap);
         }
 
         TypeScriptActionAppDataProvider prov = TypeScriptActionInterface::getAppDataProvider(action.app);
@@ -350,8 +356,9 @@ public class TypeScriptActionInterface {
         return rv;
     }
 
-    static *hash<string, hash<ActionOptionInfo>> getOptions(hash<DataProviderAppInfo> app, hash<auto> action,
-            hash<auto> opts, reference<hash<string, hash<AsyncCallInfo>>> omap, JavaScriptProgramPool pool) {
+    static *hash<string, hash<ActionOptionInfo>> getOptions(hash<DataProviderAppInfo> app,
+            reference<hash<auto>> action, hash<auto> opts, reference<hash<string, hash<AsyncCallInfo>>> omap,
+            reference<hash<string, hash<AsyncCallInfo>>> dmap, JavaScriptProgramPool pool) {
         hash<string, hash<ActionOptionInfo>> rv;
         foreach hash<auto> i in (opts.pairIterator()) {
             date io_timeout = seconds(remove i.value.io_timeout_secs ?? DefaultIoTimeoutSecs);
@@ -370,10 +377,28 @@ public class TypeScriptActionInterface {
                 };
                 i.value.ref_data = i.key;
             }
+            if (exists (auto get_dependent_options = remove i.value.get_dependent_options)) {
+                if (!get_dependent_options.callp()) {
+                    throw "TYPESCRIPT-ACTION-ERROR", sprintf("App %y action %y option %y has an invalid "
+                        "\"get_dependent_options\" attribute; got type %y; expecting a callable value", action.app,
+                        action.action, i.key, get_dependent_options.fullType());
+                }
+                dmap{i.key} = <AsyncCallInfo>{
+                    "label": sprintf("Dependent option function for app %y action %y option %y", app.name,
+                        action.action, i.key),
+                    "pool": pool,
+                    "async_call": get_dependent_options,
+                    "to": io_timeout,
+                };
+                action.data_dependent_options = True;
+            }
             if (i.value.required && !i.value.preselected && !exists i.value.default_value) {
                 i.value.preselected = True;
             }
             rv{i.key} = TypeScriptActionInterface::getOptionInfo(i.value);
+            if (dmap{i.key}) {
+                rv{i.key}.structural_determinate = True;
+            }
         }
         return rv;
     }
@@ -534,6 +559,10 @@ public class TypeScriptActionInterface {
     static string processUrl(string url, hash<auto> opts, hash<string, bool> url_template_options) {
         map url = replace(url, "{{" + $1 + "}}", opts{$1}), keys url_template_options, opts{$1}.val();
         return url;
+    }
+
+    static *hash<AsyncCallInfo> getPostAuthCall(string app) {
+        return app_post_auth_map{app.lwr()};
     }
 }
 }

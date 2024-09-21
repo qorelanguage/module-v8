@@ -59,19 +59,27 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         hash<AsyncCallInfo> api;
         *AbstractDataProviderType request_type;
         *AbstractDataProviderType response_type;
+        #! options with functions for reference data
         *hash<string, hash<AsyncCallInfo>> omap;
+        #! options that determine the structure of other options
+        *hash<string, hash<AsyncCallInfo>> dmap;
+
+        #! type cache for dependent options; opt val key -> type
+        hash<string, AbstractDataProviderType> dtcache;
 
         #! connection for the action
         AbstractConnection conn;
     }
 
     constructor(string name, hash<AsyncCallInfo> api, *AbstractDataProviderType request_type,
-            *AbstractDataProviderType response_type, *hash<string, hash<AsyncCallInfo>> omap) {
+            *AbstractDataProviderType response_type, *hash<string, hash<AsyncCallInfo>> omap,
+            *hash<string, hash<AsyncCallInfo>> dmap) {
         self.name = name;
         self.api = api;
         self.request_type = request_type;
         self.response_type = response_type;
         self.omap = omap;
+        self.dmap = dmap;
     }
 
     private constructor(string name, *hash<AsyncCallInfo> api) {
@@ -148,6 +156,84 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         return request_type;
     }
 
+    #! Returns the description of a successful request message with call data, if any
+    /** @param req sample request data that can be used to determine the final type
+
+        @return the request type for this provider according to any call data passed
+
+        @note
+        - Only called if the provider supports the request / response API
+        - This API is meant to provide information about request data types that can depend on the call data
+
+        @since DataProvider 3.0
+    */
+    private *AbstractDataProviderType getRequestTypeWithDataImpl(auto req) {
+        *AbstractDataProviderType rt = getRequestTypeImpl();
+        if (!dmap) {
+            return rt;
+        }
+        if (!(rt instanceof HashDataType)) {
+            throw "DATA-PROVIDER-REQUEST-TYPE-ERROR", sprintf("Request type is not a hash; cannot add fields to "
+                "type %y", rt.getName());
+        }
+        if (req.typeCode() != NT_HASH) {
+            throw "DATA-PROVIDER-REQUEST-TYPE-ERROR", sprintf("Request data has type %y; expecting \"hash\"",
+                req.fullType());
+        }
+
+        *hash<auto> slice = dmap{keys req};
+        if (!slice) {
+            return rt;
+        }
+        # cache key (opt[|opt...]=val[|val])
+        *string ckey = getCacheKey(keys slice, req);
+        if (exists ckey) {
+            if (*AbstractDataProviderType rv = dtcache{ckey}) {
+                return rv;
+            }
+        }
+
+        HashDataType type;
+        foreach hash<auto> i in (slice.pairIterator()) {
+            auto val = req{i.key};
+            info("Retrieving options dependent on option %y, value %y for data provider %y type %y", i.key, val,
+                getName(), type);
+            auto res = getAsyncValue(i.value, getCallContextInfo(req));
+            if (!exists res) {
+                continue;
+            }
+            if (res.typeCode() != NT_HASH) {
+                throw "DATA-PROVIDER-REQUEST-TYPE-ERROR", sprintf("JavaScript 'get_dependent_options()' function "
+                    "returned type %y; expecting \"hash\"", res.fullType());
+            }
+            if (!type) {
+                type = cast<HashDataType>(rt.copy());
+            }
+            type.addQoreFields(map {$1.key: TypeScriptActionInterface::getField($1.key, $1.value)},
+                res.pairIterator());
+        }
+        if (exists ckey) {
+            return dtcache{ckey} = type;
+        }
+        return type ?? rt;
+    }
+
+    #! Returns a key to the dependent type cache for the request type
+    private static *string getCacheKey(list<string> skeys, hash<auto> req) {
+        string ckey;
+        foreach string key in (skeys) {
+            auto val = req{key};
+            if (!val.strp()) {
+                return;
+            }
+            if (exists ckey) {
+                ckey += "|";
+            }
+            ckey += val.toString();
+        }
+        return (foldl $1 + "|" + $2, skeys) + "=" + ckey;
+    }
+
     #! Returns the description of a response message, if this object represents a response message
     /** @return the response type for this response message
     */
@@ -172,16 +258,20 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
     }
 
     auto getAsyncValue(hash<AsyncCallInfo> api, ...) {
+        return getAsyncValueArgs(self, api, argv);
+    }
+
+    static auto getAsyncValueArgs(LoggerInterface logger, hash<AsyncCallInfo> api, *softlist<auto> args) {
         on_error rethrow $1.err, sprintf("%s (context: %s)", $1.desc, api.label);
 
         JavaScriptProgram pgm = api.pool.get();
         on_exit {
             api.pool.release(pgm);
-            info("TypeScriptActionApiDataProvider::getAsyncValue() released pgm %y", pgm.uniqueHash());
+            logger.info("TypeScriptActionApiDataProvider::getAsyncValue() released pgm %y", pgm.uniqueHash());
         }
-        info("TypeScriptActionApiDataProvider::getAsyncValue() acquired pgm %y", pgm.uniqueHash());
+        logger.info("TypeScriptActionApiDataProvider::getAsyncValue() acquired pgm %y", pgm.uniqueHash());
 
-        auto v = call_function_args(api.async_call, argv);
+        auto v = call_function_args(api.async_call, args);
         auto rv;
         auto err;
         if (v instanceof JavaScriptPromise) {
@@ -207,7 +297,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
 
         if (exists err) {
             # strip non-serializable data from err
-            err = stripNonSerializableData(err);
+            err = TypeScriptActionApiDataProvider::stripNonSerializableData(err);
 
             if (err._err{"message", "name", "code"}.size() == 3) {
                 string desc = sprintf("Error in async request: %s: %s: ", err._err.name, err._err."code");

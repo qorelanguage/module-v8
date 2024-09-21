@@ -91,7 +91,8 @@ var obj = {
             "logo_file_name": "test.svg",
             "logo_mime_type": MimeTypeSvg,
         };
-        TypeScriptActionInterface::registerApp(app);
+        JavaScriptProgramPool pool("", "pgm.js", sub (JavaScriptProgram pgm) {});
+        TypeScriptActionInterface::registerApp(app, pool);
         hash<DataProviderAppInfo> appinfo = DataProviderActionCatalog::getAppEx(name);
         assertEq(name, appinfo.name);
 
@@ -104,9 +105,6 @@ var obj = {
             "action_code": DPAT_API,
             "api_function": sub () {},
         };
-        JavaScriptProgramPool pool("async function runAsync(a, b, args) {
-    b.result = await a(...args);
-}", "pgm.js", sub (JavaScriptProgram pgm) {});
         TypeScriptActionInterface::registerAction(action, pool);
         hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx(name, "test-api");
         assertEq("test-api", actioninfo.action);
@@ -120,7 +118,8 @@ var obj = {
 
     private jsTest() {
         chdir(get_script_dir());
-        JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile("example.js"), "example.js", sub (JavaScriptProgram pgm) {});
+        JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile("example.js"), "example.js",
+            sub (JavaScriptProgram pgm) {});
         JavaScriptProgram pgm = pool.get();
         on_exit pool.release(pgm);
         JavaScriptObject obj = pgm.getGlobal().exports;
@@ -132,6 +131,8 @@ var obj = {
 
         hash<DataProviderActionInfo> actioninfo = DataProviderActionCatalog::getAppActionEx("js-test", "test-api");
         assertEq("test-api", actioninfo.action);
+        assertTrue(actioninfo.data_dependent_options);
+        assertTrue(actioninfo.options.key.structural_determinate);
 
         appinfo = DataProviderActionCatalog::getAppEx("js-swagger-test");
         assertEq("js-swagger-test", appinfo.name);
@@ -187,8 +188,20 @@ var obj = {
         };
         conn = new TypeScriptAppRestConnection(config);
         prov = TypeScriptActionInterface::getDataProvider("js-test", conn).getChildProviderEx("test-api");
-        t = prov.getRequestType();
-        assertEq(("count", "other", "key", "a0", "a1"), keys t.getFields({"key": "A"}));
-        assertEq(("count", "other", "key", "b0", "b1"), keys t.getFields({"key": "B"}));
+        t = prov.getRequestTypeWithData({"key": "A"});
+        assertEq(("count", "other", "key", "a0", "a1"), keys t.getFields());
+        t = prov.getRequestTypeWithData({"key": "B"});
+        assertEq(("count", "other", "key", "b0", "b1"), keys t.getFields());
+
+        TypeScriptAppRestClient rest = conn.get(False);
+        hash<auto> h = TestRestClient::test0(rest, {});
+        assertEq("abc123", h.account_id);
+        assertEq("https://www.example.com/api/abc123", rest.getURL());
+    }
+}
+
+class TestRestClient inherits TypeScriptAppRestClient {
+    static *hash<auto> test0(TypeScriptAppRestClient client, hash<auto> h) {
+        return client.getUpdateOptionsAfterLogin(h);
     }
 }

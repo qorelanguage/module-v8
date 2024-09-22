@@ -49,7 +49,7 @@ class TypeScriptActionInterfacePriv {
                             pgm.getGlobal().exports.actionsCatalogue.registerAppActions(
                                 TypeScriptActionInterface::Api
                             );
-                        }, 1
+                        },
                     );
                     pstore{pool.uniqueHash()} = pool;
                 } catch (hash<ExceptionInfo> ex) {
@@ -89,7 +89,7 @@ class TypeScriptActionInterfacePriv {
                             } else {
                                 rv = v;
                             }
-                        }, 1
+                        },
                     );
                     pstore{pool.uniqueHash()} = pool;
                 } catch (hash<ExceptionInfo> ex) {

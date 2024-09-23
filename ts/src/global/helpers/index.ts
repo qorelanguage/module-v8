@@ -25,7 +25,7 @@ export const OMMITTED_FIELDS = ['_localizationGroup'] as const;
  */
 export const buildActionsFromSwaggerSchema = (
   schema: OpenAPIV2.Document,
-  allowedPaths: string[]
+  allowedPaths?: string[]
 ): IQorePartialAppActionWithSwaggerPath[] => {
   // Check if the schema was provided, return empty actions if not
   // If the allowedPaths are empty, return empty actions

@@ -8,6 +8,8 @@ describe('Qorus Apps Catalogue tests', () => {
     actionsCatalogue.initializeCatalogue();
 
     expect(actionsCatalogue.apps).toHaveProperty('zendesk');
+    expect(actionsCatalogue.apps).toHaveProperty('asana');
+    expect(actionsCatalogue.apps).toHaveProperty('esignature');
 
     forEach(actionsCatalogue.apps, (app) => {
       expect(app.display_name).not.toBeFalsy();
@@ -18,6 +20,9 @@ describe('Qorus Apps Catalogue tests', () => {
         // Make sure the swagger file exists
         expect(readFileSync(join(__dirname, '..', app.swagger))).not.toBeFalsy();
       }
+
+      expect(app.actions).not.toBeFalsy();
+      expect(app.actions.length).toBeGreaterThan(0);
 
       forEach(app.actions, (action) => {
         expect(action.action).not.toBeFalsy();

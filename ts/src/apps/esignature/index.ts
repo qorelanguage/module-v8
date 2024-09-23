@@ -18,10 +18,11 @@ export default (locale: Locales) =>
     desc: L[locale].apps[ESIGNATURE_LOCALIZATION_KEY].longDesc(),
     actions: mapActionsToApp(
       ESIGNATURE_LOCALIZATION_KEY,
-      buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document, []),
+      buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document),
       locale
     ),
-    logo: 'PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1NDcgMTU0OSIg' +
+    logo:
+      'PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1NDcgMTU0OSIg' +
       'd2lkdGg9IjE1NDciIGhlaWdodD0iMTU0OSI+Cgk8dGl0bGU+ZG9jdS1zdmc8L3RpdGxlPgoJPHN0eWxlPgoJCS5zMCB7IGZpbGw6ICM0YzAw' +
       'ZmYgfSAKCQkuczEgeyBmaWxsOiAjZmY1MjUyIH0gCgkJLnMyIHsgZmlsbDogIzAwMDAwMCB9IAoJPC9zdHlsZT4KCTxnIGlkPSJMYXllciI+' +
       'CgkJPHBhdGggaWQ9IkxheWVyIiBjbGFzcz0iczAiIGQ9Im0xMTEzLjQgMTExNC45djM5NS42YzAgMjAuOC0xNi43IDM3LjYtMzcuNSAzNy42' +

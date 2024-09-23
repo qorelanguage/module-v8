@@ -2,7 +2,7 @@ import {
   IQoreAppActionWithFunction,
   IQoreAppWithActions,
   TQoreAppActionFunctionContext,
-} from '@qoretechnologies/qorus-actions-catalogue';
+} from '../global/models/qore';
 import { PiecesAppCatalogue } from '../pieces/piecesCatalogue';
 import { validateResponseProperties } from './utils';
 import { QorusRequest } from '@qoretechnologies/ts-toolkit';

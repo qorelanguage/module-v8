@@ -130,6 +130,9 @@ export interface IQoreRestConnectionModifiers<
   options?: ModifierOptions;
   required_options?: string;
   url_template_options?: Array<keyof ModifierOptions>;
+  set_options_post_auth?: (
+    context: Omit<TQoreAppActionFunctionContext<ModifierOptions>, 'opts'>
+  ) => Record<keyof ModifierOptions, any>;
 }
 
 export type TFirstAppCharacter =
@@ -184,6 +187,7 @@ export interface IQoreApp<
   logo_mime_type: string;
   rest?: IQoreRestConnectionConfig;
   rest_modifiers?: IQoreRestConnectionModifiers<RestModifierOptions>;
+
   swagger?: string;
 }
 
@@ -206,11 +210,7 @@ export interface IQoreBaseAppAction extends IQoreAppShared {
 
 export type TQoreAppActionFunctionContext<CustomConnOptions extends Record<string, any> = {}> = {
   conn_name?: string;
-  conn_opts?: {
-    token?: string;
-    oauth2_refresh_token?: string;
-    token_type?: 'Bearer' | string;
-  } & CustomConnOptions;
+  conn_opts?: Partial<IQoreRestConnectionConfig> & CustomConnOptions;
   opts?: Record<string, any>;
 };
 

@@ -1,15 +1,33 @@
+import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 import { OpenAPIV2 } from 'openapi-types';
 import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
 import L from '../../i18n/i18n-node';
 import { Locales } from '../../i18n/i18n-types';
 import eSignature from '../../schemas/esignature.swagger.json';
+import { IQoreConnectionOptions } from '../zendesk';
 import { ESIGNATURE_APP_NAME } from './constants';
 /*
  * Returns the app object with all the actions ready to use, using translations
  * @param locale - the locale
  * @returns IQoreAppWithActions
  */
+
+export const ESIGNATURE_CONN_OPTIONS = {
+  account_id: {
+    display_name: 'Account ID',
+    short_desc: 'The account ID',
+    desc: 'The account ID',
+    type: 'string',
+  },
+  base_uri: {
+    display_name: 'Base URI',
+    short_desc: 'The base URI',
+    desc: 'The base URI',
+    type: 'string',
+  },
+} satisfies IQoreConnectionOptions;
+
 export default (locale: Locales) =>
   ({
     display_name: L[locale].apps[ESIGNATURE_APP_NAME].displayName(),
@@ -37,7 +55,7 @@ export default (locale: Locales) =>
     logo_mime_type: 'image/svg+xml',
     swagger: 'schemas/esignature.swagger.json',
     rest: {
-      url: '',
+      url: '{{base_uri}}/accounts/{{account_id}}',
       data: 'json',
       oauth2_grant_type: 'authorization_code',
       oauth2_auth_url: 'https://account-d.docusign.com/oauth/auth',
@@ -46,4 +64,35 @@ export default (locale: Locales) =>
       ping_method: 'GET',
       ping_path: '',
     },
-  }) satisfies IQoreAppWithActions;
+    rest_modifiers: {
+      options: ESIGNATURE_CONN_OPTIONS,
+      set_options_post_auth: async (context) => {
+        // We need to make a call to the docusign user info endpoint to get the base_uri\
+        // and account_id
+        const userInfo = await QorusRequest.get<Record<string, any>>(
+          {
+            path: '/oauth/userinfo',
+            headers: {
+              Authorization: `Bearer ${context.conn_opts.token}`,
+            },
+          },
+          {
+            url: 'https://account-d.docusign.com',
+            endpointId: 'Docusing',
+          }
+        );
+
+        if ('base_uri' in userInfo && 'account_id' in userInfo) {
+          return {
+            base_uri: userInfo.accounts[0].base_uri,
+            account_id: userInfo.accounts[0].account_id,
+          };
+        }
+
+        throw new Error(
+          'Could not get the base_uri and account_id from the user info endpoint of docusign eSignature'
+        );
+      },
+      url_template_options: ['account_id', 'base_uri'],
+    },
+  }) satisfies IQoreAppWithActions<typeof ESIGNATURE_CONN_OPTIONS>;

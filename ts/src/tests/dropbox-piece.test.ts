@@ -5,6 +5,7 @@ import {
 } from '@qoretechnologies/qorus-actions-catalogue';
 import { PiecesAppCatalogue } from '../pieces/piecesCatalogue';
 import { validateResponseProperties } from './utils';
+import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 
 describe('DropboxPieceTest', () => {
   let dropboxApp: IQoreAppWithActions | null = null;
@@ -16,12 +17,25 @@ describe('DropboxPieceTest', () => {
   const actionContext = {
     conn_name: 'dropbox',
     conn_opts: {
-      token: process.env.DROPBOX_ACCESS_TOKEN,
+      token: '',
     },
     opts: {},
   } satisfies TQoreAppActionFunctionContext;
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    const response = (await QorusRequest.post(
+      {
+        params: {
+          refresh_token: process.env.DROPBOX_REFRESH_TOKEN,
+          client_id: process.env.DROPBOX_CLIENT_ID,
+          client_secret: process.env.DROPBOX_CLIENT_SECRET,
+          grant_type: 'refresh_token',
+        },
+        path: '/oauth2/token',
+      },
+      { url: 'https://api.dropboxapi.com', endpointId: 'dropbox' }
+    )) as any;
+    actionContext.conn_opts.token = response?.data?.access_token;
     PiecesAppCatalogue.registerApps();
     dropboxApp = PiecesAppCatalogue.apps['Dropbox'];
   });

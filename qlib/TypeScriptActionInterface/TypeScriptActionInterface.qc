@@ -141,6 +141,9 @@ public class TypeScriptActionInterface {
     }
 
     static registerApp(hash<auto> app, JavaScriptProgramPool pool) {
+        if (app.name =~ / /) {
+            throw "APP-ERROR", sprintf("App name %y is invalid; it contains one or more spaces", app.name);
+        }
         SwaggerSchema schema;
         if ((*string swagger_loc = remove app.swagger).val()) {
             schema = SwaggerLoader::fromString(FileLocationHandler::getTextFileFromLocation(swagger_loc));

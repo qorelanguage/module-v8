@@ -99,16 +99,19 @@ export const mapActionsToApp = (
     ...omit(action, OMMITTED_FIELDS),
 
     display_name:
+      action.display_name ||
       // @ts-expect-error no idea whats going on here, will fix later
       L[locale].apps[app].actions[action.action as unknown].displayName() ||
       capitalize(action.action.replace(/_/g, ' ')),
 
     short_desc:
+      action.short_desc ||
       // @ts-expect-error no idea whats going on here, will fix later
       L[locale].apps[app].actions[action.action as unknown].shortDesc() ||
       capitalize(action.action.replace(/_/g, ' ')),
 
     desc:
+      action.desc ||
       // @ts-expect-error no idea whats going on here, will fix later
       L[locale].apps[app].actions[action.action as unknown].longDesc() ||
       capitalize(action.action.replace(/_/g, ' ')),

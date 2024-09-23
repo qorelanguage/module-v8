@@ -33,8 +33,8 @@ const en = {
       shortDesc: 'Collection of actions to interact with Asana API',
       longDesc: 'Collection of actions to interact with Asana API',
     },
-    Esignature: {
-      displayName: 'Esignature',
+    DocusignESignature: {
+      displayName: 'Docusign eSignature',
       shortDesc: 'Collection of actions to interact with Esignature API',
       longDesc: 'Collection of actions to interact with Esignature API',
     },

@@ -4,7 +4,7 @@ import { IQoreAppWithActions } from '../../global/models/qore';
 import L from '../../i18n/i18n-node';
 import { Locales } from '../../i18n/i18n-types';
 import eSignature from '../../schemas/esignature.swagger.json';
-import { ESIGNATURE_APP_NAME, ESIGNATURE_LOCALIZATION_KEY } from './constants';
+import { ESIGNATURE_APP_NAME } from './constants';
 /*
  * Returns the app object with all the actions ready to use, using translations
  * @param locale - the locale
@@ -12,12 +12,12 @@ import { ESIGNATURE_APP_NAME, ESIGNATURE_LOCALIZATION_KEY } from './constants';
  */
 export default (locale: Locales) =>
   ({
-    display_name: L[locale].apps[ESIGNATURE_LOCALIZATION_KEY].displayName(),
-    short_desc: L[locale].apps[ESIGNATURE_LOCALIZATION_KEY].shortDesc(),
+    display_name: L[locale].apps[ESIGNATURE_APP_NAME].displayName(),
+    short_desc: L[locale].apps[ESIGNATURE_APP_NAME].shortDesc(),
     name: ESIGNATURE_APP_NAME,
-    desc: L[locale].apps[ESIGNATURE_LOCALIZATION_KEY].longDesc(),
+    desc: L[locale].apps[ESIGNATURE_APP_NAME].longDesc(),
     actions: mapActionsToApp(
-      ESIGNATURE_LOCALIZATION_KEY,
+      ESIGNATURE_APP_NAME,
       buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document),
       locale
     ),

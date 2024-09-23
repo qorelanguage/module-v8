@@ -82,9 +82,9 @@ type RootTranslation = {
 			 */
 			longDesc: string
 		}
-		Esignature: {
+		DocusignESignature: {
 			/**
-			 * E​s​i​g​n​a​t​u​r​e
+			 * D​o​c​u​s​i​g​n​ ​e​S​i​g​n​a​t​u​r​e
 			 */
 			displayName: string
 			/**
@@ -2031,9 +2031,9 @@ export type TranslationFunctions = {
 			 */
 			longDesc: () => LocalizedString
 		}
-		Esignature: {
+		DocusignESignature: {
 			/**
-			 * Esignature
+			 * Docusign eSignature
 			 */
 			displayName: () => LocalizedString
 			/**

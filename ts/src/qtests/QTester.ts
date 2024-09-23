@@ -1,6 +1,6 @@
 import { runCLI } from 'jest';
-import { IQoreConnectionOptionsValues } from '../apps/zendesk';
 import * as path from 'path';
+import { IQoreConnectionOptionsValues } from '../apps/zendesk';
 
 export interface IQoreTestApi {
   createConnection: (app: string, opts?: IQoreConnectionOptionsValues) => string;
@@ -20,15 +20,14 @@ export type IQoreTestFunction = (
 
 export class QTester {
   public async run(api: IQoreTestApi) {
-    (globalThis as any).api = api;
-    console.log(process.cwd(), path.join(process.cwd(), '/jest.config.js'));
+    // Assign the api to the global object so it can be accessed in the Jest tests as `testApi`
+    (globalThis as any).testApi = api;
+    // Run the Jest tests
     await runJest();
-    console.log('After run Jest');
   }
 }
 
 async function runJest() {
-  console.log('Run cli');
   const { results } = await runCLI(
     {
       testMatch: ['**/?(*.)+(qtest).[tj]s?(x)'],
@@ -40,7 +39,7 @@ async function runJest() {
     },
     [process.cwd()]
   );
-  console.log('Run cli results', results);
+
   if (results.success) {
     console.log('Tests passed!');
   } else {

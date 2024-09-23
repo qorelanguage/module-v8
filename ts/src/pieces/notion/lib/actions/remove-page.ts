@@ -19,9 +19,11 @@ export const removePage = createAction({
       notionVersion: '2022-02-22',
     });
 
-    return await notion.pages.update({
+    const result = await notion.pages.update({
       page_id: pageId as string,
       in_trash: true,
     });
+
+    return result;
   },
 });

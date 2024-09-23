@@ -6,6 +6,8 @@ import {
 import { PiecesAppCatalogue } from '../pieces/piecesCatalogue';
 import { validateResponseProperties } from './utils';
 
+const TEST_PAGE_NAME = 'Test Page';
+
 describe('notionPieceTest', () => {
   let notionApp: IQoreAppWithActions | null = null;
   let user: any | null = null;
@@ -117,7 +119,7 @@ describe('notionPieceTest', () => {
         const result = await actionFunction(
           {
             pageId: pages[0].value,
-            title: 'Test Page',
+            title: TEST_PAGE_NAME,
             content: 'This is a test page content',
           },
           {},
@@ -350,11 +352,16 @@ describe('notionPieceTest', () => {
     ) as IQoreAppActionWithFunction;
     const actionFunction = action?.api_function;
 
+    const pages = await action.options.pageId.get_allowed_values(actionContext);
+    const pageId = pages.find(
+      (foundPage) => foundPage.display_name === TEST_PAGE_NAME || foundPage.value === page.id
+    );
+
     if (actionFunction && page) {
       try {
         const result = await actionFunction(
           {
-            pageId: page.id,
+            pageId: pageId.value,
           },
           {},
           actionContext

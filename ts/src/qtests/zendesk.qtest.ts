@@ -1,4 +1,4 @@
-import { ZENDESK_ACTIONS, ZENDESK_APP_NAME } from '../apps/zendesk';
+import { ZENDESK_ACTIONS } from '../apps/zendesk';
 
 let connection: string;
 
@@ -17,7 +17,7 @@ describe('Runs tests with Qore API', () => {
     // each action returns a valid response and does not throw an error
     ZENDESK_ACTIONS.forEach((action) => {
       it(`Testing the ${action.action} action`, () => {
-        const response = testApi.execAppAction(ZENDESK_APP_NAME, action.action, connection);
+        const response = testApi.execAppAction('zendesk', action.action, connection);
 
         console.log(response);
 

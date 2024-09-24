@@ -14,7 +14,7 @@ describe('Runs tests with Qore API', () => {
     // Go through the actions and run them, this will test that
     // each action returns a valid response and does not throw an error
     ZENDESK_ACTIONS.forEach((action) => {
-      it(`Testing the ${action} action`, () => {
+      it(`Testing the ${action.action} action`, () => {
         const response = testApi.execAppAction(ZENDESK_APP_NAME, action.action, connection);
 
         console.log(response);

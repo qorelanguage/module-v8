@@ -51,7 +51,10 @@ export const ZENDESK_ALLOWED_PATHS = [
   '/api/v2/targets',
 ];
 
-export const ZENDESK_ACTIONS = buildActionsFromSwaggerSchema(ZendeskSchema, ZENDESK_ALLOWED_PATHS);
+export const ZENDESK_ACTIONS = buildActionsFromSwaggerSchema(
+  ZendeskSchema as any,
+  ZENDESK_ALLOWED_PATHS
+);
 
 /*
  * Returns the app object with all the actions ready to use, using translations

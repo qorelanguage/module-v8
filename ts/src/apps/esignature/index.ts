@@ -36,7 +36,7 @@ export default (locale: Locales) =>
     desc: L[locale].apps[ESIGNATURE_APP_NAME].longDesc(),
     actions: mapActionsToApp(
       ESIGNATURE_APP_NAME,
-      buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document),
+      buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document, ['/v2.1/accounts']),
       locale
     ),
     logo:

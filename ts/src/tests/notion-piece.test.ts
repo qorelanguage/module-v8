@@ -361,7 +361,7 @@ describe('notionPieceTest', () => {
       try {
         const result = await actionFunction(
           {
-            pageId: pageId.value,
+            pageId: pageId?.value || page.id,
           },
           {},
           actionContext

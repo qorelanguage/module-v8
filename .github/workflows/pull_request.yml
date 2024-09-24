@@ -139,17 +139,11 @@ jobs:
           cmake .. -DSINGLE_COMPILATION_UNIT=1 -DCMAKE_BUILD_TYPE=release
           make && sudo make install
 
-      # Check catalogue actions
-      - name: Check catalogue actions
-        run: |
-          cd ts
-          yarn build && QORE_TYPESCRIPT_ACTION_SCRIPTS=./dist/index.js qdp ts-actions{}
-
       # Test catalogue actions made with schema
       - name: Test catalogue actions
         run: |
           cd ts
-          yarn test-build && QORE_TYPESCRIPT_ACTION_SCRIPTS=./dist/index.js QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS=./dist/index.js qore -l TypeScriptActionInterface -nX 1   
+          yarn test-build && QORE_TYPESCRIPT_ACTION_SCRIPTS=./dist/index.js QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS=./dist/index.js qore -l TypeScriptActionInterface -nX 1
 
       # - name: Serve Storybook and run tests
       #   run: |

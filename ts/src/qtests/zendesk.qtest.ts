@@ -7,7 +7,9 @@ describe('Runs tests with Qore API', () => {
     beforeAll(() => {
       // Create a connection to the Zendesk app
       connection = testApi.createConnection('zendesk', {
-        subdomain: 'd3v-qoretechnologies',
+        opts: {
+          subdomain: 'd3v-qoretechnologies',
+        },
       });
     });
 

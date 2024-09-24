@@ -3,7 +3,7 @@ import * as path from 'path';
 import { IQoreConnectionOptionsValues } from '../apps/zendesk';
 
 export interface IQoreTestApi {
-  createConnection: (app: string, opts?: IQoreConnectionOptionsValues) => string;
+  createConnection: (app: string, config?: { opts?: IQoreConnectionOptionsValues }) => string;
   execAppAction: (
     app: string,
     action: string,

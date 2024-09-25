@@ -20,8 +20,8 @@ export const removePage = createAction({
     });
 
     const result = await notion.pages.update({
-      page_id: pageId as string,
-      in_trash: true,
+      page_id: pageId,
+      archived: true,
     });
 
     return result;

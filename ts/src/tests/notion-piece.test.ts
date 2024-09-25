@@ -4,7 +4,7 @@ import {
   TQoreAppActionFunctionContext,
 } from '../global/models/qore';
 import { PiecesAppCatalogue } from '../pieces/piecesCatalogue';
-import { validateResponseProperties } from './utils';
+import { retry, validateResponseProperties } from './utils';
 
 const TEST_PAGE_NAME = 'Test Page';
 
@@ -346,6 +346,30 @@ describe('notionPieceTest', () => {
     }
   });
 
+  it('should test dependent options', async () => {
+    const action = notionApp.actions.find(
+      (action) => action.action === 'notion_find_database_item'
+    ) as IQoreAppActionWithFunction;
+    const actionFunction = action?.api_function;
+
+    if (actionFunction && database) {
+      try {
+        const dependentOption = await action.options.database_id.get_dependent_options({
+          ...actionContext,
+          opts: {
+            database_id: database.id,
+          },
+        });
+        expect(dependentOption).toBeDefined();
+      } catch (error) {
+        console.error('Error finding an item in a database', error);
+        throw error;
+      }
+    } else {
+      throw new Error('Action function not found');
+    }
+  });
+
   it('should remove the page', async () => {
     const action = notionApp.actions.find(
       (action) => action.action === 'remove_page'
@@ -359,12 +383,14 @@ describe('notionPieceTest', () => {
 
     if (actionFunction && page) {
       try {
-        const result = await actionFunction(
-          {
-            pageId: pageId.value,
-          },
-          {},
-          actionContext
+        const result = await retry(() =>
+          actionFunction(
+            {
+              pageId: pageId?.value || page.id,
+            },
+            {},
+            actionContext
+          )
         );
         expect(result).toBeDefined();
         const expectedResponseType = action.response_type;

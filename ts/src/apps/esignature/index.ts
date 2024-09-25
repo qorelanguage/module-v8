@@ -1,4 +1,4 @@
-import { QorusRequest } from '@qoretechnologies/ts-toolkit';
+// import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 import { OpenAPIV2 } from 'openapi-types';
 import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
@@ -66,33 +66,33 @@ export default (locale: Locales) =>
     },
     rest_modifiers: {
       options: ESIGNATURE_CONN_OPTIONS,
-      set_options_post_auth: async (context) => {
-        // We need to make a call to the docusign user info endpoint to get the base_uri\
-        // and account_id
-        const userInfo = await QorusRequest.get<Record<string, any>>(
-          {
-            path: '/oauth/userinfo',
-            headers: {
-              Authorization: `Bearer ${context.conn_opts.token}`,
-            },
-          },
-          {
-            url: 'https://account-d.docusign.com',
-            endpointId: 'Docusing',
-          }
-        );
+      // set_options_post_auth: async (context) => {
+      //   // We need to make a call to the docusign user info endpoint to get the base_uri\
+      //   // and account_id
+      //   const userInfo = await QorusRequest.get<Record<string, any>>(
+      //     {
+      //       path: '/oauth/userinfo',
+      //       headers: {
+      //         Authorization: `Bearer ${context.conn_opts.token}`,
+      //       },
+      //     },
+      //     {
+      //       url: 'https://account-d.docusign.com',
+      //       endpointId: 'Docusing',
+      //     }
+      //   );
 
-        if ('base_uri' in userInfo && 'account_id' in userInfo) {
-          return {
-            base_uri: userInfo.accounts[0].base_uri,
-            account_id: userInfo.accounts[0].account_id,
-          };
-        }
+      //   if ('base_uri' in userInfo && 'account_id' in userInfo) {
+      //     return {
+      //       base_uri: userInfo.accounts[0].base_uri,
+      //       account_id: userInfo.accounts[0].account_id,
+      //     };
+      //   }
 
-        throw new Error(
-          'Could not get the base_uri and account_id from the user info endpoint of docusign eSignature'
-        );
-      },
+      //   throw new Error(
+      //     'Could not get the base_uri and account_id from the user info endpoint of docusign eSignature'
+      //   );
+      // },
       url_template_options: ['account_id', 'base_uri'],
     },
   }) satisfies IQoreAppWithActions<typeof ESIGNATURE_CONN_OPTIONS>;

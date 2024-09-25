@@ -42,3 +42,24 @@ export const validateResponseProperties = (
     }
   });
 };
+
+export const retry = async <T>(
+  fn: () => Promise<T>,
+  retries: number = 3,
+  delay: number = 1000
+): Promise<T> => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const result = await fn();
+      console.log(`Success on attempt ${i + 1}`);
+
+      return result;
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      console.warn(`Retry ${i + 1} failed. Retrying in ${delay}ms...`);
+      await new Promise((res) => setTimeout(res, delay));
+      delay *= 2;
+    }
+  }
+  throw new Error('Max retries reached');
+};

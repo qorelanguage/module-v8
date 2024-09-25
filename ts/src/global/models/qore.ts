@@ -132,7 +132,7 @@ export interface IQoreRestConnectionModifiers<
   url_template_options?: Array<keyof ModifierOptions>;
   set_options_post_auth?: (
     context: Omit<TQoreAppActionFunctionContext<ModifierOptions>, 'opts'>
-  ) => Record<keyof ModifierOptions, any>;
+  ) => Promise<Record<keyof ModifierOptions, any>>;
 }
 
 export type TFirstAppCharacter =

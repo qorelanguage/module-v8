@@ -1,9 +1,12 @@
 import { runCLI } from 'jest';
 import * as path from 'path';
-import { IQoreConnectionOptionsValues } from '../apps/zendesk';
+import { IQoreRestConnectionConfig } from '../global/models/qore';
 
 export interface IQoreTestApi {
-  createConnection: (app: string, opts?: IQoreConnectionOptionsValues) => string;
+  createConnection: <CustomConnOptions>(
+    app: string,
+    config?: { opts?: Record<keyof CustomConnOptions, any> & Partial<IQoreRestConnectionConfig> }
+  ) => string;
   execAppAction: (
     app: string,
     action: string,

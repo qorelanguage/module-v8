@@ -32,8 +32,6 @@ class ActionsCatalogue {
       // Register the app
       api.registerApp(app);
 
-      console.log(actions);
-
       // Register the actions
       actions.forEach((action) => {
         api.registerAction(action);

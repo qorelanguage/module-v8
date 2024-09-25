@@ -17269,7 +17269,6 @@ definitions:
         body: "The smoke is very colorful."
       priority: "urgent"
       subject: "My printer is on fire!"
-    type: "object"
   TicketCreateRequest:
     properties:
       ticket:

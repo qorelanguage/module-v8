@@ -8,9 +8,9 @@ describe('Runs tests with Qore API', () => {
       // Create a connection to the Zendesk app
       connection = testApi.createConnection<typeof ZENDESK_CONN_OPTIONS>('zendesk', {
         opts: {
-          subdomain: 'qoretechnologies',
-          username: 'filip.witosz@qoretechnologies.com/token',
-          password: 'xF1TpVCygW6ZjWXesPiR7jLFAfB3PV2UJMh4DJQ2',
+          subdomain: process.env.ZENDESK_SUBDOMAIN,
+          username: process.env.ZENDESK_USER,
+          password: process.env.ZENDESK_API_KEY,
           oauth2_grant_type: null,
         },
       });

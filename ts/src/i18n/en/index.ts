@@ -28,6 +28,11 @@ const en = {
       shortDesc: 'Collection of actions to interact with Notion API',
       longDesc: 'Collection of actions to interact with Notion API',
     },
+    Github: {
+      displayName: 'Github',
+      shortDesc: 'Collection of actions to interact with Github API',
+      longDesc: 'Collection of actions to interact with Github API',
+    },
     Asana: {
       displayName: 'Asana',
       shortDesc: 'Collection of actions to interact with Asana API',

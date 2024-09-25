@@ -1,11 +1,14 @@
 import { runCLI } from 'jest';
 import * as path from 'path';
 import { IQoreRestConnectionConfig } from '../global/models/qore';
+import { StrictRecord } from '../global/models/utils';
 
 export interface IQoreTestApi {
   createConnection: <CustomConnOptions>(
     app: string,
-    config?: { opts?: Record<keyof CustomConnOptions, any> & Partial<IQoreRestConnectionConfig> }
+    config?: {
+      opts?: StrictRecord<keyof CustomConnOptions, any> & Partial<IQoreRestConnectionConfig>;
+    }
   ) => string;
   execAppAction: (
     app: string,

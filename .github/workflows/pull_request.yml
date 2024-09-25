@@ -7,10 +7,9 @@ on:
     branches:
       - develop
 env:
-  ZENDESK_TEST_DOMAIN: ${{ secrets.ZENDESK_TEST_DOMAIN }}
-  ZENDESK_EMAIL: ${{ secrets.ZENDESK_EMAIL }}
-  ZENDESK_API_TOKEN: ${{ secrets.ZENDESK_API_TOKEN }}
-  ZENDESK_CLIENT_SECRET: ${{ secrets.ZENDESK_CLIENT_SECRET }}
+  ZENDESK_SUBDOMAIN: ${{ secrets.ZENDESK_SUBDOMAIN }}
+  ZENDESK_USER: ${{ secrets.ZENDESK_USER }}
+  ZENDESK_API_KEY: ${{ secrets.ZENDESK_API_KEY }}
   SLACK_ACCESS_TOKEN: ${{ secrets.SLACK_ACCESS_TOKEN }}
   SLACK_USER_ACCESS_TOKEN: ${{ secrets.SLACK_USER_ACCESS_TOKEN }}
   SLACK_USER_EMAIL: ${{ secrets.SLACK_USER_EMAIL }}
@@ -18,13 +17,12 @@ env:
   DROPBOX_CLIENT_ID: ${{ secrets.DROPBOX_CLIENT_ID }}
   DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
   NOTION_ACCESS_TOKEN: ${{ secrets.NOTION_ACCESS_TOKEN }}
+  GH_PAT: ${{ secrets.GH_PAT }}
 
 jobs:
   PullRequestTests:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04
-    env:
-      QORUS_TOKEN: ${{ secrets.QORUS_TOKEN }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Get current time for the commit

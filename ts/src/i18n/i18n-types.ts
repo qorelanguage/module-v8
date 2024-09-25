@@ -68,6 +68,20 @@ type RootTranslation = {
 			 */
 			longDesc: string
 		}
+		Github: {
+			/**
+			 * G​i​t​h​u​b
+			 */
+			displayName: string
+			/**
+			 * C​o​l​l​e​c​t​i​o​n​ ​o​f​ ​a​c​t​i​o​n​s​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​G​i​t​h​u​b​ ​A​P​I
+			 */
+			shortDesc: string
+			/**
+			 * C​o​l​l​e​c​t​i​o​n​ ​o​f​ ​a​c​t​i​o​n​s​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​G​i​t​h​u​b​ ​A​P​I
+			 */
+			longDesc: string
+		}
 		Asana: {
 			/**
 			 * A​s​a​n​a
@@ -2014,6 +2028,20 @@ export type TranslationFunctions = {
 			shortDesc: () => LocalizedString
 			/**
 			 * Collection of actions to interact with Notion API
+			 */
+			longDesc: () => LocalizedString
+		}
+		Github: {
+			/**
+			 * Github
+			 */
+			displayName: () => LocalizedString
+			/**
+			 * Collection of actions to interact with Github API
+			 */
+			shortDesc: () => LocalizedString
+			/**
+			 * Collection of actions to interact with Github API
 			 */
 			longDesc: () => LocalizedString
 		}

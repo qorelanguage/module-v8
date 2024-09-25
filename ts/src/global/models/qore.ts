@@ -347,6 +347,10 @@ export interface IQoreAllowedValue<TypeValue = unknown> extends IQoreAppShared {
   value: TypeValue;
 }
 
+export type TQoreGetDependentOptionsFunction = (
+  context?: TQoreAppActionFunctionContext
+) => Record<string, IQoreAppActionOption> | Promise<Record<string, IQoreAppActionOption>>;
+
 export interface IQoreSharedObject<TypeName extends TQoreType = TQoreType, TypeValue = unknown>
   extends IQoreAppShared {
   // either a string or a data object again
@@ -366,6 +370,9 @@ export interface IQoreSharedObject<TypeName extends TQoreType = TQoreType, TypeV
 
   // a function that returns the allowed values for the field
   get_allowed_values?: TQoreGetAllowedValuesFunction<TypeValue>;
+
+  // a function that returns dependent options for the field
+  get_dependent_options?: TQoreGetDependentOptionsFunction;
 
   // the number of seconds to wait for the action to complete before timing out
   io_timeout_secs?: number;

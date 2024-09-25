@@ -1,4 +1,4 @@
-// import { QorusRequest } from '@qoretechnologies/ts-toolkit';
+import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 import { OpenAPIV2 } from 'openapi-types';
 import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
@@ -7,7 +7,6 @@ import { Locales } from '../../i18n/i18n-types';
 import eSignature from '../../schemas/esignature.swagger.json';
 import { IQoreConnectionOptions } from '../zendesk';
 import { ESIGNATURE_APP_NAME } from './constants';
-import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 /*
  * Returns the app object with all the actions ready to use, using translations
  * @param locale - the locale

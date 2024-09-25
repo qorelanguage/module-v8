@@ -3,9 +3,9 @@ import * as path from 'path';
 import { IQoreRestConnectionConfig } from '../global/models/qore';
 
 export interface IQoreTestApi {
-  createConnection: <T>(
+  createConnection: <CustomConnOptions>(
     app: string,
-    config?: { opts?: T & Partial<IQoreRestConnectionConfig> }
+    config?: { opts?: Record<keyof CustomConnOptions, any> & Partial<IQoreRestConnectionConfig> }
   ) => string;
   execAppAction: (
     app: string,

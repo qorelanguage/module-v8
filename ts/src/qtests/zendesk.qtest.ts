@@ -9,8 +9,12 @@ describe('Runs tests with Qore API', () => {
       connection = testApi.createConnection('zendesk', {
         opts: {
           subdomain: 'd3v-qoretechnologies',
+          username: 'filip.witosz@qoretechnologies.com/token',
+          password: 'xF1TpVCygW6ZjWXesPiR7jLFAfB3PV2UJMh4DJQ2',
         },
       });
+
+      expect(connection).toBeDefined();
     });
 
     // Go through the actions and run them, this will test that

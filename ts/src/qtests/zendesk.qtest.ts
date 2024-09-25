@@ -11,6 +11,7 @@ describe('Runs tests with Qore API', () => {
           subdomain: 'd3v-qoretechnologies',
           username: 'filip.witosz@qoretechnologies.com/token',
           password: 'xF1TpVCygW6ZjWXesPiR7jLFAfB3PV2UJMh4DJQ2',
+          oauth2_grant_type: 'password',
         },
       });
 

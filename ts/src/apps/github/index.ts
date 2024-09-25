@@ -1,4 +1,3 @@
-import { OpenAPIV2 } from 'openapi-types';
 import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
 import L from '../../i18n/i18n-node';
@@ -7,10 +6,7 @@ import github from '../../schemas/github.swagger.json';
 
 export const GITHUB_APP_NAME = 'Github';
 export const GITHUB_ALLOWED_PATHS = ['/issues'];
-export const GITHUB_ACTIONS = buildActionsFromSwaggerSchema(
-  github as OpenAPIV2.Document,
-  GITHUB_ALLOWED_PATHS
-);
+export const GITHUB_ACTIONS = buildActionsFromSwaggerSchema(github as any, GITHUB_ALLOWED_PATHS);
 
 /*
  * Returns the app object with all the actions ready to use, using translations

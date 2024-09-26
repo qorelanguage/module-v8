@@ -21,9 +21,13 @@ describe('Tests Github Actions', () => {
     it(`Testing the ${action.action} action`, () => {
       const response = testApi.execAppAction('github', action.action, connection);
 
-      console.log(response);
-
+      // There should be 2 issues and 1 pull request
       expect(response).toBeDefined();
+
+      // Check the response for the issues/list action
+      if (action.swagger_path === '/issues/GET') {
+        expect(response?.body?.length).toBe(3);
+      }
     });
   });
 });

@@ -248,6 +248,7 @@ class _PiecesAppCatalogue {
     getOptions: DynamicDropdownOptions<any>
   ): TQoreGetAllowedValuesFunction {
     return async (context: TQoreAppActionFunctionContext): Promise<IQoreAllowedValue[]> => {
+      console.log('Get allowed values context:', context);
       const auth = { access_token: context.conn_opts.token };
       const options = await getOptions({ auth });
 

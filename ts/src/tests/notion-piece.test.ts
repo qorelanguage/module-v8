@@ -383,14 +383,17 @@ describe('notionPieceTest', () => {
 
     if (actionFunction && page) {
       try {
-        const result = await retry(() =>
-          actionFunction(
-            {
-              pageId: pageId?.value || page.id,
-            },
-            {},
-            actionContext
-          )
+        const result = await retry(
+          () =>
+            actionFunction(
+              {
+                pageId: pageId?.value || page.id,
+              },
+              {},
+              actionContext
+            ),
+          3,
+          5000
         );
         expect(result).toBeDefined();
         const expectedResponseType = action.response_type;

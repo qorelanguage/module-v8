@@ -28,6 +28,9 @@ export default (locale: Locales) =>
     rest: {
       url: 'https://api.github.com/',
       data: 'json',
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
       oauth2_grant_type: 'authorization_code',
       oauth2_client_id: 'Ov23liR886f3UxFr2NVK',
       oauth2_client_secret: actionsCatalogue.getOauth2ClientSecret(GITHUB_APP_NAME),

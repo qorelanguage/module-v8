@@ -133,9 +133,9 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
     private *list<hash<AllowedValueInfo>> getReferenceDataImpl(string type, *hash<auto> action_opts) {
         if (*hash<AsyncCallInfo> ref_api = omap{type}) {
             *hash<RefDataContextInfo> arg = getCallContextInfo(action_opts);
-            info("Retrieving reference data for data provider %y type %y arg: %y", getName(), type, arg);
-            *softlist<auto> l = getAsyncValue(ref_api, );
-            info("Reference data for data provider %y type %y: %y", getName(), type, l);
+            debug("Retrieving reference data for data provider %y type %y arg: %y", getName(), type, arg);
+            *softlist<auto> l = getAsyncValue(ref_api, arg);
+            debug("Reference data for data provider %y type %y: %y", getName(), type, l);
             if (!l) {
                 return;
             }
@@ -198,7 +198,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         HashDataType type;
         foreach hash<auto> i in (slice.pairIterator()) {
             auto val = req{i.key};
-            info("Retrieving options dependent on option %y, value %y for data provider %y type %y", i.key, val,
+            debug("Retrieving options dependent on option %y, value %y for data provider %y type %y", i.key, val,
                 getName(), type);
             auto res = getAsyncValue(i.value, getCallContextInfo(req));
             if (!exists res) {
@@ -269,20 +269,33 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         JavaScriptProgram pgm = api.pool.get();
         on_exit {
             api.pool.release(pgm);
-            logger.info("TypeScriptActionApiDataProvider::getAsyncValue() released pgm %y", pgm.uniqueHash());
+            #logger.info("TypeScriptActionApiDataProvider::getAsyncValue() released pgm %y", pgm.uniqueHash());
         }
-        logger.info("TypeScriptActionApiDataProvider::getAsyncValue() acquired pgm %y", pgm.uniqueHash());
+        #logger.info("TypeScriptActionApiDataProvider::getAsyncValue() acquired pgm %y", pgm.uniqueHash());
 
-        auto v = call_function_args(api.async_call, args);
+        auto v;
+        try {
+            v = call_function_args(api.async_call, args);
+        } catch (hash<ExceptionInfo> ex) {
+            logger.error("Error making async JavaScript request %y: %s", api.label, get_exception_string(ex));
+            rethrow;
+        }
         auto rv;
         auto err;
         if (v instanceof JavaScriptPromise) {
-            v.then(sub (auto val) {
-                rv = val;
-            }, sub (auto e) {
-                err = e;
-            });
-            v.wait();
+            try {
+                v.then(sub (auto val) {
+                    rv = val;
+                }, sub (auto e) {
+                    err = e;
+                }).doCatch(sub (auto e) {
+                    err = e;
+                });
+                v.wait();
+            } catch (hash<ExceptionInfo> ex) {
+                logger.error("Error waiting for async JavaScript request %y: %s", api.label, get_exception_string(ex));
+                rethrow;
+            }
         } else {
             rv = v;
         }

@@ -104,6 +104,19 @@ JavaScriptPromise::wait() {
     p->wait(v8h);
 }
 
+//! Returns the result of the promise
+/** @return the result of the promise
+
+    @throw PROMISE-PENDING The Promise has not yet been resolved
+*/
+auto JavaScriptPromise::getResult() {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return p->getResult(v8h);
+}
+
 //! Calls the JavaScript method and returns the response
 /** @param m the method name
     @param ... any argument to the method

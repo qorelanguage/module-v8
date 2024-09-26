@@ -26,6 +26,7 @@ describe('Tests Github Actions', () => {
 
       // Check the response for the issues/list action
       if (action.swagger_path === '/issues/GET') {
+        console.log(response.body);
         expect(response?.body?.length).toBe(3);
       }
     });

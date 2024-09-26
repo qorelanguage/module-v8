@@ -72,6 +72,7 @@ class _PiecesAppCatalogue {
         url: auth.url,
         ping_method: auth.pingMethod,
         ping_path: auth.pingPath,
+        ping_headers: auth.pingHeaders,
         oauth2_auth_url: auth.authUrl,
         oauth2_token_url: auth.tokenUrl,
         oauth2_scopes: auth.scope,
@@ -210,8 +211,6 @@ class _PiecesAppCatalogue {
     return async (
       context: TQoreAppActionFunctionContext
     ): Promise<Record<string, IQoreAppActionOption>> => {
-      console.log('Dynamic options mapping context:', context);
-
       const pieceContext = {
         auth: { access_token: context.conn_opts.token, ...context.opts },
         ...context.opts,
@@ -228,8 +227,6 @@ class _PiecesAppCatalogue {
           options[key] = qoreOption;
         }
       }
-
-      console.log('Dynamic options mapping result:', options);
 
       return options;
     };

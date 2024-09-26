@@ -31,6 +31,9 @@ export const notionAuth = PieceAuth.OAuth2({
   extra: {
     owner: 'user',
   },
+  pingHeaders: {
+    'Notion-Version': '2022-02-22',
+  },
   oauth2TokenUseBasicAuth: true,
   url: 'https://api.notion.com',
   pingMethod: 'GET',

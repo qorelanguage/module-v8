@@ -35,6 +35,8 @@ const OAuth2ExtraProps = Type.Object({
   tokenUrl: Type.String(),
   url: Type.Optional(Type.String()),
   pingPath: Type.Optional(Type.String()),
+  headers: Type.Optional(Type.Record(Type.String(), Type.String())),
+  pingHeaders: Type.Optional(Type.Record(Type.String(), Type.String())),
   pingMethod: Type.Optional(Type.String()),
   scope: Type.Array(Type.String()),
   pkce: Type.Optional(Type.Boolean()),
@@ -55,6 +57,8 @@ type OAuth2ExtraProps = {
   pkce?: boolean;
   authorizationMethod?: OAuth2AuthorizationMethod;
   grantType?: OAuth2GrantType;
+  headers?: Record<string, string>;
+  pingHeaders?: Record<string, string>;
   extra?: Record<string, unknown>;
   oauth2TokenUseBasicAuth?: boolean;
 };

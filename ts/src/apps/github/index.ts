@@ -28,6 +28,7 @@ export default (locale: Locales) =>
       url: 'https://api.github.com/',
       data: 'json',
       oauth2_grant_type: 'authorization_code',
+      oauth2_client_id: 'Ov23liR886f3UxFr2NVK',
       oauth2_auth_url: 'https://github.com/login/oauth/authorize',
       oauth2_token_url: 'https://github.com/login/oauth/access_token',
       oauth2_scopes: ['repo', 'user'],

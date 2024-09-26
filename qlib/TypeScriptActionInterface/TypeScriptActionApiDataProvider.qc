@@ -132,8 +132,10 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
     */
     private *list<hash<AllowedValueInfo>> getReferenceDataImpl(string type, *hash<auto> action_opts) {
         if (*hash<AsyncCallInfo> ref_api = omap{type}) {
-            info("Retrieving reference data for data provider %y type %y", getName(), type);
-            *softlist<auto> l = getAsyncValue(ref_api, getCallContextInfo(action_opts));
+            *hash<RefDataContextInfo> arg = getCallContextInfo(action_opts);
+            info("Retrieving reference data for data provider %y type %y arg: %y", getName(), type, arg);
+            *softlist<auto> l = getAsyncValue(ref_api, );
+            info("Reference data for data provider %y type %y: %y", getName(), type, l);
             if (!l) {
                 return;
             }

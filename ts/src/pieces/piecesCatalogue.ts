@@ -251,6 +251,7 @@ class _PiecesAppCatalogue {
       console.log('Get allowed values context:', context);
       const auth = { access_token: context.conn_opts.token };
       const options = await getOptions({ auth });
+      console.log('Get allowed values - unformatted options:', options);
 
       return options.options.map((option) => ({
         value: option.value,

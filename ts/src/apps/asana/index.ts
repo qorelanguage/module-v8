@@ -1,9 +1,13 @@
-import { mapActionsToApp } from '../../global/helpers';
+import { actionsCatalogue } from '../../ActionsCatalogue';
+import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
 import L from '../../i18n/i18n-node';
 import { Locales } from '../../i18n/i18n-types';
-import * as asanaActions from './actions';
-import { ASANA_APP_NAME } from './constants';
+import asana from '../../schemas/asana.swagger.json';
+import { ASANA_ALLOWED_PATHS, ASANA_APP_NAME } from './constants';
+
+export const ASANA_ACTIONS = buildActionsFromSwaggerSchema(asana as any, ASANA_ALLOWED_PATHS);
+
 /*
  * Returns the app object with all the actions ready to use, using translations
  * @param locale - the locale
@@ -11,10 +15,10 @@ import { ASANA_APP_NAME } from './constants';
  */
 export default (locale: Locales) =>
   ({
-    display_name: L[locale].apps.Asana.displayName(),
-    short_desc: L[locale].apps.Asana.shortDesc(),
+    display_name: L[locale].apps[ASANA_APP_NAME].displayName(),
+    short_desc: L[locale].apps[ASANA_APP_NAME].shortDesc(),
     name: ASANA_APP_NAME,
-    actions: mapActionsToApp(ASANA_APP_NAME, asanaActions, locale),
+    actions: mapActionsToApp(ASANA_APP_NAME, ASANA_ACTIONS, locale),
     desc: L[locale].apps.Asana.longDesc(),
     logo:
       'PHN2ZyBpZD0ibG9nb3NhbmR0eXBlc19jb20iIGRhdGEtbmFtZT0ibG9nb3NhbmR0eXBlcyBjb20iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy' +
@@ -31,11 +35,13 @@ export default (locale: Locales) =>
       'EsNzguMzNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0wLjIpIi8+PC9zdmc+',
     logo_file_name: 'asana-logo.svg',
     logo_mime_type: 'image/svg+xml',
-    swagger: 'schemas/asana.swagger.yaml',
+    swagger: 'schemas/asana.swagger.json',
     rest: {
       url: 'https://app.asana.com',
       data: 'json',
       oauth2_grant_type: 'authorization_code',
+      oauth2_client_id: '1208416840087775',
+      oauth2_client_secret: actionsCatalogue.getOauth2ClientSecret(ASANA_APP_NAME),
       oauth2_auth_url: 'https://api.notion.com/v1/oauth/authorize',
       oauth2_token_url: 'https://api.notion.com/v1/oauth/token',
       oauth2_scopes: ['read', 'write'],

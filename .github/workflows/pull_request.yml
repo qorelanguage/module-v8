@@ -18,6 +18,7 @@ env:
   DROPBOX_CLIENT_SECRET: ${{ secrets.DROPBOX_CLIENT_SECRET }}
   NOTION_ACCESS_TOKEN: ${{ secrets.NOTION_ACCESS_TOKEN }}
   GH_PAT: ${{ secrets.GH_PAT }}
+  ASANA_PAT: ${{ secrets.ASANA_PAT }}
 
 jobs:
   PullRequestTests:

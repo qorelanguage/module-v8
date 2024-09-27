@@ -14,6 +14,8 @@ export const ASANA_ALLOWED_PATHS = [
   '/projects',
   '/projects/{project_gid}',
   '/projects/{project_gid}/tasks',
+  '/projects/{project_gid}/sections',
+  '/time_periods',
   '/sections',
   '/sections/{section_gid}',
   '/sections/{section_gid}/tasks',

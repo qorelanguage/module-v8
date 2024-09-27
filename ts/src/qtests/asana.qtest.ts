@@ -16,7 +16,7 @@ describe('Tests Asana Actions', () => {
   beforeAll(() => {
     connection = testApi.createConnection('asana', {
       opts: {
-        token: '2/1206353569757060/1208408375932574:c5e6c5ff5ce625c9f7c55d45787b0edc',
+        token: process.env.ASANA_PAT,
       },
     });
     expect(connection).toBeDefined();
@@ -31,7 +31,7 @@ describe('Tests Asana Actions', () => {
     expect(response.data).toBeDefined();
     expect(response.data.length).toBeGreaterThan(0);
 
-    workspaceId = response.data[1].gid;
+    workspaceId = response.data[0].gid;
   });
 
   it('Should get a workspace', async () => {
@@ -44,7 +44,6 @@ describe('Tests Asana Actions', () => {
 
     expect(response.data).toBeDefined();
     expect(response.data.gid).toBe(workspaceId);
-    console.log(response.data);
   });
 
   it('should update a workspace', async () => {

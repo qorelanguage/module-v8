@@ -189,6 +189,7 @@ export interface IQoreApp<
   rest_modifiers?: IQoreRestConnectionModifiers<RestModifierOptions>;
 
   swagger?: string;
+  swagger_options?: object;
 }
 
 export interface IQoreAppWithActions<

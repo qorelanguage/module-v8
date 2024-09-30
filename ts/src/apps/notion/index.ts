@@ -40,6 +40,9 @@ export default (locale: Locales) =>
     logo_file_name: 'notion-logo.svg',
     logo_mime_type: 'image/svg+xml',
     swagger: 'schemas/notion.swagger.yaml',
+    swagger_options: {
+        'parse_flags': 128,
+    },
     rest: {
       url: 'https://api.notion.com',
       data: 'json',

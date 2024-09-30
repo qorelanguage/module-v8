@@ -146,7 +146,9 @@ public class TypeScriptActionInterface {
         }
         SwaggerSchema schema;
         if ((*string swagger_loc = remove app.swagger).val()) {
-            schema = SwaggerLoader::fromString(FileLocationHandler::getTextFileFromLocation(swagger_loc));
+            *hash<auto> swagger_opts = remove app.swagger_options;
+            schema = SwaggerLoader::fromString(FileLocationHandler::getTextFileFromLocation(swagger_loc), NOTHING,
+                swagger_opts);
         }
         hash<auto> app0 += app;
         if (app.logo) {

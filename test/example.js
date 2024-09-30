@@ -2,7 +2,10 @@ exports.actionsCatalogue = {
     registerAppActions: function(api) {
         /** registerApp() takes the same arguments as DataProviderActionCatalog::registerApp() plus:
             - rest?: object -> documented below
-            - swagger? string -> a location to a Swagger 2.0 schema = OpenAPI 2.0
+            - swagger?: string -> a location to a Swagger 2.0 schema = OpenAPI 2.0
+            - swagger_options?: object -> an optional hash of swagger parsing options - the main option is
+              - "parse_flags": -1 -> this will turn on all lax parsing options - or you can use 128
+                (LM_ACCEPT_QUERY_OBJECTS = accept "object" as a valid type for query parameters like OpenAPI 3.0)
         */
         api.registerApp({
             "name": "js-test",

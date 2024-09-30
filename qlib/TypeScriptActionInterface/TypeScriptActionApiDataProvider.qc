@@ -277,7 +277,8 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         try {
             v = call_function_args(api.async_call, args);
         } catch (hash<ExceptionInfo> ex) {
-            logger.error("Error making async JavaScript request %y: %s", api.label, get_exception_string(ex));
+            logger.error("JAVASCRIPT-ASYNC-ERROR", "Error making async JavaScript request %y: %s", api.label,
+                get_exception_string(ex));
             rethrow;
         }
         auto rv;
@@ -293,7 +294,8 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
                 });
                 v.wait();
             } catch (hash<ExceptionInfo> ex) {
-                logger.error("Error waiting for async JavaScript request %y: %s", api.label, get_exception_string(ex));
+                logger.error("JAVASCRIPT-ASYNC-ERROR", "Error waiting for async JavaScript request %y: %s", api.label,
+                    get_exception_string(ex));
                 rethrow;
             }
         } else {

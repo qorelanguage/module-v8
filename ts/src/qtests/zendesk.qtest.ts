@@ -24,8 +24,6 @@ describe('Runs tests with Qore API', () => {
       it(`Testing the ${action.action} action`, () => {
         const response = testApi.execAppAction('zendesk', action.action, connection);
 
-        console.log(response);
-
         expect(response).toBeDefined();
       });
     });

@@ -28,6 +28,16 @@ const en = {
       shortDesc: 'Collection of actions to interact with Notion API',
       longDesc: 'Collection of actions to interact with Notion API',
     },
+    Jira: {
+      displayName: 'Jira',
+      shortDesc: 'Collection of actions to interact with Jira API',
+      longDesc: 'Collection of actions to interact with Jira API',
+    },
+    Stripe: {
+      displayName: 'Stripe',
+      shortDesc: 'Collection of actions to interact with Stripe API',
+      longDesc: 'Collection of actions to interact with Stripe API',
+    },
     Github: {
       displayName: 'Github',
       shortDesc: 'Collection of actions to interact with Github API',

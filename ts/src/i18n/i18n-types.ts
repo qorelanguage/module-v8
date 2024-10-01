@@ -68,6 +68,34 @@ type RootTranslation = {
 			 */
 			longDesc: string
 		}
+		Jira: {
+			/**
+			 * J​i​r​a
+			 */
+			displayName: string
+			/**
+			 * C​o​l​l​e​c​t​i​o​n​ ​o​f​ ​a​c​t​i​o​n​s​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​J​i​r​a​ ​A​P​I
+			 */
+			shortDesc: string
+			/**
+			 * C​o​l​l​e​c​t​i​o​n​ ​o​f​ ​a​c​t​i​o​n​s​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​J​i​r​a​ ​A​P​I
+			 */
+			longDesc: string
+		}
+		Stripe: {
+			/**
+			 * S​t​r​i​p​e
+			 */
+			displayName: string
+			/**
+			 * C​o​l​l​e​c​t​i​o​n​ ​o​f​ ​a​c​t​i​o​n​s​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​S​t​r​i​p​e​ ​A​P​I
+			 */
+			shortDesc: string
+			/**
+			 * C​o​l​l​e​c​t​i​o​n​ ​o​f​ ​a​c​t​i​o​n​s​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​S​t​r​i​p​e​ ​A​P​I
+			 */
+			longDesc: string
+		}
 		Github: {
 			/**
 			 * G​i​t​h​u​b
@@ -2028,6 +2056,34 @@ export type TranslationFunctions = {
 			shortDesc: () => LocalizedString
 			/**
 			 * Collection of actions to interact with Notion API
+			 */
+			longDesc: () => LocalizedString
+		}
+		Jira: {
+			/**
+			 * Jira
+			 */
+			displayName: () => LocalizedString
+			/**
+			 * Collection of actions to interact with Jira API
+			 */
+			shortDesc: () => LocalizedString
+			/**
+			 * Collection of actions to interact with Jira API
+			 */
+			longDesc: () => LocalizedString
+		}
+		Stripe: {
+			/**
+			 * Stripe
+			 */
+			displayName: () => LocalizedString
+			/**
+			 * Collection of actions to interact with Stripe API
+			 */
+			shortDesc: () => LocalizedString
+			/**
+			 * Collection of actions to interact with Stripe API
 			 */
 			longDesc: () => LocalizedString
 		}

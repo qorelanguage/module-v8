@@ -2,6 +2,8 @@
 import asana from '../apps/asana';
 import esignature from '../apps/esignature';
 import github from '../apps/github';
+import jira from '../apps/jira';
+import stripe from '../apps/stripe';
 import zendesk from '../apps/zendesk';
 import { Log } from '../decorators/Logger';
 import { IQoreApp, IQoreAppWithActions, TQoreAppAction, TQoreApps } from '../global/models/qore';
@@ -50,6 +52,8 @@ class ActionsCatalogue {
     this.apps['asana'] = asana(this.locale);
     this.apps['esignature'] = esignature(this.locale);
     this.apps['github'] = github(this.locale);
+    this.apps['jira'] = jira(this.locale);
+    this.apps['stripe'] = stripe(this.locale);
   }
 
   public getOauth2ClientSecret(appName: string): string {

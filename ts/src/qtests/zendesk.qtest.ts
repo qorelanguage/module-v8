@@ -11,7 +11,7 @@ describe('Runs tests with Qore API', () => {
           subdomain: process.env.ZENDESK_SUBDOMAIN,
           username: process.env.ZENDESK_USER,
           password: process.env.ZENDESK_API_KEY,
-          oauth2_grant_type: null,
+          oauth2_grant_type: 'none',
         },
       });
 

@@ -11,7 +11,7 @@ type TQoreRestContentEncoding = 'gzip' | 'bzip2' | 'deflate' | 'identity';
 
 type TQoreRestData = 'auto' | 'json' | 'yaml' | 'rawxml' | 'xml' | 'url' | 'text' | 'bin';
 
-type TQoreRestOauth2GrantType = 'authorization_code' | 'client_credentials' | 'password';
+type TQoreRestOauth2GrantType = 'authorization_code' | 'client_credentials' | 'password' | 'none';
 
 export interface IQoreRestConnectionConfig {
   // Specifies the encoding to be used for message bodies when sending requests.

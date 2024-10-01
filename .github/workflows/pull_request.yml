@@ -19,6 +19,7 @@ env:
   NOTION_ACCESS_TOKEN: ${{ secrets.NOTION_ACCESS_TOKEN }}
   GH_PAT: ${{ secrets.GH_PAT }}
   ASANA_PAT: ${{ secrets.ASANA_PAT }}
+  ASANA_WORKSPACE_ID: ${{ secrets.ASANA_WORKSPACE_ID }}
 
 jobs:
   PullRequestTests:

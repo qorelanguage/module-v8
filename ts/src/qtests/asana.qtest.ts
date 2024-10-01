@@ -19,6 +19,8 @@ describe('Tests Asana Actions', () => {
         token: process.env.ASANA_PAT,
       },
     });
+
+    workspaceId = process.env.ASANA_WORKSPACE_ID;
     expect(connection).toBeDefined();
   });
 
@@ -30,8 +32,6 @@ describe('Tests Asana Actions', () => {
     const response = await testApi.execAppAction('asana', action.action, connection);
     expect(response.data).toBeDefined();
     expect(response.data.length).toBeGreaterThan(0);
-
-    workspaceId = response.data[0].gid;
   });
 
   it('Should get a workspace', async () => {

@@ -17,7 +17,6 @@ describe('Tests Github Actions', () => {
   // Go through the actions and run them, this will test that
   // each action returns a valid response and does not throw an error
   GITHUB_ACTIONS.forEach((action) => {
-    console.log(action);
     it(`Testing the ${action.action} action`, () => {
       const response = testApi.execAppAction('github', action.action, connection);
 

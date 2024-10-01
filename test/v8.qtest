@@ -31,7 +31,7 @@ class V8Test inherits Test {
 var exports = {};
 var exec = require('child_process').exec;
 function test() {
-    console.log('about to call exec');
+    //console.log('about to call exec');
     exec('pwd', function callback(error, stdout, stderr) {
         exports.io = {
             'error': error,
@@ -477,6 +477,12 @@ function setValue(v) {
         js = new JavaScriptProgram("globalThis.val = [0, 'one', 2.1]", "test.js");
         assertEq((0, "one", 2.1), js.getGlobal().val);
 
+        js = new JavaScriptProgram("globalThis.val = {'a': null, 'b': 1}", "test.js");
+        assertEq({
+            "a": NOTHING,
+            "b": 1,
+        }, js.getGlobal().val.toData());
+
         JavaScriptObject o(js);
         assertEq("JavaScriptObject", o.className());
 
@@ -614,6 +620,22 @@ obj", "test.js");
         assertEq((1, 2, 3), o.a);
         h = o.toData();
         assertEq((1, 2, 3), h.a);
+
+        js = new JavaScriptProgram("var obj = {
+    a: [],
+};
+obj", "test.js");
+        o = js.getGlobal().obj;
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        assertEq((), o.a);
+        h = o.toData();
+        assertEq((), h.a);
+
+        js = new JavaScriptProgram("var obj = [];
+obj", "test.js");
+        auto l = js.getGlobal().obj;
+        assertEq((), l);
     }
 
     v8ExceptionTest() {

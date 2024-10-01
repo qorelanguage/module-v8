@@ -505,11 +505,19 @@ public class TypeScriptActionInterface {
             opts.url = sprintf("tsrest-%s://", app);
         }
         if (cmap{opts.name}) {
-            throw "TYPESCRIPT-ACTION-TEST-ERROR", sprintf("Duplicate connection name %y", opts.name);
+            throw "TYPESCRIPT-CONNECTION-ERROR", sprintf("Duplicate connection name %y", opts.name);
         }
         TypeScriptAppRestConnection conn(opts);
         cmap{opts.name} = conn;
         return opts.name;
+    }
+
+    #! Returns the connection object created with createConnection()
+    static AbstractConnection getConnection(string name) {
+        if (*AbstractConnection rv = cmap{name}) {
+            return rv;
+        }
+        throw "TYPESCRIPT-CONNECTION-ERROR", sprintf("No connection %y is available", name);
     }
 
     #! Executes the given app action with the given arguments
@@ -523,7 +531,7 @@ public class TypeScriptActionInterface {
     static auto execAppActionIntern(string app, string action, string connection, auto req, *hash<auto> request_options) {
         *TypeScriptAppRestConnection conn = cmap{connection};
         if (!conn) {
-            throw "TYPESCRIPT-ACTION-TEST-ERROR", sprintf("Unknown connection test %y; known test connections: %y",
+            throw "TYPESCRIPT-ACTION-ERROR", sprintf("Unknown connection %y; known connections: %y",
                 connection, keys cmap);
         }
 

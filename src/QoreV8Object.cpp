@@ -93,29 +93,17 @@ AbstractQoreNode* QoreV8Object::toData(QoreV8ProgramHelper& v8h, v8::Local<v8::V
     // check the first prop; if it's an integer, then it's an array
     uint32_t len = props->Length();
     if (!len) {
-        return new QoreHashNode(autoTypeInfo);
-    }
-    v8::MaybeLocal<v8::Value> first_prop = props->Get(v8h.getContext(), 0);
-    if (first_prop.IsEmpty()) {
-        if (v8h.checkException()) {
-            return nullptr;
+        if (obj->IsArray()) {
+            return new QoreListNode(autoTypeInfo);
+        } else {
+            return new QoreHashNode(autoTypeInfo);
         }
-        xsink->raiseException("OBJECT-TO-DATA-ERROR", "Initial property value is missing");
-        return nullptr;
-    }
-    v8::Local<v8::Value> first = first_prop.ToLocalChecked();
-    if (first->IsString()) {
-        return toHash(v8h, parent, objset, handle_scope.Escape(props), len);
-    } else if (first->IsUint32()) {
-        return toList(v8h, parent, objset, handle_scope.Escape(props), len);
     }
 
-    v8::Local<v8::String> str = first->TypeOf(isolate);
-    // Convert the result to an UTF8 string
-    v8::String::Utf8Value utf8(isolate, str);
-    xsink->raiseException("OBJECT-TO-DATA-ERROR", "Cannot handle objects with property key type \"%s\"; expecting "
-        "\"string\" or \"int\"", *utf8);
-    return nullptr;
+    if (obj->IsArray()) {
+        return toList(v8h, parent, objset, handle_scope.Escape(props), len);
+    }
+    return toHash(v8h, parent, objset, handle_scope.Escape(props), len);
 }
 
 QoreListNode* QoreV8Object::getPropertyList(QoreV8ProgramHelper& v8h) {

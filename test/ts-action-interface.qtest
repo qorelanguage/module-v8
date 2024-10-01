@@ -168,8 +168,10 @@ var obj = {
         assertEq("https://{{subdomain}}.example.com/oauth2/auth", conn.orig_opts.oauth2_auth_url);
 
         *hash<string, bool> fh = conn.getFeatures();
-        on_error printf("fh: %y\n", fh);
-        assertTrue(fh{RestConnection::RCF_OAUTH2_AUTH_CODE});
+        {
+            on_error printf("fh: %y\n", fh);
+            assertTrue(fh{RestConnection::RCF_OAUTH2_AUTH_CODE});
+        }
 
         AbstractDataProvider prov =
             TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("create-pet");
@@ -178,6 +180,18 @@ var obj = {
 
         #prov = TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("get-pet");
         #prov.doRequest({"id": 1});
+
+        string cname = TypeScriptActionInterface::createConnection("js-swagger-test", {} + {
+            "opts": {
+                "subdomain": "test",
+                "username": "x",
+                "password": "y",
+                "oauth2_grant_type": NOTHING,
+            },
+        });
+        assertRegex("^app-", cname);
+        conn = TypeScriptActionInterface::getConnection(cname);
+        assertNothing(conn.getRealOptions().oauth2_grant_type);
 
         config = {
             "name": "test",

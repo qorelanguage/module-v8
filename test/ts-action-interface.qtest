@@ -176,7 +176,7 @@ var obj = {
         AbstractDataProvider prov =
             TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("create-pet");
         AbstractDataProviderType t = prov.getRequestType();
-        assertEq(6, t.getField("body").getType().getFields().size());
+        assertEq(6, t.getFields().size());
 
         #prov = TypeScriptActionInterface::getDataProvider("js-swagger-test", conn).getChildProviderEx("get-pet");
         #prov.doRequest({"id": 1});

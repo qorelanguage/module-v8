@@ -144,6 +144,7 @@ public class TypeScriptActionInterface {
         if (app.name =~ / /) {
             throw "APP-ERROR", sprintf("App name %y is invalid; it contains one or more spaces", app.name);
         }
+        on_error printf("%s\n", get_exception_string($1));
         SwaggerSchema schema;
         if ((*string swagger_loc = remove app.swagger).val()) {
             *hash<auto> swagger_opts = remove app.swagger_options;
@@ -239,6 +240,10 @@ public class TypeScriptActionInterface {
     }
 
     static registerAction(hash<auto> action, JavaScriptProgramPool pool) {
+        on_error printf("%s\n", get_exception_string($1));
+
+        on_error rethrow $1.err, sprintf("%s (while registering action %y for app %y)", $1.desc, action.action,
+            action.app);
         TypeScriptActionInterface::generateDataProvider(\action, pool);
         DataProviderActionCatalog::registerAction(cast<hash<DataProviderActionInfo>>(action));
     }
@@ -366,6 +371,7 @@ public class TypeScriptActionInterface {
             reference<hash<string, hash<AsyncCallInfo>>> dmap, JavaScriptProgramPool pool) {
         hash<string, hash<ActionOptionInfo>> rv;
         foreach hash<auto> i in (opts.pairIterator()) {
+            on_error rethrow $1.err, sprintf("%s (while processing option %y)", $1.desc, i.key);
             date io_timeout = seconds(remove i.value.io_timeout_secs ?? DefaultIoTimeoutSecs);
             if (exists (auto get_allowed_values = remove i.value.get_allowed_values)) {
                 if (!get_allowed_values.callp()) {

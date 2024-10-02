@@ -56,11 +56,9 @@ describe('Tests Zendesk Actions', () => {
   it('Should update a ticket', () => {
     const response = testApi.execAppAction('zendesk', 'UpdateTicket', connection, {
       ticket_id: ticketID,
-      body: {
-        ticket: {
-          comment: {
-            body: 'The smoke is very colorful. And it smells like a rainbow.',
-          },
+      ticket: {
+        comment: {
+          body: 'The smoke is very colorful. And it smells like a rainbow.',
         },
       },
     });

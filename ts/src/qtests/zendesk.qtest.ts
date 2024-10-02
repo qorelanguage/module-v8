@@ -38,6 +38,8 @@ describe('Tests Zendesk Actions', () => {
       },
     });
 
+    console.log(response);
+
     expect(response).toHaveProperty('ticket.id');
     ticketID = response.ticket.id;
   });

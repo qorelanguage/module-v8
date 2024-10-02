@@ -112,6 +112,11 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         return map {$1: True}, keys omap;
     }
 
+    #! "Normalizes" the request and response for testing if necessary
+    auto makeNormalizedRequest(auto req, *hash<auto> request_options) {
+        return doRequest(req, request_options);
+    }
+
     #! Makes a request and returns the response
     /** @param req the request to serialize and make according to the request type
         @param request_options the request options; will be processed by validateRequestOptions()

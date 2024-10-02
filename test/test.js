@@ -22,9 +22,11 @@ exports.qtester = {
             },
         });
         res = testapi.execAppAction('js-swagger-test', 'create-pet', c, {
-            'id': 'Test',
-            'name': 'Rex',
-            'photoUrls': [],
+            'body': {
+                'id': 'Test',
+                'name': 'Rex',
+                'photoUrls': [],
+            },
         });
         if (res != true) {
             throw new Error('Err');

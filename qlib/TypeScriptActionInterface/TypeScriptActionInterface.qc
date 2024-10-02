@@ -544,7 +544,7 @@ public class TypeScriptActionInterface {
         TypeScriptActionApiDataProvider p =
             TypeScriptActionInterface::getDataProvider(app, conn).getChildProviderEx(action);
         try {
-            return p.doRequest(req, request_options);
+            return p.makeNormalizedRequest(req, request_options);
         } catch (hash<ExceptionInfo> ex) {
             #printf("%s\n", get_exception_string(ex));
             rethrow;

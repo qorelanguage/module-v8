@@ -59,6 +59,7 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         bool req_only_body;
     }
 
+    #! Creates the object from the arguments
     constructor(string name, SwaggerSchema schema, string swagger_path, *hash<AsyncCallInfo> api,
             *hash<string, bool> path_vars)
             : TypeScriptActionApiDataProvider(name, api) {
@@ -108,6 +109,18 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
                 "desc": sprintf("URI path variable %y", $1),
             })), keys path_vars;
         }
+    }
+
+    #! "Normalizes" the request and response for testing if necessary
+    auto makeNormalizedRequest(auto req, *hash<auto> request_options) {
+        if (req_only_body && req.hasKey("body")) {
+            req = req.body;
+        }
+        auto rv = doRequest(req, request_options);
+        if (res_only_body) {
+            rv.body = rv;
+        }
+        return rv;
     }
 
     #! Makes a request and returns the response

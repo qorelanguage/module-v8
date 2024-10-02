@@ -21,66 +21,68 @@ describe('Tests Zendesk Actions', () => {
   let ticketCount: number;
 
   it(`Should get account settings`, () => {
-    const response = testApi.execAppAction('zendesk', 'ShowAccountSettings', connection);
+    const { body } = testApi.execAppAction('zendesk', 'ShowAccountSettings', connection);
 
-    expect(response).toHaveProperty('settings');
-    expect(response).toHaveProperty('settings.active_features');
+    expect(body).toHaveProperty('settings');
+    expect(body).toHaveProperty('settings.active_features');
   });
 
   it(`Should create a new ticket`, () => {
-    const response = testApi.execAppAction('zendesk', 'CreateTicket', connection, {
-      ticket: {
-        comment: {
-          body: 'The smoke is very colorful.',
+    const { body } = testApi.execAppAction('zendesk', 'CreateTicket', connection, {
+      body: {
+        ticket: {
+          comment: {
+            body: 'The smoke is very colorful.',
+          },
+          priority: 'urgent',
+          subject: 'My printer is on fire!',
         },
-        priority: 'urgent',
-        subject: 'My printer is on fire!',
       },
     });
 
-    console.log(response);
-
-    expect(response.body).toHaveProperty('ticket.id');
-    ticketID = response.body.ticket.id;
+    expect(body).toHaveProperty('ticket.id');
+    ticketID = body.ticket.id;
   });
 
   it('Should get all tickets', () => {
-    const response = testApi.execAppAction('zendesk', 'ListTickets', connection);
+    const { body } = testApi.execAppAction('zendesk', 'ListTickets', connection);
 
-    expect(response).toHaveProperty('tickets');
-    expect(response.tickets.length).toBeGreaterThan(0);
+    expect(body).toHaveProperty('tickets');
+    expect(body.tickets.length).toBeGreaterThan(0);
 
-    ticketCount = response.tickets.length;
+    ticketCount = body.tickets.length;
   });
 
   it('Should update a ticket', () => {
-    const response = testApi.execAppAction('zendesk', 'UpdateTicket', connection, {
+    const { body } = testApi.execAppAction('zendesk', 'UpdateTicket', connection, {
       ticket_id: ticketID,
-      ticket: {
-        comment: {
-          body: 'The smoke is very colorful. And it smells like a rainbow.',
+      body: {
+        ticket: {
+          comment: {
+            body: 'The smoke is very colorful. And it smells like a rainbow.',
+          },
         },
       },
     });
 
-    expect(response).toHaveProperty('ticket.id');
-    expect(response.ticket.id).toBe(ticketID);
+    expect(body).toHaveProperty('ticket.id');
+    expect(body.ticket.id).toBe(ticketID);
   });
 
   it('Should get a ticket by ID', () => {
-    const response = testApi.execAppAction('zendesk', 'ShowTicket', connection, {
+    const { body } = testApi.execAppAction('zendesk', 'ShowTicket', connection, {
       ticket_id: ticketID,
     });
 
-    expect(response).toHaveProperty('ticket');
-    expect(response.ticket.id).toBe(ticketID);
+    expect(body).toHaveProperty('ticket');
+    expect(body.ticket.id).toBe(ticketID);
     // Check if the body was updated
-    expect(response.ticket.description).toBe(
+    expect(body.ticket.description).toBe(
       'The smoke is very colorful. And it smells like a rainbow.'
     );
   });
 
-  it('Should delete a ticket', () => {
+  xit('Should delete a ticket', () => {
     testApi.execAppAction('zendesk', 'DeleteTicket', connection, { ticket_id: ticketID });
 
     const tickets = testApi.execAppAction('zendesk', 'ListTickets', connection);

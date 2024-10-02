@@ -75,7 +75,7 @@ describe('Tests Zendesk Actions', () => {
     expect(response).toHaveProperty('ticket');
     expect(response.ticket.id).toBe(ticketID);
     // Check if the body was updated
-    expect(response.ticket.comment.body).toBe(
+    expect(response.ticket.description).toBe(
       'The smoke is very colorful. And it smells like a rainbow.'
     );
   });

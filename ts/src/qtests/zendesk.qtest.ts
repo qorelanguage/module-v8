@@ -54,6 +54,7 @@ describe('Tests Zendesk Actions', () => {
   });
 
   it('Should update a ticket', () => {
+    console.log('Updating ticket', ticketID);
     const { body } = testApi.execAppAction('zendesk', 'UpdateTicket', connection, {
       ticket_id: ticketID,
       body: {
@@ -64,6 +65,8 @@ describe('Tests Zendesk Actions', () => {
         },
       },
     });
+
+    console.log('Updated ticket', body);
 
     expect(body).toHaveProperty('ticket.id');
     expect(body.ticket.id).toBe(ticketID);

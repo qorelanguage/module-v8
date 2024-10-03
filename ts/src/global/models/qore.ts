@@ -110,6 +110,9 @@ export interface IQoreRestConnectionConfig {
   username?: string;
 
   oauth2_token_use_basic_auth?: boolean;
+
+  // The base path for the Swagger API.
+  swagger_base_path?: string;
 }
 
 export interface IQoreConnectionOption<

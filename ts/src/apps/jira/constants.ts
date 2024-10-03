@@ -27,10 +27,10 @@ export const JIRA_ALLOWED_PATHS = [
 export const JIRA_SWAGGER_API_PATH = '/rest/api/3/';
 
 export const JIRA_CONN_OPTIONS = {
-  subdomain: {
-    display_name: 'Subdomain',
-    short_desc: 'The subdomain for the URL',
-    desc: 'The subdomain for the URL',
+  cloud_id: {
+    display_name: 'Cloud ID',
+    short_desc: 'The cloud ID',
+    desc: 'The cloud ID',
     type: 'string',
   },
 } satisfies IQoreConnectionOptions;

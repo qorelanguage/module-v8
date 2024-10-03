@@ -1,3 +1,4 @@
+import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 import { actionsCatalogue } from '../../ActionsCatalogue';
 import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
@@ -43,20 +44,57 @@ export default (locale: Locales) =>
       parse_flags: -1,
     },
     rest: {
-      url: 'https://{{subdomain}}}.atlassian.net',
+      url: 'https://api.atlassian.com/ex/jira/{cloud_id}',
       data: 'json',
       oauth2_grant_type: 'authorization_code',
-      oauth2_client_id: '1208416840087775',
+      oauth2_client_id: 'kmvUW6HHUljPnUfYqeRfy1c1AWcE3IqY',
       oauth2_client_secret: actionsCatalogue.getOauth2ClientSecret(JIRA_APP_NAME),
-      oauth2_auth_url: 'https://{{subdomain}}}.atlassian.net/rest/oauth2/latest/authorize',
-      oauth2_token_url: 'https://{{subdomain}}}.atlassian.net/rest/oauth2/latest/token',
-      oauth2_scopes: ['read', 'write'],
+      oauth2_auth_url: 'https://auth.atlassian.com/authorize',
+      oauth2_token_url: 'https://auth.atlassian.com/oauth/token',
+      oauth2_auth_args: {
+        audience: 'api.atlassian.com',
+      },
+      oauth2_scopes: [
+        'read:jira-user',
+        'read:jira-work',
+        'write:jira-work',
+        'manage:jira-project',
+        'manage:jira-configuration',
+        'manage:jira-data-provider',
+        'manage:jira-webhook',
+        'read:me',
+        'read:account',
+        'read:servicedesk-request',
+        'manage:servicedesk-customer',
+        'write:servicedesk-request',
+        'read:servicemanagement-insight-objects',
+      ],
       ping_method: 'GET',
       ping_path: '/rest/api/3/myself',
     },
     rest_modifiers: {
       options: JIRA_CONN_OPTIONS,
-      required_options: 'subdomain',
-      url_template_options: ['subdomain'],
+      set_options_post_auth: async (context) => {
+        const userAccounts = await QorusRequest.get<Record<string, any>>(
+          {
+            path: '/oauth/token/accessible-resources',
+            headers: {
+              Authorization: `Bearer ${context.conn_opts.token}`,
+            },
+          },
+          {
+            url: 'https://api.atlassian.com',
+            endpointId: 'Atlassian',
+          }
+        );
+        const userInfo = userAccounts[0];
+
+        if ('id' in userInfo) {
+          return {
+            cloud_id: userInfo.id,
+          };
+        }
+      },
+      url_template_options: ['cloud_id'],
     },
   }) satisfies IQoreAppWithActions;

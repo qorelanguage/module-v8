@@ -17,7 +17,7 @@ describe('Tests Zendesk Actions', () => {
     expect(connection).toBeDefined();
   });
 
-  it('Should test Ticket Actions', () => {
+  describe('Should test Ticket Actions', () => {
     let ticketID: number;
     let ticketCount: number;
 
@@ -89,7 +89,7 @@ describe('Tests Zendesk Actions', () => {
     });
   });
 
-  it('Should test User Actions', () => {
+  describe('Should test User Actions', () => {
     let usersCount: number;
     let userID: number;
 

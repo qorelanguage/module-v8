@@ -158,4 +158,138 @@ describe('Tests Zendesk Actions', () => {
       expect(users.users.length).toBe(usersCount - 1);
     });
   });
+
+  describe('Should test Organization Actions', () => {
+    let orgID: number;
+    let orgCount: number;
+
+    it('Should get all organizations', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListOrganizations', connection);
+
+      expect(body).toHaveProperty('organizations');
+      expect(body.organizations.length).toBeGreaterThan(0);
+
+      orgCount = body.organizations.length;
+    });
+
+    it(`Should create a new organization`, () => {
+      const { body } = testApi.execAppAction('zendesk', 'CreateOrganization', connection, {
+        body: {
+          organization: {
+            name: 'ACME Inc.',
+          },
+        },
+      });
+
+      expect(body).toHaveProperty('organization.id');
+
+      orgID = body.organization.id;
+
+      const orgs = testApi.execAppAction('zendesk', 'ListOrganizations', connection);
+
+      expect(orgs.organizations.length).toBe(orgCount + 1);
+
+      orgCount = orgs.organizations.length;
+    });
+
+    it('Should get an organization by ID', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ShowOrganization', connection, {
+        organization_id: orgID,
+      });
+
+      expect(body).toHaveProperty('organization');
+      expect(body.organization.id).toBe(orgID);
+    });
+
+    it('Should update an organization', () => {
+      const { body } = testApi.execAppAction('zendesk', 'UpdateOrganization', connection, {
+        organization_id: orgID,
+        body: {
+          organization: {
+            name: 'ACME Corp.',
+          },
+        },
+      });
+
+      expect(body).toHaveProperty('organization.id');
+      expect(body.organization.id).toBe(orgID);
+      expect(body.organization.name).toBe('ACME Corp.');
+    });
+
+    it('Should delete an organization', () => {
+      testApi.execAppAction('zendesk', 'DeleteOrganization', connection, {
+        organization_id: orgID,
+      });
+
+      const orgs = testApi.execAppAction('zendesk', 'ListOrganizations', connection);
+
+      expect(orgs.organizations.length).toBe(orgCount - 1);
+    });
+  });
+
+  describe('Should test Group Actions', () => {
+    let groupID: number;
+    let groupCount: number;
+
+    it('Should get all groups', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListGroups', connection);
+
+      expect(body).toHaveProperty('groups');
+      expect(body.groups.length).toBeGreaterThan(0);
+
+      groupCount = body.groups.length;
+    });
+
+    it(`Should create a new group`, () => {
+      const { body } = testApi.execAppAction('zendesk', 'CreateGroup', connection, {
+        body: {
+          group: {
+            name: 'Support',
+          },
+        },
+      });
+
+      expect(body).toHaveProperty('group.id');
+
+      groupID = body.group.id;
+
+      const groups = testApi.execAppAction('zendesk', 'ListGroups', connection);
+
+      expect(groups.groups.length).toBe(groupCount + 1);
+
+      groupCount = groups.groups.length;
+    });
+
+    it('Should get a group by ID', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ShowGroup', connection, {
+        group_id: groupID,
+      });
+
+      expect(body).toHaveProperty('group');
+      expect(body.group.id).toBe(groupID);
+    });
+
+    it('Should update a group', () => {
+      const { body } = testApi.execAppAction('zendesk', 'UpdateGroup', connection, {
+        group_id: groupID,
+        body: {
+          group: {
+            name: 'Support Team',
+          },
+        },
+      });
+
+      expect(body).toHaveProperty('group.id');
+      expect(body.group.id).toBe(groupID);
+      expect(body.group.name).toBe('Support Team');
+    });
+
+    it('Should delete a group', () => {
+      testApi.execAppAction('zendesk', 'DeleteGroup', connection, { group_id: groupID });
+
+      const groups = testApi.execAppAction('zendesk', 'ListGroups', connection);
+
+      expect(groups.groups.length).toBe(groupCount - 1);
+    });
+  });
 });

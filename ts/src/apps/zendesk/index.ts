@@ -36,8 +36,6 @@ export const ZENDESK_ALLOWED_PATHS = [
   '/api/v2/deleted_users/{deleted_user_id}',
   '/api/v2/organizations',
   '/api/v2/organizations/{organization_id}',
-  '/api/v2/groups',
-  '/api/v2/groups/{group_id}',
   '/api/v2/views',
   '/api/v2/views/{view_id}',
   '/api/v2/requests',

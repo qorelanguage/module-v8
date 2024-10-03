@@ -206,7 +206,7 @@ describe('Tests Zendesk Actions', () => {
         organization_id: orgID,
         body: {
           organization: {
-            name: 'ACME Corp.',
+            notes: 'Updated organization',
           },
         },
       });
@@ -227,69 +227,75 @@ describe('Tests Zendesk Actions', () => {
     });
   });
 
-  describe('Should test Group Actions', () => {
-    let groupID: number;
-    let groupCount: number;
+  describe('Should test Macro Actions', () => {
+    let macroID: number;
+    let macroCount: number;
 
-    it('Should get all groups', () => {
-      const { body } = testApi.execAppAction('zendesk', 'ListGroups', connection);
+    it('Should get all macros', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListMacros', connection);
 
-      expect(body).toHaveProperty('groups');
-      expect(body.groups.length).toBeGreaterThan(0);
+      expect(body).toHaveProperty('macros');
+      expect(body.macros.length).toBeGreaterThan(0);
 
-      groupCount = body.groups.length;
+      macroCount = body.macros.length;
     });
 
-    it(`Should create a new group`, () => {
-      const { body } = testApi.execAppAction('zendesk', 'CreateGroup', connection, {
+    it(`Should create a new macro`, () => {
+      const { body } = testApi.execAppAction('zendesk', 'CreateMacro', connection, {
         body: {
-          group: {
-            name: 'Support',
+          macro: {
+            title: 'Test Macro',
+            actions: [
+              {
+                field: 'status',
+                value: 'open',
+              },
+            ],
           },
         },
       });
 
-      expect(body).toHaveProperty('group.id');
+      expect(body).toHaveProperty('macro.id');
 
-      groupID = body.group.id;
+      macroID = body.macro.id;
 
-      const groups = testApi.execAppAction('zendesk', 'ListGroups', connection);
+      const macros = testApi.execAppAction('zendesk', 'ListMacros', connection);
 
-      expect(groups.groups.length).toBe(groupCount + 1);
+      expect(macros.macros.length).toBe(macroCount + 1);
 
-      groupCount = groups.groups.length;
+      macroCount = macros.macros.length;
     });
 
-    it('Should get a group by ID', () => {
-      const { body } = testApi.execAppAction('zendesk', 'ShowGroup', connection, {
-        group_id: groupID,
+    it('Should get a macro by ID', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ShowMacro', connection, {
+        macro_id: macroID,
       });
 
-      expect(body).toHaveProperty('group');
-      expect(body.group.id).toBe(groupID);
+      expect(body).toHaveProperty('macro');
+      expect(body.macro.id).toBe(macroID);
     });
 
-    it('Should update a group', () => {
-      const { body } = testApi.execAppAction('zendesk', 'UpdateGroup', connection, {
-        group_id: groupID,
+    it('Should update a macro', () => {
+      const { body } = testApi.execAppAction('zendesk', 'UpdateMacro', connection, {
+        macro_id: macroID,
         body: {
-          group: {
-            name: 'Support Team',
+          macro: {
+            title: 'Updated Macro',
           },
         },
       });
 
-      expect(body).toHaveProperty('group.id');
-      expect(body.group.id).toBe(groupID);
-      expect(body.group.name).toBe('Support Team');
+      expect(body).toHaveProperty('macro.id');
+      expect(body.macro.id).toBe(macroID);
+      expect(body.macro.title).toBe('Updated Macro');
     });
 
-    it('Should delete a group', () => {
-      testApi.execAppAction('zendesk', 'DeleteGroup', connection, { group_id: groupID });
+    it('Should delete a macro', () => {
+      testApi.execAppAction('zendesk', 'DeleteMacro', connection, { macro_id: macroID });
 
-      const groups = testApi.execAppAction('zendesk', 'ListGroups', connection);
+      const macros = testApi.execAppAction('zendesk', 'ListMacros', connection);
 
-      expect(groups.groups.length).toBe(groupCount - 1);
+      expect(macros.macros.length).toBe(macroCount - 1);
     });
   });
 });

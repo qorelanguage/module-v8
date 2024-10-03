@@ -143,6 +143,9 @@ describe('Tests Zendesk Actions', () => {
 
     it('Should delete a user', () => {
       testApi.execAppAction('zendesk', 'DeleteUser', connection, { user_id: userID });
+      testApi.execAppAction('zendesk', 'PermanentlyDeleteUser', connection, {
+        deleted_user_id: userID,
+      });
 
       const users = testApi.execAppAction('zendesk', 'ListUsers', connection);
 

@@ -1,11 +1,6 @@
 export const STRIPE_APP_NAME = 'Stripe';
 export const STRIPE_ALLOWED_PATHS = [
   '/v1/account',
-  '/v1/account_links',
-  '/v1/accounts/{account}',
-  '/v1/accounts/{account}/login_links',
-  '/v1/accounts/{account}/people',
-  '/v1/accounts/{account}/external_accounts',
   '/v1/balance',
   '/v1/balance/history',
   '/v1/balance/history/{id}',

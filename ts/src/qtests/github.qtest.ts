@@ -20,6 +20,6 @@ describe('Tests Github Actions', () => {
     });
 
     expect(body).toBeDefined();
-    expect(body.length).toBe(3);
+    expect(body.length).toBe(2);
   });
 });

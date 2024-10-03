@@ -49,7 +49,7 @@ class TypeScriptActionInterfacePriv {
                             pgm.getGlobal().exports.actionsCatalogue.registerAppActions(
                                 TypeScriptActionInterface::Api
                             );
-                        }, 1
+                        },
                     );
                     pstore{pool.uniqueHash()} = pool;
                 } catch (hash<ExceptionInfo> ex) {
@@ -72,10 +72,24 @@ class TypeScriptActionInterfacePriv {
                     }
                     JavaScriptProgramPool pool("var exports = {};\n" + File::readTextFile(basename(path)), path,
                         sub (JavaScriptProgram pgm) {
-                            pgm.getGlobal().exports.qtester.run(
+                            auto v = pgm.getGlobal().exports.qtester.run(
                                 TypeScriptActionInterface::TestApi
                             );
-                        }, 1
+                            #printf("qtester.run() returned: %y\n", v);
+                            auto rv;
+                            if (v instanceof JavaScriptPromise) {
+                                v.then(sub (auto val) {
+                                    rv.result = val;
+                                }, sub (auto e) {
+                                    rv.error = e;
+                                });
+                                # waiting on Promise and waiting on I/O
+                                #printf("qtester.run() waiting on Promise\n");
+                                v.wait();
+                            } else {
+                                rv = v;
+                            }
+                        },
                     );
                     pstore{pool.uniqueHash()} = pool;
                 } catch (hash<ExceptionInfo> ex) {

@@ -53,9 +53,13 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         *hash<string, bool> path_vars;
 
         #! If the response only has a body key
-        bool only_body;
+        bool res_only_body;
+
+        #! If the request only has a body key
+        bool req_only_body;
     }
 
+    #! Creates the object from the arguments
     constructor(string name, SwaggerSchema schema, string swagger_path, *hash<AsyncCallInfo> api,
             *hash<string, bool> path_vars)
             : TypeScriptActionApiDataProvider(name, api) {
@@ -66,10 +70,18 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
             prov = new SwaggerDataProvider(schema).getChildProviderPath(swagger_path);
         }
         request_type = prov.getRequestType();
+        if (request_type && (*hash<string, AbstractDataField> fields = request_type.getFields())
+            && fields.size() == 1 && fields.body) {
+            *AbstractDataProviderType t = fields.body.getType();
+            if (!path_vars || !t || !t.getFields(){keys path_vars}) {
+                req_only_body = True;
+                request_type = t;
+            }
+        }
         response_type = prov.getResponseType();
         if (response_type && (*hash<string, AbstractDataField> fields = response_type.getFields())
             && fields.size() == 1 && fields.body) {
-            only_body = True;
+            res_only_body = True;
             response_type = fields.body.getType();
         }
 
@@ -99,6 +111,18 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         }
     }
 
+    #! "Normalizes" the request and response for testing if necessary
+    auto makeNormalizedRequest(auto req, *hash<auto> request_options) {
+        if (req_only_body && req.hasKey("body")) {
+            req = req.body + (req - "body");
+        }
+        auto rv = doRequest(req, request_options);
+        if (res_only_body) {
+            rv.body = rv;
+        }
+        return rv;
+    }
+
     #! Makes a request and returns the response
     /** @param req the request to serialize and make according to the request type
         @param request_options the request options; will be processed by validateRequestOptions()
@@ -114,8 +138,13 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
                 req -= keys path_vars;
                 request_options.path_vars = vars;
             }
+            if (req_only_body) {
+                req = {
+                    "body": req,
+                };
+            }
             auto rv = prov.doRequest(req, request_options);
-            return only_body ? rv.body : rv;
+            return res_only_body ? rv.body : rv;
         }
         return getAsyncValue(api, req, request_options, getCallContextInfo());
     }

@@ -16,12 +16,37 @@ class V8Test inherits Test {
     }
 
     constructor() : Test("v8 test", "1.0") {
+        addTestCase("process", \processTest());
         addTestCase("io test", \ioTest());
         addTestCase("async test", \asyncTest());
         addTestCase("v8 program test", \v8ProgramTest());
         addTestCase("exception test", \v8ExceptionTest());
         # Set return value for compatibility with test harnesses that check the return value
         set_return_value(main());
+    }
+
+    processTest() {
+        {
+            JavaScriptProgram js("
+var exports = {};
+var exec = require('child_process').exec;
+function test() {
+    //console.log('about to call exec');
+    exec('pwd', function callback(error, stdout, stderr) {
+        exports.io = {
+            'error': error,
+            'stdout': stdout,
+            'stderr': stderr,
+        };
+    });
+}
+", "test.js");
+            JavaScriptObject global = js.getGlobal();
+            code test = global.test.toData();
+            test();
+            js.spinOnce();
+            assertEq(Type::String, global.exports.io.toData().stdout.type());
+        }
     }
 
     ioTest() {
@@ -48,7 +73,6 @@ async function doPromise0() {
             v0.then(sub (auto v) { rv0 = v.toData(); });
             assertTrue(v0.hasHandler());
             assertEq(Pending, v0.getState());
-            js.spinOnce();
             v0.wait();
             assertEq(Type::Hash, rv0.type());
 
@@ -56,7 +80,6 @@ async function doPromise0() {
             v0.then(sub (auto v) { rv0 = v.toData(); });
             assertTrue(v0.hasHandler());
             assertEq(Pending, v0.getState());
-            js.spinOnce();
             v0.wait();
             assertEq(Type::Hash, rv0.type());
         }
@@ -100,7 +123,6 @@ async function doPromise1() {
             v1.then(sub (auto v) { rv1 = v.toData(); });
             assertTrue(v0.hasHandler());
             assertTrue(v1.hasHandler());
-            js.spinOnce();
             v0.wait();
             v1.wait();
             assertEq(Type::Hash, rv0.type());
@@ -112,7 +134,6 @@ async function doPromise1() {
             v1.then(sub (auto v) { rv1 = v.toData(); });
             assertTrue(v0.hasHandler());
             assertTrue(v1.hasHandler());
-            js.spinOnce();
             v0.wait();
             v1.wait();
             assertEq(Type::Hash, rv0.type());
@@ -140,7 +161,6 @@ async function doPromise0() {
             });
             assertTrue(v0.hasHandler());
             assertEq(Pending, v0.getState());
-            js.spinOnce();
             v0.wait();
             assertEq(Type::Hash, err.type());
 
@@ -152,7 +172,6 @@ async function doPromise0() {
             });
             assertTrue(v0.hasHandler());
             assertEq(Pending, v0.getState());
-            js.spinOnce();
             v0.wait();
             assertEq(Type::Hash, err.type());
         }
@@ -239,7 +258,6 @@ function doPromise() {
             v.then(sub (auto v) {
                 val = v;
             });
-            js.spinOnce();
             v.wait();
             assertEq(100, val);
         }
@@ -269,7 +287,6 @@ async function doAsync(a, err) {
                 throw "ERR";
             });
             assertTrue(v.hasHandler());
-            js.spinOnce();
             v.wait();
             printf("err: %y\n", err.toData());
             assertEq(1, val);
@@ -460,6 +477,12 @@ function setValue(v) {
         js = new JavaScriptProgram("globalThis.val = [0, 'one', 2.1]", "test.js");
         assertEq((0, "one", 2.1), js.getGlobal().val);
 
+        js = new JavaScriptProgram("globalThis.val = {'a': null, 'b': 1}", "test.js");
+        assertEq({
+            "a": NOTHING,
+            "b": 1,
+        }, js.getGlobal().val.toData());
+
         JavaScriptObject o(js);
         assertEq("JavaScriptObject", o.className());
 
@@ -597,6 +620,22 @@ obj", "test.js");
         assertEq((1, 2, 3), o.a);
         h = o.toData();
         assertEq((1, 2, 3), h.a);
+
+        js = new JavaScriptProgram("var obj = {
+    a: [],
+};
+obj", "test.js");
+        o = js.getGlobal().obj;
+        assertEq(NT_OBJECT, o.typeCode());
+        assertEq("JavaScriptObject", o.className());
+        assertEq((), o.a);
+        h = o.toData();
+        assertEq((), h.a);
+
+        js = new JavaScriptProgram("var obj = [];
+obj", "test.js");
+        auto l = js.getGlobal().obj;
+        assertEq((), l);
     }
 
     v8ExceptionTest() {

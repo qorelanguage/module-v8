@@ -32,6 +32,8 @@
 #include "QoreV8Promise.h"
 #include "QoreV8Program.h"
 
+#include <uv.h>
+
 QoreV8Promise::QoreV8Promise(ExceptionSink* xsink, QoreV8Program* pgm, v8::Local<v8::Promise> obj)
         : QoreV8Object(pgm, obj) {
 }
@@ -45,13 +47,13 @@ int QoreV8Promise::wait(QoreV8ProgramHelper& v8h) {
     v8::Local<v8::Promise> p = get();
     if (p->HasHandler()) {
         while (p->State() == v8::Promise::kPending) {
+            v8h.getProgram()->spinOnce();
             isolate->PerformMicrotaskCheckpoint();
         }
     }
     return 0;
 }
 
-/*
 QoreValue QoreV8Promise::getResult(QoreV8ProgramHelper& v8h) {
     v8::Local<v8::Promise> p = get();
     ExceptionSink* xsink = v8h.getExceptionSink();
@@ -61,7 +63,6 @@ QoreValue QoreV8Promise::getResult(QoreV8ProgramHelper& v8h) {
     }
     return v8h.getProgram()->getQoreValue(v8h.getExceptionSink(), p->Result());
 }
-*/
 
 static void resolve_promise(const v8::FunctionCallbackInfo<v8::Value>& info) {
     // NOTE: we ignore arguments in info in these callbacks

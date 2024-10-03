@@ -24,6 +24,44 @@
 
 #! Main namespace for the TypeScriptActionInterface module
 public namespace TypeScriptActionInterface {
+#! Generic REST client class for apps provided by the TypeScript API
+public class TypeScriptAppRestClient inherits RestClient {
+    private {
+        TypeScriptAppRestConnection conn;
+        *hash<AsyncCallInfo> post_auth;
+    }
+
+    #! calls the base class HTTPClient constructor and optionally connects to the REST server
+    constructor(TypeScriptAppRestConnection conn, *hash<auto> opts, *softbool do_not_connect)
+            : RestClient(opts, do_not_connect) {
+        self.conn := conn;
+        post_auth = TypeScriptActionInterface::getPostAuthCall(conn.getAppName());
+    }
+
+    #! Returns options to update after an OAuth2 login
+    /** @since %RestClient 2.0
+    */
+    private *hash<auto> getUpdateOptionsAfterLogin(hash<auto> h) {
+        *hash<auto> rv = RestClient::getUpdateOptionsAfterLogin(h);
+        if (post_auth) {
+            rv += TypeScriptActionApiDataProvider::getAsyncValueArgs(self, post_auth, {
+                "conn_name": conn.name,
+                "conn_opts": conn.getRealOptions(),
+            });
+
+            hash<auto> config = {
+                "url": getURL(),
+                "opts": conn.getRealOptions() + rv,
+            };
+            config = TypeScriptActionInterface::getRestConfig(conn.getAppName(), config);
+            if (config.url.val()) {
+                setURL(AbstractConnection::getRealUrl(config.url, conn.getConnectionSchemeInfo(), conn.getType()));
+            }
+        }
+        return rv;
+    }
+}
+
 #! Generic class for app REST connection for an app provided by the TypeScript API
 public class TypeScriptAppRestConnection inherits RestConnection {
     private {
@@ -74,6 +112,11 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     */
     constructor(hash<auto> config, *hash<auto> attr)
             : RestConnection(TypeScriptAppRestConnection::getConfig(config), attr) {
+    }
+
+    #! Returns the app name
+    string getAppName() {
+        return app;
     }
 
     #! returns the type
@@ -157,7 +200,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
 
         @return a @ref TypeScriptAppRestConnection object
     */
-    private RestClient getImpl(bool connect = True, *hash<auto> rtopts) {
+    private TypeScriptAppRestClient getImpl(bool connect = True, *hash<auto> rtopts) {
         *hash<auto> opts = getConnectionOptions();
         if (url_template_options) {
             foreach string opt in ("oauth2_auth_url", "oauth2_token_url") {
@@ -166,7 +209,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
                 }
             }
         }
-        return new RestClient(opts, !connect);
+        return new TypeScriptAppRestClient(self, opts, !connect);
     }
 
     #! Returns the ConnectionSchemeInfo hash for this object

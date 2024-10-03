@@ -54,7 +54,7 @@ public:
 
     DLLLOCAL v8::Promise::PromiseState getState(QoreV8ProgramHelper& v8h);
 
-    //DLLLOCAL QoreValue getResult(QoreV8ProgramHelper& v8h);
+    DLLLOCAL QoreValue getResult(QoreV8ProgramHelper& v8h);
 
 protected:
     DLLLOCAL v8::MaybeLocal<v8::Function> getPromiseFunction(QoreV8ProgramHelper& v8h,

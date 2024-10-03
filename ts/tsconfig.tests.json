@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "dist", "src/i18n"],
+  "compilerOptions": {
+    "rootDir": "./src"
+  }
+}

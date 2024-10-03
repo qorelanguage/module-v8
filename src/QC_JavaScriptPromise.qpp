@@ -93,7 +93,8 @@ int JavaScriptPromise::getState() {
 }
 
 //! Waits for the promise to resolve
-/**
+/** This also ensures that any background I/O is executed by spinning the UV event loop while waiting for the Promise
+    to resolve
 */
 JavaScriptPromise::wait() {
     QoreV8ProgramHelper v8h(xsink, p->getProgram());
@@ -101,6 +102,19 @@ JavaScriptPromise::wait() {
         return QoreValue();
     }
     p->wait(v8h);
+}
+
+//! Returns the result of the promise
+/** @return the result of the promise
+
+    @throw PROMISE-PENDING The Promise has not yet been resolved
+*/
+auto JavaScriptPromise::getResult() {
+    QoreV8ProgramHelper v8h(xsink, p->getProgram());
+    if (*xsink) {
+        return QoreValue();
+    }
+    return p->getResult(v8h);
 }
 
 //! Calls the JavaScript method and returns the response

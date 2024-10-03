@@ -115,6 +115,12 @@ describe('Tests Zendesk Actions', () => {
       expect(body).toHaveProperty('user.id');
 
       userID = body.user.id;
+
+      const users = testApi.execAppAction('zendesk', 'ListUsers', connection);
+
+      expect(users.users.length).toBe(usersCount + 1);
+
+      usersCount = users.users.length;
     });
 
     it('Should get a user by ID', () => {

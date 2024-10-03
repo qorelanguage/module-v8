@@ -59,14 +59,10 @@ describe('Tests Zendesk Actions', () => {
       ticket_id: ticketID,
       body: {
         ticket: {
-          comment: {
-            body: 'The smoke is very colorful. And it smells like a rainbow.',
-          },
+          status: 'pending',
         },
       },
     });
-
-    console.log('Updated ticket', body);
 
     expect(body).toHaveProperty('ticket.id');
     expect(body.ticket.id).toBe(ticketID);
@@ -80,12 +76,10 @@ describe('Tests Zendesk Actions', () => {
     expect(body).toHaveProperty('ticket');
     expect(body.ticket.id).toBe(ticketID);
     // Check if the body was updated
-    expect(body.ticket.description).toBe(
-      'The smoke is very colorful. And it smells like a rainbow.'
-    );
+    expect(body.ticket.status).toBe('pending');
   });
 
-  xit('Should delete a ticket', () => {
+  it('Should delete a ticket', () => {
     testApi.execAppAction('zendesk', 'DeleteTicket', connection, { ticket_id: ticketID });
 
     const tickets = testApi.execAppAction('zendesk', 'ListTickets', connection);

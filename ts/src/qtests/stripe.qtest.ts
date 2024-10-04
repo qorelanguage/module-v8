@@ -3,9 +3,9 @@ import { STRIPE_ACTIONS } from '../apps/stripe';
 let connection: string;
 
 describe('Tests Stripe Actions', () => {
-  // let customerId: string | null = null;
-  // let chargeId: string | null = null;
-  // let invoiceId: string | null = null;
+  let customerId: string | null = null;
+  let chargeId: string | null = null;
+  let invoiceId: string | null = null;
 
   beforeAll(() => {
     connection = testApi.createConnection('stripe', {
@@ -27,24 +27,24 @@ describe('Tests Stripe Actions', () => {
     expect(response.body.id).toBeDefined();
   });
 
-  // // Balances
-  // it('Should retrieve balance', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetBalance');
-  //   expect(action).toBeDefined();
+  // Balances
+  it('Should retrieve balance', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetBalance');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
+    const response = await testApi.execAppAction('stripe', action.action, connection);
 
-  //   expect(response.body).toBeDefined();
-  // });
+    expect(response.body).toBeDefined();
+  });
 
-  // it('Should retrieve balance history', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetBalanceHistory');
-  //   expect(action).toBeDefined();
+  it('Should retrieve balance history', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetBalanceHistory');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
+    const response = await testApi.execAppAction('stripe', action.action, connection);
 
-  //   expect(response.body).toBeDefined();
-  // });
+    expect(response.body).toBeDefined();
+  });
 
   /**
    * Enable this test when there is something in balance history
@@ -68,279 +68,279 @@ describe('Tests Stripe Actions', () => {
    * Enable these tests when qore is fixed with required values for formDataType
    */
 
-  // it('Should create a charge', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCharges');
-  //   expect(action).toBeDefined();
+  it('Should create a charge', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCharges');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     amount: 500,
-  //     currency: 'usd',
-  //     source: 'tok_visa',
-  //   });
-  //   expect(response.body).toBeDefined();
-  //   chargeId = response.body.id;
-  // });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      amount: 500,
+      currency: 'usd',
+      source: 'tok_visa',
+    });
+    expect(response.body).toBeDefined();
+    chargeId = response.body.id;
+  });
 
-  // it('Should retrieve specific charge details', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetChargesCharge');
-  //   expect(action).toBeDefined();
+  it('Should retrieve specific charge details', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetChargesCharge');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     charge: chargeId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      charge: chargeId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.id).toBe(chargeId);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.id).toBe(chargeId);
+  });
 
-  // it('Should update a charge', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostChargesCharge');
-  //   expect(action).toBeDefined();
-  //   const description = 'Updated charge description';
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     charge: chargeId,
-  //     description,
-  //   });
+  it('Should update a charge', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostChargesCharge');
+    expect(action).toBeDefined();
+    const description = 'Updated charge description';
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      charge: chargeId,
+      description,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.description).toBeDefined();
-  //   expect(response.body.description).toBe(description);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.description).toBeDefined();
+    expect(response.body.description).toBe(description);
+  });
 
-  // it('Should list charges', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCharges');
-  //   expect(action).toBeDefined();
+  it('Should list charges', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCharges');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
-  //   console.log('GetCharges', response);
-  //   expect(response.body).toBeDefined();
-  // });
+    const response = await testApi.execAppAction('stripe', action.action, connection);
+    console.log('GetCharges', response);
+    expect(response.body).toBeDefined();
+  });
 
-  // // Refunds;
-  // it('Should create a refund', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostRefunds');
-  //   expect(action).toBeDefined();
+  // Refunds;
+  it('Should create a refund', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostRefunds');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     charge: chargeId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      charge: chargeId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.status).toBe('succeeded');
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.status).toBe('succeeded');
+  });
 
-  // it('Should list refunds', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetRefunds');
-  //   expect(action).toBeDefined();
+  it('Should list refunds', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetRefunds');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
+    const response = await testApi.execAppAction('stripe', action.action, connection);
 
-  //   expect(response.body).toBeDefined();
-  // });
+    expect(response.body).toBeDefined();
+  });
 
   // Customers
 
-  // it('Should create a customer', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCustomers');
-  //   expect(action).toBeDefined();
+  it('Should create a customer', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCustomers');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     email: 'test@example.com',
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      email: 'test@example.com',
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   customerId = response.body.id;
-  // });
+    expect(response.body).toBeDefined();
+    customerId = response.body.id;
+  });
 
-  // it('Should list customers', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCustomers');
-  //   expect(action).toBeDefined();
+  it('Should list customers', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCustomers');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.data).toBeDefined();
-  //   expect(response.body.data.length).toBeGreaterThan(0);
-  // });
+    const response = await testApi.execAppAction('stripe', action.action, connection);
+    expect(response.body).toBeDefined();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
 
-  // it('Should retrieve specific customer details', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCustomersCustomer');
-  //   expect(action).toBeDefined();
+  it('Should retrieve specific customer details', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCustomersCustomer');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  // });
+    expect(response.body).toBeDefined();
+  });
 
-  // it('Should update a customer', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCustomersCustomer');
-  //   expect(action).toBeDefined();
+  it('Should update a customer', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCustomersCustomer');
+    expect(action).toBeDefined();
 
-  //   const email = 'updated@example.com';
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //     email,
-  //   });
+    const email = 'updated@example.com';
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+      email,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.email).toBe(email);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.email).toBe(email);
+  });
 
-  // it('Should create a customer balance transaction', async () => {
-  //   const action = STRIPE_ACTIONS.find(
-  //     (a) => a.action === 'PostCustomersCustomerBalanceTransactions'
-  //   );
-  //   expect(action).toBeDefined();
+  it('Should create a customer balance transaction', async () => {
+    const action = STRIPE_ACTIONS.find(
+      (a) => a.action === 'PostCustomersCustomerBalanceTransactions'
+    );
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //     amount: 100,
-  //     currency: 'usd',
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+      amount: 100,
+      currency: 'usd',
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.customer).toBe(customerId);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.customer).toBe(customerId);
+  });
 
-  // it('Should list customer balance transactions', async () => {
-  //   const action = STRIPE_ACTIONS.find(
-  //     (a) => a.action === 'GetCustomersCustomerBalanceTransactions'
-  //   );
-  //   expect(action).toBeDefined();
+  it('Should list customer balance transactions', async () => {
+    const action = STRIPE_ACTIONS.find(
+      (a) => a.action === 'GetCustomersCustomerBalanceTransactions'
+    );
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.data).toBeDefined();
-  //   expect(response.body.data.length).toBeGreaterThan(0);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
 
-  // it('Should create a customer source', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCustomersCustomerSources');
-  //   expect(action).toBeDefined();
+  it('Should create a customer source', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostCustomersCustomerSources');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //     source: 'tok_visa',
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+      source: 'tok_visa',
+    });
 
-  //   expect(response.body).toBeDefined();
-  // });
+    expect(response.body).toBeDefined();
+  });
 
-  // it('Should list customer sources', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCustomersCustomerSources');
-  //   expect(action).toBeDefined();
+  it('Should list customer sources', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetCustomersCustomerSources');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.data).toBeDefined();
-  //   expect(response.body.data.length).toBeGreaterThan(0);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
 
-  // it('Should delete a customer', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'DeleteCustomersCustomer');
-  //   expect(action).toBeDefined();
+  it('Should delete a customer', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'DeleteCustomersCustomer');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.deleted).toBe(true);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.deleted).toBe(true);
+  });
 
-  // // Invoices
-  // it('Should create an invoice', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostInvoices');
-  //   expect(action).toBeDefined();
+  // Invoices
+  it('Should create an invoice', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostInvoices');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     customer: customerId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      customer: customerId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   invoiceId = response.body.id;
-  // });
+    expect(response.body).toBeDefined();
+    invoiceId = response.body.id;
+  });
 
-  // it('Should retrieve a specific invoice', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetInvoicesInvoice');
-  //   expect(action).toBeDefined();
+  it('Should retrieve a specific invoice', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetInvoicesInvoice');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     invoice: invoiceId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      invoice: invoiceId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.id).toBe(invoiceId);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.id).toBe(invoiceId);
+  });
 
-  // it('Should update an invoice', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostInvoicesInvoice');
-  //   expect(action).toBeDefined();
+  it('Should update an invoice', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostInvoicesInvoice');
+    expect(action).toBeDefined();
 
-  //   const description = 'Updated Invoice Description';
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     invoice: invoiceId,
-  //     description,
-  //   });
+    const description = 'Updated Invoice Description';
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      invoice: invoiceId,
+      description,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.description).toBeDefined();
-  //   expect(response.body.description).toBe(description);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.description).toBeDefined();
+    expect(response.body.description).toBe(description);
+  });
 
-  // it('Should list invoices', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetInvoices');
-  //   expect(action).toBeDefined();
+  it('Should list invoices', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetInvoices');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
+    const response = await testApi.execAppAction('stripe', action.action, connection);
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.data).toBeDefined();
-  //   expect(response.body.data.length).toBeGreaterThan(0);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
 
-  // it('Should delete an invoice', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'DeleteInvoicesInvoice');
-  //   expect(action).toBeDefined();
+  it('Should delete an invoice', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'DeleteInvoicesInvoice');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     invoice: invoiceId,
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      invoice: invoiceId,
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.deleted).toBe(true);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.deleted).toBe(true);
+  });
 
-  // // // Payment Intents
-  // it('Should create a payment intent', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'PostPaymentIntents');
-  //   expect(action).toBeDefined();
+  // Payment Intents
+  it('Should create a payment intent', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'PostPaymentIntents');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection, {
-  //     amount: 1000,
-  //     currency: 'usd',
-  //     payment_method: 'pm_card_visa',
-  //   });
+    const response = await testApi.execAppAction('stripe', action.action, connection, {
+      amount: 1000,
+      currency: 'usd',
+      payment_method: 'pm_card_visa',
+    });
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.amount).toBe(1000);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.amount).toBe(1000);
+  });
 
-  // it('Should list payment intents', async () => {
-  //   const action = STRIPE_ACTIONS.find((a) => a.action === 'GetPaymentIntents');
-  //   expect(action).toBeDefined();
+  it('Should list payment intents', async () => {
+    const action = STRIPE_ACTIONS.find((a) => a.action === 'GetPaymentIntents');
+    expect(action).toBeDefined();
 
-  //   const response = await testApi.execAppAction('stripe', action.action, connection);
+    const response = await testApi.execAppAction('stripe', action.action, connection);
 
-  //   expect(response.body).toBeDefined();
-  //   expect(response.body.data).toBeDefined();
-  //   expect(response.body.data.length).toBeGreaterThan(0);
-  // });
+    expect(response.body).toBeDefined();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
 });

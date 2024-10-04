@@ -134,6 +134,9 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
             if (!prov.tryGetRestClient()) {
                 prov.setRestClient(conn.get());
             }
+            if (exists (*string base_path = conn.orig_opts.swagger_base_path)) {
+                request_options.base_path = base_path;
+            }
             if (path_vars && (*hash<auto> vars = req{keys path_vars})) {
                 req -= keys path_vars;
                 request_options.path_vars = vars;

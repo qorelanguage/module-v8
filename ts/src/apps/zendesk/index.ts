@@ -33,6 +33,7 @@ export const ZENDESK_ALLOWED_PATHS = [
   '/api/v2/tickets/{ticket_id}',
   '/api/v2/users',
   '/api/v2/users/{user_id}',
+  '/api/v2/deleted_users/{deleted_user_id}',
   '/api/v2/organizations',
   '/api/v2/organizations/{organization_id}',
   '/api/v2/groups',
@@ -87,7 +88,7 @@ export default (locale: Locales) =>
     logo_mime_type: 'image/svg+xml',
     swagger: 'schemas/zendesk.swagger.json',
     swagger_options: {
-        'parse_flags': 128,
+      parse_flags: 128,
     },
     rest: {
       url: `https://{{subdomain}}.zendesk.com`,

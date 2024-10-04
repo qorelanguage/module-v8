@@ -40,9 +40,6 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
     }
 
     private {
-        #! Swagger schema
-        SwaggerSchema schema;
-
         #! Swagger path
         string swagger_path;
 
@@ -63,6 +60,7 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
     constructor(string name, SwaggerSchema schema, string swagger_path, *hash<AsyncCallInfo> api,
             *hash<string, bool> path_vars)
             : TypeScriptActionApiDataProvider(name, api) {
+        self.swagger_path = swagger_path;
         # set request and response types
         {
             swagger_path =~ s/^\///;
@@ -102,6 +100,9 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
                     "desc": "API request type",
                 }));
                 request_type = h;
+            } else {
+                # do not modify the underlying data provider's type
+                request_type = request_type.copy();
             }
             map request_type.addField(new QoreDataField({
                 "name": $1,
@@ -130,6 +131,9 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         @return the response to the request
     */
     private auto doRequestImpl(auto req, *hash<auto> request_options) {
+        if (path_vars) {
+            request_options.path_vars = remove req{keys path_vars};
+        }
         if (!api) {
             if (!prov.tryGetRestClient()) {
                 prov.setRestClient(conn.get());

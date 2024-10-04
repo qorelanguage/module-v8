@@ -528,7 +528,10 @@ public class TypeScriptActionInterface {
 
     #! Executes the given app action with the given arguments
     static auto execAppAction(string app, string action, string connection, *JavaScriptObject opts,
-            *JavaScriptObject request_options) {
+            *JavaScriptObject request_options, *bool silent) {
+        on_error if (!silent) {
+            printf("%s\n", get_exception_string($1));
+        }
         return TypeScriptActionInterface::execAppActionIntern(app, action, connection, opts ? opts.toData() : NOTHING,
             request_options ? request_options.toData() : NOTHING);
     }

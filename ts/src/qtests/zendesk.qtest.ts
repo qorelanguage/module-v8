@@ -298,4 +298,129 @@ describe('Tests Zendesk Actions', () => {
       expect(macros.macros.length).toBe(macroCount - 1);
     });
   });
+
+  describe('Should test Request Actions', () => {
+    let requestID: number;
+    let requestCount: number;
+
+    it('Should get all requests', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListRequests', connection);
+
+      expect(body).toHaveProperty('requests');
+      expect(body.requests.length).toBeGreaterThan(0);
+
+      requestCount = body.requests.length;
+    });
+
+    it(`Should create a new request`, () => {
+      const { body } = testApi.execAppAction('zendesk', 'CreateRequest', connection, {
+        body: {
+          request: {
+            subject: 'Test Request',
+            comment: {
+              body: 'This is a test request.',
+            },
+          },
+        },
+      });
+
+      expect(body).toHaveProperty('request.id');
+
+      requestID = body.request.id;
+
+      const requests = testApi.execAppAction('zendesk', 'ListRequests', connection);
+
+      expect(requests.requests.length).toBe(requestCount + 1);
+
+      requestCount = requests.requests.length;
+    });
+
+    it('Should get a request by ID', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ShowRequest', connection, {
+        request_id: requestID,
+      });
+
+      expect(body).toHaveProperty('request');
+      expect(body.request.id).toBe(requestID);
+    });
+
+    it('Should update a request', () => {
+      const { body } = testApi.execAppAction('zendesk', 'UpdateRequest', connection, {
+        request_id: requestID,
+        body: {
+          request: {
+            status: 'open',
+          },
+        },
+      });
+
+      expect(body).toHaveProperty('request.id');
+      expect(body.request.id).toBe(requestID);
+      expect(body.request.status).toBe('open');
+    });
+
+    it('Should delete a request', () => {
+      testApi.execAppAction('zendesk', 'DeleteRequest', connection, { request_id: requestID });
+
+      const requests = testApi.execAppAction('zendesk', 'ListRequests', connection);
+
+      expect(requests.requests.length).toBe(requestCount - 1);
+    });
+  });
+
+  describe('Should test Search Actions', () => {
+    it('Should search for tickets', () => {
+      const { body } = testApi.execAppAction('zendesk', 'Search', connection, {
+        query: 'status:open',
+      });
+
+      expect(body).toHaveProperty('results');
+      expect(body.results.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Should test Ticket Fields Actions', () => {
+    it('Should get all ticket fields', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListTicketFields', connection);
+
+      expect(body).toHaveProperty('ticket_fields');
+      expect(body.ticket_fields.length).toBeGreaterThan(0);
+    });
+
+    it('Should get a ticket field by ID', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ShowTicketField', connection, {
+        field_id: 'subject',
+      });
+
+      expect(body).toHaveProperty('ticket_field');
+      expect(body.ticket_field.id).toBe('subject');
+    });
+  });
+
+  describe('Should test Satisfaction Ratings Actions', () => {
+    it('Should get all satisfaction ratings', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListSatisfactionRatings', connection);
+
+      expect(body).toHaveProperty('satisfaction_ratings');
+      expect(body.satisfaction_ratings.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Should test Ticket Metrics Actions', () => {
+    it('Should get all ticket metrics', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListTicketMetrics', connection);
+
+      expect(body).toHaveProperty('ticket_metrics');
+      expect(body.ticket_metrics.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Should test Targets Actions', () => {
+    it('Should get all targets', () => {
+      const { body } = testApi.execAppAction('zendesk', 'ListTargets', connection);
+
+      expect(body).toHaveProperty('targets');
+      expect(body.targets.length).toBeGreaterThan(0);
+    });
+  });
 });

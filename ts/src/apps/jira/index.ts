@@ -44,7 +44,7 @@ export default (locale: Locales) =>
       parse_flags: -1,
     },
     rest: {
-      url: 'https://api.atlassian.com/ex/jira/{cloud_id}',
+      url: 'https://api.atlassian.com',
       data: 'json',
       oauth2_grant_type: 'authorization_code',
       oauth2_client_id: 'kmvUW6HHUljPnUfYqeRfy1c1AWcE3IqY',
@@ -90,8 +90,11 @@ export default (locale: Locales) =>
         const userInfo = userAccounts[0];
 
         if ('id' in userInfo) {
+          const cloud_id = userInfo.id;
+
           return {
-            cloud_id: userInfo.id,
+            cloud_id,
+            swagger_base_path: `ex/jira/${cloud_id}`,
           };
         }
       },

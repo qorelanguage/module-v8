@@ -16,6 +16,7 @@ describe('Tests Jira Actions', () => {
         username: process.env.JIRA_USERNAME,
         password: process.env.JIRA_PASSWORD,
         cloud_id: process.env.JIRA_CLOUD_ID,
+        swagger_base_path: process.env.JIRA_CLOUD_ID,
         oauth2_grant_type: 'none',
       },
     });

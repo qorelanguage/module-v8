@@ -157,17 +157,18 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     }
 
     #! Processes the OAuth2 token response
-    private hash<auto> processOAuth2TokenResponseImpl(hash<auto> resp) {
-        resp = RestConnection::processOAuth2TokenResponseImpl(resp);
-        if (post_auth) {
-            on_error rethrow $1.err, sprintf("%s (resp: %y)", $1.desc, resp);
-            resp += TypeScriptActionApiDataProvider::getAsyncValueArgs(self, post_auth, {
+    private *hash<auto> processOAuth2TokenResponseImpl(hash<auto> resp) {
+        *hash<auto> new_opts = RestConnection::processOAuth2TokenResponseImpl(resp);
+        if (new_opts && post_auth) {
+            on_error rethrow $1.err, sprintf("%s (new_opts: %y)", $1.desc, new_opts);
+            new_opts += TypeScriptActionApiDataProvider::getAsyncValueArgs(self, post_auth, {
                 "conn_name": name,
-                "conn_opts": real_opts + resp,
+                "conn_opts": real_opts + new_opts,
             });
-            LoggerWrapper::info("Connection %y app %y post-auth adding options: %y", name, app, resp);
+            LoggerWrapper::debug("Connection %y app %y post-auth adding options: %y from %y", name, app, new_opts,
+                resp);
         }
-        return resp;
+        return new_opts;
     }
 
     #! performs options validation in the constructor

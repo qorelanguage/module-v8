@@ -288,13 +288,16 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         }
         auto rv;
         auto err;
+        string errloc;
         if (v instanceof JavaScriptPromise) {
             try {
                 v.then(sub (auto val) {
                     rv = val;
                 }, sub (auto e) {
+                    errloc = sprintf("reject");
                     err = e;
                 }).doCatch(sub (auto e) {
+                    errloc = "catch";
                     err = e;
                 });
                 v.wait();
@@ -307,11 +310,13 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
             rv = v;
         }
 
+        string errstr;
         if (rv instanceof JavaScriptObject) {
             rv = rv.toData();
         } else if (rv.typeCode() == NT_LIST && (rv[0] instanceof JavaScriptObject)) {
             rv = map $1.toData(), rv;
         } else if (err instanceof JavaScriptObject) {
+            errstr = err.toString();
             err = err.toData();
         } else if (err.typeCode() == NT_LIST && (err[0] instanceof JavaScriptObject)) {
             err = map $1.toData(), err;
@@ -338,7 +343,14 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
                 }
                 throw "JAVASCRIPT-ASYNC-ERROR", desc, arg;
             }
-            throw "JAVASCRIPT-ASYNC-ERROR", "Error in async request", err;
+            if (!err && !errstr) {
+                err = sprintf("No JvaScript exception information available: %y (from: %s)", err, errloc);
+            }
+            string desc = "Error in async request";
+            if (!err && errstr.val()) {
+                desc += ": " + errstr;
+            }
+            throw "JAVASCRIPT-ASYNC-ERROR", desc, err;
         }
 
         return rv;

@@ -39,8 +39,6 @@ public class TypeScriptAppRestClient inherits RestClient {
     }
 
     #! Returns options to update after an OAuth2 login
-    /** @since %RestClient 2.0
-    */
     private *hash<auto> getUpdateOptionsAfterLogin(hash<auto> h) {
         *hash<auto> rv = RestClient::getUpdateOptionsAfterLogin(h);
         if (post_auth) {
@@ -48,6 +46,7 @@ public class TypeScriptAppRestClient inherits RestClient {
                 "conn_name": conn.name,
                 "conn_opts": conn.getRealOptions(),
             });
+            info("Connection %y app %y post-auth adding options: %y", conn.name, conn.getAppName(), rv);
 
             hash<auto> config = {
                 "url": getURL(),
@@ -69,6 +68,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         string app;
         hash<ConnectionSchemeInfo> info;
         *hash<string, bool> url_template_options;
+        *hash<AsyncCallInfo> post_auth;
     }
 
     #! Creates the object
@@ -90,6 +90,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
                 "url": url,
                 "opts": options,
             }), attributes) {
+        post_auth = TypeScriptActionInterface::getPostAuthCall(app);
     }
 
     #! creates the TypeScriptAppRestConnection object
@@ -112,6 +113,7 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     */
     constructor(hash<auto> config, *hash<auto> attr)
             : RestConnection(TypeScriptAppRestConnection::getConfig(config), attr) {
+        post_auth = TypeScriptActionInterface::getPostAuthCall(app);
     }
 
     #! Returns the app name
@@ -135,8 +137,6 @@ public class TypeScriptAppRestConnection inherits RestConnection {
 
     #! Return OAuth2 options
     /** @return a hash of OAuth2 options
-
-        @since RestClient 2.2
     */
     hash<auto> getOAuth2Options() {
         hash<auto> rv = RestConnection::getOAuth2Options();
@@ -154,6 +154,20 @@ public class TypeScriptAppRestConnection inherits RestConnection {
     #! Returns the logger interface for logging
     *LoggerInterface getLogger() {
         return logger;
+    }
+
+    #! Processes the OAuth2 token response
+    private hash<auto> processOAuth2TokenResponseImpl(hash<auto> resp) {
+        resp = RestConnection::processOAuth2TokenResponseImpl(resp);
+        if (post_auth) {
+            on_error rethrow $1.err, sprintf("%s (resp: %y)", $1.desc, resp);
+            resp += TypeScriptActionApiDataProvider::getAsyncValueArgs(self, post_auth, {
+                "conn_name": name,
+                "conn_opts": real_opts + resp,
+            });
+            LoggerWrapper::info("Connection %y app %y post-auth adding options: %y", name, app, resp);
+        }
+        return resp;
     }
 
     #! performs options validation in the constructor

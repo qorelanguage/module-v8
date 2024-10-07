@@ -36,17 +36,13 @@ export const ZENDESK_ALLOWED_PATHS = [
   '/api/v2/deleted_users/{deleted_user_id}',
   '/api/v2/organizations',
   '/api/v2/organizations/{organization_id}',
-  '/api/v2/requests',
-  '/api/v2/requests/{request_id}',
   '/api/v2/macros',
   '/api/v2/macros/{macro_id}',
   '/api/v2/search',
   '/api/v2/ticket_fields',
   '/api/v2/ticket_fields/{ticket_field_id}',
-  '/api/v2/satisfaction_ratings',
   '/api/v2/ticket_metrics',
   '/api/v2/ticket_metrics/{ticket_metric_id}',
-  '/api/v2/targets',
 ];
 
 export const ZENDESK_ACTIONS = buildActionsFromSwaggerSchema(

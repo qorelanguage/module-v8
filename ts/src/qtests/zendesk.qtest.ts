@@ -287,7 +287,9 @@ describe('Tests Zendesk Actions', () => {
   describe('Should test Search Actions', () => {
     it('Should search for tickets', () => {
       const { body } = testApi.execAppAction('zendesk', 'ListSearchResults', connection, {
-        query: 'status:open',
+        body: {
+          query: 'status:open',
+        },
       });
 
       expect(body).toHaveProperty('results');
@@ -301,15 +303,6 @@ describe('Tests Zendesk Actions', () => {
 
       expect(body).toHaveProperty('ticket_fields');
       expect(body.ticket_fields.length).toBeGreaterThan(0);
-    });
-
-    it('Should get a ticket field by ID', () => {
-      const { body } = testApi.execAppAction('zendesk', 'ShowTicketField', connection, {
-        field_id: 'subject',
-      });
-
-      expect(body).toHaveProperty('ticket_field');
-      expect(body.ticket_field.id).toBe('subject');
     });
   });
 

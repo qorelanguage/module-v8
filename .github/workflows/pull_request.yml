@@ -23,6 +23,7 @@ env:
   JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
   JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
   JIRA_CLOUD_ID: ${{ secrets.JIRA_CLOUD_ID }}
+  JIRA_LEAD_ACCOUNT_ID: ${{ secrets.JIRA_LEAD_ACCOUNT_ID }}
 
 
 jobs:

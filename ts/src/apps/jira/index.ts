@@ -76,7 +76,7 @@ export default (locale: Locales) =>
       options: JIRA_CONN_OPTIONS,
       set_options_post_auth: async (context) => {
         try {
-            const userAccounts = await QorusRequest.get<Record<string, any>>(
+          const userAccounts = await QorusRequest.get<Record<string, any>>(
             {
               path: '/oauth/token/accessible-resources',
               headers: {
@@ -88,7 +88,6 @@ export default (locale: Locales) =>
               endpointId: 'Atlassian',
             }
           );
-          console.log('userAccounts:', userAccounts);
           const userInfo = userAccounts.data[0];
           if ('id' in userInfo) {
             const cloud_id = userInfo.id;

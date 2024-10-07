@@ -291,7 +291,7 @@ class TypeScriptActionApiDataProvider inherits AbstractDataProvider {
         string errloc;
         if (v instanceof JavaScriptPromise) {
             try {
-                v.then(sub (auto val) {
+                v = v.then(sub (auto val) {
                     rv = val;
                 }, sub (auto e) {
                     errloc = sprintf("reject");

@@ -119,7 +119,7 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         }
         auto rv = doRequest(req, request_options);
         if (res_only_body) {
-            rv.body = rv;
+            rv.body = remove rv;
         }
         return rv;
     }

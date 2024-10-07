@@ -75,27 +75,31 @@ export default (locale: Locales) =>
     rest_modifiers: {
       options: JIRA_CONN_OPTIONS,
       set_options_post_auth: async (context) => {
-        const userAccounts = await QorusRequest.get<Record<string, any>>(
-          {
-            path: '/oauth/token/accessible-resources',
-            headers: {
-              Authorization: `Bearer ${context.conn_opts.token}`,
+        try {
+          const userAccounts = await QorusRequest.get<Record<string, any>>(
+            {
+              path: '/oauth/token/accessible-resources',
+              headers: {
+                Authorization: `Bearer ${context.conn_opts.token}`,
+              },
             },
-          },
-          {
-            url: 'https://api.atlassian.com',
-            endpointId: 'Atlassian',
+            {
+              url: 'https://api.atlassian.com',
+              endpointId: 'Atlassian',
+            }
+          );
+          const userInfo = userAccounts[0];
+          console.log(userInfo, 'user info');
+          if ('id' in userInfo) {
+            const cloud_id = userInfo.id;
+
+            return {
+              cloud_id,
+              swagger_base_path: `ex/jira/${cloud_id}`,
+            };
           }
-        );
-        const userInfo = userAccounts[0];
-
-        if ('id' in userInfo) {
-          const cloud_id = userInfo.id;
-
-          return {
-            cloud_id,
-            swagger_base_path: `ex/jira/${cloud_id}`,
-          };
+        } catch (error) {
+          console.error(error);
         }
       },
       url_template_options: ['cloud_id'],

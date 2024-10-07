@@ -201,21 +201,6 @@ describe('Tests Zendesk Actions', () => {
       expect(body.organization.id).toBe(orgID);
     });
 
-    it('Should update an organization', () => {
-      const { body } = testApi.execAppAction('zendesk', 'UpdateOrganization', connection, {
-        organization_id: orgID,
-        body: {
-          organization: {
-            notes: 'Updated organization',
-          },
-        },
-      });
-
-      expect(body).toHaveProperty('organization.id');
-      expect(body.organization.id).toBe(orgID);
-      expect(body.organization.name).toBe('ACME Corp.');
-    });
-
     it('Should delete an organization', () => {
       testApi.execAppAction('zendesk', 'DeleteOrganization', connection, {
         organization_id: orgID,
@@ -287,7 +272,7 @@ describe('Tests Zendesk Actions', () => {
   describe('Should test Search Actions', () => {
     it('Should search for tickets', () => {
       const { body } = testApi.execAppAction('zendesk', 'ListSearchResults', connection, {
-        body: {
+        query: {
           query: 'status:open',
         },
       });

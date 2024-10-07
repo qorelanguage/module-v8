@@ -22528,7 +22528,8 @@
           "$ref": "#/definitions/TicketCreateInput"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": ["ticket"]
     },
     "TicketCreateVoicemailTicketInput": {
       "properties": {

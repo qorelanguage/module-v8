@@ -83,9 +83,9 @@ describe('Tests Zendesk Actions', () => {
     it('Should delete a ticket', () => {
       testApi.execAppAction('zendesk', 'DeleteTicket', connection, { ticket_id: ticketID });
 
-      const tickets = testApi.execAppAction('zendesk', 'ListTickets', connection);
+      const { body } = testApi.execAppAction('zendesk', 'ListTickets', connection);
 
-      expect(tickets.tickets.length).toBe(ticketCount - 1);
+      expect(body.tickets.length).toBe(ticketCount - 1);
     });
   });
 
@@ -116,11 +116,11 @@ describe('Tests Zendesk Actions', () => {
 
       userID = body.user.id;
 
-      const users = testApi.execAppAction('zendesk', 'ListUsers', connection);
+      const { body: listUsersBody } = testApi.execAppAction('zendesk', 'ListUsers', connection);
 
-      expect(users.users.length).toBe(usersCount + 1);
+      expect(listUsersBody.users.length).toBe(usersCount + 1);
 
-      usersCount = users.users.length;
+      usersCount = listUsersBody.users.length;
     });
 
     it('Should get a user by ID', () => {
@@ -153,9 +153,9 @@ describe('Tests Zendesk Actions', () => {
         deleted_user_id: userID,
       });
 
-      const users = testApi.execAppAction('zendesk', 'ListUsers', connection);
+      const { body } = testApi.execAppAction('zendesk', 'ListUsers', connection);
 
-      expect(users.users.length).toBe(usersCount - 1);
+      expect(body.users.length).toBe(usersCount - 1);
     });
   });
 
@@ -185,11 +185,15 @@ describe('Tests Zendesk Actions', () => {
 
       orgID = body.organization.id;
 
-      const orgs = testApi.execAppAction('zendesk', 'ListOrganizations', connection);
+      const { body: listOrgsBody } = testApi.execAppAction(
+        'zendesk',
+        'ListOrganizations',
+        connection
+      );
 
-      expect(orgs.organizations.length).toBe(orgCount + 1);
+      expect(listOrgsBody.organizations.length).toBe(orgCount + 1);
 
-      orgCount = orgs.organizations.length;
+      orgCount = listOrgsBody.organizations.length;
     });
 
     it('Should get an organization by ID', () => {
@@ -206,9 +210,9 @@ describe('Tests Zendesk Actions', () => {
         organization_id: orgID,
       });
 
-      const orgs = testApi.execAppAction('zendesk', 'ListOrganizations', connection);
+      const { body } = testApi.execAppAction('zendesk', 'ListOrganizations', connection);
 
-      expect(orgs.organizations.length).toBe(orgCount - 1);
+      expect(body.organizations.length).toBe(orgCount - 1);
     });
   });
 
@@ -244,11 +248,11 @@ describe('Tests Zendesk Actions', () => {
 
       macroID = body.macro.id;
 
-      const macros = testApi.execAppAction('zendesk', 'ListMacros', connection);
+      const { body: listMacrosBody } = testApi.execAppAction('zendesk', 'ListMacros', connection);
 
-      expect(macros.macros.length).toBe(macroCount + 1);
+      expect(listMacrosBody.macros.length).toBe(macroCount + 1);
 
-      macroCount = macros.macros.length;
+      macroCount = listMacrosBody.macros.length;
     });
 
     it('Should get a macro by ID', () => {
@@ -263,9 +267,9 @@ describe('Tests Zendesk Actions', () => {
     it('Should delete a macro', () => {
       testApi.execAppAction('zendesk', 'DeleteMacro', connection, { macro_id: macroID });
 
-      const macros = testApi.execAppAction('zendesk', 'ListMacros', connection);
+      const { body } = testApi.execAppAction('zendesk', 'ListMacros', connection);
 
-      expect(macros.macros.length).toBe(macroCount - 1);
+      expect(body.macros.length).toBe(macroCount - 1);
     });
   });
 

@@ -13,8 +13,6 @@
     "title": "The Jira Cloud platform REST API",
     "version": "1001.0.0-SNAPSHOT-6b4e1ae0aa8e26de871a32326f4607bd634a5412"
   },
-  "host": "your-domain.atlassian.net",
-  "basePath": "/",
   "schemes": [
     "https"
   ],

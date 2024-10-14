@@ -1,32 +1,15 @@
 import { QorusRequest } from '@qoretechnologies/ts-toolkit';
-import { OpenAPIV2 } from 'openapi-types';
-import { buildActionsFromSwaggerSchema, mapActionsToApp } from '../../global/helpers';
+import { mapActionsToApp } from '../../global/helpers';
 import { IQoreAppWithActions } from '../../global/models/qore';
 import L from '../../i18n/i18n-node';
 import { Locales } from '../../i18n/i18n-types';
-import eSignature from '../../schemas/esignature.swagger.json';
-import { IQoreConnectionOptions } from '../zendesk';
-import { ESIGNATURE_APP_NAME } from './constants';
+import { ESIGNATURE_ACTIONS, ESIGNATURE_APP_NAME, ESIGNATURE_CONN_OPTIONS } from './constants';
+import { actionsCatalogue } from '../../ActionsCatalogue';
 /*
  * Returns the app object with all the actions ready to use, using translations
  * @param locale - the locale
  * @returns IQoreAppWithActions
  */
-
-export const ESIGNATURE_CONN_OPTIONS = {
-  account_id: {
-    display_name: 'Account ID',
-    short_desc: 'The account ID',
-    desc: 'The account ID',
-    type: 'string',
-  },
-  base_uri: {
-    display_name: 'Base URI',
-    short_desc: 'The base URI',
-    desc: 'The base URI',
-    type: 'string',
-  },
-} satisfies IQoreConnectionOptions;
 
 export default (locale: Locales) =>
   ({
@@ -34,11 +17,7 @@ export default (locale: Locales) =>
     short_desc: L[locale].apps[ESIGNATURE_APP_NAME].shortDesc(),
     name: ESIGNATURE_APP_NAME,
     desc: L[locale].apps[ESIGNATURE_APP_NAME].longDesc(),
-    actions: mapActionsToApp(
-      ESIGNATURE_APP_NAME,
-      buildActionsFromSwaggerSchema(eSignature as OpenAPIV2.Document, ['/v2.1/accounts']),
-      locale
-    ),
+    actions: mapActionsToApp(ESIGNATURE_APP_NAME, ESIGNATURE_ACTIONS, locale),
     logo:
       'PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1NDcgMTU0OSIg' +
       'd2lkdGg9IjE1NDciIGhlaWdodD0iMTU0OSI+Cgk8dGl0bGU+ZG9jdS1zdmc8L3RpdGxlPgoJPHN0eWxlPgoJCS5zMCB7IGZpbGw6ICM0YzAw' +
@@ -55,12 +34,14 @@ export default (locale: Locales) =>
     logo_mime_type: 'image/svg+xml',
     swagger: 'schemas/esignature.swagger.json',
     rest: {
-      url: '{{base_uri}}/accounts/{{account_id}}',
+      url: 'https://{{base_uri}}/restapi/v2.1/accounts/{{account_id}}',
       data: 'json',
       oauth2_grant_type: 'authorization_code',
+      oauth2_client_id: 'a7aaad55-1fc1-4a14-90cd-d4a27cb84d32',
+      oauth2_client_secret: actionsCatalogue.getOauth2ClientSecret(ESIGNATURE_APP_NAME),
       oauth2_auth_url: 'https://account-d.docusign.com/oauth/auth',
       oauth2_token_url: 'https://account-d.docusign.com/oauth/token',
-      oauth2_scopes: ['read', 'write'],
+      oauth2_scopes: ['impersonation', 'signature'],
       ping_method: 'GET',
       ping_path: '',
     },
@@ -69,7 +50,7 @@ export default (locale: Locales) =>
       set_options_post_auth: async (context) => {
         // We need to make a call to the docusign user info endpoint to get the base_uri\
         // and account_id
-        const userInfo = await QorusRequest.get<Record<string, any>>(
+        const { data: userInfo } = await QorusRequest.get<Record<string, any>>(
           {
             path: '/oauth/userinfo',
             headers: {
@@ -78,14 +59,18 @@ export default (locale: Locales) =>
           },
           {
             url: 'https://account-d.docusign.com',
-            endpointId: 'Docusing',
+            endpointId: 'Docusign',
           }
         );
 
-        if ('base_uri' in userInfo && 'account_id' in userInfo) {
+        if ('accounts' in userInfo && userInfo.accounts.length > 0) {
+          const base_uri = userInfo.accounts[0].base_uri.split('//'[1]);
+          const account_id = userInfo.accounts[0].account_id;
+
           return {
-            base_uri: userInfo.accounts[0].base_uri,
-            account_id: userInfo.accounts[0].account_id,
+            base_uri,
+            account_id,
+            ping_path: `${base_uri}/restapi/v2.1/accounts/${account_id}`,
           };
         }
 

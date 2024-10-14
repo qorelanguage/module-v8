@@ -137,7 +137,7 @@ describe('Tests eSignature Actions', () => {
 });
 
 const updateDocusignSecret = async (newRefreshToken: string): Promise<void> => {
-  const docusignSecretName = process.env.DOCUSIGN_SECRET_NAME;
+  const docusignSecretName = process.env.GH_MODULE_DOCUSIGN_SECRET_NAME;
   const ghModuleRepoName = process.env.GH_MODULE_REPO_NAME;
   const ghModuleRepoOwner = process.env.GH_MODULE_REPO_OWNER;
   const ghPatForSecrets = process.env.GH_PAT_FOR_SECRETS;

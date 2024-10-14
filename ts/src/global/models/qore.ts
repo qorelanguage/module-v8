@@ -136,6 +136,7 @@ export interface IQoreRestConnectionModifiers<
   set_options_post_auth?: (
     context: Omit<TQoreAppActionFunctionContext<ModifierOptions>, 'opts'>
   ) => Promise<Record<keyof ModifierOptions, any>>;
+  conn_option_map?: object;
 }
 
 export type TFirstAppCharacter =

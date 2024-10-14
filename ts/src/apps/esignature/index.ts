@@ -48,35 +48,42 @@ export default (locale: Locales) =>
     rest_modifiers: {
       options: ESIGNATURE_CONN_OPTIONS,
       set_options_post_auth: async (context) => {
-        // We need to make a call to the docusign user info endpoint to get the base_uri\
+        // We need to make a call to the docusign user info endpoint to get the base_uri
         // and account_id
-        const { data: userInfo } = await QorusRequest.get<Record<string, any>>(
-          {
-            path: '/oauth/userinfo',
-            headers: {
-              Authorization: `Bearer ${context.conn_opts.token}`,
+        try {
+          const { data: userInfo } = await QorusRequest.get<Record<string, any>>(
+            {
+              path: '/oauth/userinfo',
+              headers: {
+                Authorization: `Bearer ${context.conn_opts.token}`,
+              },
             },
-          },
-          {
-            url: 'https://account-d.docusign.com',
-            endpointId: 'Docusign',
+            {
+              url: 'https://account-d.docusign.com',
+              endpointId: 'Docusign',
+            }
+          );
+
+          if ('accounts' in userInfo && userInfo.accounts.length > 0) {
+            const base_uri = userInfo.accounts[0].base_uri.split('//')[1];
+            const account_id = userInfo.accounts[0].account_id;
+
+            return {
+                base_uri,
+                account_id,
+                ping_path: `/restapi/v2.1/accounts/${account_id}`,
+            };
+          } else {
+            throw new Error(`Response missing account info: ${userInfo}`);
           }
-        );
-
-        if ('accounts' in userInfo && userInfo.accounts.length > 0) {
-          const base_uri = userInfo.accounts[0].base_uri.split('//'[1]);
-          const account_id = userInfo.accounts[0].account_id;
-
-          return {
-            base_uri,
-            account_id,
-            ping_path: `${base_uri}/restapi/v2.1/accounts/${account_id}`,
-          };
+        } catch (e) {
+            console.log(e);
+            throw e;
         }
-
-        throw new Error(
-          'Could not get the base_uri and account_id from the user info endpoint of docusign eSignature'
-        );
+      },
+      // maps connection options to query options
+      conn_option_map: {
+        "account_id": "accountId",
       },
       url_template_options: ['account_id', 'base_uri'],
     },

@@ -69,21 +69,21 @@ export default (locale: Locales) =>
             const account_id = userInfo.accounts[0].account_id;
 
             return {
-                base_uri,
-                account_id,
-                ping_path: `/restapi/v2.1/accounts/${account_id}`,
+              base_uri,
+              account_id,
+              ping_path: `/restapi/v2.1/accounts/${account_id}`,
             };
           } else {
             throw new Error(`Response missing account info: ${userInfo}`);
           }
         } catch (e) {
-            console.log(e);
-            throw e;
+          console.log(e);
+          throw e;
         }
       },
       // maps connection options to query options
       conn_option_map: {
-        "account_id": "accountId",
+        account_id: 'accountId',
       },
       url_template_options: ['account_id', 'base_uri'],
     },

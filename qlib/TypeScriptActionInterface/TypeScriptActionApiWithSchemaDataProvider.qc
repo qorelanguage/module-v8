@@ -55,7 +55,7 @@ class TypeScriptActionApiWithSchemaDataProvider inherits TypeScriptActionApiData
         #! If the request only has a body key
         bool req_only_body;
 
-        #! Connection to query option map
+        #! Connection to Swagger path option map
         *hash<string, string> conn_opt_map;
 
         #! Query option set

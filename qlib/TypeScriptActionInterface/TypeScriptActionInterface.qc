@@ -109,7 +109,7 @@ public class TypeScriptActionInterface {
         #! Maps from app names to connection post-auth functions
         static hash<string, hash<AsyncCallInfo>> app_post_auth_map;
 
-        #! Maps from app names to connection -> query option maps
+        #! Maps from app names to connection -> Swagger path option maps
         static hash<string, hash<string, string>> app_conn_opt_map;
 
         #! Connection map for testing

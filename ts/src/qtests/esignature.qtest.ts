@@ -8,7 +8,7 @@ describe('Tests eSignature Actions', () => {
   let accountId: string;
   let brandId: string;
   let envelopeId: string;
-  let templateId: string;
+  // let templateId: string;
   const documentId = Math.floor(Math.random() * 100) + 1;
   const recipientId = Math.floor(Math.random() * 100) + 1;
 

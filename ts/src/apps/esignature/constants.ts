@@ -33,8 +33,11 @@ export const ESIGNATURE_ACTIONS = buildActionsFromSwaggerSchema(eSignature as Op
   '/v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient',
   '/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents/combined',
   '/v2.1/accounts/{accountId}/envelopes/{envelopeId}/audit',
-  '/v2.1/accounts/{accountId}/templates',
-  '/v2.1/accounts/{accountId}/templates/{templateId}',
+  /**
+   * Template actions temporary removed
+   */
+  // '/v2.1/accounts/{accountId}/templates',
+  // '/v2.1/accounts/{accountId}/templates/{templateId}',
   '/v2.1/accounts/{accountId}/envelopes/{envelopeId}/webhooks',
   '/v2.1/accounts/{accountId}/envelopes/{envelopeId}/notifications',
   '/v2.1/accounts/{accountId}/brands',

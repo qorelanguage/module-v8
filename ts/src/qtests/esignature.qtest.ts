@@ -297,72 +297,76 @@ describe('Tests eSignature Actions', () => {
     expect(body.signers.length).toBeGreaterThan(0);
   });
 
-  it('Should create a new template', async () => {
-    const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_PostTemplates');
-    expect(action).toBeDefined();
-    const userData = {
-      userName: 'test',
-    };
-    const { body } = await testApi.execAppAction('docusignesignature', action.action, connection, {
-      body: {
-        envelopeTemplateDefinition: {
-          templateId: Date.now().toString(),
-          name: 'Test template',
-          description: 'Test description',
-        },
-        lastModifiedBy: userData,
-        owner: userData,
-        sender: userData,
-      },
-    });
+  /**
+   * Template actions temporary removed
+   */
 
-    expect(body).toBeDefined();
-    expect(body.templateId).toBeDefined();
-    templateId = body.templateId;
-  });
+  //   it('Should create a new template', async () => {
+  //     const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_PostTemplates');
+  //     expect(action).toBeDefined();
+  //     const userData = {
+  //       userName: 'test',
+  //     };
+  //     const { body } = await testApi.execAppAction('docusignesignature', action.action, connection, {
+  //       body: {
+  //         envelopeTemplateDefinition: {
+  //           templateId: Date.now().toString(),
+  //           name: 'Test template',
+  //           description: 'Test description',
+  //         },
+  //         lastModifiedBy: userData,
+  //         owner: userData,
+  //         sender: userData,
+  //       },
+  //     });
 
-  it('Should update a template', async () => {
-    const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_PutTemplate');
-    expect(action).toBeDefined();
-    const userData = {
-      userName: 'test',
-    };
-    const { body } = await testApi.execAppAction('docusignesignature', action.action, connection, {
-      templateId,
-      body: {
-        envelopeTemplateDefinition: {
-          templateId,
-          name: 'Updated template',
-          description: 'Updated description',
-        },
-        lastModifiedBy: userData,
-        owner: userData,
-        sender: userData,
-      },
-    });
+  //     expect(body).toBeDefined();
+  //     expect(body.templateId).toBeDefined();
+  //     templateId = body.templateId;
+  //   });
 
-    expect(body).toBeDefined();
-  });
+  //   it('Should update a template', async () => {
+  //     const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_PutTemplate');
+  //     expect(action).toBeDefined();
+  //     const userData = {
+  //       userName: 'test',
+  //     };
+  //     const { body } = await testApi.execAppAction('docusignesignature', action.action, connection, {
+  //       templateId,
+  //       body: {
+  //         envelopeTemplateDefinition: {
+  //           templateId,
+  //           name: 'Updated template',
+  //           description: 'Updated description',
+  //         },
+  //         lastModifiedBy: userData,
+  //         owner: userData,
+  //         sender: userData,
+  //       },
+  //     });
 
-  it('Should get a template', async () => {
-    const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_GetTemplate');
+  //     expect(body).toBeDefined();
+  //   });
 
-    expect(action).toBeDefined();
-    const { body } = await testApi.execAppAction('docusignesignature', action.action, connection, {
-      templateId,
-    });
+  //   it('Should get a template', async () => {
+  //     const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_GetTemplate');
 
-    expect(body).toBeDefined();
-    expect(body.templateId).toBe(templateId);
-  });
+  //     expect(action).toBeDefined();
+  //     const { body } = await testApi.execAppAction('docusignesignature', action.action, connection, {
+  //       templateId,
+  //     });
 
-  it('Should list all templates', async () => {
-    const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_GetTemplates');
+  //     expect(body).toBeDefined();
+  //     expect(body.templateId).toBe(templateId);
+  //   });
 
-    expect(action).toBeDefined();
-    const { body } = await testApi.execAppAction('docusignesignature', action.action, connection);
-    expect(body).toBeDefined();
-  });
+  //   it('Should list all templates', async () => {
+  //     const action = ESIGNATURE_ACTIONS.find((a) => a.action === 'Templates_GetTemplates');
+
+  //     expect(action).toBeDefined();
+  //     const { body } = await testApi.execAppAction('docusignesignature', action.action, connection);
+  //     expect(body).toBeDefined();
+  //   });
 });
 
 const updateDocusignSecret = async (newRefreshToken: string): Promise<void> => {

@@ -438,7 +438,7 @@ describe('Tests Github Actions', () => {
 
     expect(body).toBeDefined();
     expect(body.key).toBeDefined();
-    repoPublicKey = body.key;
+    repoPublicKey = body;
   });
 
   it('Should create repository secret', async () => {

@@ -1,6 +1,6 @@
 import { QorusRequest } from '@qoretechnologies/ts-toolkit';
 import { ESIGNATURE_ACTIONS } from '../apps/esignature/constants';
-import _sodium from 'libsodium-wrappers';
+import { encryptGitHubSecret } from './utils';
 
 let connection: string;
 
@@ -391,7 +391,7 @@ const updateDocusignSecret = async (newRefreshToken: string): Promise<void> => {
     }
   );
 
-  const encryptedRefreshToken = await encryptSecret(newRefreshToken, body.key);
+  const encryptedRefreshToken = encryptGitHubSecret(newRefreshToken, body.key);
 
   await testApi.execAppAction('github', 'actions-create-or-update-repo-secret', gitHubConnection, {
     owner: ghModuleRepoOwner,
@@ -402,11 +402,4 @@ const updateDocusignSecret = async (newRefreshToken: string): Promise<void> => {
       key_id: body.key_id,
     },
   });
-};
-
-const encryptSecret = (secret: string, publicKey: string): string => {
-  const publicKeyBinary = Buffer.from(publicKey, 'base64');
-  const encryptedMessage = _sodium.crypto_box_seal(Buffer.from(secret), publicKeyBinary);
-
-  return Buffer.from(encryptedMessage).toString('base64');
 };

@@ -1,5 +1,5 @@
+// Copyright 2026 Qore Technologies, s.r.o.
 import { TQoreAppWithActions, TQoreRecordBasedApp } from '@qoretechnologies/ts-toolkit';
-import { getOauth2ClientSecret } from '../../utils/oauth2-client-secret';
 import { mapActionsToApp, mapTriggersToApp } from '../../global/helpers';
 import L from '../../i18n/i18n-node';
 import { Locales } from '../../i18n/i18n-types';
@@ -13,7 +13,7 @@ import { HUBSPOT_LISTS_ACTIONS } from './allowed-paths/lists';
 import { HUBSPOT_PRODUCTS_ACTIONS } from './allowed-paths/products';
 import { HUBSPOT_TICKETS_ACTIONS } from './allowed-paths/tickets';
 import { HUBSPOT_USERS_ACTIONS } from './allowed-paths/users';
-import { HUBSPOT_APP_NAME, HUBSPOT_OAUTH_API_VERSION } from './constants';
+import { HUBSPOT_APP_NAME, getHubspotRestOptions } from './rest';
 import * as HUBSPOT_TRIGGERS from './triggers';
 import * as HUBSPOT_ACTIONS from './actions';
 import { HubspotSearchOptions } from './helpers/record-based/get-search-options';
@@ -68,42 +68,7 @@ export default (locale: Locales) =>
       ...mapActionsToApp(HUBSPOT_APP_NAME, HUBSPOT_ACTIONS, locale),
       ...mapTriggersToApp(HUBSPOT_APP_NAME, HUBSPOT_TRIGGERS, locale),
     ],
-    rest: {
-      url: 'https://api.hubapi.com',
-      data: 'json',
-      oauth2_grant_type: 'authorization_code',
-      oauth2_client_id: '483b815d-b266-46c0-8dd5-c84bdb6c1331',
-      oauth2_client_secret: getOauth2ClientSecret(HUBSPOT_APP_NAME),
-      oauth2_auth_url: 'https://app.hubspot.com/oauth/authorize',
-      oauth2_token_url: `https://api.hubapi.com/oauth/${HUBSPOT_OAUTH_API_VERSION}/token`,
-      oauth2_scopes: [
-        'media_bridge.read',
-        'oauth',
-        'tickets',
-        'e-commerce',
-        'crm.objects.custom.read',
-        'crm.objects.custom.write',
-        'crm.schemas.custom.read',
-        'crm.schemas.contacts.read',
-        'crm.objects.contacts.read',
-        'crm.objects.contacts.write',
-        'crm.schemas.deals.read',
-        'crm.objects.deals.read',
-        'crm.objects.deals.write',
-        'crm.schemas.companies.read',
-        'crm.objects.companies.read',
-        'crm.objects.companies.write',
-        'crm.objects.leads.read',
-        'crm.objects.leads.write',
-        'crm.objects.users.read',
-        'crm.objects.users.write',
-        'crm.lists.read',
-        'crm.lists.write',
-        'forms',
-      ],
-      ping_method: 'GET',
-      ping_path: '/integrations/v1/me',
-    },
+    rest: getHubspotRestOptions(),
     swagger_options: {
       parse_flags: 128,
     },

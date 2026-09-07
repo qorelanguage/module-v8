@@ -52,6 +52,11 @@ public class TypeScriptAppRestClient inherits RestClient {
         return conn.getOAuth2Options();
     }
 
+    #! Copies a client whose constructor also requires the TypeScript connection
+    private AbstractRestClient copySelf(hash<auto> opts) {
+        return cast<AbstractRestClient>(Class::getClass(self).newObject(conn, opts, True));
+    }
+
     #! Returns options to update after an OAuth2 login
     private *hash<auto> getUpdateOptionsAfterLogin(hash<auto> h, *bool refresh) {
         *hash<auto> rv = RestClient::getUpdateOptionsAfterLogin(h, refresh);
@@ -310,6 +315,9 @@ public class TypeScriptAppRestConnection inherits RestConnection {
         @return a @ref TypeScriptAppRestClient object
     */
     private TypeScriptAppRestClient getImpl(bool connect = True, *hash<auto> rtopts) {
+        if (app == "hubspot") {
+            return new TypeScriptHubspotRestClient(self, getConnectionOptions(), !connect);
+        }
         return new TypeScriptAppRestClient(self, getConnectionOptions(), !connect);
     }
 

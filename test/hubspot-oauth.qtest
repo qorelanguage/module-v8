@@ -1,0 +1,365 @@
+#!/usr/bin/env qore
+# Copyright 2026 Qore Technologies, s.r.o.
+# SPDX-License-Identifier: MIT
+# Run with QORE_TYPESCRIPT_MASTER_ACTION_SCRIPT, QORE_TYPESCRIPT_ACTION_SCRIPTS and
+# QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS unset; see docs/hubspot-cms-oauth.md.
+%modern
+%prepend-module-path ../qlib
+%requires ../qlib/TypeScriptActionInterface
+%requires QUnit
+%requires HttpServer
+%requires RestClient
+%requires v8
+%try-module json
+%error "The HubSpot fixture requires the json module"
+%endtry
+%exec-class HubspotOAuthTest
+
+#! Local, read-only HubSpot fixture; no production accounts or content are used
+class HubspotOAuthHandler inherits AbstractHttpRequestHandler {
+    private {
+        Mutex mutex();
+        hash<string, int> counts;
+    }
+
+    int count(string path) {
+        AutoLock lock(mutex);
+        return counts{path} ?? 0;
+    }
+
+    hash<HttpResponseInfo> handleRequest(hash<auto> cx, hash<auto> hdr, *data body) {
+        string path = Util::parse_uri_query(cx.raw_path).method;
+        {
+            AutoLock lock(mutex);
+            ++counts{path};
+        }
+        hash<auto> result;
+        int status = 200;
+        if (path == "/oauth/2026-03/token/introspect") {
+            hash<auto> args = mime_parse_form_urlencoded_string(body);
+            if (hdr.method != "POST" || args.client_id != "fixture-client" || args.client_secret != "fixture-secret"
+                    || args.token_type_hint != "access_token") {
+                return makeResponse(400, "invalid introspection request");
+            }
+            result = {"active": True, "scopes": ("oauth", "crm.objects.contacts.read")};
+            switch (args.token) {
+                case "cms-token":
+                case "cms-refreshed-token":
+                case "entitlement-token":
+                case "retry-token":
+                    result.scopes += ("content", "cms.domains.read");
+                    break;
+                case "domains-token":
+                    result.scopes += "cms.domains.read";
+                    break;
+                case "inactive-token":
+                    result.active = False;
+                    break;
+                case "invalid-active-token":
+                    result.active = "true";
+                    break;
+                case "missing-scopes-token":
+                    remove result.scopes;
+                    break;
+                case "invalid-scopes-token":
+                    result.scopes = ("content", 42);
+                    break;
+                case "metadata-error-token":
+                    return makeResponse(503, "fixture-secret metadata-error-token");
+            }
+        } else if (path == "/oauth/2026-03/token") {
+            hash<auto> args = mime_parse_form_urlencoded_string(body);
+            if (hdr.method != "POST" || args.client_id != "fixture-client" || args.client_secret != "fixture-secret") {
+                return makeResponse(400, "invalid token request");
+            }
+            if (args.grant_type == "authorization_code") {
+                if (args."code" != "approved-cms-code") {
+                    return makeResponse(400, make_json({"error": "invalid_grant"}),
+                        {"Content-Type": "application/json"});
+                }
+                result = {"access_token": "cms-token", "refresh_token": "cms-refresh-token",
+                    "token_type": "bearer", "expires_in": 1800};
+            } else if (args.grant_type == "refresh_token") {
+                result = {"access_token": args.refresh_token == "cms-refresh-token"
+                    ? "cms-refreshed-token" : "crm-refreshed-token",
+                    "refresh_token": args.refresh_token, "token_type": "bearer", "expires_in": 1800};
+            } else {
+                return makeResponse(400, "invalid grant type");
+            }
+        } else {
+            # All CMS fixture operations are read-only, even with a content grant.
+            if (hdr.method != "GET" && hdr.method != "HEAD") {
+                return makeResponse(405, "fixture permits reads only");
+            }
+            if (path == "/crm/v3/objects/contacts" || path == "/integrations/v1/me") {
+                result = {"results": ({"id": "contact-1"},)};
+            } else if (path == "/crm/v3/objects/forbidden") {
+                status = 403;
+                result = {"category": "FORBIDDEN"};
+            } else if (hdr.authorization == "Bearer retry-token") {
+                status = 401;
+                result = {"category": "EXPIRED_AUTHENTICATION"};
+            } else if (hdr.authorization == "Bearer entitlement-token") {
+                status = 403;
+                result = {"category": "FORBIDDEN", "message": "CMS subscription required"};
+            } else if (hdr.authorization != "Bearer cms-token" && hdr.authorization != "Bearer cms-refreshed-token"
+                    && !(path == "/cms/v3/domains" && hdr.authorization == "Bearer domains-token")) {
+                status = 403;
+                result = {"category": "MISSING_SCOPES"};
+            } else {
+                result = {"results": ({"id": "cms-1", "name": "Fixture page or domain"},)};
+            }
+        }
+        return makeResponse(status, make_json(result), {"Content-Type": "application/json"});
+    }
+}
+
+class HubspotOAuthTest inherits QUnit::Test {
+    private {
+        HttpServer server;
+        HubspotOAuthHandler handler;
+        string url;
+        string rest_url;
+        JavaScriptProgramPool pool;
+    }
+
+    constructor() : Test("HubSpot optional CMS OAuth", "1.0") {
+        addTestCase("real catalog consent URL and overrides", \testConsent());
+        addTestCase("granted CMS pages and domains", \testGranted());
+        addTestCase("missing, declined and unavailable scopes", \testMissing());
+        addTestCase("invalid metadata and safe errors", \testMetadata());
+        addTestCase("account entitlement rejection", \testEntitlement());
+        addTestCase("refresh preserves the existing grant", \testRefresh());
+        addTestCase("staged reauthorization and recovery", \testReauthorization());
+        addTestCase("endpoint and method boundaries", \testBoundaries());
+        addTestCase("outgoing token and authorization retries", \testOutgoingToken());
+        set_return_value(main());
+    }
+
+    globalSetUp() {
+        handler = new HubspotOAuthHandler();
+        server = new HttpServer();
+        server.setDefaultHandler("fixture", handler);
+        int port = server.addListener(<HttpListenerOptionInfo>{"node": "127.0.0.1", "service": 0}).port;
+        url = sprintf("http://127.0.0.1:%d", port);
+        # TypeScript app connections use HTTPS; the fixture certificate exists only in process memory.
+        string pem = backquote("openssl req -config /dev/null -x509 -newkey rsa:2048 -keyout /dev/stdout "
+            "-out /dev/stdout -days 1 -nodes -subj /CN=localhost 2>/dev/null");
+        SSLPrivateKey key((pem =~ x/(-----BEGIN PRIVATE KEY-----[\s\S]+?-----END PRIVATE KEY-----)/)[0]);
+        SSLCertificate cert((pem =~ x/(-----BEGIN CERTIFICATE-----[\s\S]+?-----END CERTIFICATE-----)/)[0]);
+        port = server.addListener(<HttpListenerOptionInfo>{"node": "127.0.0.1", "service": 0,
+            "key": key, "cert": cert, "enable_h3": False}).port;
+        rest_url = sprintf("https://127.0.0.1:%d", port);
+        # Load the same connection metadata factory as the TypeScript catalog, without unrelated action SDKs.
+        string script = "var exports = {}; const metadata = require("
+            + make_json(realpath(get_script_dir() + "/../ts/dist/apps/hubspot"))
+            + " + '/rest');\n"
+            "exports.app = {name: metadata.HUBSPOT_APP_NAME, display_name: 'HubSpot', short_desc: 'CMS fixture',\n"
+            "desc: 'Local CMS authorization fixture', logo: '', logo_file_name: 'fixture.svg',\n"
+            "logo_mime_type: 'image/svg+xml', rest: metadata.getHubspotRestOptions()};\n";
+        pool = new JavaScriptProgramPool(script, get_script_dir() + "/../ts/hubspot-oauth-fixture.js",
+            sub (JavaScriptProgram pgm) {});
+        hash<auto> app = pool.getProgram().getGlobal().exports.app.toData();
+        app.logo = make_base64_string("<svg xmlns=\"http://www.w3.org/2000/svg\"/>");
+        app.rest.url = rest_url;
+        TypeScriptActionInterface::registerApp(app, pool);
+        TypeScriptActionInterface::getAppDataProvider("Hubspot");
+    }
+
+    globalTearDown() {
+        delete server;
+    }
+
+    TypeScriptAppRestConnection connection(string token = "crm-token", hash<auto> extra = {}) {
+        return new TypeScriptAppRestConnection("hubspot-fixture", "Local fixture", "tsrest-hubspot://unused", {}, {
+            "token": token,
+            "oauth2_client_id": "fixture-client",
+            "oauth2_client_secret": "fixture-secret",
+            "oauth2_token_url": url + "/oauth/2026-03/token",
+            "oauth2_redirect_url": "https://callback.example.test/oauth?return=crm&label=two words",
+        } + extra);
+    }
+
+    testConsent() {
+        TypeScriptAppRestConnection conn = connection();
+        string state = "nonce&scope=admin+% #ü";
+        string uri = conn.getAuthorizationCodeRequest(<AuthCodeInfo>{"state": state});
+        assertFalse(uri =~ /[[:space:]]/);
+        hash<auto> args = Util::parse_uri_query(uri).params;
+        assertEq("content cms.domains.read", args.optional_scope);
+        assertEq(state, args.state);
+        assertEq("https://callback.example.test/oauth?return=crm&label=two words", args.redirect_uri);
+        assertFalse(args.scope =~ /\b(content|cms\.domains\.read)\b/);
+        assertTrue(args.scope =~ /crm.objects.contacts.read/);
+        assertEq("https://app.hubspot.com/oauth/authorize", Util::parse_uri_query(uri).method);
+        conn = connection(extra: {"oauth2_auth_args": {"optional_scope": "cms.domains.read"}});
+        assertEq("cms.domains.read", Util::parse_uri_query(conn.getAuthorizationCodeRequest()).params.optional_scope);
+        conn = connection(extra: {"oauth2_auth_args": {}});
+        assertNothing(Util::parse_uri_query(conn.getAuthorizationCodeRequest()).params.optional_scope);
+    }
+
+    testGranted() {
+        TypeScriptAppRestConnection conn = connection("cms-token");
+        RestClient client = conn.get(False);
+        assertTrue(client instanceof TypeScriptHubspotRestClient);
+        foreach string path in ("/cms/v3/domains", "/cms/v3/pages/site-pages", "/cms/v3/pages/landing-pages",
+                "/cms/pages/2026-03/site-pages", "/cms/domains/2026-03") {
+            assertEq("cms-1", client.restGet(path).body.results[0].id);
+        }
+        # The same client is discovered by the generic API action.
+        object raw_client = conn.getDataProvider().getRestClientForGenericCall();
+        assertTrue(raw_client instanceof TypeScriptHubspotRestClient);
+        assertEq("cms-1", raw_client.restDoRawRequest("GET", "/cms/v3/domains").body.results[0].id);
+        AbstractDataProvider api = conn.getDataProvider().getChildProviderEx("__call__");
+        assertEq("cms-1", api.doRequest({"method": "GET", "path": "/cms/v3/domains"}).body.results[0].id);
+        assertEq("cms-1", client.doRequestWithResponseLimit("GET", "/cms/v3/domains", NOTHING, 4096)
+            .body.results[0].id);
+        AbstractRestClient copy = client.copyWithUrl(rest_url);
+        assertTrue(copy instanceof TypeScriptHubspotRestClient);
+        assertEq("cms-1", copy.restGet("/cms/v3/domains").body.results[0].id);
+    }
+
+    testMissing() {
+        foreach string token in ("crm-token", "declined-token", "unavailable-token") {
+            TypeScriptAppRestConnection conn = connection(token);
+            RestClient client = conn.get(False);
+            int before = handler.count("/oauth/2026-03/token/introspect");
+            assertEq("contact-1", client.restGet("/integrations/v1/me").body.results[0].id);
+            assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+            assertEq(before, handler.count("/oauth/2026-03/token/introspect"));
+            foreach string path in ("/cms/v3/domains", "/cms/v3/pages/site-pages") {
+                int calls = handler.count(path);
+                assertCapability(client, path, "reauthorize");
+                assertEq(calls, handler.count(path), "missing grants must be rejected before the CMS request");
+            }
+            assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.restDoRawRequest(), ("GET", "/cms/v3/domains"));
+            assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.doRequestWithResponseLimit(),
+                ("GET", "/cms/v3/domains", NOTHING, 4096));
+            AbstractDataProvider api = conn.getDataProvider().getChildProviderEx("__call__");
+            assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \api.doRequest(),
+                ({"method": "GET", "path": "/cms/v3/pages/site-pages", "error_passthru": True},));
+            assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+        }
+        TypeScriptAppRestConnection conn = connection("domains-token");
+        RestClient client = conn.get(False);
+        assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+        assertCapability(client, "/cms/v3/pages/site-pages", "content");
+    }
+
+    testMetadata() {
+        foreach string token in ("inactive-token", "invalid-active-token", "missing-scopes-token",
+                "invalid-scopes-token", "metadata-error-token") {
+            TypeScriptAppRestConnection conn = connection(token);
+            RestClient client = conn.get(False);
+            assertCapability(client, "/cms/v3/domains", "reauthorize");
+            assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+        }
+    }
+
+    testEntitlement() {
+        foreach bool passthru in (False, True) {
+            TypeScriptAppRestConnection conn = connection("entitlement-token");
+            RestClient client = conn.get(False);
+            client.setErrorPassthru(passthru);
+            assertCapability(client, "/cms/v3/pages/site-pages", "subscription");
+            assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+        }
+    }
+
+    testRefresh() {
+        foreach bool cms in (False, True) {
+            TypeScriptAppRestConnection conn = connection(cms ? "cms-token" : "crm-token", {
+                "oauth2_refresh_token": cms ? "cms-refresh-token" : "crm-refresh-token",
+                "oauth2_token_expiry": now_us() - 1s,
+            });
+            RestClient client = conn.get(False);
+            if (cms) {
+                assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+                assertEq("cms-refreshed-token", client.getToken());
+            } else {
+                assertCapability(client, "/cms/v3/domains", "reauthorize");
+                assertEq("crm-refreshed-token", client.getToken());
+                assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+            }
+        }
+    }
+
+    testReauthorization() {
+        TypeScriptAppRestConnection active = connection("crm-token", {"oauth2_refresh_token": "crm-refresh-token"});
+        hash<auto> original = active.getRealOptions();
+        # Consent is generated on a candidate; cancellation never replaces the active credentials.
+        TypeScriptAppRestConnection candidate = connection();
+        assertTrue(candidate.getAuthorizationCodeRequest() =~ /optional_scope=/);
+        assertEq(original, active.getRealOptions());
+        RestClient exchange({"url": url + "/oauth/2026-03/token", "data": "url"}, True);
+        hash<auto> request = {"grant_type": "authorization_code", "code": "cancelled-or-expired-code",
+            "client_id": "fixture-client", "client_secret": "fixture-secret"};
+        assertThrows("HTTP-CLIENT-RECEIVE-ERROR", \exchange.restPost(), ("", request));
+        assertEq(original, active.getRealOptions());
+        request."code" = "approved-cms-code";
+        hash<auto> response = exchange.restPost("", request).body;
+        hash<auto> staged = candidate.processOAuth2TokenResponse(response);
+        TypeScriptAppRestConnection verified = connection(extra: staged);
+        RestClient client = verified.get(False);
+        assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+        assertEq(original, active.getRealOptions(), "staging must remain recoverable until persistence succeeds");
+        # A failed or interrupted persistence step leaves the saved original and candidate available for retry.
+        assertEq("contact-1", active.get(False).restGet("/crm/v3/objects/contacts").body.results[0].id);
+        active = connection(extra: staged);
+        client = active.get(False);
+        client.getNewToken();
+        assertEq("cms-refreshed-token", client.getToken());
+        assertEq("cms-1", client.restGet("/cms/v3/pages/site-pages").body.results[0].id);
+    }
+
+    testBoundaries() {
+        assertEq("cms.domains.read", TypeScriptHubspotRestClient::getCmsScope("head", "/cms/v3/domains?limit=1"));
+        assertEq("cms.domains.write", TypeScriptHubspotRestClient::getCmsScope("POST", "/cms/v3/domains"));
+        assertEq("content", TypeScriptHubspotRestClient::getCmsScope("PATCH", "/cms/v3/pages/site-pages/1"));
+        assertNothing(TypeScriptHubspotRestClient::getCmsScope("GET", "/cms/v3/domains-other"));
+        assertNothing(TypeScriptHubspotRestClient::getCmsScope("GET", "/crm/v3/objects/contacts?cms=/cms/v3/domains"));
+    }
+
+    testOutgoingToken() {
+        TypeScriptAppRestConnection conn = connection("cms-token");
+        RestClient client = conn.get(False);
+        int calls = handler.count("/cms/v3/domains");
+        assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.restGet(),
+            ("/cms/v3/domains", {"Authorization": "Bearer crm-token"}));
+        assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.restGet(),
+            ("/cms/v3/domains", {"Authorization": "Basic fixture"}));
+        assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.restGet(),
+            ("/cms/v3/domains", {"authorization": "Bearer cms-token"}));
+        assertEq(calls, handler.count("/cms/v3/domains"));
+        assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.restPost(), ("/cms/v3/domains", {}));
+        assertEq(calls, handler.count("/cms/v3/domains"), "domain writes need a separate grant");
+        conn = connection("crm-token");
+        client = conn.get(False);
+        assertEq("cms-1", client.restGet("/cms/v3/domains", {"Authorization": "Bearer cms-token"}).body.results[0].id);
+        conn = connection("retry-token", {"oauth2_refresh_token": "cms-refresh-token"});
+        client = conn.get(False);
+        calls = handler.count("/oauth/2026-03/token/introspect");
+        assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+        assertEq("cms-refreshed-token", client.getToken());
+        assertEq(calls + 2, handler.count("/oauth/2026-03/token/introspect"),
+            "authorization retry must verify the replacement token too");
+        calls = handler.count("/oauth/2026-03/token/introspect");
+        client.setErrorPassthru(True);
+        assertEq(403, client.restGet("/crm/v3/objects/forbidden").status_code);
+        assertEq(calls, handler.count("/oauth/2026-03/token/introspect"));
+    }
+
+    assertCapability(RestClient client, string path, string message) {
+        *hash<ExceptionInfo> caught;
+        try {
+            client.restGet(path);
+        } catch (hash<ExceptionInfo> ex) {
+            caught = ex;
+        }
+        assertTrue(exists caught, "CMS request must fail");
+        assertEq("HUBSPOT-CMS-CAPABILITY-ERROR", caught.err);
+        assertTrue(caught.desc.lwr().find(message.lwr()) >= 0, caught.desc);
+        string rendered = get_exception_string(caught);
+        assertFalse(rendered =~ /fixture-secret|metadata-error-token/);
+    }
+}

@@ -4,7 +4,7 @@
 # Run with QORE_TYPESCRIPT_MASTER_ACTION_SCRIPT, QORE_TYPESCRIPT_ACTION_SCRIPTS and
 # QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS unset; see docs/hubspot-cms-oauth.md.
 %modern
-%prepend-module-path ../qlib
+%prepend-module-path "${SCRIPT_DIR}/../qlib"
 %requires ../qlib/TypeScriptActionInterface
 %requires QUnit
 %requires HttpServer

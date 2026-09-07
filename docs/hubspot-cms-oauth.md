@@ -135,9 +135,11 @@ metadata factory through V8, registers it, and uses ephemeral loopback HTTP/HTTP
 listeners. `openssl` generates a temporary fixture certificate in memory. Clear
 the three catalog environment variables before launching Qore so installed apps
 cannot conflict with the fixture registration.
+The Ubuntu and Alpine CI runners clear these variables for this fixture automatically.
 It covers consent encoding, persisted overrides, page/domain grants, CRM-only
 access, malformed metadata, entitlement rejection, refresh and staged
-reauthorization. It does not use environment credentials or production content.
+reauthorization, and preservation of non-HTTP request exceptions. It does not use
+environment credentials or production content.
 
 ## References
 

@@ -114,6 +114,22 @@ class HubspotOAuthHandler inherits AbstractHttpRequestHandler {
     }
 }
 
+#! Injects a non-HTTP failure through the real request path to verify exception preservation
+class HubspotRequestErrorClient inherits TypeScriptHubspotRestClient {
+    private {
+        auto error_arg;
+    }
+
+    constructor(TypeScriptAppRestConnection conn, auto error_arg)
+            : TypeScriptHubspotRestClient(conn, conn.getRealOptions(), True) {
+        self.error_arg = error_arg;
+    }
+
+    private signRequest(string method, *string path, *data body, reference<hash<auto>> hdr) {
+        throw "FIXTURE-REQUEST-ERROR", "original request failure", error_arg;
+    }
+}
+
 class HubspotOAuthTest inherits QUnit::Test {
     private {
         HttpServer server;
@@ -133,6 +149,7 @@ class HubspotOAuthTest inherits QUnit::Test {
         addTestCase("staged reauthorization and recovery", \testReauthorization());
         addTestCase("endpoint and method boundaries", \testBoundaries());
         addTestCase("outgoing token and authorization retries", \testOutgoingToken());
+        addTestCase("non-HTTP request errors are preserved", \testRequestErrors());
         set_return_value(main());
     }
 
@@ -347,6 +364,23 @@ class HubspotOAuthTest inherits QUnit::Test {
         client.setErrorPassthru(True);
         assertEq(403, client.restGet("/crm/v3/objects/forbidden").status_code);
         assertEq(calls, handler.count("/oauth/2026-03/token/introspect"));
+    }
+
+    testRequestErrors() {
+        TypeScriptAppRestConnection conn = connection("cms-token");
+        foreach auto error_arg in (111, "connection failed", NOTHING, (1, 2), {"detail": "no HTTP status"}) {
+            HubspotRequestErrorClient client(conn, error_arg);
+            *hash<ExceptionInfo> caught;
+            try {
+                client.restGet("/cms/v3/domains");
+            } catch (hash<ExceptionInfo> ex) {
+                caught = ex;
+            }
+            assertTrue(exists caught);
+            assertEq("FIXTURE-REQUEST-ERROR", caught.err);
+            assertEq("original request failure", caught.desc);
+            assertEq(error_arg, caught.arg);
+        }
     }
 
     assertCapability(RestClient client, string path, string message) {

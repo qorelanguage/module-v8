@@ -27,6 +27,10 @@ class HubspotOAuthHandler inherits AbstractHttpRequestHandler {
         return counts{path} ?? 0;
     }
 
+    static string sign(hash<auto> info) {
+        return hmac("sha256", sprintf("%s!%s", info.path, info.body), "fixture-signing-key").toBase64();
+    }
+
     hash<HttpResponseInfo> handleRequest(hash<auto> cx, hash<auto> hdr, *data body) {
         string path = Util::parse_uri_query(cx.raw_path).method;
         {
@@ -35,8 +39,73 @@ class HubspotOAuthHandler inherits AbstractHttpRequestHandler {
         }
         hash<auto> result;
         int status = 200;
-        if (path == "/oauth/2026-03/token/introspect") {
-            hash<auto> args = mime_parse_form_urlencoded_string(body);
+        hash<auto> args;
+        if (hdr.method == "POST") {
+            args = mime_parse_form_urlencoded_string(body);
+        }
+        if (path =~ /^\/broker\//) {
+            if (hdr.method != "POST" || hdr."x-fixture-signature" != sign({"path": path, "body": body})
+                    || hdr.authorization || args.tenant != "fixture & tenant/ü" || args.client_id != "fixture-client") {
+                return makeResponse(401, "invalid delegated request");
+            }
+            if (path == "/broker/unsupported") {
+                return makeResponse(400, "unsupported operation: fixture-secret metadata-error-token");
+            }
+            if (path == "/broker/redirect") {
+                return makeResponse(307, "", {"Location": "/unexpected-redirect"});
+            }
+            if (args.oauth2_operation == "introspect") {
+                {
+                    AutoLock lock(mutex);
+                    ++counts{"delegated-introspection"};
+                }
+                # Only opaque routing context and the explicit metadata contract may reach the broker.
+                if ((args - ("tenant", "oauth2_operation", "oauth2_token_url", "client_id", "token",
+                        "token_type_hint")).size()
+                        || args.oauth2_token_url !~ /\/(oauth\/2026-03\/token\/introspect|provider\/inspect)$/) {
+                    return makeResponse(400, "invalid introspection envelope");
+                }
+                if (path == "/broker/token-response") {
+                    return makeResponse(200, make_json({"access_token": "unexpected-token",
+                        "refresh_token": "unexpected-refresh-token", "expires_in": 1800}),
+                        {"Content-Type": "application/json"});
+                }
+                path = "/oauth/2026-03/token/introspect";
+            } else if (args.grant_type == "refresh_token" && args.oauth2_token_url =~ /\/oauth\/2026-03\/token$/) {
+                {
+                    AutoLock lock(mutex);
+                    ++counts{"delegated-refresh"};
+                }
+                path = "/oauth/2026-03/token";
+            } else {
+                return makeResponse(400, "unsupported operation");
+            }
+            # Simulate the service supplying credentials after authenticating and resolving the context.
+            args.client_secret = "fixture-secret";
+        }
+        if (path == "/provider/inspect-encoded") {
+            if (hdr.authorization != "Basic "
+                    + "fixture%3Aclient%20%2B%26%C3%BC:fixture%3Asecret%20%2B%26%C3%BC".toBase64()
+                    || args.client_id || args.client_secret) {
+                return makeResponse(401, "invalid encoded client authentication");
+            }
+            args.client_id = "fixture-client";
+            args.client_secret = "fixture-secret";
+        }
+        if (path == "/oauth/2026-03/token/introspect" || path == "/provider/inspect"
+                || path == "/provider/inspect-encoded") {
+            if (hdr.authorization == "Basic " + "fixture-client:fixture-secret".toBase64()) {
+                if (args.client_id || args.client_secret) {
+                    return makeResponse(400, "duplicated client authentication");
+                }
+                args.client_id = "fixture-client";
+                args.client_secret = "fixture-secret";
+            } else if (hdr.authorization == "Basic " + "fixture-secret:".toBase64()) {
+                if (args.client_secret) {
+                    return makeResponse(400, "duplicated client secret");
+                }
+                args.client_secret = "fixture-secret";
+            }
             if (hdr.method != "POST" || args.client_id != "fixture-client" || args.client_secret != "fixture-secret"
                     || args.token_type_hint != "access_token") {
                 return makeResponse(400, "invalid introspection request");
@@ -66,9 +135,14 @@ class HubspotOAuthHandler inherits AbstractHttpRequestHandler {
                     break;
                 case "metadata-error-token":
                     return makeResponse(503, "fixture-secret metadata-error-token");
+                case "non-object-token":
+                    return makeResponse(200, "[\"fixture-secret metadata-error-token\"]",
+                        {"Content-Type": "application/json"});
+                case "malformed-json-token":
+                    return makeResponse(200, "{fixture-secret metadata-error-token",
+                        {"Content-Type": "application/json"});
             }
         } else if (path == "/oauth/2026-03/token") {
-            hash<auto> args = mime_parse_form_urlencoded_string(body);
             if (hdr.method != "POST" || args.client_id != "fixture-client" || args.client_secret != "fixture-secret") {
                 return makeResponse(400, "invalid token request");
             }
@@ -150,6 +224,10 @@ class HubspotOAuthTest inherits QUnit::Test {
         addTestCase("endpoint and method boundaries", \testBoundaries());
         addTestCase("outgoing token and authorization retries", \testOutgoingToken());
         addTestCase("non-HTTP request errors are preserved", \testRequestErrors());
+        addTestCase("generic introspection API and client authentication", \testIntrospectionApi());
+        addTestCase("delegated introspection and signer preservation", \testDelegated());
+        addTestCase("delegated refresh and authorization retry", \testDelegatedRefresh());
+        addTestCase("delegated errors preserve credentials and CRM access", \testDelegatedErrors());
         set_return_value(main());
     }
 
@@ -195,6 +273,17 @@ class HubspotOAuthTest inherits QUnit::Test {
             "oauth2_token_url": url + "/oauth/2026-03/token",
             "oauth2_redirect_url": "https://callback.example.test/oauth?return=crm&label=two words",
         } + extra);
+    }
+
+    TypeScriptAppRestConnection delegatedConnection(string token = "cms-token", hash<auto> extra = {}) {
+        TypeScriptAppRestConnection conn = connection(token, {
+            "oauth2_client_secret": "managed-externally",
+            "oauth2_alt_token_url": url + "/broker/token",
+            "oauth2_token_args": {"tenant": "fixture & tenant/ü"},
+            "oauth2_refresh_token": "cms-refresh-token",
+        } + extra);
+        conn.setAltTokenSigner(\HubspotOAuthHandler::sign(), "X-Fixture-Signature");
+        return conn;
     }
 
     testConsent() {
@@ -381,6 +470,182 @@ class HubspotOAuthTest inherits QUnit::Test {
             assertEq("original request failure", caught.desc);
             assertEq(error_arg, caught.arg);
         }
+    }
+
+    testIntrospectionApi() {
+        foreach hash<auto> extra in ({}, {"oauth2_token_use_basic_auth": True},
+                {"oauth2_token_auth_secret_only": True}) {
+            TypeScriptAppRestConnection conn = connection("crm-token", extra + {
+                "oauth2_refresh_token": "crm-refresh-token", "oauth2_token_expiry": now_us() - 1s});
+            # Use the generic client directly with a provider endpoint unrelated to HubSpot's URL layout.
+            int persistence_calls = 0;
+            TypeScriptAppRestClient client(conn, conn.getRealOptions() + {"url": rest_url,
+                "update_options": sub (hash<auto> new_opts) {
+                    ++persistence_calls;
+                }}, True);
+            hash<auto> original = conn.getRealOptions();
+            int refreshes = handler.count("/oauth/2026-03/token");
+            hash<auto> metadata = client.introspectOAuth2Token(url + "/provider/inspect", "cms-token");
+            assertEq(True, metadata.active);
+            assertEq(("oauth", "crm.objects.contacts.read", "content", "cms.domains.read"), metadata.scopes);
+            assertEq("crm-token", client.getToken());
+            assertEq(original, conn.getRealOptions());
+            foreach string token in ("metadata-error-token", "non-object-token", "malformed-json-token") {
+                *hash<ExceptionInfo> caught;
+                try {
+                    client.introspectOAuth2Token(url + "/provider/inspect", token);
+                } catch (hash<ExceptionInfo> ex) {
+                    caught = ex;
+                }
+                assertEq("OAUTH2-INTROSPECTION-ERROR", caught.err);
+                assertFalse(get_exception_string(caught) =~ /fixture-secret|metadata-error-token/);
+            }
+            assertThrows("OAUTH2-INTROSPECTION-ERROR", \client.introspectOAuth2Token(), ("", "cms-token"));
+            assertThrows("OAUTH2-INTROSPECTION-ERROR", \client.introspectOAuth2Token(), (url, ""));
+            assertEq("crm-token", client.getToken());
+            assertEq(original, conn.getRealOptions());
+            assertEq(refreshes, handler.count("/oauth/2026-03/token"));
+            assertEq(0, persistence_calls, "Introspection must not invoke the persistence callback");
+        }
+        TypeScriptAppRestConnection conn = delegatedConnection("crm-token");
+        TypeScriptAppRestClient client(conn, conn.getRealOptions() + {"url": rest_url}, True);
+        client.setAltTokenSigner(\HubspotOAuthHandler::sign(), "X-Fixture-Signature");
+        assertEq(True, client.introspectOAuth2Token(url + "/provider/inspect", "cms-token").active);
+        assertEq("crm-token", client.getToken());
+        foreach hash<auto> extra in ({"oauth2_client_id": ""}, {"oauth2_client_secret": ""},
+                {"oauth2_client_secret": "incorrect-secret"}) {
+            conn = connection("cms-token", extra);
+            client = cast<TypeScriptAppRestClient>(conn.get(False));
+            assertThrows("OAUTH2-INTROSPECTION-ERROR", \client.introspectOAuth2Token(),
+                (url + "/provider/inspect", "cms-token"));
+            assertEq("cms-token", client.getToken());
+        }
+        conn = connection("cms-token", {"oauth2_client_id": "fixture:client +&ü",
+            "oauth2_client_secret": "fixture:secret +&ü", "oauth2_token_use_basic_auth": True});
+        client = cast<TypeScriptAppRestClient>(conn.get(False));
+        assertEq(True, client.introspectOAuth2Token(url + "/provider/inspect-encoded", "cms-token").active);
+    }
+
+    testDelegated() {
+        int direct_calls = handler.count("/oauth/2026-03/token/introspect");
+        TypeScriptAppRestConnection conn = delegatedConnection(extra: {"oauth2_token_args": {
+            "tenant": "fixture & tenant/ü", "client_secret": "must-not-forward", "grant_type": "refresh_token",
+            "code": "must-not-forward", "refresh_token": "must-not-forward", "redirect_uri": "must-not-forward",
+            "code_verifier": "must-not-forward", "token": "wrong-token", "client_id": "wrong-client",
+            "username": "must-not-forward", "password": "must-not-forward", "assertion": "must-not-forward",
+            "client_assertion": "must-not-forward", "client_assertion_type": "must-not-forward",
+            "token_type_hint": "refresh_token", "oauth2_operation": "wrong-operation",
+            "oauth2_token_url": "https://wrong-endpoint.example.test",
+        }});
+        hash<auto> original = conn.getRealOptions();
+        RestClient client = conn.get(False);
+        string original_url = client.getURL();
+        int calls = handler.count("delegated-introspection");
+        assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+        assertEq("cms-1", client.restGet("/cms/pages/2026-03/site-pages").body.results[0].id);
+        assertEq(calls + 2, handler.count("delegated-introspection"));
+        assertEq("cms-token", client.getToken());
+        assertEq(original_url, client.getURL());
+        assertEq(original, conn.getRealOptions());
+        calls = handler.count("delegated-introspection");
+        assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+        assertEq(calls, handler.count("delegated-introspection"));
+        AbstractRestClient copy = client.copyWithUrl(rest_url);
+        assertTrue(copy instanceof TypeScriptHubspotRestClient);
+        assertEq("cms-1", copy.restGet("/cms/v3/domains").body.results[0].id);
+        assertEq("cms-1", client.doRequestWithResponseLimit("GET", "/cms/v3/domains", NOTHING, 4096)
+            .body.results[0].id);
+        assertEq("cms-1", client.restDoRawRequest("GET", "/cms/v3/domains").body.results[0].id);
+        int cms_calls = handler.count("/cms/v3/domains");
+        assertThrows("HUBSPOT-CMS-CAPABILITY-ERROR", \client.restGet(),
+            ("/cms/v3/domains", {"Authorization": "Bearer crm-token"}));
+        assertEq(cms_calls, handler.count("/cms/v3/domains"));
+        assertEq(direct_calls, handler.count("/oauth/2026-03/token/introspect"));
+        # Endpoint configuration controls delegation even when local credentials are also available.
+        conn = delegatedConnection(extra: {"oauth2_client_secret": "fixture-secret"});
+        assertEq("cms-1", conn.get(False).restGet("/cms/v3/domains").body.results[0].id);
+        assertEq(direct_calls, handler.count("/oauth/2026-03/token/introspect"));
+    }
+
+    testDelegatedRefresh() {
+        int direct_calls = handler.count("/oauth/2026-03/token/introspect");
+        int direct_refresh = handler.count("/oauth/2026-03/token");
+        foreach bool cms in (False, True) {
+            TypeScriptAppRestConnection conn = delegatedConnection(cms ? "cms-token" : "crm-token", {
+                "oauth2_refresh_token": cms ? "cms-refresh-token" : "crm-refresh-token",
+                "oauth2_token_expiry": now_us() - 1s,
+            });
+            # A copied client's first request must retain the signer for both refresh and metadata.
+            AbstractRestClient client = conn.get(False).copyWithUrl(rest_url);
+            int calls = handler.count("delegated-introspection");
+            int refreshes = handler.count("delegated-refresh");
+            if (cms) {
+                assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+            } else {
+                assertCapability(cast<RestClient>(client), "/cms/v3/domains", "reauthorize");
+            }
+            assertEq(cms ? "cms-refreshed-token" : "crm-refreshed-token", client.getToken());
+            assertEq(calls + 1, handler.count("delegated-introspection"));
+            assertEq(refreshes + 1, handler.count("delegated-refresh"));
+        }
+        TypeScriptAppRestConnection conn = delegatedConnection("retry-token");
+        RestClient client = conn.get(False);
+        int calls = handler.count("delegated-introspection");
+        int refreshes = handler.count("delegated-refresh");
+        assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+        assertEq("cms-refreshed-token", client.getToken());
+        assertEq(calls + 2, handler.count("delegated-introspection"));
+        assertEq(refreshes + 1, handler.count("delegated-refresh"));
+        assertEq(direct_calls, handler.count("/oauth/2026-03/token/introspect"));
+        assertEq(direct_refresh, handler.count("/oauth/2026-03/token"));
+    }
+
+    testDelegatedErrors() {
+        int direct_calls = handler.count("/oauth/2026-03/token/introspect");
+        int refreshes = handler.count("delegated-refresh");
+        foreach string token in ("crm-token", "inactive-token", "invalid-active-token", "missing-scopes-token",
+                "invalid-scopes-token", "metadata-error-token", "non-object-token", "malformed-json-token") {
+            TypeScriptAppRestConnection conn = delegatedConnection(token);
+            RestClient client = conn.get(False);
+            hash<auto> original = conn.getRealOptions();
+            int cms_calls = handler.count("/cms/v3/domains");
+            assertCapability(client, "/cms/v3/domains", "reauthorize");
+            assertEq(cms_calls, handler.count("/cms/v3/domains"));
+            assertEq(token, client.getToken());
+            assertEq(original, conn.getRealOptions());
+            assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+        }
+        foreach string endpoint in ("unsupported", "token-response", "redirect") {
+            TypeScriptAppRestConnection conn = delegatedConnection(extra: {
+                "oauth2_alt_token_url": url + "/broker/" + endpoint});
+            RestClient client = conn.get(False);
+            hash<auto> original = conn.getRealOptions();
+            assertCapability(client, "/cms/v3/domains", "reauthorize");
+            assertEq("cms-token", client.getToken());
+            assertEq(original, conn.getRealOptions());
+        }
+        assertEq(0, handler.count("/unexpected-redirect"));
+        TypeScriptAppRestConnection conn = delegatedConnection();
+        conn.clearAltTokenSigner();
+        RestClient client = conn.get(False);
+        int calls = handler.count("/broker/token");
+        assertCapability(client, "/cms/v3/domains", "introspection support");
+        assertEq(calls, handler.count("/broker/token"), "missing signer must fail before any metadata request");
+        client.setAltTokenSigner(\HubspotOAuthHandler::sign(), "");
+        assertCapability(client, "/cms/v3/domains", "reauthorize");
+        assertEq(calls, handler.count("/broker/token"), "missing signature header must fail before sending");
+        client.setAltTokenSigner(string sub (hash<auto> info) { return "invalid-signature"; }, "X-Fixture-Signature");
+        assertCapability(client, "/cms/v3/domains", "reauthorize");
+        client.setAltTokenSigner(sub (hash<auto> info) {
+            throw "SIGNING-ERROR", "fixture-secret metadata-error-token";
+        }, "X-Fixture-Signature");
+        assertCapability(client, "/cms/v3/domains", "reauthorize");
+        assertEq("cms-token", client.getToken());
+        assertEq("contact-1", client.restGet("/crm/v3/objects/contacts").body.results[0].id);
+        client.setAltTokenSigner(\HubspotOAuthHandler::sign(), "X-Fixture-Signature");
+        assertEq("cms-1", client.restGet("/cms/v3/domains").body.results[0].id);
+        assertEq(direct_calls, handler.count("/oauth/2026-03/token/introspect"));
+        assertEq(refreshes, handler.count("delegated-refresh"), "introspection never exchanges or refreshes tokens");
     }
 
     assertCapability(RestClient client, string path, string message) {

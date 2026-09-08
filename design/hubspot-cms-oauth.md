@@ -12,8 +12,16 @@ optional `optional_scope`, redirect URI and state parameters.
 the HubSpot app. The generic API action obtains this client from the connection.
 Its request signing hook checks supported page/domain paths after the base client
 refreshes authentication, and again if authentication is retried. It introspects
-the outgoing bearer token using a separate client and the configured token URL
-plus `/introspect`. There is no mutable grant cache or persisted scope snapshot.
+the outgoing bearer token through the generic
+`TypeScriptAppRestClient.introspectOAuth2Token()` API, supplying the configured
+provider token URL plus `/introspect`. This API uses a separate client for direct
+credential-based requests or signed requests through `oauth2_alt_token_url`.
+The hosting application supplies that alternate endpoint and signer; opaque
+`oauth2_token_args` carry routing context. The module implements no service-specific
+credential resolution or signing algorithm. The
+[generic API contract](../docs/oauth2-token-introspection.md) defines the operation
+fields, authentication options and failure behavior.
+There is no mutable grant cache or persisted scope snapshot.
 The active token and granted scope list must be valid; requested scopes and ping
 results are never permission evidence. CRM requests skip introspection.
 
@@ -25,7 +33,10 @@ credentials. Raw and bounded requests use these same hooks.
 
 TypeScript REST clients override `copySelf()` because their constructor needs the
 owning connection as well as REST options. Copies retain their concrete class,
-connection, current token and any custom behavior.
+connection, current token, alternate endpoint signer/header and any custom behavior.
+Introspection never runs the token exchange/persistence path, even if the metadata
+service returns an unexpected token response. Unsupported operations fail without
+direct fallback; the CMS checker requires active-token metadata and granted scopes.
 
 Credential storage and consent callbacks belong to the consuming application.
 This module does not replace credentials to enable optional scopes. The

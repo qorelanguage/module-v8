@@ -1,7 +1,7 @@
 # -*- mode: qore; indent-tabs-mode: nil -*-
 #! Qore TypeScriptActionInterface module definition
 
-/*  TypeScriptActionInterface.qm Copyright 2024 Qore Technologies, s.r.o.
+/*  TypeScriptActionInterface.qm Copyright 2024 - 2026 Qore Technologies, s.r.o.
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,12 @@ module TypeScriptActionInterface {
       actionable capability and account-entitlement errors. Existing connections need reauthorization to
       expand their grant; see \c docs/hubspot-cms-oauth.md for deployment and recovery instructions
       (<a href="https://github.com/qoretechnologies/qore/issues/5443">issue 5443</a>)
-    - copied TypeScript REST clients preserve their owning connection and specialized client behavior
+    - added generic \c TypeScriptAppRestClient::introspectOAuth2Token() for direct or signed
+      alternate-service token metadata requests without changing token state. HubSpot CMS checks use
+      this API; alternate services must implement the operation described in
+      \c docs/oauth2-token-introspection.md
+    - copied TypeScript REST clients preserve their owning connection, specialized client behavior,
+      and the alternate OAuth endpoint signer and signature header
     - fixed the source-owned provider i18n catalogs shipped in
       \c qlib/TypeScriptActionInterface/i18n to contain exactly the apps and actions registered by
       this module. Catalog generation is scoped to the technical source owner, so installed or

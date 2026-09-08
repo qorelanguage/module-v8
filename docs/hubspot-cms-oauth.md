@@ -41,6 +41,10 @@ Changing the token API version cannot expand a grant. Authorization remains at
    `TypeScriptActionInterface` module. Rebuild its AOT module when used. Reload
    the application catalog and recreate/reload connection objects so they receive
    the updated defaults and HubSpot REST client implementation.
+   If `oauth2_alt_token_url` is configured, first deploy the service's
+   [signed introspection operation](oauth2-token-introspection.md#delegated-requests).
+   Existing alternate-endpoint and signer configuration is reused; no client
+   secret needs to be copied into the connection.
 4. Review persisted connection overrides. Explicit `oauth2_auth_args` replaces
    the catalog hash, so an old override can hide the new optional scopes. Merge
    `optional_scope` into intentional overrides, retaining other arguments. Leave
@@ -82,10 +86,20 @@ metadata errors, and does not save introspection responses in connection options
 
 The synchronous REST client used by **Make an API call** introspects the actual
 outgoing access token at `/oauth/2026-03/token/introspect` immediately before a
-supported CMS request. This happens after automatic refresh and on authentication
+supported CMS request. It uses the generic
+`TypeScriptAppRestClient.introspectOAuth2Token()` API, which routes through the
+configured alternate OAuth endpoint and signer when present. Direct requests use
+the connection's client credentials. This happens after automatic refresh and on authentication
 retries. It requires an active token and the operation's granted scope. It never
 trusts the requested scopes or a cached permission list. This adds one metadata
 request per CMS request and no metadata requests to CRM calls.
+
+The alternate service must support `oauth2_operation=introspect` and return
+metadata directly. An unsupported operation, missing signer, or metadata failure
+blocks the CMS call with a recoverable error and leaves existing credentials
+intact. CRM operations and normal token refresh keep their existing behavior.
+See the [generic API contract](oauth2-token-introspection.md) for the exact
+request fields and examples.
 
 Missing, declined, unavailable or unverifiable grants produce
 `HUBSPOT-CMS-CAPABILITY-ERROR` with reauthorization guidance. A CMS HTTP 403
@@ -138,7 +152,8 @@ cannot conflict with the fixture registration.
 The Ubuntu and Alpine CI runners clear these variables for this fixture automatically.
 It covers consent encoding, persisted overrides, page/domain grants, CRM-only
 access, malformed metadata, entitlement rejection, refresh and staged
-reauthorization, and preservation of non-HTTP request exceptions. It does not use
+reauthorization, signed alternate-service introspection, signer preservation on
+copied clients, and preservation of non-HTTP request exceptions. It does not use
 environment credentials or production content.
 
 ## References

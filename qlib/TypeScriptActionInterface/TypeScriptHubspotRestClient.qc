@@ -46,9 +46,9 @@ string scope = TypeScriptHubspotRestClient::getCmsScope("GET", "/cms/v3/domains"
             return;
         }
         hash<auto> oauth = getOAuth2Options();
-        if (!oauth.oauth2_client_id || !oauth.oauth2_client_secret || !oauth.oauth2_token_url) {
-            throw "HUBSPOT-CMS-CAPABILITY-ERROR", "Cannot verify CMS access: configure the HubSpot OAuth client "
-                "credentials and reauthorize the connection with the required optional CMS scope.";
+        if (!oauth.oauth2_token_url) {
+            throw "HUBSPOT-CMS-CAPABILITY-ERROR", "Cannot verify CMS access: configure the HubSpot OAuth token "
+                "endpoint and reauthorize the connection with the required optional CMS scope.";
         }
         # Inspect the actual outgoing bearer token, including an explicitly supplied authorization header.
         *string authorization;
@@ -67,26 +67,12 @@ string scope = TypeScriptHubspotRestClient::getCmsScope("GET", "/cms/v3/domains"
         }
         hash<auto> metadata;
         try {
-            # A separate client has no auth/debug callbacks and never places credentials in URLs.
-            # Use the configured token endpoint so custom developer apps and test fixtures use the same authority.
-            RestClient inspector({
-                "url": oauth.oauth2_token_url + "/introspect",
-                "data": "url",
-                "ssl_verify_cert": True,
-                "timeout": getTimeout(),
-                "connect_timeout": getConnectTimeout(),
-                "headers": {"Accept": "application/json"},
-            }, True);
-            metadata = inspector.restPost("", {
-                "client_id": oauth.oauth2_client_id,
-                "client_secret": oauth.oauth2_client_secret,
-                "token": match[0],
-                "token_type_hint": "access_token",
-            }).body;
+            metadata = introspectOAuth2Token(oauth.oauth2_token_url + "/introspect", match[0]);
         } catch () {
             # Transport exceptions and HubSpot metadata can contain tokens; never propagate either.
             throw "HUBSPOT-CMS-CAPABILITY-ERROR", "Cannot verify the current HubSpot CMS grant. Check the "
-                "OAuth client configuration and connectivity, then retry or reauthorize the connection.";
+                "OAuth client configuration, alternate service introspection support and connectivity, "
+                "then retry or reauthorize the connection.";
         }
         if (metadata.active !== True || metadata.scopes.typeCode() != NT_LIST) {
             throw "HUBSPOT-CMS-CAPABILITY-ERROR", "HubSpot did not return an active token with valid granted "

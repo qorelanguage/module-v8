@@ -52,9 +52,97 @@ public class TypeScriptAppRestClient inherits RestClient {
         return conn.getOAuth2Options();
     }
 
+    #! Reads OAuth2 token metadata without authenticating or updating this client's token state
+    /** @param introspection_url provider's absolute token introspection endpoint
+        @param token access token to inspect, which can differ from this client's token
+
+        With \c oauth2_alt_token_url configured, sends a signed form POST to that endpoint using
+        the callback and header installed with \c setAltTokenSigner(). The form contains
+        \c oauth2_operation=introspect, \c oauth2_token_url=introspection_url, \c client_id,
+        \c token, and \c token_type_hint=access_token, plus opaque \c oauth2_token_args.
+        Credentials and token-exchange fields are excluded from those extra arguments.
+        The alternate service supplies provider credentials and returns the metadata object directly.
+
+        Otherwise sends a form POST to the provider using the configured client credentials and
+        token endpoint authentication options. A separate client isolates both paths from token
+        refresh, persistence callbacks and logging. There is no fallback between the two paths.
+
+        @return provider metadata; the caller must validate activity and provider-specific scopes
+        @throw OAUTH2-INTROSPECTION-ERROR configuration, signing, transport, or response failure;
+            the exception contains no request or response data
+        @note Configure endpoints and signing before using or copying clients. A signer shared by
+            concurrently used clients must be thread safe. Activity and scope formats are provider-specific.
+        @par Example
+        Inspect a connection's access grant before a protected operation:
+        @code{.py}
+TypeScriptAppRestClient client = cast<TypeScriptAppRestClient>(connection.get(False));
+hash<auto> metadata = client.introspectOAuth2Token(
+    "https://provider.example.test/oauth/introspect", client.getToken());
+        @endcode
+        @since TypeScriptActionInterface 1.1
+    */
+    hash<auto> introspectOAuth2Token(string introspection_url, string token) {
+        hash<auto> oauth = getOAuth2Options();
+        bool delegated = oauth.oauth2_alt_token_url.val();
+        if (!introspection_url.val() || !token.val() || !oauth.oauth2_client_id.val()
+                || (delegated ? (!alt_token_signer || !alt_token_signer_header.val())
+                    : !oauth.oauth2_client_secret.val())) {
+            throw "OAUTH2-INTROSPECTION-ERROR", "Token introspection requires an endpoint, token and client ID, "
+                "and either client credentials or an alternate endpoint with a configured request signer.";
+        }
+        try {
+            hash<auto> request = {
+                "client_id": oauth.oauth2_client_id,
+                "token": token,
+                "token_type_hint": "access_token",
+            };
+            hash<auto> hdr = {"Accept": "application/json"};
+            if (delegated) {
+                request = (oauth.oauth2_token_args ?? {})
+                    - ("client_secret", "grant_type", "code", "redirect_uri", "refresh_token", "code_verifier",
+                        "username", "password", "assertion", "client_assertion", "client_assertion_type")
+                    + request + {"oauth2_operation": "introspect", "oauth2_token_url": introspection_url};
+            } else if (oauth.oauth2_token_use_basic_auth || oauth.oauth2_token_auth_secret_only) {
+                # OAuth2 Basic credentials are individually form-encoded (RFC 6749 section 2.3.1).
+                hdr.Authorization = "Basic " + (oauth.oauth2_token_use_basic_auth
+                    ? sprintf("%s:%s", mime_get_urlencoded_string(oauth.oauth2_client_id),
+                        mime_get_urlencoded_string(oauth.oauth2_client_secret))
+                    : sprintf("%s:", oauth.oauth2_client_secret)).toBase64();
+                if (oauth.oauth2_token_use_basic_auth) {
+                    remove request.client_id;
+                }
+            } else {
+                request.client_secret = oauth.oauth2_client_secret;
+            }
+            RestClient inspector({
+                "url": delegated ? oauth.oauth2_alt_token_url : introspection_url,
+                "data": "url",
+                "ssl_verify_cert": True,
+                "max_redirects": 0,
+                "timeout": getTimeout(),
+                "connect_timeout": getConnectTimeout(),
+                "headers": hdr,
+            }, True);
+            auto metadata = delegated
+                ? inspector.doSignedRequest(alt_token_signer_header, alt_token_signer, "POST", "", request).body
+                : inspector.restPost("", request).body;
+            if (metadata.typeCode() != NT_HASH) {
+                throw "OAUTH2-INTROSPECTION-ERROR", "Invalid token metadata response.";
+            }
+            return metadata;
+        } catch () {
+            throw "OAUTH2-INTROSPECTION-ERROR", "Cannot retrieve token metadata. Check the introspection "
+                "endpoint, credentials or request signer, service support, and connectivity.";
+        }
+    }
+
     #! Copies a client whose constructor also requires the TypeScript connection
     private AbstractRestClient copySelf(hash<auto> opts) {
-        return cast<AbstractRestClient>(Class::getClass(self).newObject(conn, opts, True));
+        RestClient copy = cast<RestClient>(Class::getClass(self).newObject(conn, opts, True));
+        if (alt_token_signer) {
+            copy.setAltTokenSigner(alt_token_signer, alt_token_signer_header);
+        }
+        return copy;
     }
 
     #! Returns options to update after an OAuth2 login

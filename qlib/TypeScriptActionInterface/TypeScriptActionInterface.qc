@@ -1233,7 +1233,11 @@ public class TypeScriptActionInterface {
             throw "APP-ERROR", sprintf("App name %y is invalid; it contains one or more spaces", app.name);
         }
         on_success TSAI::debug("TypeScriptActionInterface: registered app %y", app.name);
-        on_error TSAI::error("%s", get_exception_string($1));
+        on_error {
+            DataProviderActionCatalog::reportInitializationFailure("app", app.name, NOTHING, $1,
+                TypeScriptActionInterface::getModulePath());
+            TSAI::error("%s", get_exception_string($1));
+        }
         string appname = app.name.lwr();
 
         # Normalize swagger_* aliases to openapi_* (openapi_* are the primary property names)
@@ -1554,7 +1558,11 @@ public class TypeScriptActionInterface {
 
     static private registerExistingAppIntern(hash<auto> app, JavaScriptProgramPool pool) {
         on_success TSAI::debug("TypeScriptActionInterface: registered app %y", app.name);
-        on_error TSAI::error("%s", get_exception_string($1));
+        on_error {
+            DataProviderActionCatalog::reportInitializationFailure("app", app.name, NOTHING, $1,
+                TypeScriptActionInterface::getModulePath());
+            TSAI::error("%s", get_exception_string($1));
+        }
 
         string appname = app.name.lwr();
         TypeScriptActionAppDataProvider prov(appname, app."root_provider" ?? app."module");
@@ -1919,9 +1927,12 @@ public class TypeScriptActionInterface {
     }
 
     private static registerActionIntern(hash<auto> action, JavaScriptProgramPool pool) {
-        on_error printf("%s\n", get_exception_string($1));
-        on_error rethrow $1.err, sprintf("%s (while registering action %y for app %y)", $1.desc, action.action,
-            action.app);
+        on_error {
+            DataProviderActionCatalog::reportInitializationFailure("action", action.app, action.action, $1,
+                TypeScriptActionInterface::getModulePath());
+            rethrow $1.err, sprintf("%s (while registering action %y for app %y)", $1.desc, action.action,
+                action.app), $1.arg;
+        }
         TypeScriptActionInterface::generateDataProvider(\action, pool);
         DataProviderActionCatalog::registerAction(cast<hash<DataProviderActionInfo>>(action));
     }
@@ -3278,13 +3289,13 @@ public class TypeScriptActionInterface {
             info.attr.on_change = v;
         }
         if (auto v = remove type_hash.allowed_values) {
-            info.allowed_values = v;
+            info.allowed_values = map cast<hash<AllowedValueInfo>>($1), v;
         }
         if (remove type_hash.allowed_values_creatable) {
             info.allowed_values_creatable = True;
         }
         if (auto v = remove type_hash.element_allowed_values) {
-            info.element_allowed_values = v;
+            info.element_allowed_values = map cast<hash<AllowedValueInfo>>($1), v;
         }
         if (remove type_hash.element_allowed_values_creatable) {
             info.element_allowed_values_creatable = True;

@@ -48,6 +48,8 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
         addTestCase("test API", \testApi());
         addTestCase("include_response_headers flag", \includeResponseHeadersTest());
         addTestCase("app base dir", \appBaseDirTest());
+        addTestCase("structured field choices", \structuredFieldChoicesTest());
+        addTestCase("eager registration failure reporting", \eagerRegistrationFailureTest());
 
         # Return for compatibility with test harnesses that check the script's return value
         set_return_value(main());
@@ -1028,6 +1030,87 @@ var obj = {
         assertEq(old_dir, TypeScriptActionInterface::getAppBaseDir());
         chdir("/");
         assertEq(old_dir, TypeScriptActionInterface::getAppBaseDir());
+    }
+
+    #! TypeScript field schemas define choices as AllowedValueInfo records even when their values are hashes
+    private structuredFieldChoicesTest() {
+        hash<auto> payload = {
+            "field": "modifiedTime",
+            "direction": "desc",
+        };
+        TypeScriptDataField field = TypeScriptActionInterface::getField("repro", "order_by", {
+            "type": {
+                "type": "list",
+                "element_type": {
+                    "type": "hash",
+                    "fields": {
+                        "field": {"type": "string", "required": True},
+                        "direction": {"type": "string", "required": True},
+                    },
+                },
+            },
+            "required": False,
+            "element_allowed_values": (
+                {"display_name": "opaque-label", "value": payload},
+            ),
+            "element_allowed_values_creatable": True,
+        });
+
+        foreach QoreDataField value in (field, Serializable::deserialize(field.serialize())) {
+            list<hash<AllowedValueInfo>> choices = value.getElementAllowedValues();
+            assertEq(1, choices.size());
+            assertEq("opaque-label", choices[0].display_name);
+            assertEq(payload, choices[0].value);
+            assertEq((payload,), value.acceptsValue((payload,)));
+            assertEq(({"field": "name", "direction": "asc"},),
+                value.acceptsValue(({"field": "name", "direction": "asc"},)),
+                "creatable structured choices still accept custom values");
+        }
+    }
+
+    #! Eager TypeScript registration failures retain machine-readable action identity without relying on output
+    private eagerRegistrationFailureTest() {
+        string app = "TypeScriptFailure_" + get_random_string(8);
+        JavaScriptProgramPool pool("", "failure-test.js", sub (JavaScriptProgram pgm) {});
+        TypeScriptActionInterface::registerApp({
+            "name": app,
+            "display_name": app,
+            "short_desc": "eager registration failure test",
+            "desc": "eager registration failure test",
+            "groups": ("Other",),
+            "logo": make_base64_string(<00>),
+            "logo_file_name": "test.svg",
+            "logo_mime_type": MimeTypeSvg,
+            "dynamic": True,
+        }, pool);
+        DataProviderActionCatalog::getAppEx(app);
+        on_exit TypeScriptActionInterface::deregisterDynamicApp(app);
+
+        hash<auto> action = {
+            "app": app,
+            "action": "broken-action",
+            "display_name": "Broken action",
+            "short_desc": "broken action",
+            "desc": "broken action",
+            "action_code": 999,
+        };
+        assertThrows("TYPESCRIPT-ACTION-ERROR", "unsupported", sub () {
+            TypeScriptActionInterface::registerAction(action, pool);
+        });
+
+        list<hash<DataProviderInitializationFailureInfo>> failures
+            = DataProviderActionCatalog::getInitializationFailures((app,));
+        assertEq(1, failures.size());
+        assertEq("action", failures[0].kind);
+        assertEq(app, failures[0].app);
+        assertEq("broken-action", failures[0].action);
+        assertEq("TYPESCRIPT-ACTION-ERROR", failures[0].error);
+
+        # A successful retry of the same exact identity clears the retained failure.
+        action.action_code = DPAT_API;
+        action.api_function = sub () {};
+        TypeScriptActionInterface::registerAction(action, pool);
+        assertEq((), DataProviderActionCatalog::getInitializationFailures((app,)));
     }
 }
 

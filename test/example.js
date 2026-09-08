@@ -717,7 +717,7 @@ exports.actionsCatalogue = {
                     },
                 },
                 "key": {
-                    "type": "hash",
+                    "type": "string",
                     "display_name": "Key",
                     "short_desc": "another option",
                     "desc": "another option",

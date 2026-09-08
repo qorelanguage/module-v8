@@ -1,3 +1,6 @@
+// Copyright 2026 Qore Technologies, s.r.o.
+// SPDX-License-Identifier: MIT
+
 exports.qtester = {
     /** testapi has two properties:
         - createConnection: function (app: string, opts?: object) : string
@@ -15,23 +18,21 @@ exports.qtester = {
             - request_opts: the request options
             return value: the return value of the API call
     */
-    run: function(testapi) {
-        let c = testapi.createConnection('js-openapi-test', {
+    run: function(testapi, request = {
+        body: {
+            id: 123,
+            name: 'Rex',
+            photoUrls: [],
+        },
+        // The action fixture adds this required dynamic option alongside the Pet body.
+        new0: { new1: { a: 'Fixture' } },
+    }) {
+        const c = testapi.createConnection('js-openapi-test', {
             'opts': {
                 'subdomain': 'www',
             },
         });
-        let res = testapi.execAppAction('js-openapi-test', 'create-pet', c, {
-            'body': {
-                'id': 'Test',
-                'name': 'Rex',
-                'photoUrls': [],
-            },
-        }, null, true);
-        if (res != true) {
-            throw new Error('Err');
-        } else {
-            console.log('OK');
-        }
+        // Validation succeeds before the unauthenticated fixture reports authorization_code.
+        return testapi.execAppAction('js-openapi-test', 'create-pet', c, request, null, true);
     }
 };

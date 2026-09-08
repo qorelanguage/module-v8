@@ -1,7 +1,10 @@
 #!/usr/bin/env qore
 # -*- mode: qore; indent-tabs-mode: nil -*-
+# Copyright 2026 Qore Technologies, s.r.o.
+# SPDX-License-Identifier: MIT
 
 %modern
+%prepend-module-path "${SCRIPT_DIR}/../qlib"
 
 %requires QUnit
 %requires RestClient
@@ -614,8 +617,24 @@ async function runWithTimeout(promise, delay) {
   });
 }\n" + File::readTextFile("test.js"), "test.js",
             sub (JavaScriptProgram pgm) {});
-        code run = pool.getProgram().getGlobal().exports.qtester.toData().run;
+        code<auto(hash<string, code>, *hash<auto>)> run = pool.getProgram().getGlobal().exports.qtester.toData().run;
         assertThrows("JAVASCRIPT-EXCEPTION", "authorization_code", run, TypeScriptActionInterface::TestApi);
+        # Both the original body wrapper and flattened action options must reach the OAuth check
+        # when the Pet body and the additional dynamic option satisfy the action's request type.
+        hash<auto> pet = {"id": 123, "name": "Rex", "photoUrls": ()};
+        hash<auto> dynamic_option = {"new0": {"new1": {"a": "Fixture"}}};
+        assertThrows("JAVASCRIPT-EXCEPTION", "authorization_code", run,
+            (TypeScriptActionInterface::TestApi, pet + dynamic_option));
+        # Invalid requests must fail validation before an OAuth error can hide the problem.
+        assertThrows("JAVASCRIPT-EXCEPTION", "required field \"new0\" is absent", run,
+            (TypeScriptActionInterface::TestApi, {"body": pet}));
+        assertThrows("JAVASCRIPT-EXCEPTION", "required field \"photoUrls\" is absent", run,
+            (TypeScriptActionInterface::TestApi, {"body": pet - "photoUrls"} + dynamic_option));
+        assertThrows("JAVASCRIPT-EXCEPTION", "required field \"name\" is absent", run,
+            (TypeScriptActionInterface::TestApi, {"body": pet - "name"} + dynamic_option));
+        # The dynamic object's child is optional; an empty object still reaches authentication.
+        assertThrows("JAVASCRIPT-EXCEPTION", "authorization_code", run,
+            (TypeScriptActionInterface::TestApi, {"body": pet, "new0": {"new1": {}}}));
     }
 
     private poolTest() {

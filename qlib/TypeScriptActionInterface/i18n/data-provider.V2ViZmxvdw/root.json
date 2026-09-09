@@ -699,6 +699,30 @@
           "source": "Filter items by their last published date range",
           "message": "Filter items by their last published date range"
         },
+        "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.bGFzdFB1Ymxpc2hlZA.field.Z3Rl.display_name": {
+          "source": "Greater Than or Equal To",
+          "message": "Greater Than or Equal To"
+        },
+        "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.bGFzdFB1Ymxpc2hlZA.field.Z3Rl.short_desc": {
+          "source": "Items published after or on this date",
+          "message": "Items published after or on this date"
+        },
+        "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.bGFzdFB1Ymxpc2hlZA.field.Z3Rl.desc": {
+          "source": "Include items published after or on this date",
+          "message": "Include items published after or on this date"
+        },
+        "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.bGFzdFB1Ymxpc2hlZA.field.bHRl.display_name": {
+          "source": "Less Than or Equal To",
+          "message": "Less Than or Equal To"
+        },
+        "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.bGFzdFB1Ymxpc2hlZA.field.bHRl.short_desc": {
+          "source": "Items published before or on this date",
+          "message": "Items published before or on this date"
+        },
+        "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.bGFzdFB1Ymxpc2hlZA.field.bHRl.desc": {
+          "source": "Include items published before or on this date",
+          "message": "Include items published before or on this date"
+        },
         "app.V2ViZmxvdw.action.bGlzdF9pdGVtcw.option.c29ydEJ5.display_name": {
           "source": "Sort By",
           "message": "Sort By"

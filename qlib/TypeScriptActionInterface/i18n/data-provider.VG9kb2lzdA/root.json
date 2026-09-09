@@ -627,6 +627,38 @@
           "source": "Specify how long you expect the task to take. Used for time tracking and scheduling.",
           "message": "Specify how long you expect the task to take. Used for time tracking and scheduling."
         },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.YW1vdW50.short_desc": {
+          "source": "Duration value",
+          "message": "Duration value"
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.YW1vdW50.desc": {
+          "source": "The numeric value for the duration.",
+          "message": "The numeric value for the duration."
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.display_name": {
+          "source": "Unit",
+          "message": "Unit"
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.short_desc": {
+          "source": "Duration unit",
+          "message": "Duration unit"
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.desc": {
+          "source": "The unit of time: minutes or days.",
+          "message": "The unit of time: minutes or days."
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.allowed-value.c3RyaW5nOm1pbnV0ZQ.display_name": {
+          "source": "Minute",
+          "message": "Minute"
+        },
+        "app.VG9kb2lzdA.action.Y3JlYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.allowed-value.c3RyaW5nOmRheQ.display_name": {
+          "source": "Day",
+          "message": "Day"
+        },
         "app.VG9kb2lzdA.action.ZGVsZXRlX3Rhc2s.display_name": {
           "source": "Delete Task",
           "message": "Delete Task"
@@ -1082,6 +1114,38 @@
         "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.desc": {
           "source": "Change how long you expect the task to take.",
           "message": "Change how long you expect the task to take."
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.YW1vdW50.short_desc": {
+          "source": "Duration value",
+          "message": "Duration value"
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.YW1vdW50.desc": {
+          "source": "The numeric value for the duration.",
+          "message": "The numeric value for the duration."
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.display_name": {
+          "source": "Unit",
+          "message": "Unit"
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.short_desc": {
+          "source": "Duration unit",
+          "message": "Duration unit"
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.desc": {
+          "source": "The unit of time: minutes or days.",
+          "message": "The unit of time: minutes or days."
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.allowed-value.c3RyaW5nOm1pbnV0ZQ.display_name": {
+          "source": "Minute",
+          "message": "Minute"
+        },
+        "app.VG9kb2lzdA.action.dXBkYXRlX3Rhc2s.option.ZHVyYXRpb24.field.dW5pdA.allowed-value.c3RyaW5nOmRheQ.display_name": {
+          "source": "Day",
+          "message": "Day"
         },
         "app.VG9kb2lzdA.action.Y29tcGxldGVfdGFzaw.display_name": {
           "source": "Complete Task",

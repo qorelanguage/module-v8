@@ -435,6 +435,66 @@
           "source": "Formatting options to apply to the inserted text.",
           "message": "Formatting options to apply to the inserted text."
         },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Ym9sZA.display_name": {
+          "source": "Bold",
+          "message": "Bold"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Ym9sZA.short_desc": {
+          "source": "Make text bold",
+          "message": "Make text bold"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Ym9sZA.desc": {
+          "source": "Whether to make the text bold.",
+          "message": "Whether to make the text bold."
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Zm9udF9mYW1pbHk.display_name": {
+          "source": "Font Family",
+          "message": "Font Family"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Zm9udF9mYW1pbHk.short_desc": {
+          "source": "Font family name",
+          "message": "Font family name"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Zm9udF9mYW1pbHk.desc": {
+          "source": "The font family to use for the text (e.g., \"Arial\", \"Times New Roman\").",
+          "message": "The font family to use for the text (e.g., \"Arial\", \"Times New Roman\")."
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Zm9udF9zaXpl.display_name": {
+          "source": "Font Size",
+          "message": "Font Size"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Zm9udF9zaXpl.short_desc": {
+          "source": "Text font size in points",
+          "message": "Text font size in points"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.Zm9udF9zaXpl.desc": {
+          "source": "The font size for the text in points.",
+          "message": "The font size for the text in points."
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.aXRhbGlj.display_name": {
+          "source": "Italic",
+          "message": "Italic"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.aXRhbGlj.short_desc": {
+          "source": "Make text italic",
+          "message": "Make text italic"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.aXRhbGlj.desc": {
+          "source": "Whether to make the text italic.",
+          "message": "Whether to make the text italic."
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.dW5kZXJsaW5l.display_name": {
+          "source": "Underline",
+          "message": "Underline"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.dW5kZXJsaW5l.short_desc": {
+          "source": "Underline text",
+          "message": "Underline text"
+        },
+        "app.R29vZ2xlRG9jcw.action.YXBwZW5kX3RleHRfdG9fZG9jdW1lbnQ.option.dGV4dF9zdHlsZQ.field.dW5kZXJsaW5l.desc": {
+          "source": "Whether to underline the text.",
+          "message": "Whether to underline the text."
+        },
         "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.display_name": {
           "source": "Create Document from Template",
           "message": "Create Document from Template"
@@ -494,6 +554,42 @@
         "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.desc": {
           "source": "List of placeholder text replacements to make in the template.",
           "message": "List of placeholder text replacements to make in the template."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.bWF0Y2hfY2FzZQ.display_name": {
+          "source": "Match Case",
+          "message": "Match Case"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.bWF0Y2hfY2FzZQ.short_desc": {
+          "source": "Case-sensitive replacement",
+          "message": "Case-sensitive replacement"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.bWF0Y2hfY2FzZQ.desc": {
+          "source": "Whether the placeholder replacement should be case-sensitive.",
+          "message": "Whether the placeholder replacement should be case-sensitive."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.cGxhY2Vob2xkZXI.display_name": {
+          "source": "Placeholder",
+          "message": "Placeholder"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.cGxhY2Vob2xkZXI.short_desc": {
+          "source": "Placeholder text to replace",
+          "message": "Placeholder text to replace"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.cGxhY2Vob2xkZXI.desc": {
+          "source": "The placeholder text in the template to be replaced (e.g., \"NAME\").",
+          "message": "The placeholder text in the template to be replaced (e.g., \"NAME\")."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.cmVwbGFjZW1lbnRfdGV4dA.display_name": {
+          "source": "Replacement Text",
+          "message": "Replacement Text"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.cmVwbGFjZW1lbnRfdGV4dA.short_desc": {
+          "source": "Text to replace placeholder with",
+          "message": "Text to replace placeholder with"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVwbGFjZW1lbnRz.field.cmVwbGFjZW1lbnRfdGV4dA.desc": {
+          "source": "The text that will replace the placeholder in the new document.",
+          "message": "The text that will replace the placeholder in the new document."
         },
         "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.cmVtb3ZlX3VudXNlZF9maWVsZHM.display_name": {
           "source": "Remove Unused Fields",
@@ -562,6 +658,54 @@
         "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.desc": {
           "source": "List of placeholder image replacements to make in the template.",
           "message": "List of placeholder image replacements to make in the template."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.aGVpZ2h0.display_name": {
+          "source": "Height",
+          "message": "Height"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.aGVpZ2h0.short_desc": {
+          "source": "Image height in points",
+          "message": "Image height in points"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.aGVpZ2h0.desc": {
+          "source": "The height of the inserted image in points.",
+          "message": "The height of the inserted image in points."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.aW1hZ2VfdXJs.display_name": {
+          "source": "Image URL",
+          "message": "Image URL"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.aW1hZ2VfdXJs.short_desc": {
+          "source": "URL of the image to insert",
+          "message": "URL of the image to insert"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.aW1hZ2VfdXJs.desc": {
+          "source": "The URL of the image that will replace the placeholder.",
+          "message": "The URL of the image that will replace the placeholder."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.cGxhY2Vob2xkZXI.display_name": {
+          "source": "Placeholder",
+          "message": "Placeholder"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.cGxhY2Vob2xkZXI.short_desc": {
+          "source": "Image placeholder text",
+          "message": "Image placeholder text"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.cGxhY2Vob2xkZXI.desc": {
+          "source": "The placeholder text in the template to be replaced with an image.",
+          "message": "The placeholder text in the template to be replaced with an image."
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.d2lkdGg.display_name": {
+          "source": "Width",
+          "message": "Width"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.d2lkdGg.short_desc": {
+          "source": "Image width in points",
+          "message": "Image width in points"
+        },
+        "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGVtcGxhdGU.option.aW1hZ2Vz.field.d2lkdGg.desc": {
+          "source": "The width of the inserted image in points.",
+          "message": "The width of the inserted image in points."
         },
         "app.R29vZ2xlRG9jcw.action.Y3JlYXRlX2RvY3VtZW50X2Zyb21fdGV4dA.display_name": {
           "source": "Create Document from Text",
@@ -715,6 +859,126 @@
           "source": "The document file to upload and convert to Google Docs format.",
           "message": "The document file to upload and convert to Google Docs format."
         },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.Y29udGVudA.display_name": {
+          "source": "File Data",
+          "message": "File Data"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.Y29udGVudA.short_desc": {
+          "source": "Base64-encoded file data or raw data to be encoded with base64 encoding",
+          "message": "Base64-encoded file data or raw data to be encoded with base64 encoding"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.Y29udGVudA.desc": {
+          "source": "Base64-encoded file data or raw data to be encoded with base64 encoding",
+          "message": "Base64-encoded file data or raw data to be encoded with base64 encoding"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.display_name": {
+          "source": "MIME Type",
+          "message": "MIME Type"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.short_desc": {
+          "source": "The MIME type string for the file",
+          "message": "The MIME type string for the file"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.desc": {
+          "source": "The MIME type string for the file",
+          "message": "The MIME type string for the file"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.display_name": {
+          "source": "Autodetect",
+          "message": "Autodetect"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.short_desc": {
+          "source": "Autodetect from the file name; valid only on input",
+          "message": "Autodetect from the file name; valid only on input"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.desc": {
+          "source": "Autodetect from the file name; valid only on input",
+          "message": "Autodetect from the file name; valid only on input"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.display_name": {
+          "source": "text/plain",
+          "message": "text/plain"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.short_desc": {
+          "source": "Plain text",
+          "message": "Plain text"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.desc": {
+          "source": "Plain text",
+          "message": "Plain text"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.display_name": {
+          "source": "text/html",
+          "message": "text/html"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.short_desc": {
+          "source": "HTML text",
+          "message": "HTML text"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.desc": {
+          "source": "HTML text",
+          "message": "HTML text"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.display_name": {
+          "source": "application/pdf",
+          "message": "application/pdf"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.short_desc": {
+          "source": "PDF file",
+          "message": "PDF file"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.desc": {
+          "source": "PDF file",
+          "message": "PDF file"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "message": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.short_desc": {
+          "source": "MS Word docx document",
+          "message": "MS Word docx document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.desc": {
+          "source": "MS Word `docx` document",
+          "message": "MS Word `docx` document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "message": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.short_desc": {
+          "source": "MS PowerPoint pptx document",
+          "message": "MS PowerPoint pptx document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.desc": {
+          "source": "MS PowerPoint `pptx` document",
+          "message": "MS PowerPoint `pptx` document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "message": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.short_desc": {
+          "source": "MS Excel xlsx document",
+          "message": "MS Excel xlsx document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.desc": {
+          "source": "MS Excel `xlsx` document",
+          "message": "MS Excel `xlsx` document"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bmFtZQ.display_name": {
+          "source": "Filename",
+          "message": "Filename"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bmFtZQ.short_desc": {
+          "source": "The filename",
+          "message": "The filename"
+        },
+        "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZQ.field.bmFtZQ.desc": {
+          "source": "The filename",
+          "message": "The filename"
+        },
         "app.R29vZ2xlRG9jcw.action.dXBsb2FkX2RvY3VtZW50.option.ZmlsZV9uYW1l.display_name": {
           "source": "File Name",
           "message": "File Name"
@@ -794,6 +1058,58 @@
         "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.desc": {
           "source": "List of sorting criteria to apply to the search results. Each item specifies a field and direction.",
           "message": "List of sorting criteria to apply to the search results. Each item specifies a field and direction."
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Direction",
+          "message": "Direction"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.desc": {
+          "source": "The direction to sort - either ascending (asc) or descending (desc).",
+          "message": "The direction to sort - either ascending (asc) or descending (desc)."
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.desc": {
+          "source": "The field to sort the results by (e.g., name, modifiedTime, createdTime).",
+          "message": "The field to sort the results by (e.g., name, modifiedTime, createdTime)."
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOmNyZWF0ZWRUaW1l.display_name": {
+          "source": "Created Time",
+          "message": "Created Time"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOm1vZGlmaWVkVGltZQ.display_name": {
+          "source": "Modified Time",
+          "message": "Modified Time"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOm5hbWU.display_name": {
+          "source": "Name",
+          "message": "Name"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOmZvbGRlcg.display_name": {
+          "source": "Folder",
+          "message": "Folder"
+        },
+        "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOnJlY2VuY3k.display_name": {
+          "source": "Recency",
+          "message": "Recency"
         },
         "app.R29vZ2xlRG9jcw.action.c2VhcmNoX2RvY3VtZW50cw.option.cGFnZV9zaXpl.display_name": {
           "source": "Page Size",

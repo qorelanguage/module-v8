@@ -15450,7 +15450,7 @@ type RootTranslation = {
 														 */
 														shortDesc: string
 														/**
-														 * C​h​o​o​s​e​ ​t​h​e​ ​c​o​m​p​a​r​i​s​o​n​ ​o​p​e​r​a​t​o​r​ ​f​o​r​ ​t​h​i​s​ ​f​i​l​t​e​r​ ​c​o​n​d​i​t​i​o​n​.
+														 * C​h​o​o​s​e​ ​t​h​e​ ​c​o​m​p​a​r​i​s​o​n​ ​o​p​e​r​a​t​o​r​ ​f​o​r​ ​t​h​i​s​ ​f​i​l​t​e​r​ ​c​o​n​d​i​t​i​o​n​ ​(​e​q​u​a​l​,​ ​c​o​n​t​a​i​n​s​,​ ​e​m​p​t​y​,​ ​e​t​c​.​)​.
 														 */
 														longDesc: string
 													}
@@ -132530,7 +132530,7 @@ export type TranslationFunctions = {
 														 */
 														shortDesc: () => LocalizedString
 														/**
-														 * Choose the comparison operator for this filter condition.
+														 * Choose the comparison operator for this filter condition (equal, contains, empty, etc.).
 														 */
 														longDesc: () => LocalizedString
 													}

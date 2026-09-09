@@ -28,7 +28,7 @@
 # allow the weak reference operator (:=)
 %allow-weak-references
 
-%requires(reexport) DataProvider
+%requires(reexport) DataProvider >= 3.8
 %requires(reexport) TypeScriptProxy
 %requires ConnectionProvider
 %requires ProviderIndexUtil
@@ -57,6 +57,11 @@ module TypeScriptActionInterface {
     url = "http://qore.org";
     license = "MIT";
     init = sub () {
+        # Publish a lightweight exact identity inventory for qualified index discovery.
+        DataProviderActionCatalog::registerDiscoveryInventoryProvider(
+            TypeScriptActionInterface::DiscoveryInventoryProviderName,
+            \TypeScriptActionInterface::getDiscoveryInventory());
+
         # Register the module's initializer
         DataProvider::registerStaticInitializer(\TypeScriptActionInterface::init());
 
@@ -80,6 +85,10 @@ module TypeScriptActionInterface {
     @section TypeScriptActionInterface_relnotes Release Notes
 
     @subsection TypeScriptActionInterface_v1_1 TypeScriptActionInterface v1.1
+    - added a versioned TypeScript provider-schema boundary with exact absent/empty/null handling, structurally scoped
+      \c AllowedValueInfo conversion, and a lightweight app/action identity inventory for qualified provider-index
+      discovery; raw payload hashes containing a \c value member remain opaque, and source failures before identity
+      publication remain structural qualification failures until the exact source succeeds
     - HubSpot requests optional CMS page and domain-read scopes without adding required CRM installation
       permissions. Its synchronous REST client verifies current token grants before CMS calls and reports
       actionable capability and account-entitlement errors. Existing connections need reauthorization to

@@ -519,6 +519,30 @@
           "source": "Optional tags to categorize and track your emails. Tags can be used for reporting and analytics in your SES dashboard.",
           "message": "Optional tags to categorize and track your emails. Tags can be used for reporting and analytics in your SES dashboard."
         },
+        "app.QW1hem9uU0VT.action.c2VuZF9lbWFpbA.option.dGFncw.field.bmFtZQ.display_name": {
+          "source": "Tag Name",
+          "message": "Tag Name"
+        },
+        "app.QW1hem9uU0VT.action.c2VuZF9lbWFpbA.option.dGFncw.field.bmFtZQ.short_desc": {
+          "source": "The name of the tag.",
+          "message": "The name of the tag."
+        },
+        "app.QW1hem9uU0VT.action.c2VuZF9lbWFpbA.option.dGFncw.field.bmFtZQ.desc": {
+          "source": "A descriptive name for the tag that will be used for categorization.",
+          "message": "A descriptive name for the tag that will be used for categorization."
+        },
+        "app.QW1hem9uU0VT.action.c2VuZF9lbWFpbA.option.dGFncw.field.dmFsdWU.display_name": {
+          "source": "Tag Value",
+          "message": "Tag Value"
+        },
+        "app.QW1hem9uU0VT.action.c2VuZF9lbWFpbA.option.dGFncw.field.dmFsdWU.short_desc": {
+          "source": "The value of the tag.",
+          "message": "The value of the tag."
+        },
+        "app.QW1hem9uU0VT.action.c2VuZF9lbWFpbA.option.dGFncw.field.dmFsdWU.desc": {
+          "source": "The value associated with this tag name.",
+          "message": "The value associated with this tag name."
+        },
         "app.QW1hem9uU0VT.action.dmVyaWZ5X2VtYWlsX2FkZHJlc3M.display_name": {
           "source": "Verify Email Address",
           "message": "Verify Email Address"

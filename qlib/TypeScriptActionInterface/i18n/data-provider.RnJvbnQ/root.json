@@ -811,6 +811,58 @@
           "source": "A list of handles for the contact. Each handle consists of a handle value (e.g., email address) and a source type (email, phone, twitter, etc.). At least one handle is required.",
           "message": "A list of handles for the contact. Each handle consists of a handle value (e.g., email address) and a source type (email, phone, twitter, etc.). At least one handle is required."
         },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.aGFuZGxl.display_name": {
+          "source": "Handle",
+          "message": "Handle"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.aGFuZGxl.short_desc": {
+          "source": "The handle value",
+          "message": "The handle value"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.aGFuZGxl.desc": {
+          "source": "The actual handle value, such as an email address, phone number, or social media username.",
+          "message": "The actual handle value, such as an email address, phone number, or social media username."
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.display_name": {
+          "source": "Source",
+          "message": "Source"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.short_desc": {
+          "source": "The type of handle",
+          "message": "The type of handle"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.desc": {
+          "source": "The type of handle: email, phone, twitter, facebook, intercom, front_chat, or custom.",
+          "message": "The type of handle: email, phone, twitter, facebook, intercom, front_chat, or custom."
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOmVtYWls.display_name": {
+          "source": "Email",
+          "message": "Email"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOnBob25l.display_name": {
+          "source": "Phone",
+          "message": "Phone"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOmludGVyY29t.display_name": {
+          "source": "Intercom",
+          "message": "Intercom"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOmZyb250X2NoYXQ.display_name": {
+          "source": "Front Chat",
+          "message": "Front Chat"
+        },
+        "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.aGFuZGxlcw.field.c291cmNl.allowed-value.c3RyaW5nOmN1c3RvbQ.display_name": {
+          "source": "Custom",
+          "message": "Custom"
+        },
         "app.RnJvbnQ.action.Y3JlYXRlX2NvbnRhY3Q.option.bGlua3M.display_name": {
           "source": "Links",
           "message": "Links"

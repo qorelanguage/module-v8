@@ -599,6 +599,30 @@
           "source": "Filter criteria to apply to the query.",
           "message": "Filter criteria to apply to the query."
         },
+        "app.QXR0aW8.action.ZmluZF9vYmplY3RfcmVjb3Jkcw.option.ZmlsdGVy.field.YXR0cmlidXRl.display_name": {
+          "source": "Attribute",
+          "message": "Attribute"
+        },
+        "app.QXR0aW8.action.ZmluZF9vYmplY3RfcmVjb3Jkcw.option.ZmlsdGVy.field.YXR0cmlidXRl.short_desc": {
+          "source": "Attribute to filter by",
+          "message": "Attribute to filter by"
+        },
+        "app.QXR0aW8.action.ZmluZF9vYmplY3RfcmVjb3Jkcw.option.ZmlsdGVy.field.YXR0cmlidXRl.desc": {
+          "source": "The attribute to filter by.",
+          "message": "The attribute to filter by."
+        },
+        "app.QXR0aW8.action.ZmluZF9vYmplY3RfcmVjb3Jkcw.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.QXR0aW8.action.ZmluZF9vYmplY3RfcmVjb3Jkcw.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "Filter value",
+          "message": "Filter value"
+        },
+        "app.QXR0aW8.action.ZmluZF9vYmplY3RfcmVjb3Jkcw.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to filter by.",
+          "message": "The value to filter by."
+        },
         "app.QXR0aW8.action.dXBkYXRlX29iamVjdF9yZWNvcmQ.display_name": {
           "source": "Update Object Record",
           "message": "Update Object Record"
@@ -762,6 +786,30 @@
         "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.desc": {
           "source": "Filter criteria to apply to the query.",
           "message": "Filter criteria to apply to the query."
+        },
+        "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.field.YXR0cmlidXRl.display_name": {
+          "source": "Attribute",
+          "message": "Attribute"
+        },
+        "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.field.YXR0cmlidXRl.short_desc": {
+          "source": "Attribute to filter by",
+          "message": "Attribute to filter by"
+        },
+        "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.field.YXR0cmlidXRl.desc": {
+          "source": "The attribute to filter by.",
+          "message": "The attribute to filter by."
+        },
+        "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "Filter value",
+          "message": "Filter value"
+        },
+        "app.QXR0aW8.action.ZmluZF9saXN0X2VudHJpZXM.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to filter by.",
+          "message": "The value to filter by."
         },
         "app.QXR0aW8.action.dXBkYXRlX2xpc3RfZW50cnk.display_name": {
           "source": "Update List Entry",

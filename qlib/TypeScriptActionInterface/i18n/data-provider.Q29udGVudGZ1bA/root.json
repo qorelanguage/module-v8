@@ -471,6 +471,30 @@
           "source": "Provide a list of replacement pairs. Each pair has a \"tag\" (placeholder to find) and a \"value\" (text to replace it with). All string fields in the entry will be processed.",
           "message": "Provide a list of replacement pairs. Each pair has a \"tag\" (placeholder to find) and a \"value\" (text to replace it with). All string fields in the entry will be processed."
         },
+        "app.Q29udGVudGZ1bA.action.Z2V0X2VudHJ5X3dpdGhfcmVwbGFjZW1lbnQ.option.cmVwbGFjZW1lbnRz.field.dGFn.display_name": {
+          "source": "Tag",
+          "message": "Tag"
+        },
+        "app.Q29udGVudGZ1bA.action.Z2V0X2VudHJ5X3dpdGhfcmVwbGFjZW1lbnQ.option.cmVwbGFjZW1lbnRz.field.dGFn.short_desc": {
+          "source": "The tag/placeholder to search for in text fields",
+          "message": "The tag/placeholder to search for in text fields"
+        },
+        "app.Q29udGVudGZ1bA.action.Z2V0X2VudHJ5X3dpdGhfcmVwbGFjZW1lbnQ.option.cmVwbGFjZW1lbnRz.field.dGFn.desc": {
+          "source": "The tag or placeholder text to search for within all string fields of the entry.",
+          "message": "The tag or placeholder text to search for within all string fields of the entry."
+        },
+        "app.Q29udGVudGZ1bA.action.Z2V0X2VudHJ5X3dpdGhfcmVwbGFjZW1lbnQ.option.cmVwbGFjZW1lbnRz.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.Q29udGVudGZ1bA.action.Z2V0X2VudHJ5X3dpdGhfcmVwbGFjZW1lbnQ.option.cmVwbGFjZW1lbnRz.field.dmFsdWU.short_desc": {
+          "source": "The replacement value",
+          "message": "The replacement value"
+        },
+        "app.Q29udGVudGZ1bA.action.Z2V0X2VudHJ5X3dpdGhfcmVwbGFjZW1lbnQ.option.cmVwbGFjZW1lbnRz.field.dmFsdWU.desc": {
+          "source": "The text that will replace all occurrences of the tag.",
+          "message": "The text that will replace all occurrences of the tag."
+        },
         "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2VudHJ5.display_name": {
           "source": "Create an Entry",
           "message": "Create an Entry"
@@ -1678,6 +1702,66 @@
         "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.desc": {
           "source": "A list of field definitions. Each field requires an ID, name, and type. Supported types: Symbol, Text, Integer, Number, Date, Boolean, RichText, Link, Array, Object, Location.",
           "message": "A list of field definitions. Each field requires an ID, name, and type. Supported types: Symbol, Text, Integer, Number, Date, Boolean, RichText, Link, Array, Object, Location."
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.aWQ.display_name": {
+          "source": "Field ID",
+          "message": "Field ID"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.aWQ.short_desc": {
+          "source": "Field ID (unique identifier)",
+          "message": "Field ID (unique identifier)"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.aWQ.desc": {
+          "source": "A unique ID for the field (e.g., \"heroImage\", \"publishDate\"). Must be unique within the content type.",
+          "message": "A unique ID for the field (e.g., \"heroImage\", \"publishDate\"). Must be unique within the content type."
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.bG9jYWxpemVk.display_name": {
+          "source": "Localized",
+          "message": "Localized"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.bG9jYWxpemVk.short_desc": {
+          "source": "Whether the field supports localization",
+          "message": "Whether the field supports localization"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.bG9jYWxpemVk.desc": {
+          "source": "If enabled, the field can have different values for different locales.",
+          "message": "If enabled, the field can have different values for different locales."
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.bmFtZQ.display_name": {
+          "source": "Field Name",
+          "message": "Field Name"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.bmFtZQ.short_desc": {
+          "source": "Field display name",
+          "message": "Field display name"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.bmFtZQ.desc": {
+          "source": "A human-readable name for the field (e.g., \"Hero Image\", \"Publish Date\").",
+          "message": "A human-readable name for the field (e.g., \"Hero Image\", \"Publish Date\")."
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.cmVxdWlyZWQ.display_name": {
+          "source": "Required",
+          "message": "Required"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.cmVxdWlyZWQ.short_desc": {
+          "source": "Whether the field is required",
+          "message": "Whether the field is required"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.cmVxdWlyZWQ.desc": {
+          "source": "If enabled, entries must provide a value for this field.",
+          "message": "If enabled, entries must provide a value for this field."
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.dHlwZQ.display_name": {
+          "source": "Field Type",
+          "message": "Field Type"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.dHlwZQ.short_desc": {
+          "source": "Field type (Symbol, Text, Integer, Number, Date, Boolean, RichText, Link, Array, Object, Location)",
+          "message": "Field type (Symbol, Text, Integer, Number, Date, Boolean, RichText, Link, Array, Object, Location)"
+        },
+        "app.Q29udGVudGZ1bA.action.Y3JlYXRlX2NvbnRlbnRfdHlwZQ.option.ZmllbGRz.field.dHlwZQ.desc": {
+          "source": "The data type for the field. Supported types: Symbol (short text), Text (long text), Integer, Number, Date, Boolean, RichText, Link, Array, Object, Location.",
+          "message": "The data type for the field. Supported types: Symbol (short text), Text (long text), Integer, Number, Date, Boolean, RichText, Link, Array, Object, Location."
         },
         "app.Q29udGVudGZ1bA.action.dXBkYXRlX2NvbnRlbnRfdHlwZQ.display_name": {
           "source": "Update a Content Type",

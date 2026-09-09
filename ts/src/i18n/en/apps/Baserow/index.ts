@@ -296,7 +296,8 @@ Your database token that grants access to specific workspaces and tables. Tokens
                       type: {
                         displayName: 'Type',
                         shortDesc: 'The comparison operator',
-                        longDesc: 'Choose the comparison operator for this filter condition.',
+                        longDesc:
+                          'Choose the comparison operator for this filter condition (equal, contains, empty, etc.).',
                       },
                       field: {
                         displayName: 'Field',

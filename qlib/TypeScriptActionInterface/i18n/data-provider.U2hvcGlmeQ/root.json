@@ -1723,6 +1723,30 @@
           "source": "The primary image associated with the blog post, used for visual appeal in previews or headers.",
           "message": "The primary image associated with the blog post, used for visual appeal in previews or headers."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWJsb2ctZW50cnk.option.aW1hZ2U.field.YWx0VGV4dA.display_name": {
+          "source": "Alt Text",
+          "message": "Alt Text"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWJsb2ctZW50cnk.option.aW1hZ2U.field.YWx0VGV4dA.short_desc": {
+          "source": "Image alt text",
+          "message": "Image alt text"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWJsb2ctZW50cnk.option.aW1hZ2U.field.YWx0VGV4dA.desc": {
+          "source": "Descriptive text for the image, used for accessibility and SEO purposes.",
+          "message": "Descriptive text for the image, used for accessibility and SEO purposes."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWJsb2ctZW50cnk.option.aW1hZ2U.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWJsb2ctZW50cnk.option.aW1hZ2U.field.dXJs.short_desc": {
+          "source": "Image URL",
+          "message": "Image URL"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWJsb2ctZW50cnk.option.aW1hZ2U.field.dXJs.desc": {
+          "source": "The web address or source location of the image file to be used in the blog post.",
+          "message": "The web address or source location of the image file to be used in the blog post."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.display_name": {
           "source": "Create Company",
           "message": "Create Company"
@@ -1795,6 +1819,78 @@
           "source": "Details about the primary contact person for the company.",
           "message": "Details about the primary contact person for the company."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.ZW1haWw.display_name": {
+          "source": "Email",
+          "message": "Email"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.ZW1haWw.short_desc": {
+          "source": "Contact email",
+          "message": "Contact email"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.ZW1haWw.desc": {
+          "source": "The email address of the primary contact, used for communication.",
+          "message": "The email address of the primary contact, used for communication."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.Zmlyc3ROYW1l.display_name": {
+          "source": "First Name",
+          "message": "First Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.Zmlyc3ROYW1l.short_desc": {
+          "source": "Contact first name",
+          "message": "Contact first name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.Zmlyc3ROYW1l.desc": {
+          "source": "The first name of the company’s primary contact.",
+          "message": "The first name of the company’s primary contact."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.bGFzdE5hbWU.display_name": {
+          "source": "Last Name",
+          "message": "Last Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.bGFzdE5hbWU.short_desc": {
+          "source": "Contact last name",
+          "message": "Contact last name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.bGFzdE5hbWU.desc": {
+          "source": "The last name of the company’s primary contact.",
+          "message": "The last name of the company’s primary contact."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.bG9jYWxl.display_name": {
+          "source": "Locale",
+          "message": "Locale"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.bG9jYWxl.short_desc": {
+          "source": "Contact language/region",
+          "message": "Contact language/region"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.bG9jYWxl.desc": {
+          "source": "The preferred language and region code for the contact, e.g., \"en-US\".",
+          "message": "The preferred language and region code for the contact, e.g., \"en-US\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.cGhvbmU.display_name": {
+          "source": "Phone",
+          "message": "Phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.cGhvbmU.short_desc": {
+          "source": "Contact phone",
+          "message": "Contact phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.cGhvbmU.desc": {
+          "source": "The phone number of the primary contact.",
+          "message": "The phone number of the primary contact."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.dGl0bGU.display_name": {
+          "source": "Title",
+          "message": "Title"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.dGl0bGU.short_desc": {
+          "source": "Contact job title",
+          "message": "Contact job title"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.Y29udGFjdFByb3BlcnRpZXM.field.dGl0bGU.desc": {
+          "source": "The job title or role of the primary contact within the company.",
+          "message": "The job title or role of the primary contact within the company."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.display_name": {
           "source": "Location Properties",
           "message": "Location Properties"
@@ -1806,6 +1902,282 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.desc": {
           "source": "Details about the company’s physical location, including shipping and billing addresses.",
           "message": "Details about the company’s physical location, including shipping and billing addresses."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.YmlsbGluZ0FkZHJlc3M.display_name": {
+          "source": "Billing Address",
+          "message": "Billing Address"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.YmlsbGluZ0FkZHJlc3M.short_desc": {
+          "source": "Billing address",
+          "message": "Billing address"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.YmlsbGluZ0FkZHJlc3M.desc": {
+          "source": "The address used for billing purposes, if different from shipping.",
+          "message": "The address used for billing purposes, if different from shipping."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.YWRkcmVzczE.display_name": {
+          "source": "Address Line 1",
+          "message": "Address Line 1"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.YWRkcmVzczE.short_desc": {
+          "source": "Primary billing line",
+          "message": "Primary billing line"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.YWRkcmVzczE.desc": {
+          "source": "The street address or PO Box for billing.",
+          "message": "The street address or PO Box for billing."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.YWRkcmVzczI.display_name": {
+          "source": "Address Line 2",
+          "message": "Address Line 2"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.YWRkcmVzczI.short_desc": {
+          "source": "Secondary billing line",
+          "message": "Secondary billing line"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.YWRkcmVzczI.desc": {
+          "source": "Additional billing address details, e.g., apartment number.",
+          "message": "Additional billing address details, e.g., apartment number."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.Y2l0eQ.short_desc": {
+          "source": "Billing city",
+          "message": "Billing city"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.Y2l0eQ.desc": {
+          "source": "The city for the billing address.",
+          "message": "The city for the billing address."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.Y291bnRyeUNvZGU.display_name": {
+          "source": "Country Code",
+          "message": "Country Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.Y291bnRyeUNvZGU.short_desc": {
+          "source": "Country code",
+          "message": "Country code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.Y291bnRyeUNvZGU.desc": {
+          "source": "The ISO 3166-1 alpha-2 country code, e.g., \"CA\".",
+          "message": "The ISO 3166-1 alpha-2 country code, e.g., \"CA\"."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.emlw.display_name": {
+          "source": "ZIP/Postal Code",
+          "message": "ZIP/Postal Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.emlw.short_desc": {
+          "source": "Billing postal code",
+          "message": "Billing postal code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.emlw.desc": {
+          "source": "The ZIP or postal code for the billing address.",
+          "message": "The ZIP or postal code for the billing address."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.em9uZUNvZGU.display_name": {
+          "source": "Zone Code",
+          "message": "Zone Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.em9uZUNvZGU.short_desc": {
+          "source": "Province/state code",
+          "message": "Province/state code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzQ1MDI5MTZmYzZkY2RmOTc3MTIyZWE3ODYwMDgxNTJiZmMwZjE2MjM1ZmExZWIxNjQ3MGMwYTZiMDliNjVmOTk6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpZbWxzYkdsdVowRmtaSEpsYzNN.field.em9uZUNvZGU.desc": {
+          "source": "The code for the province or state, e.g., \"NY\".",
+          "message": "The code for the province or state, e.g., \"NY\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.YmlsbGluZ1NhbWVBc1NoaXBwaW5n.display_name": {
+          "source": "Billing Same as Shipping",
+          "message": "Billing Same as Shipping"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.YmlsbGluZ1NhbWVBc1NoaXBwaW5n.short_desc": {
+          "source": "Use shipping for billing",
+          "message": "Use shipping for billing"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.YmlsbGluZ1NhbWVBc1NoaXBwaW5n.desc": {
+          "source": "If true, the shipping address is also used as the billing address.",
+          "message": "If true, the shipping address is also used as the billing address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.ZXh0ZXJuYWxJZA.display_name": {
+          "source": "External ID",
+          "message": "External ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.ZXh0ZXJuYWxJZA.short_desc": {
+          "source": "Location external ID",
+          "message": "Location external ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.ZXh0ZXJuYWxJZA.desc": {
+          "source": "An external identifier for this location, useful for integration with other systems.",
+          "message": "An external identifier for this location, useful for integration with other systems."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bG9jYWxl.display_name": {
+          "source": "Locale",
+          "message": "Locale"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bG9jYWxl.short_desc": {
+          "source": "Location language/region",
+          "message": "Location language/region"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bG9jYWxl.desc": {
+          "source": "The preferred language and region code for this location, e.g., \"en-CA\".",
+          "message": "The preferred language and region code for this location, e.g., \"en-CA\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bG9jYXRpb25OYW1l.display_name": {
+          "source": "Location Name",
+          "message": "Location Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bG9jYXRpb25OYW1l.short_desc": {
+          "source": "Name of location",
+          "message": "Name of location"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bG9jYXRpb25OYW1l.desc": {
+          "source": "A descriptive name for this company location, e.g., \"Headquarters\".",
+          "message": "A descriptive name for this company location, e.g., \"Headquarters\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bm90ZQ.display_name": {
+          "source": "Note",
+          "message": "Note"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bm90ZQ.short_desc": {
+          "source": "Location notes",
+          "message": "Location notes"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.bm90ZQ.desc": {
+          "source": "Internal notes about this location, such as delivery instructions.",
+          "message": "Internal notes about this location, such as delivery instructions."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.cGhvbmU.display_name": {
+          "source": "Phone",
+          "message": "Phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.cGhvbmU.short_desc": {
+          "source": "Location phone",
+          "message": "Location phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.cGhvbmU.desc": {
+          "source": "The phone number associated with this company location.",
+          "message": "The phone number associated with this company location."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.c2hpcHBpbmdBZGRyZXNz.display_name": {
+          "source": "Shipping Address",
+          "message": "Shipping Address"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.c2hpcHBpbmdBZGRyZXNz.short_desc": {
+          "source": "Shipping address",
+          "message": "Shipping address"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.c2hpcHBpbmdBZGRyZXNz.desc": {
+          "source": "The address where goods are shipped for this company location.",
+          "message": "The address where goods are shipped for this company location."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.YWRkcmVzczE.display_name": {
+          "source": "Address Line 1",
+          "message": "Address Line 1"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.YWRkcmVzczE.short_desc": {
+          "source": "Primary shipping line",
+          "message": "Primary shipping line"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.YWRkcmVzczE.desc": {
+          "source": "The street address or PO Box for shipping.",
+          "message": "The street address or PO Box for shipping."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.YWRkcmVzczI.display_name": {
+          "source": "Address Line 2",
+          "message": "Address Line 2"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.YWRkcmVzczI.short_desc": {
+          "source": "Secondary shipping line",
+          "message": "Secondary shipping line"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.YWRkcmVzczI.desc": {
+          "source": "Additional shipping address details, e.g., suite number.",
+          "message": "Additional shipping address details, e.g., suite number."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.Y2l0eQ.short_desc": {
+          "source": "Shipping city",
+          "message": "Shipping city"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.Y2l0eQ.desc": {
+          "source": "The city for the shipping address.",
+          "message": "The city for the shipping address."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.Y291bnRyeUNvZGU.display_name": {
+          "source": "Country Code",
+          "message": "Country Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.Y291bnRyeUNvZGU.short_desc": {
+          "source": "Country code",
+          "message": "Country code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.Y291bnRyeUNvZGU.desc": {
+          "source": "The ISO 3166-1 alpha-2 country code, e.g., \"US\".",
+          "message": "The ISO 3166-1 alpha-2 country code, e.g., \"US\"."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.emlw.display_name": {
+          "source": "ZIP/Postal Code",
+          "message": "ZIP/Postal Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.emlw.short_desc": {
+          "source": "Shipping postal code",
+          "message": "Shipping postal code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.emlw.desc": {
+          "source": "The ZIP or postal code for the shipping address.",
+          "message": "The ZIP or postal code for the shipping address."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.em9uZUNvZGU.display_name": {
+          "source": "Zone Code",
+          "message": "Zone Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.em9uZUNvZGU.short_desc": {
+          "source": "Province/state code",
+          "message": "Province/state code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdOdmJYQmhibms6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-I2JiZTk1YTlhYmZhNjNhZmRjNzZjM2U3ZGFiZmQxYTgzOWI5MTM0Nzc4NTVmMTRhMDQwYzEzNWU2MTBiZGZkNTE6b3B0aW9uOmJHOWpZWFJwYjI1UWNtOXdaWEowYVdWejpmaWVsZDpjMmhwY0hCcGJtZEJaR1J5WlhOeg.field.em9uZUNvZGU.desc": {
+          "source": "The code for the province or state, e.g., \"CA\" for California.",
+          "message": "The code for the province or state, e.g., \"CA\" for California."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4RXhlbXB0.display_name": {
+          "source": "Tax Exempt",
+          "message": "Tax Exempt"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4RXhlbXB0.short_desc": {
+          "source": "Tax exemption status",
+          "message": "Tax exemption status"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4RXhlbXB0.desc": {
+          "source": "Indicates if this location is exempt from taxes.",
+          "message": "Indicates if this location is exempt from taxes."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4RXhlbXB0aW9ucw.display_name": {
+          "source": "Tax Exemptions",
+          "message": "Tax Exemptions"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4RXhlbXB0aW9ucw.short_desc": {
+          "source": "Specific tax exemptions",
+          "message": "Specific tax exemptions"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4RXhlbXB0aW9ucw.desc": {
+          "source": "A list of specific tax exemptions applied to this location.",
+          "message": "A list of specific tax exemptions applied to this location."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4UmVnaXN0cmF0aW9uSWQ.display_name": {
+          "source": "Tax Registration ID",
+          "message": "Tax Registration ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4UmVnaXN0cmF0aW9uSWQ.short_desc": {
+          "source": "Tax ID",
+          "message": "Tax ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWNvbXBhbnk.option.bG9jYXRpb25Qcm9wZXJ0aWVz.field.dGF4UmVnaXN0cmF0aW9uSWQ.desc": {
+          "source": "The tax registration number for this location, e.g., VAT or EIN.",
+          "message": "The tax registration number for this location, e.g., VAT or EIN."
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.display_name": {
           "source": "Create Customer",
@@ -1939,6 +2311,126 @@
           "source": "The addresses for a customer.",
           "message": "The addresses for a customer."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.YWRkcmVzczE.display_name": {
+          "source": "Address Line 1",
+          "message": "Address Line 1"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.YWRkcmVzczE.short_desc": {
+          "source": "Primary address line",
+          "message": "Primary address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.YWRkcmVzczE.desc": {
+          "source": "The street address or PO Box for the customer.",
+          "message": "The street address or PO Box for the customer."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.YWRkcmVzczI.display_name": {
+          "source": "Address Line 2",
+          "message": "Address Line 2"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.YWRkcmVzczI.short_desc": {
+          "source": "Secondary address line",
+          "message": "Secondary address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.YWRkcmVzczI.desc": {
+          "source": "Additional address information like apartment or suite number.",
+          "message": "Additional address information like apartment or suite number."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y2l0eQ.short_desc": {
+          "source": "Customer city",
+          "message": "Customer city"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y2l0eQ.desc": {
+          "source": "The city associated with the customer’s address.",
+          "message": "The city associated with the customer’s address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y29tcGFueQ.display_name": {
+          "source": "Company",
+          "message": "Company"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y29tcGFueQ.short_desc": {
+          "source": "Address company name",
+          "message": "Address company name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y29tcGFueQ.desc": {
+          "source": "The company name tied to this address, if applicable.",
+          "message": "The company name tied to this address, if applicable."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y291bnRyeQ.short_desc": {
+          "source": "Customer country",
+          "message": "Customer country"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Y291bnRyeQ.desc": {
+          "source": "The country for the customer’s address.",
+          "message": "The country for the customer’s address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Zmlyc3ROYW1l.display_name": {
+          "source": "First Name",
+          "message": "First Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Zmlyc3ROYW1l.short_desc": {
+          "source": "Address first name",
+          "message": "Address first name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.Zmlyc3ROYW1l.desc": {
+          "source": "The first name associated with this specific address.",
+          "message": "The first name associated with this specific address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.bGFzdE5hbWU.display_name": {
+          "source": "Last Name",
+          "message": "Last Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.bGFzdE5hbWU.short_desc": {
+          "source": "Address last name",
+          "message": "Address last name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.bGFzdE5hbWU.desc": {
+          "source": "The last name associated with this specific address.",
+          "message": "The last name associated with this specific address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.cGhvbmU.display_name": {
+          "source": "Phone",
+          "message": "Phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.cGhvbmU.short_desc": {
+          "source": "Address phone number",
+          "message": "Address phone number"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.cGhvbmU.desc": {
+          "source": "The phone number linked to this specific address.",
+          "message": "The phone number linked to this specific address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.cHJvdmluY2U.display_name": {
+          "source": "Province/State",
+          "message": "Province/State"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.cHJvdmluY2U.short_desc": {
+          "source": "Customer province or state",
+          "message": "Customer province or state"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.cHJvdmluY2U.desc": {
+          "source": "The province, state, or region for the customer’s address.",
+          "message": "The province, state, or region for the customer’s address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.emlw.display_name": {
+          "source": "ZIP/Postal Code",
+          "message": "ZIP/Postal Code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.emlw.short_desc": {
+          "source": "Customer postal code",
+          "message": "Customer postal code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.YWRkcmVzc2Vz.field.emlw.desc": {
+          "source": "The ZIP or postal code for the customer’s address.",
+          "message": "The ZIP or postal code for the customer’s address."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.display_name": {
           "source": "Email Marketing Consent",
           "message": "Email Marketing Consent"
@@ -1950,6 +2442,54 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.desc": {
           "source": "Details about the customer’s consent to receive email marketing communications.",
           "message": "Details about the customer’s consent to receive email marketing communications."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nT3B0SW5MZXZlbA.display_name": {
+          "source": "Marketing Opt-In Level",
+          "message": "Marketing Opt-In Level"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nT3B0SW5MZXZlbA.short_desc": {
+          "source": "Opt-in level",
+          "message": "Opt-in level"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nT3B0SW5MZXZlbA.desc": {
+          "source": "The level of consent provided, e.g., \"SINGLE_OPT_IN\" or \"CONFIRMED_OPT_IN\", based on how consent was obtained.",
+          "message": "The level of consent provided, e.g., \"SINGLE_OPT_IN\" or \"CONFIRMED_OPT_IN\", based on how consent was obtained."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nT3B0SW5MZXZlbA.allowed-value.c3RyaW5nOlNJTkdMRV9PUFRfSU4.display_name": {
+          "source": "Single Opt-In",
+          "message": "Single Opt-In"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nT3B0SW5MZXZlbA.allowed-value.c3RyaW5nOkRPVUJMRV9PUFRfSU4.display_name": {
+          "source": "Double Opt-In",
+          "message": "Double Opt-In"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.display_name": {
+          "source": "Marketing State",
+          "message": "Marketing State"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.short_desc": {
+          "source": "Consent status",
+          "message": "Consent status"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.desc": {
+          "source": "The current state of email marketing consent, e.g., \"SUBSCRIBED\", \"UNSUBSCRIBED\", or \"PENDING\".",
+          "message": "The current state of email marketing consent, e.g., \"SUBSCRIBED\", \"UNSUBSCRIBED\", or \"PENDING\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOlNVQlNDUklCRUQ.display_name": {
+          "source": "Subscribed",
+          "message": "Subscribed"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOk5PVF9TVUJTQ1JJQkVE.display_name": {
+          "source": "Not Subscribed",
+          "message": "Not Subscribed"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOlBFTkRJTkc.display_name": {
+          "source": "Pending",
+          "message": "Pending"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.ZW1haWxNYXJrZXRpbmdDb25zZW50.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOlVOU1VCU0NSSUJFRA.display_name": {
+          "source": "Unsubscribed",
+          "message": "Unsubscribed"
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.display_name": {
           "source": "SMS Marketing Consent",
@@ -1963,6 +2503,54 @@
           "source": "Details about the customer’s consent to receive SMS marketing messages.",
           "message": "Details about the customer’s consent to receive SMS marketing messages."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nT3B0SW5MZXZlbA.display_name": {
+          "source": "Marketing Opt-In Level",
+          "message": "Marketing Opt-In Level"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nT3B0SW5MZXZlbA.short_desc": {
+          "source": "Opt-in level",
+          "message": "Opt-in level"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nT3B0SW5MZXZlbA.desc": {
+          "source": "The level of consent provided for SMS, e.g., \"SINGLE_OPT_IN\" or \"CONFIRMED_OPT_IN\".",
+          "message": "The level of consent provided for SMS, e.g., \"SINGLE_OPT_IN\" or \"CONFIRMED_OPT_IN\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nT3B0SW5MZXZlbA.allowed-value.c3RyaW5nOlNJTkdMRV9PUFRfSU4.display_name": {
+          "source": "Single Opt-In",
+          "message": "Single Opt-In"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nT3B0SW5MZXZlbA.allowed-value.c3RyaW5nOkRPVUJMRV9PUFRfSU4.display_name": {
+          "source": "Double Opt-In",
+          "message": "Double Opt-In"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.display_name": {
+          "source": "Marketing State",
+          "message": "Marketing State"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.short_desc": {
+          "source": "Consent status",
+          "message": "Consent status"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.desc": {
+          "source": "The current state of SMS marketing consent, e.g., \"SUBSCRIBED\", \"UNSUBSCRIBED\", or \"PENDING\".",
+          "message": "The current state of SMS marketing consent, e.g., \"SUBSCRIBED\", \"UNSUBSCRIBED\", or \"PENDING\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOlNVQlNDUklCRUQ.display_name": {
+          "source": "Subscribed",
+          "message": "Subscribed"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOk5PVF9TVUJTQ1JJQkVE.display_name": {
+          "source": "Not Subscribed",
+          "message": "Not Subscribed"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOlBFTkRJTkc.display_name": {
+          "source": "Pending",
+          "message": "Pending"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.c21zTWFya2V0aW5nQ29uc2VudA.field.bWFya2V0aW5nU3RhdGU.allowed-value.c3RyaW5nOlVOU1VCU0NSSUJFRA.display_name": {
+          "source": "Unsubscribed",
+          "message": "Unsubscribed"
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.display_name": {
           "source": "Metafields",
           "message": "Metafields"
@@ -1974,6 +2562,54 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.desc": {
           "source": "Additional metadata fields for the customer, useful for custom integrations or data storage.",
           "message": "Additional metadata fields for the customer, useful for custom integrations or data storage."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.a2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.a2V5.short_desc": {
+          "source": "Metafield key",
+          "message": "Metafield key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.a2V5.desc": {
+          "source": "The specific identifier for the metafield.",
+          "message": "The specific identifier for the metafield."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.bmFtZXNwYWNl.display_name": {
+          "source": "Namespace",
+          "message": "Namespace"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.bmFtZXNwYWNl.short_desc": {
+          "source": "Metafield namespace",
+          "message": "Metafield namespace"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.bmFtZXNwYWNl.desc": {
+          "source": "A grouping identifier for the metafield to organize related data.",
+          "message": "A grouping identifier for the metafield to organize related data."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.dHlwZQ.display_name": {
+          "source": "Type",
+          "message": "Type"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.dHlwZQ.short_desc": {
+          "source": "Metafield data type",
+          "message": "Metafield data type"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.dHlwZQ.desc": {
+          "source": "The data type of the metafield value, e.g., \"string\", \"integer\", \"json\".",
+          "message": "The data type of the metafield value, e.g., \"string\", \"integer\", \"json\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.dmFsdWU.short_desc": {
+          "source": "Metafield value",
+          "message": "Metafield value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWN1c3RvbWVy.option.bWV0YWZpZWxkcw.field.dmFsdWU.desc": {
+          "source": "The value stored in the metafield, which can be a string, number, or JSON.",
+          "message": "The value stored in the metafield, which can be a string, number, or JSON."
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.display_name": {
           "source": "Create Draft Order",
@@ -2083,6 +2719,126 @@
           "source": "The full shipping address where the order will be delivered, including all relevant fields.",
           "message": "The full shipping address where the order will be delivered, including all relevant fields."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.YWRkcmVzczE.display_name": {
+          "source": "Address Line 1",
+          "message": "Address Line 1"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.YWRkcmVzczE.short_desc": {
+          "source": "Primary address line",
+          "message": "Primary address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.YWRkcmVzczE.desc": {
+          "source": "The street address or PO Box for shipping.",
+          "message": "The street address or PO Box for shipping."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.YWRkcmVzczI.display_name": {
+          "source": "Address Line 2",
+          "message": "Address Line 2"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.YWRkcmVzczI.short_desc": {
+          "source": "Secondary address line",
+          "message": "Secondary address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.YWRkcmVzczI.desc": {
+          "source": "Additional address information like apartment or suite number.",
+          "message": "Additional address information like apartment or suite number."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y2l0eQ.short_desc": {
+          "source": "Shipping city",
+          "message": "Shipping city"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y2l0eQ.desc": {
+          "source": "The city for the shipping address.",
+          "message": "The city for the shipping address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y29tcGFueQ.display_name": {
+          "source": "Company",
+          "message": "Company"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y29tcGFueQ.short_desc": {
+          "source": "Shipping company name",
+          "message": "Shipping company name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y29tcGFueQ.desc": {
+          "source": "The company name associated with the shipping address, if applicable.",
+          "message": "The company name associated with the shipping address, if applicable."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y291bnRyeQ.short_desc": {
+          "source": "Shipping country",
+          "message": "Shipping country"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Y291bnRyeQ.desc": {
+          "source": "The country for the shipping address.",
+          "message": "The country for the shipping address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Zmlyc3ROYW1l.display_name": {
+          "source": "First Name",
+          "message": "First Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Zmlyc3ROYW1l.short_desc": {
+          "source": "Recipient first name",
+          "message": "Recipient first name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.Zmlyc3ROYW1l.desc": {
+          "source": "The first name of the shipping recipient.",
+          "message": "The first name of the shipping recipient."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.bGFzdE5hbWU.display_name": {
+          "source": "Last Name",
+          "message": "Last Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.bGFzdE5hbWU.short_desc": {
+          "source": "Recipient last name",
+          "message": "Recipient last name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.bGFzdE5hbWU.desc": {
+          "source": "The last name of the shipping recipient.",
+          "message": "The last name of the shipping recipient."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.cGhvbmU.display_name": {
+          "source": "Phone",
+          "message": "Phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.cGhvbmU.short_desc": {
+          "source": "Shipping contact phone",
+          "message": "Shipping contact phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.cGhvbmU.desc": {
+          "source": "The phone number for the shipping recipient.",
+          "message": "The phone number for the shipping recipient."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.cHJvdmluY2U.display_name": {
+          "source": "Province/State",
+          "message": "Province/State"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.cHJvdmluY2U.short_desc": {
+          "source": "Shipping province or state",
+          "message": "Shipping province or state"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.cHJvdmluY2U.desc": {
+          "source": "The province, state, or region for the shipping address.",
+          "message": "The province, state, or region for the shipping address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.emlw.display_name": {
+          "source": "ZIP/Postal Code",
+          "message": "ZIP/Postal Code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.emlw.short_desc": {
+          "source": "Shipping postal code",
+          "message": "Shipping postal code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdBZGRyZXNz.field.emlw.desc": {
+          "source": "The ZIP or postal code for the shipping address.",
+          "message": "The ZIP or postal code for the shipping address."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.display_name": {
           "source": "Billing Address",
           "message": "Billing Address"
@@ -2094,6 +2850,126 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.desc": {
           "source": "The address used for billing purposes, which may differ from the shipping address.",
           "message": "The address used for billing purposes, which may differ from the shipping address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.YWRkcmVzczE.display_name": {
+          "source": "Address Line 1",
+          "message": "Address Line 1"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.YWRkcmVzczE.short_desc": {
+          "source": "Primary billing address line",
+          "message": "Primary billing address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.YWRkcmVzczE.desc": {
+          "source": "The street address or PO Box for billing.",
+          "message": "The street address or PO Box for billing."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.YWRkcmVzczI.display_name": {
+          "source": "Address Line 2",
+          "message": "Address Line 2"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.YWRkcmVzczI.short_desc": {
+          "source": "Secondary billing address line",
+          "message": "Secondary billing address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.YWRkcmVzczI.desc": {
+          "source": "Additional billing address information like apartment or suite number.",
+          "message": "Additional billing address information like apartment or suite number."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y2l0eQ.short_desc": {
+          "source": "Billing city",
+          "message": "Billing city"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y2l0eQ.desc": {
+          "source": "The city for the billing address.",
+          "message": "The city for the billing address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y29tcGFueQ.display_name": {
+          "source": "Company",
+          "message": "Company"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y29tcGFueQ.short_desc": {
+          "source": "Billing company name",
+          "message": "Billing company name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y29tcGFueQ.desc": {
+          "source": "The company name associated with the billing address, if applicable.",
+          "message": "The company name associated with the billing address, if applicable."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y291bnRyeQ.short_desc": {
+          "source": "Billing country",
+          "message": "Billing country"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Y291bnRyeQ.desc": {
+          "source": "The country for the billing address.",
+          "message": "The country for the billing address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Zmlyc3ROYW1l.display_name": {
+          "source": "First Name",
+          "message": "First Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Zmlyc3ROYW1l.short_desc": {
+          "source": "Billing first name",
+          "message": "Billing first name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.Zmlyc3ROYW1l.desc": {
+          "source": "The first name of the billing contact.",
+          "message": "The first name of the billing contact."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.bGFzdE5hbWU.display_name": {
+          "source": "Last Name",
+          "message": "Last Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.bGFzdE5hbWU.short_desc": {
+          "source": "Billing last name",
+          "message": "Billing last name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.bGFzdE5hbWU.desc": {
+          "source": "The last name of the billing contact.",
+          "message": "The last name of the billing contact."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.cGhvbmU.display_name": {
+          "source": "Phone",
+          "message": "Phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.cGhvbmU.short_desc": {
+          "source": "Billing contact phone",
+          "message": "Billing contact phone"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.cGhvbmU.desc": {
+          "source": "The phone number for the billing contact.",
+          "message": "The phone number for the billing contact."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.cHJvdmluY2U.display_name": {
+          "source": "Province/State",
+          "message": "Province/State"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.cHJvdmluY2U.short_desc": {
+          "source": "Billing province or state",
+          "message": "Billing province or state"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.cHJvdmluY2U.desc": {
+          "source": "The province, state, or region for the billing address.",
+          "message": "The province, state, or region for the billing address."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.emlw.display_name": {
+          "source": "ZIP/Postal Code",
+          "message": "ZIP/Postal Code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.emlw.short_desc": {
+          "source": "Billing postal code",
+          "message": "Billing postal code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YmlsbGluZ0FkZHJlc3M.field.emlw.desc": {
+          "source": "The ZIP or postal code for the billing address.",
+          "message": "The ZIP or postal code for the billing address."
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.dXNlQ3VzdG9tZXJEZWZhdWx0QWRkcmVzcw.display_name": {
           "source": "Use Customer Default Address",
@@ -2119,6 +2995,414 @@
           "source": "A list of products or variants included in the draft order, with details like quantity and price.",
           "message": "A list of products or variants included in the draft order, with details like quantity and price."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.YXBwbGllZERpc2NvdW50.display_name": {
+          "source": "Applied Discount",
+          "message": "Applied Discount"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.YXBwbGllZERpc2NvdW50.short_desc": {
+          "source": "Discount on item",
+          "message": "Discount on item"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.YXBwbGllZERpc2NvdW50.desc": {
+          "source": "Details of any discount applied to this specific line item.",
+          "message": "Details of any discount applied to this specific line item."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.YW1vdW50V2l0aEN1cnJlbmN5.display_name": {
+          "source": "Amount with Currency",
+          "message": "Amount with Currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.YW1vdW50V2l0aEN1cnJlbmN5.short_desc": {
+          "source": "Discount amount with currency",
+          "message": "Discount amount with currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.YW1vdW50V2l0aEN1cnJlbmN5.desc": {
+          "source": "The discount amount including currency details.",
+          "message": "The discount amount including currency details."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjYyMDc5YzUxNzk0OTVlMTI2YTk0YmMyZGEyNGJjYTI1OWZmMjI5ZGYzZTJhYmViYTlhNjVlYWRkYTExNzYwNzpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUwOmZpZWxkOllXMXZkVzUwVjJsMGFFTjFjbkpsYm1ONQ.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjYyMDc5YzUxNzk0OTVlMTI2YTk0YmMyZGEyNGJjYTI1OWZmMjI5ZGYzZTJhYmViYTlhNjVlYWRkYTExNzYwNzpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUwOmZpZWxkOllXMXZkVzUwVjJsMGFFTjFjbkpsYm1ONQ.field.YW1vdW50.short_desc": {
+          "source": "Discount amount",
+          "message": "Discount amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjYyMDc5YzUxNzk0OTVlMTI2YTk0YmMyZGEyNGJjYTI1OWZmMjI5ZGYzZTJhYmViYTlhNjVlYWRkYTExNzYwNzpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUwOmZpZWxkOllXMXZkVzUwVjJsMGFFTjFjbkpsYm1ONQ.field.YW1vdW50.desc": {
+          "source": "The numerical value of the discount.",
+          "message": "The numerical value of the discount."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjYyMDc5YzUxNzk0OTVlMTI2YTk0YmMyZGEyNGJjYTI1OWZmMjI5ZGYzZTJhYmViYTlhNjVlYWRkYTExNzYwNzpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUwOmZpZWxkOllXMXZkVzUwVjJsMGFFTjFjbkpsYm1ONQ.field.Y3VycmVuY3lDb2Rl.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjYyMDc5YzUxNzk0OTVlMTI2YTk0YmMyZGEyNGJjYTI1OWZmMjI5ZGYzZTJhYmViYTlhNjVlYWRkYTExNzYwNzpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUwOmZpZWxkOllXMXZkVzUwVjJsMGFFTjFjbkpsYm1ONQ.field.Y3VycmVuY3lDb2Rl.short_desc": {
+          "source": "Discount currency",
+          "message": "Discount currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjYyMDc5YzUxNzk0OTVlMTI2YTk0YmMyZGEyNGJjYTI1OWZmMjI5ZGYzZTJhYmViYTlhNjVlYWRkYTExNzYwNzpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUwOmZpZWxkOllXMXZkVzUwVjJsMGFFTjFjbkpsYm1ONQ.field.Y3VycmVuY3lDb2Rl.desc": {
+          "source": "The ISO 4217 currency code for the discount amount.",
+          "message": "The ISO 4217 currency code for the discount amount."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.ZGVzY3JpcHRpb24.display_name": {
+          "source": "Discount Description",
+          "message": "Discount Description"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.ZGVzY3JpcHRpb24.short_desc": {
+          "source": "Discount details",
+          "message": "Discount details"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.ZGVzY3JpcHRpb24.desc": {
+          "source": "A description of the discount applied.",
+          "message": "A description of the discount applied."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dGl0bGU.display_name": {
+          "source": "Discount Title",
+          "message": "Discount Title"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dGl0bGU.short_desc": {
+          "source": "Discount name",
+          "message": "Discount name"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dGl0bGU.desc": {
+          "source": "The name or title of the discount.",
+          "message": "The name or title of the discount."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWU.display_name": {
+          "source": "Discount Value",
+          "message": "Discount Value"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWU.short_desc": {
+          "source": "Discount amount or percentage",
+          "message": "Discount amount or percentage"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWU.desc": {
+          "source": "The numerical value of the discount, either as a fixed amount or percentage.",
+          "message": "The numerical value of the discount, either as a fixed amount or percentage."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWVUeXBl.display_name": {
+          "source": "Value Type",
+          "message": "Value Type"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWVUeXBl.short_desc": {
+          "source": "Type of discount value",
+          "message": "Type of discount value"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWVUeXBl.desc": {
+          "source": "Specifies if the discount is a fixed amount or percentage (e.g., \"FIXED_AMOUNT\", \"PERCENTAGE\").",
+          "message": "Specifies if the discount is a fixed amount or percentage (e.g., \"FIXED_AMOUNT\", \"PERCENTAGE\")."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWVUeXBl.allowed-value.c3RyaW5nOkZJWEVEX0FNT1VOVA.display_name": {
+          "source": "Fixed Amount",
+          "message": "Fixed Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDAxNTYyMWFhMjQ0ZTVkOTk4MmRjOTIyNTZhMjIwNTJlYWM3NWRkNGEzMDgwMGQ4OTNkYWJjZTEzYTk4ZjA4NTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOllYQndiR2xsWkVScGMyTnZkVzUw.field.dmFsdWVUeXBl.allowed-value.c3RyaW5nOlBFUkNFTlRBR0U.display_name": {
+          "source": "Percentage",
+          "message": "Percentage"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Y29tcG9uZW50cw.display_name": {
+          "source": "Components",
+          "message": "Components"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Y29tcG9uZW50cw.short_desc": {
+          "source": "Bundle components",
+          "message": "Bundle components"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Y29tcG9uZW50cw.desc": {
+          "source": "Details of components if the item is a bundle or composite product.",
+          "message": "Details of components if the item is a bundle or composite product."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNTk1YjY1YWU4NTU3ZjhjZmE0MjNhZWQwN2I1NzNhNjAyZTQwYWFhZjgyYmI4ODBhZTkyY2Y1NmQxMzNlN2QyMjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkyOXRjRzl1Wlc1MGN3.field.cXVhbnRpdHk.display_name": {
+          "source": "Quantity",
+          "message": "Quantity"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNTk1YjY1YWU4NTU3ZjhjZmE0MjNhZWQwN2I1NzNhNjAyZTQwYWFhZjgyYmI4ODBhZTkyY2Y1NmQxMzNlN2QyMjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkyOXRjRzl1Wlc1MGN3.field.cXVhbnRpdHk.short_desc": {
+          "source": "Component quantity",
+          "message": "Component quantity"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNTk1YjY1YWU4NTU3ZjhjZmE0MjNhZWQwN2I1NzNhNjAyZTQwYWFhZjgyYmI4ODBhZTkyY2Y1NmQxMzNlN2QyMjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkyOXRjRzl1Wlc1MGN3.field.cXVhbnRpdHk.desc": {
+          "source": "The number of units of this component in the bundle.",
+          "message": "The number of units of this component in the bundle."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNTk1YjY1YWU4NTU3ZjhjZmE0MjNhZWQwN2I1NzNhNjAyZTQwYWFhZjgyYmI4ODBhZTkyY2Y1NmQxMzNlN2QyMjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkyOXRjRzl1Wlc1MGN3.field.dmFyaWFudElk.display_name": {
+          "source": "Variant ID",
+          "message": "Variant ID"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNTk1YjY1YWU4NTU3ZjhjZmE0MjNhZWQwN2I1NzNhNjAyZTQwYWFhZjgyYmI4ODBhZTkyY2Y1NmQxMzNlN2QyMjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkyOXRjRzl1Wlc1MGN3.field.dmFyaWFudElk.short_desc": {
+          "source": "Component variant ID",
+          "message": "Component variant ID"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNTk1YjY1YWU4NTU3ZjhjZmE0MjNhZWQwN2I1NzNhNjAyZTQwYWFhZjgyYmI4ODBhZTkyY2Y1NmQxMzNlN2QyMjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkyOXRjRzl1Wlc1MGN3.field.dmFyaWFudElk.desc": {
+          "source": "The unique identifier of the variant included as a component.",
+          "message": "The unique identifier of the variant included as a component."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Y3VzdG9tQXR0cmlidXRlcw.display_name": {
+          "source": "Custom Attributes",
+          "message": "Custom Attributes"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Y3VzdG9tQXR0cmlidXRlcw.short_desc": {
+          "source": "Additional item attributes",
+          "message": "Additional item attributes"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Y3VzdG9tQXR0cmlidXRlcw.desc": {
+          "source": "Key-value pairs for adding custom metadata to the line item.",
+          "message": "Key-value pairs for adding custom metadata to the line item."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jZmQzOTg2MjBlZmJlNjFlMWVhMWM2OGJmZDliYzgzMGFhNGJmODg5MjdiMGYzNmMyNDVjNTVkOWM4N2QxN2MxYTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkzVnpkRzl0UVhSMGNtbGlkWFJsY3c.field.a2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jZmQzOTg2MjBlZmJlNjFlMWVhMWM2OGJmZDliYzgzMGFhNGJmODg5MjdiMGYzNmMyNDVjNTVkOWM4N2QxN2MxYTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkzVnpkRzl0UVhSMGNtbGlkWFJsY3c.field.a2V5.short_desc": {
+          "source": "Attribute key",
+          "message": "Attribute key"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jZmQzOTg2MjBlZmJlNjFlMWVhMWM2OGJmZDliYzgzMGFhNGJmODg5MjdiMGYzNmMyNDVjNTVkOWM4N2QxN2MxYTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkzVnpkRzl0UVhSMGNtbGlkWFJsY3c.field.a2V5.desc": {
+          "source": "The identifier for the custom attribute.",
+          "message": "The identifier for the custom attribute."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jZmQzOTg2MjBlZmJlNjFlMWVhMWM2OGJmZDliYzgzMGFhNGJmODg5MjdiMGYzNmMyNDVjNTVkOWM4N2QxN2MxYTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkzVnpkRzl0UVhSMGNtbGlkWFJsY3c.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jZmQzOTg2MjBlZmJlNjFlMWVhMWM2OGJmZDliYzgzMGFhNGJmODg5MjdiMGYzNmMyNDVjNTVkOWM4N2QxN2MxYTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkzVnpkRzl0UVhSMGNtbGlkWFJsY3c.field.dmFsdWU.short_desc": {
+          "source": "Attribute value",
+          "message": "Attribute value"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jZmQzOTg2MjBlZmJlNjFlMWVhMWM2OGJmZDliYzgzMGFhNGJmODg5MjdiMGYzNmMyNDVjNTVkOWM4N2QxN2MxYTpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOlkzVnpkRzl0UVhSMGNtbGlkWFJsY3c.field.dmFsdWU.desc": {
+          "source": "The value associated with the custom attribute key.",
+          "message": "The value associated with the custom attribute key."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Z2VuZXJhdGVQcmljZU92ZXJyaWRl.display_name": {
+          "source": "Generate Price Override",
+          "message": "Generate Price Override"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Z2VuZXJhdGVQcmljZU92ZXJyaWRl.short_desc": {
+          "source": "Override item price",
+          "message": "Override item price"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.Z2VuZXJhdGVQcmljZU92ZXJyaWRl.desc": {
+          "source": "If true, allows setting a custom price for the item instead of the original price.",
+          "message": "If true, allows setting a custom price for the item instead of the original price."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.b3JpZ2luYWxVbml0UHJpY2U.display_name": {
+          "source": "Original Unit Price",
+          "message": "Original Unit Price"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.b3JpZ2luYWxVbml0UHJpY2U.short_desc": {
+          "source": "Price per unit",
+          "message": "Price per unit"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.b3JpZ2luYWxVbml0UHJpY2U.desc": {
+          "source": "The original price per unit of the item before discounts.",
+          "message": "The original price per unit of the item before discounts."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.b3JpZ2luYWxVbml0UHJpY2VXaXRoQ3VycmVuY3k.display_name": {
+          "source": "Original Unit Price with Currency",
+          "message": "Original Unit Price with Currency"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.b3JpZ2luYWxVbml0UHJpY2VXaXRoQ3VycmVuY3k.short_desc": {
+          "source": "Price with currency details",
+          "message": "Price with currency details"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.b3JpZ2luYWxVbml0UHJpY2VXaXRoQ3VycmVuY3k.desc": {
+          "source": "The original unit price including currency specification.",
+          "message": "The original unit price including currency specification."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDhlMWY0MGIzNTdlNTcyZjI3OWJhMmYyMjNjY2MyOWJmYTc3YWEwOTM5MGEyYjUxZjE5ZTdjOGI1MDdmNWJjYjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmIzSnBaMmx1WVd4VmJtbDBVSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDhlMWY0MGIzNTdlNTcyZjI3OWJhMmYyMjNjY2MyOWJmYTc3YWEwOTM5MGEyYjUxZjE5ZTdjOGI1MDdmNWJjYjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmIzSnBaMmx1WVd4VmJtbDBVSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.YW1vdW50.short_desc": {
+          "source": "Price amount",
+          "message": "Price amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDhlMWY0MGIzNTdlNTcyZjI3OWJhMmYyMjNjY2MyOWJmYTc3YWEwOTM5MGEyYjUxZjE5ZTdjOGI1MDdmNWJjYjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmIzSnBaMmx1WVd4VmJtbDBVSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.YW1vdW50.desc": {
+          "source": "The numerical value of the unit price.",
+          "message": "The numerical value of the unit price."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDhlMWY0MGIzNTdlNTcyZjI3OWJhMmYyMjNjY2MyOWJmYTc3YWEwOTM5MGEyYjUxZjE5ZTdjOGI1MDdmNWJjYjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmIzSnBaMmx1WVd4VmJtbDBVSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.Y3VycmVuY3lDb2Rl.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDhlMWY0MGIzNTdlNTcyZjI3OWJhMmYyMjNjY2MyOWJmYTc3YWEwOTM5MGEyYjUxZjE5ZTdjOGI1MDdmNWJjYjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmIzSnBaMmx1WVd4VmJtbDBVSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.Y3VycmVuY3lDb2Rl.short_desc": {
+          "source": "Currency code",
+          "message": "Currency code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMDhlMWY0MGIzNTdlNTcyZjI3OWJhMmYyMjNjY2MyOWJmYTc3YWEwOTM5MGEyYjUxZjE5ZTdjOGI1MDdmNWJjYjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmIzSnBaMmx1WVd4VmJtbDBVSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.Y3VycmVuY3lDb2Rl.desc": {
+          "source": "The ISO 4217 currency code for the price, e.g., USD, EUR.",
+          "message": "The ISO 4217 currency code for the price, e.g., USD, EUR."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cHJpY2VPdmVycmlkZQ.display_name": {
+          "source": "Price Override",
+          "message": "Price Override"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cHJpY2VPdmVycmlkZQ.short_desc": {
+          "source": "Custom item price",
+          "message": "Custom item price"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cHJpY2VPdmVycmlkZQ.desc": {
+          "source": "The custom price to override the original unit price.",
+          "message": "The custom price to override the original unit price."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jM2JmMzRkODc2MjcyMzE2NjNjN2Q2ZTczYzM5MDViZDBhNzFkOTg1ZTlmMjFjYjY5OGYyMWQ0ZTI1NmJiZTQ1YjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmNISnBZMlZQZG1WeWNtbGtaUQ.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jM2JmMzRkODc2MjcyMzE2NjNjN2Q2ZTczYzM5MDViZDBhNzFkOTg1ZTlmMjFjYjY5OGYyMWQ0ZTI1NmJiZTQ1YjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmNISnBZMlZQZG1WeWNtbGtaUQ.field.YW1vdW50.short_desc": {
+          "source": "Override amount",
+          "message": "Override amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jM2JmMzRkODc2MjcyMzE2NjNjN2Q2ZTczYzM5MDViZDBhNzFkOTg1ZTlmMjFjYjY5OGYyMWQ0ZTI1NmJiZTQ1YjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmNISnBZMlZQZG1WeWNtbGtaUQ.field.YW1vdW50.desc": {
+          "source": "The numerical value of the custom price.",
+          "message": "The numerical value of the custom price."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jM2JmMzRkODc2MjcyMzE2NjNjN2Q2ZTczYzM5MDViZDBhNzFkOTg1ZTlmMjFjYjY5OGYyMWQ0ZTI1NmJiZTQ1YjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmNISnBZMlZQZG1WeWNtbGtaUQ.field.Y3VycmVuY3lDb2Rl.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jM2JmMzRkODc2MjcyMzE2NjNjN2Q2ZTczYzM5MDViZDBhNzFkOTg1ZTlmMjFjYjY5OGYyMWQ0ZTI1NmJiZTQ1YjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmNISnBZMlZQZG1WeWNtbGtaUQ.field.Y3VycmVuY3lDb2Rl.short_desc": {
+          "source": "Override currency",
+          "message": "Override currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jM2JmMzRkODc2MjcyMzE2NjNjN2Q2ZTczYzM5MDViZDBhNzFkOTg1ZTlmMjFjYjY5OGYyMWQ0ZTI1NmJiZTQ1YjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmNISnBZMlZQZG1WeWNtbGtaUQ.field.Y3VycmVuY3lDb2Rl.desc": {
+          "source": "The ISO 4217 currency code for the custom price.",
+          "message": "The ISO 4217 currency code for the custom price."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cXVhbnRpdHk.display_name": {
+          "source": "Quantity",
+          "message": "Quantity"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cXVhbnRpdHk.short_desc": {
+          "source": "Number of items",
+          "message": "Number of items"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cXVhbnRpdHk.desc": {
+          "source": "The number of units of this variant to include in the draft order.",
+          "message": "The number of units of this variant to include in the draft order."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cmVxdWlyZXNTaGlwcGluZw.display_name": {
+          "source": "Requires Shipping",
+          "message": "Requires Shipping"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cmVxdWlyZXNTaGlwcGluZw.short_desc": {
+          "source": "Needs shipping",
+          "message": "Needs shipping"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.cmVxdWlyZXNTaGlwcGluZw.desc": {
+          "source": "Indicates if the item requires physical shipping.",
+          "message": "Indicates if the item requires physical shipping."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.c2t1.display_name": {
+          "source": "SKU",
+          "message": "SKU"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.c2t1.short_desc": {
+          "source": "Stock Keeping Unit",
+          "message": "Stock Keeping Unit"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.c2t1.desc": {
+          "source": "The stock keeping unit identifier for the product variant.",
+          "message": "The stock keeping unit identifier for the product variant."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dGF4YWJsZQ.display_name": {
+          "source": "Taxable",
+          "message": "Taxable"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dGF4YWJsZQ.short_desc": {
+          "source": "Subject to tax",
+          "message": "Subject to tax"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dGF4YWJsZQ.desc": {
+          "source": "Specifies whether the item is taxable.",
+          "message": "Specifies whether the item is taxable."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dGl0bGU.display_name": {
+          "source": "Title",
+          "message": "Title"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dGl0bGU.short_desc": {
+          "source": "Item title",
+          "message": "Item title"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dGl0bGU.desc": {
+          "source": "The display name of the line item, typically the product or variant name.",
+          "message": "The display name of the line item, typically the product or variant name."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dXVpZA.display_name": {
+          "source": "UUID",
+          "message": "UUID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dXVpZA.short_desc": {
+          "source": "Unique identifier",
+          "message": "Unique identifier"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dXVpZA.desc": {
+          "source": "A unique identifier for the line item, often used for tracking or external systems.",
+          "message": "A unique identifier for the line item, often used for tracking or external systems."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dmFyaWFudElk.display_name": {
+          "source": "Variant ID",
+          "message": "Variant ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dmFyaWFudElk.short_desc": {
+          "source": "Product variant ID",
+          "message": "Product variant ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.dmFyaWFudElk.desc": {
+          "source": "The unique identifier of the product variant to include in the order.",
+          "message": "The unique identifier of the product variant to include in the order."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.d2VpZ2h0.display_name": {
+          "source": "Weight",
+          "message": "Weight"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.d2VpZ2h0.short_desc": {
+          "source": "Item weight",
+          "message": "Item weight"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bGluZUl0ZW1z.field.d2VpZ2h0.desc": {
+          "source": "The weight of the item, used for shipping calculations.",
+          "message": "The weight of the item, used for shipping calculations."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.display_name": {
+          "source": "Weight Unit",
+          "message": "Weight Unit"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.short_desc": {
+          "source": "Unit of weight",
+          "message": "Unit of weight"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.desc": {
+          "source": "The weight unit",
+          "message": "The weight unit"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.allowed-value.c3RyaW5nOktJTE9HUkFNUw.display_name": {
+          "source": "Kilograms",
+          "message": "Kilograms"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.allowed-value.c3RyaW5nOkdSQU1T.display_name": {
+          "source": "Grams",
+          "message": "Grams"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.allowed-value.c3RyaW5nOlBPVU5EUw.display_name": {
+          "source": "Pounds",
+          "message": "Pounds"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dW5pdA.allowed-value.c3RyaW5nOk9VTkNFUw.display_name": {
+          "source": "Ounces",
+          "message": "Ounces"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dmFsdWU.display_name": {
+          "source": "Weight Value",
+          "message": "Weight Value"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dmFsdWU.short_desc": {
+          "source": "Numerical weight",
+          "message": "Numerical weight"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNDlmNzkwNDY0NDViZjFlYWEwYTU3YTVkYWUxOTNkODgxMDU3ZmJkYzQ0ODdhMTQxNjU0YTBjZDY0YmVkM2Y1MjpvcHRpb246YkdsdVpVbDBaVzF6OmZpZWxkOmQyVnBaMmgw.field.dmFsdWU.desc": {
+          "source": "The weight value",
+          "message": "The weight value"
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.display_name": {
           "source": "Applied Discount",
           "message": "Applied Discount"
@@ -2130,6 +3414,98 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.desc": {
           "source": "Details of a discount applied to the entire draft order.",
           "message": "Details of a discount applied to the entire draft order."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.YW1vdW50V2l0aEN1cnJlbmN5.display_name": {
+          "source": "Amount with Currency",
+          "message": "Amount with Currency"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.YW1vdW50V2l0aEN1cnJlbmN5.short_desc": {
+          "source": "Discount amount with currency",
+          "message": "Discount amount with currency"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.YW1vdW50V2l0aEN1cnJlbmN5.desc": {
+          "source": "The discount amount including currency details.",
+          "message": "The discount amount including currency details."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjY5ZDY0MTQxOWQwZTQ0OTdkMmY5MjhlYTQxYzY0ZjY0N2U0M2RmNmQzZWMyMDlkMjNjM2VhNWU1YTFhNWQ5NzpvcHRpb246WVhCd2JHbGxaRVJwYzJOdmRXNTA6ZmllbGQ6WVcxdmRXNTBWMmwwYUVOMWNuSmxibU41.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjY5ZDY0MTQxOWQwZTQ0OTdkMmY5MjhlYTQxYzY0ZjY0N2U0M2RmNmQzZWMyMDlkMjNjM2VhNWU1YTFhNWQ5NzpvcHRpb246WVhCd2JHbGxaRVJwYzJOdmRXNTA6ZmllbGQ6WVcxdmRXNTBWMmwwYUVOMWNuSmxibU41.field.YW1vdW50.short_desc": {
+          "source": "Discount amount",
+          "message": "Discount amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjY5ZDY0MTQxOWQwZTQ0OTdkMmY5MjhlYTQxYzY0ZjY0N2U0M2RmNmQzZWMyMDlkMjNjM2VhNWU1YTFhNWQ5NzpvcHRpb246WVhCd2JHbGxaRVJwYzJOdmRXNTA6ZmllbGQ6WVcxdmRXNTBWMmwwYUVOMWNuSmxibU41.field.YW1vdW50.desc": {
+          "source": "The numerical value of the discount.",
+          "message": "The numerical value of the discount."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjY5ZDY0MTQxOWQwZTQ0OTdkMmY5MjhlYTQxYzY0ZjY0N2U0M2RmNmQzZWMyMDlkMjNjM2VhNWU1YTFhNWQ5NzpvcHRpb246WVhCd2JHbGxaRVJwYzJOdmRXNTA6ZmllbGQ6WVcxdmRXNTBWMmwwYUVOMWNuSmxibU41.field.Y3VycmVuY3lDb2Rl.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjY5ZDY0MTQxOWQwZTQ0OTdkMmY5MjhlYTQxYzY0ZjY0N2U0M2RmNmQzZWMyMDlkMjNjM2VhNWU1YTFhNWQ5NzpvcHRpb246WVhCd2JHbGxaRVJwYzJOdmRXNTA6ZmllbGQ6WVcxdmRXNTBWMmwwYUVOMWNuSmxibU41.field.Y3VycmVuY3lDb2Rl.short_desc": {
+          "source": "Discount currency",
+          "message": "Discount currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jNjY5ZDY0MTQxOWQwZTQ0OTdkMmY5MjhlYTQxYzY0ZjY0N2U0M2RmNmQzZWMyMDlkMjNjM2VhNWU1YTFhNWQ5NzpvcHRpb246WVhCd2JHbGxaRVJwYzJOdmRXNTA6ZmllbGQ6WVcxdmRXNTBWMmwwYUVOMWNuSmxibU41.field.Y3VycmVuY3lDb2Rl.desc": {
+          "source": "The ISO 4217 currency code for the discount amount.",
+          "message": "The ISO 4217 currency code for the discount amount."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.ZGVzY3JpcHRpb24.display_name": {
+          "source": "Discount Description",
+          "message": "Discount Description"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.ZGVzY3JpcHRpb24.short_desc": {
+          "source": "Discount details",
+          "message": "Discount details"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.ZGVzY3JpcHRpb24.desc": {
+          "source": "A description of the order-wide discount.",
+          "message": "A description of the order-wide discount."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dGl0bGU.display_name": {
+          "source": "Discount Title",
+          "message": "Discount Title"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dGl0bGU.short_desc": {
+          "source": "Discount name",
+          "message": "Discount name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dGl0bGU.desc": {
+          "source": "The name or title of the order-wide discount.",
+          "message": "The name or title of the order-wide discount."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWU.display_name": {
+          "source": "Discount Value",
+          "message": "Discount Value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWU.short_desc": {
+          "source": "Discount amount or percentage",
+          "message": "Discount amount or percentage"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWU.desc": {
+          "source": "The numerical value of the discount, either as a fixed amount or percentage.",
+          "message": "The numerical value of the discount, either as a fixed amount or percentage."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWVUeXBl.display_name": {
+          "source": "Value Type",
+          "message": "Value Type"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWVUeXBl.short_desc": {
+          "source": "Type of discount value",
+          "message": "Type of discount value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWVUeXBl.desc": {
+          "source": "Specifies if the discount is a fixed amount or percentage (e.g., \"FIXED_AMOUNT\", \"PERCENTAGE\").",
+          "message": "Specifies if the discount is a fixed amount or percentage (e.g., \"FIXED_AMOUNT\", \"PERCENTAGE\")."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWVUeXBl.allowed-value.c3RyaW5nOkZJWEVEX0FNT1VOVA.display_name": {
+          "source": "Fixed Amount",
+          "message": "Fixed Amount"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YXBwbGllZERpc2NvdW50.field.dmFsdWVUeXBl.allowed-value.c3RyaW5nOlBFUkNFTlRBR0U.display_name": {
+          "source": "Percentage",
+          "message": "Percentage"
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.display_name": {
           "source": "Shipping Line",
@@ -2143,6 +3519,78 @@
           "source": "Details about the shipping method and cost for the draft order.",
           "message": "Details about the shipping method and cost for the draft order."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.cHJpY2U.display_name": {
+          "source": "Price",
+          "message": "Price"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.cHJpY2U.short_desc": {
+          "source": "Shipping cost",
+          "message": "Shipping cost"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.cHJpY2U.desc": {
+          "source": "The cost of shipping as a numerical value.",
+          "message": "The cost of shipping as a numerical value."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.cHJpY2VXaXRoQ3VycmVuY3k.display_name": {
+          "source": "Price with Currency",
+          "message": "Price with Currency"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.cHJpY2VXaXRoQ3VycmVuY3k.short_desc": {
+          "source": "Shipping cost with currency",
+          "message": "Shipping cost with currency"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.cHJpY2VXaXRoQ3VycmVuY3k.desc": {
+          "source": "The shipping cost including currency specification.",
+          "message": "The shipping cost including currency specification."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGU4ZDQzMWZlYjQ2MzQ4NGQ0NDNiNTNjZmFkYzQ1MTU5NzI4MGRkNjUyZDNiMmE2NzAxNDdjZmYyYThmNzM2NTpvcHRpb246YzJocGNIQnBibWRNYVc1bDpmaWVsZDpjSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGU4ZDQzMWZlYjQ2MzQ4NGQ0NDNiNTNjZmFkYzQ1MTU5NzI4MGRkNjUyZDNiMmE2NzAxNDdjZmYyYThmNzM2NTpvcHRpb246YzJocGNIQnBibWRNYVc1bDpmaWVsZDpjSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.YW1vdW50.short_desc": {
+          "source": "Shipping amount",
+          "message": "Shipping amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGU4ZDQzMWZlYjQ2MzQ4NGQ0NDNiNTNjZmFkYzQ1MTU5NzI4MGRkNjUyZDNiMmE2NzAxNDdjZmYyYThmNzM2NTpvcHRpb246YzJocGNIQnBibWRNYVc1bDpmaWVsZDpjSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.YW1vdW50.desc": {
+          "source": "The numerical value of the shipping cost.",
+          "message": "The numerical value of the shipping cost."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGU4ZDQzMWZlYjQ2MzQ4NGQ0NDNiNTNjZmFkYzQ1MTU5NzI4MGRkNjUyZDNiMmE2NzAxNDdjZmYyYThmNzM2NTpvcHRpb246YzJocGNIQnBibWRNYVc1bDpmaWVsZDpjSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.Y3VycmVuY3lDb2Rl.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGU4ZDQzMWZlYjQ2MzQ4NGQ0NDNiNTNjZmFkYzQ1MTU5NzI4MGRkNjUyZDNiMmE2NzAxNDdjZmYyYThmNzM2NTpvcHRpb246YzJocGNIQnBibWRNYVc1bDpmaWVsZDpjSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.Y3VycmVuY3lDb2Rl.short_desc": {
+          "source": "Shipping currency",
+          "message": "Shipping currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGU4ZDQzMWZlYjQ2MzQ4NGQ0NDNiNTNjZmFkYzQ1MTU5NzI4MGRkNjUyZDNiMmE2NzAxNDdjZmYyYThmNzM2NTpvcHRpb246YzJocGNIQnBibWRNYVc1bDpmaWVsZDpjSEpwWTJWWGFYUm9RM1Z5Y21WdVkzaw.field.Y3VycmVuY3lDb2Rl.desc": {
+          "source": "The ISO 4217 currency code for the shipping cost.",
+          "message": "The ISO 4217 currency code for the shipping cost."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.c2hpcHBpbmdSYXRlSGFuZGxl.display_name": {
+          "source": "Shipping Rate Handle",
+          "message": "Shipping Rate Handle"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.c2hpcHBpbmdSYXRlSGFuZGxl.short_desc": {
+          "source": "Shipping rate identifier",
+          "message": "Shipping rate identifier"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.c2hpcHBpbmdSYXRlSGFuZGxl.desc": {
+          "source": "A unique identifier for the shipping rate, often tied to a predefined rate in Shopify.",
+          "message": "A unique identifier for the shipping rate, often tied to a predefined rate in Shopify."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.dGl0bGU.display_name": {
+          "source": "Title",
+          "message": "Title"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.dGl0bGU.short_desc": {
+          "source": "Shipping method name",
+          "message": "Shipping method name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.c2hpcHBpbmdMaW5l.field.dGl0bGU.desc": {
+          "source": "The name of the shipping method, e.g., \"Standard Shipping\".",
+          "message": "The name of the shipping method, e.g., \"Standard Shipping\"."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.display_name": {
           "source": "Custom Attributes",
           "message": "Custom Attributes"
@@ -2154,6 +3602,30 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.desc": {
           "source": "Key-value pairs for adding custom metadata to the draft order.",
           "message": "Key-value pairs for adding custom metadata to the draft order."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.field.a2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.field.a2V5.short_desc": {
+          "source": "Attribute key",
+          "message": "Attribute key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.field.a2V5.desc": {
+          "source": "The identifier for the custom attribute.",
+          "message": "The identifier for the custom attribute."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.field.dmFsdWU.short_desc": {
+          "source": "Attribute value",
+          "message": "Attribute value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.Y3VzdG9tQXR0cmlidXRlcw.field.dmFsdWU.desc": {
+          "source": "The value associated with the custom attribute key.",
+          "message": "The value associated with the custom attribute key."
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.YWxsb3dEaXNjb3VudENvZGVzSW5DaGVja291dA.display_name": {
           "source": "Allow Discount Codes in Checkout",
@@ -2203,6 +3675,54 @@
           "source": "Additional metadata fields for the draft order, useful for custom integrations.",
           "message": "Additional metadata fields for the draft order, useful for custom integrations."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.a2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.a2V5.short_desc": {
+          "source": "Metafield key",
+          "message": "Metafield key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.a2V5.desc": {
+          "source": "The specific identifier for the metafield.",
+          "message": "The specific identifier for the metafield."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.bmFtZXNwYWNl.display_name": {
+          "source": "Namespace",
+          "message": "Namespace"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.bmFtZXNwYWNl.short_desc": {
+          "source": "Metafield namespace",
+          "message": "Metafield namespace"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.bmFtZXNwYWNl.desc": {
+          "source": "A grouping identifier for the metafield.",
+          "message": "A grouping identifier for the metafield."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.dHlwZQ.display_name": {
+          "source": "Type",
+          "message": "Type"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.dHlwZQ.short_desc": {
+          "source": "Metafield data type",
+          "message": "Metafield data type"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.dHlwZQ.desc": {
+          "source": "The data type of the metafield value, e.g., string, integer, JSON.",
+          "message": "The data type of the metafield value, e.g., string, integer, JSON."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.dmFsdWU.short_desc": {
+          "source": "Metafield value",
+          "message": "Metafield value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bWV0YWZpZWxkcw.field.dmFsdWU.desc": {
+          "source": "The value stored in the metafield.",
+          "message": "The value stored in the metafield."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.display_name": {
           "source": "Localized Fields",
           "message": "Localized Fields"
@@ -2214,6 +3734,42 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.desc": {
           "source": "Fields that support localized content for different regions or languages.",
           "message": "Fields that support localized content for different regions or languages."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.a2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.a2V5.short_desc": {
+          "source": "Localized field key",
+          "message": "Localized field key"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.a2V5.desc": {
+          "source": "The identifier for the localized field.",
+          "message": "The identifier for the localized field."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.bG9jYWxl.display_name": {
+          "source": "Locale",
+          "message": "Locale"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.bG9jYWxl.short_desc": {
+          "source": "Language/region code",
+          "message": "Language/region code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.bG9jYWxl.desc": {
+          "source": "The locale code for the localized content, e.g., \"en-US\", \"fr-CA\".",
+          "message": "The locale code for the localized content, e.g., \"en-US\", \"fr-CA\"."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.dmFsdWU.short_desc": {
+          "source": "Localized value",
+          "message": "Localized value"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.bG9jYWxpemVkRmllbGRz.field.dmFsdWU.desc": {
+          "source": "The localized content value.",
+          "message": "The localized content value."
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHJlc2VudG1lbnRDdXJyZW5jeUNvZGU.display_name": {
           "source": "Presentment Currency Code",
@@ -2251,6 +3807,78 @@
           "source": "Defines the payment terms for the draft order, such as due dates or schedules.",
           "message": "Defines the payment terms for the draft order, such as due dates or schedules."
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cGF5bWVudFRlcm1z.field.cGF5bWVudFNjaGVkdWxlcw.display_name": {
+          "source": "Payment Schedules",
+          "message": "Payment Schedules"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cGF5bWVudFRlcm1z.field.cGF5bWVudFNjaGVkdWxlcw.short_desc": {
+          "source": "Payment due dates",
+          "message": "Payment due dates"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cGF5bWVudFRlcm1z.field.cGF5bWVudFNjaGVkdWxlcw.desc": {
+          "source": "The payment schedules for the payment terms",
+          "message": "The payment schedules for the payment terms"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.YW1vdW50.display_name": {
+          "source": "Amount",
+          "message": "Amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.YW1vdW50.short_desc": {
+          "source": "Payment amount",
+          "message": "Payment amount"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.YW1vdW50.desc": {
+          "source": "The numerical value of the payment due.",
+          "message": "The numerical value of the payment due."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.Y3VycmVuY3lDb2Rl.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.Y3VycmVuY3lDb2Rl.short_desc": {
+          "source": "Payment currency",
+          "message": "Payment currency"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.Y3VycmVuY3lDb2Rl.desc": {
+          "source": "The currency for the payment",
+          "message": "The currency for the payment"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.ZHVlQXQ.display_name": {
+          "source": "Due At",
+          "message": "Due At"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.ZHVlQXQ.short_desc": {
+          "source": "Due date",
+          "message": "Due date"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.ZHVlQXQ.desc": {
+          "source": "The date when the payment is due.",
+          "message": "The date when the payment is due."
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.aXNzdWVkQXQ.display_name": {
+          "source": "Issued At",
+          "message": "Issued At"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.aXNzdWVkQXQ.short_desc": {
+          "source": "Issue date",
+          "message": "Issue date"
+        },
+        "app.U2hvcGlmeQ.type.YWN0aW9uOlkzSmxZWFJsTFdSeVlXWjBMVzl5WkdWeTpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMGEyYzhhYTlhMDI5ZmNmZjE5ZmFlYzlhYjllMTg4NmFmNTBlNjEzYTlmNzZiOTU2YTUxNmFiNWRlOTZiMzc4NTpvcHRpb246Y0dGNWJXVnVkRlJsY20xejpmaWVsZDpjR0Y1YldWdWRGTmphR1ZrZFd4bGN3.field.aXNzdWVkQXQ.desc": {
+          "source": "The date when the payment schedule was issued.",
+          "message": "The date when the payment schedule was issued."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cGF5bWVudFRlcm1z.field.cGF5bWVudFRlcm1zVGVtcGxhdGVJZA.display_name": {
+          "source": "Payment Terms Template ID",
+          "message": "Payment Terms Template ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cGF5bWVudFRlcm1z.field.cGF5bWVudFRlcm1zVGVtcGxhdGVJZA.short_desc": {
+          "source": "Template identifier",
+          "message": "Template identifier"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cGF5bWVudFRlcm1z.field.cGF5bWVudFRlcm1zVGVtcGxhdGVJZA.desc": {
+          "source": "The ID of a predefined payment terms template in Shopify.",
+          "message": "The ID of a predefined payment terms template in Shopify."
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.display_name": {
           "source": "Purchasing Entity",
           "message": "Purchasing Entity"
@@ -2262,6 +3890,54 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.desc": {
           "source": "Details about the entity making the purchase, such as a company or individual.",
           "message": "Details about the entity making the purchase, such as a company or individual."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUNvbnRhY3RJZA.display_name": {
+          "source": "Company Contact ID",
+          "message": "Company Contact ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUNvbnRhY3RJZA.short_desc": {
+          "source": "Contact ID",
+          "message": "Contact ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUNvbnRhY3RJZA.desc": {
+          "source": "The ID of the company contact responsible for the purchase.",
+          "message": "The ID of the company contact responsible for the purchase."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUlk.display_name": {
+          "source": "Company ID",
+          "message": "Company ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUlk.short_desc": {
+          "source": "Purchaser company ID",
+          "message": "Purchaser company ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUlk.desc": {
+          "source": "The ID of the company making the purchase.",
+          "message": "The ID of the company making the purchase."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUxvY2F0aW9uSWQ.display_name": {
+          "source": "Company Location ID",
+          "message": "Company Location ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUxvY2F0aW9uSWQ.short_desc": {
+          "source": "Company location ID",
+          "message": "Company location ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y29tcGFueUxvY2F0aW9uSWQ.desc": {
+          "source": "The ID of the specific company location making the purchase.",
+          "message": "The ID of the specific company location making the purchase."
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y3VzdG9tZXJJZA.display_name": {
+          "source": "Customer ID",
+          "message": "Customer ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y3VzdG9tZXJJZA.short_desc": {
+          "source": "Purchaser customer ID",
+          "message": "Purchaser customer ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cHVyY2hhc2luZ0VudGl0eQ.field.Y3VzdG9tZXJJZA.desc": {
+          "source": "The ID of the customer making the purchase.",
+          "message": "The ID of the customer making the purchase."
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWRyYWZ0LW9yZGVy.option.cmVzZXJ2ZUludmVudG9yeVVudGls.display_name": {
           "source": "Reserve Inventory Until",
@@ -2335,6 +4011,30 @@
           "source": "Specific line items within the fulfillment order",
           "message": "Specific line items within the fulfillment order"
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.ZnVsZmlsbG1lbnRPcmRlckxpbmVJdGVtcw.field.aWQ.display_name": {
+          "source": "Line Item ID",
+          "message": "Line Item ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.ZnVsZmlsbG1lbnRPcmRlckxpbmVJdGVtcw.field.aWQ.short_desc": {
+          "source": "Unique identifier for line item",
+          "message": "Unique identifier for line item"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.ZnVsZmlsbG1lbnRPcmRlckxpbmVJdGVtcw.field.aWQ.desc": {
+          "source": "The specific identifier for an individual line item",
+          "message": "The specific identifier for an individual line item"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.ZnVsZmlsbG1lbnRPcmRlckxpbmVJdGVtcw.field.cXVhbnRpdHk.display_name": {
+          "source": "Quantity",
+          "message": "Quantity"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.ZnVsZmlsbG1lbnRPcmRlckxpbmVJdGVtcw.field.cXVhbnRpdHk.short_desc": {
+          "source": "Number of items to fulfill",
+          "message": "Number of items to fulfill"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.ZnVsZmlsbG1lbnRPcmRlckxpbmVJdGVtcw.field.cXVhbnRpdHk.desc": {
+          "source": "The quantity of the specific item being fulfilled",
+          "message": "The quantity of the specific item being fulfilled"
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.bm90aWZ5Q3VzdG9tZXI.display_name": {
           "source": "Notify Customer",
           "message": "Notify Customer"
@@ -2359,6 +4059,42 @@
           "source": "Information for tracking the shipment",
           "message": "Information for tracking the shipment"
         },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.Y29tcGFueQ.display_name": {
+          "source": "Shipping Company",
+          "message": "Shipping Company"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.Y29tcGFueQ.short_desc": {
+          "source": "Name of shipping carrier",
+          "message": "Name of shipping carrier"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.Y29tcGFueQ.desc": {
+          "source": "The name of the company responsible for shipping",
+          "message": "The name of the company responsible for shipping"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.bnVtYmVy.display_name": {
+          "source": "Tracking Number",
+          "message": "Tracking Number"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.bnVtYmVy.short_desc": {
+          "source": "Shipment tracking number",
+          "message": "Shipment tracking number"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.bnVtYmVy.desc": {
+          "source": "The unique identifier for tracking the shipment",
+          "message": "The unique identifier for tracking the shipment"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.dXJs.display_name": {
+          "source": "Tracking URL",
+          "message": "Tracking URL"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.dXJs.short_desc": {
+          "source": "Link to track shipment",
+          "message": "Link to track shipment"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.dHJhY2tpbmdJbmZv.field.dXJs.desc": {
+          "source": "The web address where the shipment can be tracked",
+          "message": "The web address where the shipment can be tracked"
+        },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.display_name": {
           "source": "Origin Address",
           "message": "Origin Address"
@@ -2370,6 +4106,78 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.desc": {
           "source": "The address from which the items are being shipped",
           "message": "The address from which the items are being shipped"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.YWRkcmVzczE.display_name": {
+          "source": "Address Line 1",
+          "message": "Address Line 1"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.YWRkcmVzczE.short_desc": {
+          "source": "Primary address line",
+          "message": "Primary address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.YWRkcmVzczE.desc": {
+          "source": "The first line of the shipping origin address",
+          "message": "The first line of the shipping origin address"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.YWRkcmVzczI.display_name": {
+          "source": "Address Line 2",
+          "message": "Address Line 2"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.YWRkcmVzczI.short_desc": {
+          "source": "Secondary address line",
+          "message": "Secondary address line"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.YWRkcmVzczI.desc": {
+          "source": "Optional additional address information",
+          "message": "Optional additional address information"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.Y2l0eQ.short_desc": {
+          "source": "City of origin",
+          "message": "City of origin"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.Y2l0eQ.desc": {
+          "source": "The city from which the shipment originates",
+          "message": "The city from which the shipment originates"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.Y291bnRyeUNvZGU.display_name": {
+          "source": "Country Code",
+          "message": "Country Code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.Y291bnRyeUNvZGU.short_desc": {
+          "source": "Origin country code",
+          "message": "Origin country code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.Y291bnRyeUNvZGU.desc": {
+          "source": "The two-letter country code for the shipping origin",
+          "message": "The two-letter country code for the shipping origin"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.cHJvdmluY2VDb2Rl.display_name": {
+          "source": "Province Code",
+          "message": "Province Code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.cHJvdmluY2VDb2Rl.short_desc": {
+          "source": "State or province code",
+          "message": "State or province code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.cHJvdmluY2VDb2Rl.desc": {
+          "source": "The code representing the state or province of origin",
+          "message": "The code representing the state or province of origin"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.emlw.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.emlw.short_desc": {
+          "source": "Origin postal code",
+          "message": "Origin postal code"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.b3JpZ2luQWRkcmVzcw.field.emlw.desc": {
+          "source": "The postal code of the shipping origin",
+          "message": "The postal code of the shipping origin"
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWZ1bGZpbGxtZW50.option.bWVzc2FnZQ.display_name": {
           "source": "Message",
@@ -2478,6 +4286,54 @@
         "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.desc": {
           "source": "Additional information about the person receiving the gift card",
           "message": "Additional information about the person receiving the gift card"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.aWQ.display_name": {
+          "source": "Recipient ID",
+          "message": "Recipient ID"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.aWQ.short_desc": {
+          "source": "Unique identifier for recipient",
+          "message": "Unique identifier for recipient"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.aWQ.desc": {
+          "source": "A unique identifier for the gift card recipient",
+          "message": "A unique identifier for the gift card recipient"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.bWVzc2FnZQ.display_name": {
+          "source": "Recipient Message",
+          "message": "Recipient Message"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.bWVzc2FnZQ.short_desc": {
+          "source": "Personal message to recipient",
+          "message": "Personal message to recipient"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.bWVzc2FnZQ.desc": {
+          "source": "A personalized message to accompany the gift card",
+          "message": "A personalized message to accompany the gift card"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.cHJlZmVycmVkTmFtZQ.display_name": {
+          "source": "Preferred Name",
+          "message": "Preferred Name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.cHJlZmVycmVkTmFtZQ.short_desc": {
+          "source": "Recipient's preferred name",
+          "message": "Recipient's preferred name"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.cHJlZmVycmVkTmFtZQ.desc": {
+          "source": "The name the recipient prefers to be called",
+          "message": "The name the recipient prefers to be called"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.c2VuZE5vdGlmaWNhdGlvbkF0.display_name": {
+          "source": "Notification Timing",
+          "message": "Notification Timing"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.c2VuZE5vdGlmaWNhdGlvbkF0.short_desc": {
+          "source": "When to send gift card notification",
+          "message": "When to send gift card notification"
+        },
+        "app.U2hvcGlmeQ.action.Y3JlYXRlLWdpZnQtY2FyZA.option.cmVjaXBpZW50QXR0cmlidXRlcw.field.c2VuZE5vdGlmaWNhdGlvbkF0.desc": {
+          "source": "The specific time or date to send the gift card notification",
+          "message": "The specific time or date to send the gift card notification"
         },
         "app.U2hvcGlmeQ.action.Y3JlYXRlLXRyYW5zYWN0aW9u.display_name": {
           "source": "Create Transaction",

@@ -483,6 +483,38 @@
           "source": "Filter the list of members by a specific field and value, such as role or member type.",
           "message": "Filter the list of members by a specific field and value, such as role or member type."
         },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Filter Field",
+          "message": "Filter Field"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "The field to filter by",
+          "message": "The field to filter by"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Choose the field to filter members by: role or member type.",
+          "message": "Choose the field to filter members by: role or member type."
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.ZmllbGQ.allowed-value.c3RyaW5nOnJvbGU.display_name": {
+          "source": "Role",
+          "message": "Role"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.ZmllbGQ.allowed-value.c3RyaW5nOm1lbWJlci50eXBl.display_name": {
+          "source": "Member Type",
+          "message": "Member Type"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Filter Value",
+          "message": "Filter Value"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "The value to filter by",
+          "message": "The value to filter by"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The specific value to filter members by, based on the selected field.",
+          "message": "The specific value to filter members by, based on the selected field."
+        },
         "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZW1iZXJz.option.c2hvd0dyb3Vwcw.display_name": {
           "source": "Show Groups",
           "message": "Show Groups"
@@ -614,6 +646,38 @@
         "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.desc": {
           "source": "Filter the list of messages by a specific field and value, such as create time or thread.",
           "message": "Filter the list of messages by a specific field and value, such as create time or thread."
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Filter Field",
+          "message": "Filter Field"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "The field to filter by",
+          "message": "The field to filter by"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Choose the field to filter messages by: create time or thread name.",
+          "message": "Choose the field to filter messages by: create time or thread name."
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.ZmllbGQ.allowed-value.c3RyaW5nOmNyZWF0ZVRpbWU.display_name": {
+          "source": "Create Time",
+          "message": "Create Time"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.ZmllbGQ.allowed-value.c3RyaW5nOnRocmVhZC5uYW1l.display_name": {
+          "source": "Thread",
+          "message": "Thread"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Filter Value",
+          "message": "Filter Value"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "The value to filter by",
+          "message": "The value to filter by"
+        },
+        "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The specific value to filter messages by, based on the selected field.",
+          "message": "The specific value to filter messages by, based on the selected field."
         },
         "app.R29vZ2xlQ2hhdA.action.bGlzdF9tZXNzYWdlcw.option.c2hvd0RlbGV0ZWQ.display_name": {
           "source": "Show Deleted",

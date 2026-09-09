@@ -42,6 +42,12 @@ This is the *within-module* continuation of an existing, already-transparent
 So today the laziness stops at the **module** boundary: `checkAppModule("Paddle")`
 loads `TypeScriptActionInterface`, which then loads **all** 100 apps.
 
+## Qualified discovery inventory
+
+Provider-index generation is a qualified discovery operation. The lightweight identity inventory described in
+[producer-schema-boundary.md](producer-schema-boundary.md) is independent of lazy schema materialization: pending and
+eager registrations record exact identities, and a failed materialization cannot silently disappear from the index.
+
 ## Design: extend the same model one level down
 
 On load, the module registers **every app it provides as pending** (cheap,

@@ -411,6 +411,42 @@
           "source": "Configure how the list of invitees should be sorted.",
           "message": "Configure how the list of invitees should be sorted."
         },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Sort Direction",
+          "message": "Sort Direction"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Direction to sort (ascending or descending)",
+          "message": "Direction to sort (ascending or descending)"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZGlyZWN0aW9u.desc": {
+          "source": "Choose whether to sort in ascending or descending order.",
+          "message": "Choose whether to sort in ascending or descending order."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZmllbGQ.display_name": {
+          "source": "Sort Field",
+          "message": "Sort Field"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZmllbGQ.desc": {
+          "source": "Choose which field to use for sorting the invitees.",
+          "message": "Choose which field to use for sorting the invitees."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmNyZWF0ZWRfYXQ.display_name": {
+          "source": "Created At",
+          "message": "Created At"
+        },
         "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF9pbnZpdGVlcw.option.c3RhdHVz.display_name": {
           "source": "Status Filter",
           "message": "Status Filter"
@@ -526,6 +562,46 @@
         "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.desc": {
           "source": "Configure how the list of events should be sorted.",
           "message": "Configure how the list of events should be sorted."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Sort Direction",
+          "message": "Sort Direction"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Direction to sort (ascending or descending)",
+          "message": "Direction to sort (ascending or descending)"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZGlyZWN0aW9u.desc": {
+          "source": "Choose whether to sort in ascending or descending order.",
+          "message": "Choose whether to sort in ascending or descending order."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZmllbGQ.display_name": {
+          "source": "Sort Field",
+          "message": "Sort Field"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZmllbGQ.desc": {
+          "source": "Choose which field to use for sorting the events (start_time or end_time).",
+          "message": "Choose which field to use for sorting the events (start_time or end_time)."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnN0YXJ0X3RpbWU.display_name": {
+          "source": "Start Time",
+          "message": "Start Time"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmVuZF90aW1l.display_name": {
+          "source": "End Time",
+          "message": "End Time"
         },
         "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudHM.option.b3JnYW5pemF0aW9u.display_name": {
           "source": "Organization",
@@ -730,6 +806,54 @@
         "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.desc": {
           "source": "Configure how the list of event types should be sorted.",
           "message": "Configure how the list of event types should be sorted."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Sort Direction",
+          "message": "Sort Direction"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Direction to sort (ascending or descending)",
+          "message": "Direction to sort (ascending or descending)"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZGlyZWN0aW9u.desc": {
+          "source": "Choose whether to sort in ascending or descending order.",
+          "message": "Choose whether to sort in ascending or descending order."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.display_name": {
+          "source": "Sort Field",
+          "message": "Sort Field"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.desc": {
+          "source": "Choose which field to use for sorting the event types (name, position, created_at, or updated_at).",
+          "message": "Choose which field to use for sorting the event types (name, position, created_at, or updated_at)."
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOm5hbWU.display_name": {
+          "source": "Name",
+          "message": "Name"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnBvc2l0aW9u.display_name": {
+          "source": "Position",
+          "message": "Position"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmNyZWF0ZWRfYXQ.display_name": {
+          "source": "Created At",
+          "message": "Created At"
+        },
+        "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnVwZGF0ZWRfYXQ.display_name": {
+          "source": "Updated At",
+          "message": "Updated At"
         },
         "app.Q2FsZW5kbHk.action.bGlzdF9ldmVudF90eXBlcw.option.b3JnYW5pemF0aW9u.display_name": {
           "source": "Organization",

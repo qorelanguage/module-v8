@@ -551,6 +551,30 @@
           "source": "Filter contacts based on specific attribute values using equals operator.",
           "message": "Filter contacts based on specific attribute values using equals operator."
         },
+        "app.QnJldm8.action.bGlzdF9jb250YWN0cw.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Attribute Field",
+          "message": "Attribute Field"
+        },
+        "app.QnJldm8.action.bGlzdF9jb250YWN0cw.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "Attribute to filter by",
+          "message": "Attribute to filter by"
+        },
+        "app.QnJldm8.action.bGlzdF9jb250YWN0cw.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Contact attribute field name to filter by.",
+          "message": "Contact attribute field name to filter by."
+        },
+        "app.QnJldm8.action.bGlzdF9jb250YWN0cw.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Filter Value",
+          "message": "Filter Value"
+        },
+        "app.QnJldm8.action.bGlzdF9jb250YWN0cw.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "Value to match",
+          "message": "Value to match"
+        },
+        "app.QnJldm8.action.bGlzdF9jb250YWN0cw.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "Value that the attribute must equal.",
+          "message": "Value that the attribute must equal."
+        },
         "app.QnJldm8.action.dXBkYXRlX2NvbnRhY3Q.display_name": {
           "source": "Update Contact",
           "message": "Update Contact"
@@ -1047,6 +1071,18 @@
           "source": "Custom attributes for the company including industry, size, website, and any custom fields defined in your account.",
           "message": "Custom attributes for the company including industry, size, website, and any custom fields defined in your account."
         },
+        "app.QnJldm8.action.Y3JlYXRlX2NvbXBhbnk.option.YXR0cmlidXRlcw.field.ZG9tYWlu.display_name": {
+          "source": "Domain",
+          "message": "Domain"
+        },
+        "app.QnJldm8.action.Y3JlYXRlX2NvbXBhbnk.option.YXR0cmlidXRlcw.field.ZG9tYWlu.short_desc": {
+          "source": "Company domain",
+          "message": "Company domain"
+        },
+        "app.QnJldm8.action.Y3JlYXRlX2NvbXBhbnk.option.YXR0cmlidXRlcw.field.ZG9tYWlu.desc": {
+          "source": "The primary domain associated with the company.",
+          "message": "The primary domain associated with the company."
+        },
         "app.QnJldm8.action.Y3JlYXRlX2NvbXBhbnk.option.bGlua2VkQ29udGFjdHNJZHM.display_name": {
           "source": "Associated Contacts",
           "message": "Associated Contacts"
@@ -1222,6 +1258,30 @@
         "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.desc": {
           "source": "Filter companies based on specific attribute values.",
           "message": "Filter companies based on specific attribute values."
+        },
+        "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Attribute Field",
+          "message": "Attribute Field"
+        },
+        "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "Attribute to filter by",
+          "message": "Attribute to filter by"
+        },
+        "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Company attribute field name to filter by.",
+          "message": "Company attribute field name to filter by."
+        },
+        "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Filter Value",
+          "message": "Filter Value"
+        },
+        "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "Value to match",
+          "message": "Value to match"
+        },
+        "app.QnJldm8.action.bGlzdF9jb21wYW5pZXM.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "Value that the attribute must equal.",
+          "message": "Value that the attribute must equal."
         },
         "app.QnJldm8.action.dXBkYXRlX2NvbXBhbnk.display_name": {
           "source": "Update Company",

@@ -39,6 +39,58 @@
           "source": "Optional filter to limit which records trigger the event based on field values.",
           "message": "Optional filter to limit which records trigger the event based on field values."
         },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "Field name to filter by",
+          "message": "Field name to filter by"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "The name of the field to apply the filter condition to.",
+          "message": "The name of the field to apply the filter condition to."
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.short_desc": {
+          "source": "Filter operator",
+          "message": "Filter operator"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.desc": {
+          "source": "The comparison operator to use for filtering (equals, not equals, greater than, less than).",
+          "message": "The comparison operator to use for filtering (equals, not equals, greater than, less than)."
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmVx.display_name": {
+          "source": "Equals",
+          "message": "Equals"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOm5l.display_name": {
+          "source": "Not Equals",
+          "message": "Not Equals"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0.display_name": {
+          "source": "Greater Than",
+          "message": "Greater Than"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0.display_name": {
+          "source": "Less Than",
+          "message": "Less Than"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "Filter value",
+          "message": "Filter value"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.bmV3X3JlY29yZA.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to compare against when filtering records.",
+          "message": "The value to compare against when filtering records."
+        },
         "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.display_name": {
           "source": "Updated Record",
           "message": "Updated Record"
@@ -74,6 +126,58 @@
         "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.desc": {
           "source": "Optional filter to limit which updated records trigger the event based on field values.",
           "message": "Optional filter to limit which updated records trigger the event based on field values."
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "Field name to filter by",
+          "message": "Field name to filter by"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "The name of the field to apply the filter condition to.",
+          "message": "The name of the field to apply the filter condition to."
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.short_desc": {
+          "source": "Filter operator",
+          "message": "Filter operator"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.desc": {
+          "source": "The comparison operator to use for filtering (equals, not equals, greater than, less than).",
+          "message": "The comparison operator to use for filtering (equals, not equals, greater than, less than)."
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmVx.display_name": {
+          "source": "Equals",
+          "message": "Equals"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOm5l.display_name": {
+          "source": "Not Equals",
+          "message": "Not Equals"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0.display_name": {
+          "source": "Greater Than",
+          "message": "Greater Than"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0.display_name": {
+          "source": "Less Than",
+          "message": "Less Than"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "Filter value",
+          "message": "Filter value"
+        },
+        "app.QnVzaW5lc3NDZW50cmFs.action.dXBkYXRlZF9yZWNvcmQ.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to compare against when filtering records.",
+          "message": "The value to compare against when filtering records."
         }
       }
     }

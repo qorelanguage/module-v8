@@ -9,6 +9,18 @@ holds the generated `root.json` and the standard translation locales:
 qlib/TypeScriptActionInterface/i18n/data-provider.<base64url(app name)>/{root,cs,de,...}.json
 ```
 
+Catalog extraction follows the complete reachable option-type graph defined by Qore's presentation contract. Nested
+fields and their allowed values use stable option/occurrence/type IDs; every shipped locale must have exact ID/source
+parity with `root.json`. See [producer-schema-boundary.md](producer-schema-boundary.md) for the complementary rule that
+keeps raw payload hashes distinct from allowed-value metadata before extraction.
+
+Nested TypeScript type objects retain a stable technical path containing the
+exact app, action, option or response location. Qore includes that path in the
+type presentation identity, so two anonymous objects with the same field shape
+but different semantics do not share a message ID. Human-readable labels are
+not part of the identity; changing prose therefore leaves translation IDs
+stable. A remaining same-path/source conflict is a hard generation error.
+
 The catalogs are generated, not hand-written. They are extracted from the
 registered app metadata by `qore-data-provider-i18n` (qore repo, `bin/`), which
 calls `DataProviderPresentation::buildSourceCatalogs()` for the presentation

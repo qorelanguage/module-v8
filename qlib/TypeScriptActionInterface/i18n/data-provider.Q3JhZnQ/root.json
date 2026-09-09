@@ -743,6 +743,38 @@
           "source": "Specify the position where the block should be inserted within the document.",
           "message": "Specify the position where the block should be inserted within the document."
         },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cGFnZUlk.display_name": {
+          "source": "Page ID",
+          "message": "Page ID"
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cGFnZUlk.short_desc": {
+          "source": "The page to insert into",
+          "message": "The page to insert into"
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cGFnZUlk.desc": {
+          "source": "ID of the block to insert children into. Required for multi-document operations. Only page, text, and card type blocks can be parent blocks. Text blocks are auto-converted to page type when they receive children. Collection items are implicitly pages.",
+          "message": "ID of the block to insert children into. Required for multi-document operations. Only page, text, and card type blocks can be parent blocks. Text blocks are auto-converted to page type when they receive children. Collection items are implicitly pages."
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cG9zaXRpb24.display_name": {
+          "source": "Insert Position",
+          "message": "Insert Position"
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cG9zaXRpb24.short_desc": {
+          "source": "Insert at start or end",
+          "message": "Insert at start or end"
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cG9zaXRpb24.desc": {
+          "source": "Choose whether to insert the block at the start or end of the target page.",
+          "message": "Choose whether to insert the block at the start or end of the target page."
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cG9zaXRpb24.allowed-value.c3RyaW5nOnN0YXJ0.display_name": {
+          "source": "Start",
+          "message": "Start"
+        },
+        "app.Q3JhZnQ.action.aW5zZXJ0X2Jsb2Nr.option.cG9zaXRpb24.field.cG9zaXRpb24.allowed-value.c3RyaW5nOmVuZA.display_name": {
+          "source": "End",
+          "message": "End"
+        },
         "app.Q3JhZnQ.action.ZGVsZXRlX2Jsb2Nrcw.display_name": {
           "source": "Delete Blocks",
           "message": "Delete Blocks"
@@ -843,6 +875,54 @@
           "source": "Optional task metadata including state, schedule date, and deadline date",
           "message": "Optional task metadata including state, schedule date, and deadline date"
         },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.ZGVhZGxpbmVEYXRl.display_name": {
+          "source": "Deadline Date",
+          "message": "Deadline Date"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.ZGVhZGxpbmVEYXRl.short_desc": {
+          "source": "When the task is due",
+          "message": "When the task is due"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.ZGVhZGxpbmVEYXRl.desc": {
+          "source": "Due date of the task. Accepts ISO format YYYY-MM-DD or relative dates: 'today', 'tomorrow', 'yesterday'",
+          "message": "Due date of the task. Accepts ISO format YYYY-MM-DD or relative dates: 'today', 'tomorrow', 'yesterday'"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c2NoZWR1bGVEYXRl.display_name": {
+          "source": "Schedule Date",
+          "message": "Schedule Date"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c2NoZWR1bGVEYXRl.short_desc": {
+          "source": "When the task is scheduled",
+          "message": "When the task is scheduled"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c2NoZWR1bGVEYXRl.desc": {
+          "source": "Planned execution date of the task. Accepts ISO format YYYY-MM-DD or relative dates: 'today', 'tomorrow', 'yesterday'",
+          "message": "Planned execution date of the task. Accepts ISO format YYYY-MM-DD or relative dates: 'today', 'tomorrow', 'yesterday'"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c3RhdGU.display_name": {
+          "source": "State",
+          "message": "State"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c3RhdGU.short_desc": {
+          "source": "Current state of the task",
+          "message": "Current state of the task"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c3RhdGU.desc": {
+          "source": "Set the initial state of the task: To Do (pending), Done (completed), or Canceled (abandoned).",
+          "message": "Set the initial state of the task: To Do (pending), Done (completed), or Canceled (abandoned)."
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c3RhdGU.allowed-value.c3RyaW5nOnRvZG8.display_name": {
+          "source": "To Do",
+          "message": "To Do"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c3RhdGU.allowed-value.c3RyaW5nOmRvbmU.display_name": {
+          "source": "Done",
+          "message": "Done"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.dGFza0luZm8.field.c3RhdGU.allowed-value.c3RyaW5nOmNhbmNlbGVk.display_name": {
+          "source": "Canceled",
+          "message": "Canceled"
+        },
         "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.display_name": {
           "source": "Location",
           "message": "Location"
@@ -854,6 +934,38 @@
         "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.desc": {
           "source": "Where to create the task: in the task inbox or a specific daily note",
           "message": "Where to create the task: in the task inbox or a specific daily note"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.ZGF0ZQ.display_name": {
+          "source": "Date",
+          "message": "Date"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.ZGF0ZQ.short_desc": {
+          "source": "Date for daily note",
+          "message": "Date for daily note"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.ZGF0ZQ.desc": {
+          "source": "The daily note date where the task is located. Accepts ISO format YYYY-MM-DD or relative dates: 'today', 'tomorrow', 'yesterday'. Defaults to 'today' if not provided.",
+          "message": "The daily note date where the task is located. Accepts ISO format YYYY-MM-DD or relative dates: 'today', 'tomorrow', 'yesterday'. Defaults to 'today' if not provided."
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.dHlwZQ.display_name": {
+          "source": "Location Type",
+          "message": "Location Type"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.dHlwZQ.short_desc": {
+          "source": "Type of location",
+          "message": "Type of location"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.dHlwZQ.desc": {
+          "source": "Choose whether to create the task in your inbox (for unscheduled tasks) or in a daily note (for a specific date).",
+          "message": "Choose whether to create the task in your inbox (for unscheduled tasks) or in a daily note (for a specific date)."
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.dHlwZQ.allowed-value.c3RyaW5nOmluYm94.display_name": {
+          "source": "Inbox",
+          "message": "Inbox"
+        },
+        "app.Q3JhZnQ.action.Y3JlYXRlX3Rhc2s.option.bG9jYXRpb24.field.dHlwZQ.allowed-value.c3RyaW5nOmRhaWx5Tm90ZQ.display_name": {
+          "source": "Daily Note",
+          "message": "Daily Note"
         },
         "app.Q3JhZnQ.action.dXBkYXRlX3Rhc2s.display_name": {
           "source": "Update Task",

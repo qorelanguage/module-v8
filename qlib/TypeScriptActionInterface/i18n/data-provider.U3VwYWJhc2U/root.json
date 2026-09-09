@@ -627,6 +627,30 @@
           "source": "Define how to sort the retrieved rows by specifying a column and sort direction (ascending or descending).",
           "message": "Define how to sort the retrieved rows by specifying a column and sort direction (ascending or descending)."
         },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.b3JkZXJCeQ.field.YXNjZW5kaW5n.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.b3JkZXJCeQ.field.YXNjZW5kaW5n.short_desc": {
+          "source": "Sort in ascending order",
+          "message": "Sort in ascending order"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.b3JkZXJCeQ.field.YXNjZW5kaW5n.desc": {
+          "source": "When enabled, sorts in ascending order (A-Z, 0-9, oldest first). When disabled, sorts in descending order (Z-A, 9-0, newest first).",
+          "message": "When enabled, sorts in ascending order (A-Z, 0-9, oldest first). When disabled, sorts in descending order (Z-A, 9-0, newest first)."
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.b3JkZXJCeQ.field.Y29sdW1u.display_name": {
+          "source": "Column",
+          "message": "Column"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.b3JkZXJCeQ.field.Y29sdW1u.short_desc": {
+          "source": "The column to sort by",
+          "message": "The column to sort by"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.b3JkZXJCeQ.field.Y29sdW1u.desc": {
+          "source": "Select the table column used for sorting the results.",
+          "message": "Select the table column used for sorting the results."
+        },
         "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.display_name": {
           "source": "Filter",
           "message": "Filter"
@@ -638,6 +662,90 @@
         "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.desc": {
           "source": "Apply a filter condition to retrieve only rows that match specific criteria. Supports various comparison operators for flexible querying.",
           "message": "Apply a filter condition to retrieve only rows that match specific criteria. Supports various comparison operators for flexible querying."
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "The column to filter on",
+          "message": "The column to filter on"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Select the table column to apply the filter condition to.",
+          "message": "Select the table column to apply the filter condition to."
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.desc": {
+          "source": "Choose the comparison operator for the filter (equals, greater than, contains, etc.).",
+          "message": "Choose the comparison operator for the filter (equals, greater than, contains, etc.)."
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmVx.display_name": {
+          "source": "Equals (=)",
+          "message": "Equals (=)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOm5lcQ.display_name": {
+          "source": "Not equals (!=)",
+          "message": "Not equals (!=)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0.display_name": {
+          "source": "Greater than (>)",
+          "message": "Greater than (>)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0ZQ.display_name": {
+          "source": "Greater than or equal (>=)",
+          "message": "Greater than or equal (>=)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0.display_name": {
+          "source": "Less than (<)",
+          "message": "Less than (<)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0ZQ.display_name": {
+          "source": "Less than or equal (<=)",
+          "message": "Less than or equal (<=)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmxpa2U.display_name": {
+          "source": "Pattern match (LIKE)",
+          "message": "Pattern match (LIKE)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlsaWtl.display_name": {
+          "source": "Case-insensitive pattern match (ILIKE)",
+          "message": "Case-insensitive pattern match (ILIKE)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlz.display_name": {
+          "source": "Is (IS)",
+          "message": "Is (IS)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlu.display_name": {
+          "source": "In list (IN)",
+          "message": "In list (IN)"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmNvbnRhaW5z.display_name": {
+          "source": "Contains",
+          "message": "Contains"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmNvbnRhaW5lZEJ5.display_name": {
+          "source": "Contained by",
+          "message": "Contained by"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "The value to compare against",
+          "message": "The value to compare against"
+        },
+        "app.U3VwYWJhc2U.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to compare the column against using the selected operator. For \"in\" operator, provide comma-separated values.",
+          "message": "The value to compare the column against using the selected operator. For \"in\" operator, provide comma-separated values."
         },
         "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.display_name": {
           "source": "Delete Rows",
@@ -674,6 +782,78 @@
         "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.desc": {
           "source": "Define the filter criteria to identify which rows should be deleted. Only rows matching this condition will be removed from the table.",
           "message": "Define the filter criteria to identify which rows should be deleted. Only rows matching this condition will be removed from the table."
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "The column to filter on",
+          "message": "The column to filter on"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Select the table column to use for identifying rows to delete.",
+          "message": "Select the table column to use for identifying rows to delete."
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.desc": {
+          "source": "Choose the comparison operator for the delete filter condition.",
+          "message": "Choose the comparison operator for the delete filter condition."
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmVx.display_name": {
+          "source": "Equals (=)",
+          "message": "Equals (=)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOm5lcQ.display_name": {
+          "source": "Not equals (!=)",
+          "message": "Not equals (!=)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0.display_name": {
+          "source": "Greater than (>)",
+          "message": "Greater than (>)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0ZQ.display_name": {
+          "source": "Greater than or equal (>=)",
+          "message": "Greater than or equal (>=)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0.display_name": {
+          "source": "Less than (<)",
+          "message": "Less than (<)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0ZQ.display_name": {
+          "source": "Less than or equal (<=)",
+          "message": "Less than or equal (<=)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmxpa2U.display_name": {
+          "source": "Pattern match (LIKE)",
+          "message": "Pattern match (LIKE)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlsaWtl.display_name": {
+          "source": "Case-insensitive pattern match (ILIKE)",
+          "message": "Case-insensitive pattern match (ILIKE)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlu.display_name": {
+          "source": "In list (IN)",
+          "message": "In list (IN)"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "The value to match",
+          "message": "The value to match"
+        },
+        "app.U3VwYWJhc2U.action.ZGVsZXRlX3Jvd3M.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to compare against. Rows matching this condition will be deleted.",
+          "message": "The value to compare against. Rows matching this condition will be deleted."
         },
         "app.U3VwYWJhc2U.action.dXBzZXJ0X3Jvdw.display_name": {
           "source": "Upsert Row",
@@ -866,6 +1046,90 @@
         "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.desc": {
           "source": "Apply a filter to trigger only for new rows matching specific criteria. Leave empty to trigger for all new rows.",
           "message": "Apply a filter to trigger only for new rows matching specific criteria. Leave empty to trigger for all new rows."
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "The column to filter on",
+          "message": "The column to filter on"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Select the table column to apply the filter condition to.",
+          "message": "Select the table column to apply the filter condition to."
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.desc": {
+          "source": "Choose the comparison operator for filtering new rows.",
+          "message": "Choose the comparison operator for filtering new rows."
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmVx.display_name": {
+          "source": "Equals (=)",
+          "message": "Equals (=)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOm5lcQ.display_name": {
+          "source": "Not equals (!=)",
+          "message": "Not equals (!=)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0.display_name": {
+          "source": "Greater than (>)",
+          "message": "Greater than (>)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmd0ZQ.display_name": {
+          "source": "Greater than or equal (>=)",
+          "message": "Greater than or equal (>=)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0.display_name": {
+          "source": "Less than (<)",
+          "message": "Less than (<)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmx0ZQ.display_name": {
+          "source": "Less than or equal (<=)",
+          "message": "Less than or equal (<=)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmxpa2U.display_name": {
+          "source": "Pattern match (LIKE)",
+          "message": "Pattern match (LIKE)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlsaWtl.display_name": {
+          "source": "Case-insensitive pattern match (ILIKE)",
+          "message": "Case-insensitive pattern match (ILIKE)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlz.display_name": {
+          "source": "Is (IS)",
+          "message": "Is (IS)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmlu.display_name": {
+          "source": "In list (IN)",
+          "message": "In list (IN)"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmNvbnRhaW5z.display_name": {
+          "source": "Contains",
+          "message": "Contains"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOmNvbnRhaW5lZEJ5.display_name": {
+          "source": "Contained by",
+          "message": "Contained by"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "The value to match",
+          "message": "The value to match"
+        },
+        "app.U3VwYWJhc2U.action.bmV3X3RhYmxlX3Jvdw.option.ZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "The value to compare against. Only new rows matching this condition will trigger the event.",
+          "message": "The value to compare against. Only new rows matching this condition will trigger the event."
         }
       }
     }

@@ -1,15 +1,11 @@
 import { readFileSync } from 'fs';
 import { forEach } from 'lodash';
 import { join } from 'node:path';
-import { actionsCatalogue } from '../ActionsCatalogue';
+import { ActionsCatalogue, actionsCatalogue } from '../ActionsCatalogue';
 import en from '../i18n/en';
 import { APP_GROUPS, isValidAppGroup } from '../i18n/groups';
 
-const collectErrors = (
-  check: () => void,
-  ctx: string,
-  errors: string[]
-): void => {
+const collectErrors = (check: () => void, ctx: string, errors: string[]): void => {
   try {
     check();
   } catch {
@@ -18,6 +14,41 @@ const collectErrors = (
 };
 
 describe('Qorus Apps Catalogue tests', () => {
+  it('Publishes each complete identity batch before registration', () => {
+    const catalogue = new ActionsCatalogue();
+    catalogue.initializeCatalogue();
+    catalogue.loadAllNewApps();
+
+    const expected = new Map<string, Set<string>>();
+    for (const app of [
+      ...Object.values(catalogue.apps),
+      ...Object.values(catalogue.existingApps),
+    ]) {
+      expected.set(
+        app.name,
+        new Set(('actions' in app ? app.actions : []).map((action) => action.action))
+      );
+    }
+    const declared = new Set<string>();
+    const checkAppBatch = (app: string): void => {
+      expect(declared).toContain(`${app}/`);
+      for (const action of expected.get(app) || []) {
+        expect(declared).toContain(`${app}/${action}`);
+      }
+    };
+
+    catalogue.registerAppActions({
+      registerDiscoveryInventory: (inventory) => {
+        inventory.forEach((identity) => declared.add(`${identity.app}/${identity.action || ''}`));
+      },
+      registerApp: (app) => checkAppBatch(app.name),
+      registerExistingApp: (app) => checkAppBatch(app.name),
+      registerAction: (action) => {
+        expect(declared).toContain(`${action.app}/${action.action}`);
+      },
+    });
+  });
+
   it('Should register the apps', () => {
     actionsCatalogue.initializeCatalogue();
     // NEW-style apps load lazily on demand at runtime; eagerly load the full set

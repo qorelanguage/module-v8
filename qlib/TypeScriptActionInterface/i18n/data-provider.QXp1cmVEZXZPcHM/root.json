@@ -435,6 +435,30 @@
           "source": "Configure the properties and field values for the work item, including title, description, and other custom fields based on the selected work item type.",
           "message": "Configure the properties and field values for the work item, including title, description, and other custom fields based on the selected work item type."
         },
+        "app.QXp1cmVEZXZPcHM.action.Y3JlYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLkRlc2NyaXB0aW9u.display_name": {
+          "source": "Description",
+          "message": "Description"
+        },
+        "app.QXp1cmVEZXZPcHM.action.Y3JlYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLkRlc2NyaXB0aW9u.short_desc": {
+          "source": "Detailed description of the work item",
+          "message": "Detailed description of the work item"
+        },
+        "app.QXp1cmVEZXZPcHM.action.Y3JlYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLkRlc2NyaXB0aW9u.desc": {
+          "source": "A comprehensive description explaining the work item requirements, context, and any relevant details.",
+          "message": "A comprehensive description explaining the work item requirements, context, and any relevant details."
+        },
+        "app.QXp1cmVEZXZPcHM.action.Y3JlYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLlRpdGxl.display_name": {
+          "source": "Title",
+          "message": "Title"
+        },
+        "app.QXp1cmVEZXZPcHM.action.Y3JlYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLlRpdGxl.short_desc": {
+          "source": "The title of the work item",
+          "message": "The title of the work item"
+        },
+        "app.QXp1cmVEZXZPcHM.action.Y3JlYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLlRpdGxl.desc": {
+          "source": "A descriptive title that summarizes the work item content.",
+          "message": "A descriptive title that summarizes the work item content."
+        },
         "app.QXp1cmVEZXZPcHM.action.ZGVsZXRlX3dvcmtfaXRlbQ.display_name": {
           "source": "Delete Work Item",
           "message": "Delete Work Item"
@@ -782,6 +806,30 @@
         "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.desc": {
           "source": "Specify the fields and their new values that you want to update in the work item. Available fields depend on the work item type.",
           "message": "Specify the fields and their new values that you want to update in the work item. Available fields depend on the work item type."
+        },
+        "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLkRlc2NyaXB0aW9u.display_name": {
+          "source": "Description",
+          "message": "Description"
+        },
+        "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLkRlc2NyaXB0aW9u.short_desc": {
+          "source": "Updated description for the work item",
+          "message": "Updated description for the work item"
+        },
+        "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLkRlc2NyaXB0aW9u.desc": {
+          "source": "Provide an updated comprehensive description with new requirements, context, or relevant details.",
+          "message": "Provide an updated comprehensive description with new requirements, context, or relevant details."
+        },
+        "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLlRpdGxl.display_name": {
+          "source": "Title",
+          "message": "Title"
+        },
+        "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLlRpdGxl.short_desc": {
+          "source": "Updated title for the work item",
+          "message": "Updated title for the work item"
+        },
+        "app.QXp1cmVEZXZPcHM.action.dXBkYXRlX3dvcmtfaXRlbQ.option.cHJvcGVydGllcw.field.U3lzdGVtLlRpdGxl.desc": {
+          "source": "Provide a new title that better describes the work item content.",
+          "message": "Provide a new title that better describes the work item content."
         },
         "app.QXp1cmVEZXZPcHM.action.bmV3X3dvcmtfaXRlbQ.display_name": {
           "source": "New Work Item",

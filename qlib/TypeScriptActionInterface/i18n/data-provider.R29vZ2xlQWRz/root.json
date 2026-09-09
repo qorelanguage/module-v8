@@ -1511,6 +1511,54 @@
           "source": "List of keyword entries to add, each with text and match type.",
           "message": "List of keyword entries to add, each with text and match type."
         },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.Y3BjX2JpZA.display_name": {
+          "source": "CPC Bid",
+          "message": "CPC Bid"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.Y3BjX2JpZA.short_desc": {
+          "source": "Optional CPC bid override",
+          "message": "Optional CPC bid override"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.Y3BjX2JpZA.desc": {
+          "source": "An optional CPC bid amount for this keyword. Overrides the ad group bid.",
+          "message": "An optional CPC bid amount for this keyword. Overrides the ad group bid."
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.display_name": {
+          "source": "Match Type",
+          "message": "Match Type"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.short_desc": {
+          "source": "Keyword match type",
+          "message": "Keyword match type"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.desc": {
+          "source": "How closely the search query must match: BROAD, PHRASE, or EXACT.",
+          "message": "How closely the search query must match: BROAD, PHRASE, or EXACT."
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.allowed-value.c3RyaW5nOkJST0FE.display_name": {
+          "source": "Broad",
+          "message": "Broad"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.allowed-value.c3RyaW5nOlBIUkFTRQ.display_name": {
+          "source": "Phrase",
+          "message": "Phrase"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.allowed-value.c3RyaW5nOkVYQUNU.display_name": {
+          "source": "Exact",
+          "message": "Exact"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.dGV4dA.display_name": {
+          "source": "Keyword Text",
+          "message": "Keyword Text"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.dGV4dA.short_desc": {
+          "source": "The keyword text",
+          "message": "The keyword text"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2tleXdvcmRz.option.a2V5d29yZHM.field.dGV4dA.desc": {
+          "source": "The keyword phrase to target.",
+          "message": "The keyword phrase to target."
+        },
         "app.R29vZ2xlQWRz.action.dXBkYXRlX2tleXdvcmQ.display_name": {
           "source": "Update Keyword",
           "message": "Update Keyword"
@@ -1690,6 +1738,42 @@
         "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.desc": {
           "source": "List of negative keyword entries to add, each with text and match type.",
           "message": "List of negative keyword entries to add, each with text and match type."
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.display_name": {
+          "source": "Match Type",
+          "message": "Match Type"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.short_desc": {
+          "source": "Keyword match type",
+          "message": "Keyword match type"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.desc": {
+          "source": "How closely the search query must match for exclusion: BROAD, PHRASE, or EXACT.",
+          "message": "How closely the search query must match for exclusion: BROAD, PHRASE, or EXACT."
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.allowed-value.c3RyaW5nOkJST0FE.display_name": {
+          "source": "Broad",
+          "message": "Broad"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.allowed-value.c3RyaW5nOlBIUkFTRQ.display_name": {
+          "source": "Phrase",
+          "message": "Phrase"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.bWF0Y2hfdHlwZQ.allowed-value.c3RyaW5nOkVYQUNU.display_name": {
+          "source": "Exact",
+          "message": "Exact"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.dGV4dA.display_name": {
+          "source": "Keyword Text",
+          "message": "Keyword Text"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.dGV4dA.short_desc": {
+          "source": "The negative keyword text",
+          "message": "The negative keyword text"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX25lZ2F0aXZlX2tleXdvcmRz.option.a2V5d29yZHM.field.dGV4dA.desc": {
+          "source": "The keyword phrase to exclude.",
+          "message": "The keyword phrase to exclude."
         },
         "app.R29vZ2xlQWRz.action.bGlzdF9idWRnZXRz.display_name": {
           "source": "List Budgets",
@@ -3031,6 +3115,30 @@
           "source": "A list of contacts with email, phone, or address data to add to the customer list.",
           "message": "A list of contacts with email, phone, or address data to add to the customer list."
         },
+        "app.R29vZ2xlQWRz.action.YWRkX2NvbnRhY3RzX3RvX2N1c3RvbWVyX2xpc3Q.option.Y29udGFjdHM.field.ZW1haWw.display_name": {
+          "source": "Email",
+          "message": "Email"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2NvbnRhY3RzX3RvX2N1c3RvbWVyX2xpc3Q.option.Y29udGFjdHM.field.ZW1haWw.short_desc": {
+          "source": "Contact email address",
+          "message": "Contact email address"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2NvbnRhY3RzX3RvX2N1c3RvbWVyX2xpc3Q.option.Y29udGFjdHM.field.ZW1haWw.desc": {
+          "source": "The contact email address. Will be normalized and SHA-256 hashed before upload.",
+          "message": "The contact email address. Will be normalized and SHA-256 hashed before upload."
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2NvbnRhY3RzX3RvX2N1c3RvbWVyX2xpc3Q.option.Y29udGFjdHM.field.cGhvbmVfbnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2NvbnRhY3RzX3RvX2N1c3RvbWVyX2xpc3Q.option.Y29udGFjdHM.field.cGhvbmVfbnVtYmVy.short_desc": {
+          "source": "Contact phone number in E.164 format",
+          "message": "Contact phone number in E.164 format"
+        },
+        "app.R29vZ2xlQWRz.action.YWRkX2NvbnRhY3RzX3RvX2N1c3RvbWVyX2xpc3Q.option.Y29udGFjdHM.field.cGhvbmVfbnVtYmVy.desc": {
+          "source": "The contact phone number in E.164 format (e.g., +18005550100). Will be SHA-256 hashed.",
+          "message": "The contact phone number in E.164 format (e.g., +18005550100). Will be SHA-256 hashed."
+        },
         "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.display_name": {
           "source": "Remove Contacts from Customer List",
           "message": "Remove Contacts from Customer List"
@@ -3078,6 +3186,30 @@
         "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.desc": {
           "source": "A list of contacts with email, phone, or address data to remove from the customer list.",
           "message": "A list of contacts with email, phone, or address data to remove from the customer list."
+        },
+        "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.field.ZW1haWw.display_name": {
+          "source": "Email",
+          "message": "Email"
+        },
+        "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.field.ZW1haWw.short_desc": {
+          "source": "Contact email address",
+          "message": "Contact email address"
+        },
+        "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.field.ZW1haWw.desc": {
+          "source": "The contact email address to match for removal.",
+          "message": "The contact email address to match for removal."
+        },
+        "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.field.cGhvbmVfbnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.field.cGhvbmVfbnVtYmVy.short_desc": {
+          "source": "Contact phone number in E.164 format",
+          "message": "Contact phone number in E.164 format"
+        },
+        "app.R29vZ2xlQWRz.action.cmVtb3ZlX2NvbnRhY3RzX2Zyb21fY3VzdG9tZXJfbGlzdA.option.Y29udGFjdHM.field.cGhvbmVfbnVtYmVy.desc": {
+          "source": "The contact phone number to match for removal.",
+          "message": "The contact phone number to match for removal."
         },
         "app.R29vZ2xlQWRz.action.bmV3X2xlYWRfZm9ybV9zdWJtaXNzaW9u.display_name": {
           "source": "New Lead Form Submission",

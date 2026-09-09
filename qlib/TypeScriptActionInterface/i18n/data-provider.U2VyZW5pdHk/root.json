@@ -475,6 +475,30 @@
           "source": "An array of key-value pairs for execution context.",
           "message": "An array of key-value pairs for execution context."
         },
+        "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.cGFyYW1z.field.S2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.cGFyYW1z.field.S2V5.short_desc": {
+          "source": "The key of the parameter",
+          "message": "The key of the parameter"
+        },
+        "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.cGFyYW1z.field.S2V5.desc": {
+          "source": "The key of the parameter",
+          "message": "The key of the parameter"
+        },
+        "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.cGFyYW1z.field.VmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.cGFyYW1z.field.VmFsdWU.short_desc": {
+          "source": "The value of the parameter",
+          "message": "The value of the parameter"
+        },
+        "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.cGFyYW1z.field.VmFsdWU.desc": {
+          "source": "The value of the parameter",
+          "message": "The value of the parameter"
+        },
         "app.U2VyZW5pdHk.action.ZXhlY3V0ZS1hZ2VudA.option.dm9sYXRpbGVLbm93bGVkZ2VJZHM.display_name": {
           "source": "Volatile Knowledge IDs",
           "message": "Volatile Knowledge IDs"
@@ -534,6 +558,30 @@
         "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.desc": {
           "source": "An array of key-value pairs for additional context.",
           "message": "An array of key-value pairs for additional context."
+        },
+        "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.field.a2V5.display_name": {
+          "source": "Key",
+          "message": "Key"
+        },
+        "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.field.a2V5.short_desc": {
+          "source": "The key of the parameter",
+          "message": "The key of the parameter"
+        },
+        "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.field.a2V5.desc": {
+          "source": "The key of the parameter",
+          "message": "The key of the parameter"
+        },
+        "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.field.dmFsdWU.short_desc": {
+          "source": "The value of the parameter",
+          "message": "The value of the parameter"
+        },
+        "app.U2VyZW5pdHk.action.Y3JlYXRlLWNvbnZlcnNhdGlvbg.option.aW5wdXRQYXJhbWV0ZXJz.field.dmFsdWU.desc": {
+          "source": "The value of the parameter",
+          "message": "The value of the parameter"
         },
         "app.U2VyZW5pdHk.action.bmV3LWNvbnZlcnNhdGlvbi1tZXNzYWdl.display_name": {
           "source": "New Conversation Message",

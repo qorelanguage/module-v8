@@ -180,6 +180,12 @@ public class TypeScriptActionInterface {
         #! Default post_auth I/O timeout in seconds
         const DefaultPostAuthIoTimeoutSecs = 30;
 
+        #! Current canonical TypeScript provider-schema boundary version
+        const ProviderSchemaVersion = 1;
+
+        #! Stable owner identity for qualified discovery inventory
+        const DiscoveryInventoryProviderName = "TypeScriptActionInterface";
+
         #! Name of the directory <-> app-name map file (written next to the app dir during
         #! a full load; used to register apps pending from the data index at runtime)
         const AppDirMapFile = "ts-app-dirs.yaml";
@@ -221,6 +227,24 @@ public class TypeScriptActionInterface {
 
         #! Action map for delayed initialization: app -> action -> info
         static hash<string, hash<string, hash<ActionInfo>>> actionmap;
+
+        #! Lightweight producer inventory: app -> action -> True
+        /** An app key with an empty action map still represents the app. This map is populated before schema
+            materialization so failed action registration remains detectable by discovery qualification.
+        */
+        static hash<string, hash<string, bool>> discovery_inventory_map;
+
+        #! Apps whose complete inventory batch is waiting for its matching app registration
+        /** This distinguishes current catalogue batches from the per-record fallback used by older scripts, so a
+            dynamic replacement preserves only a newly published complete batch.
+        */
+        static hash<string, bool> discovery_inventory_batch_map;
+
+        #! Source-load failures that prevent a complete producer inventory from being published
+        static hash<string, hash<ExceptionInfo>> discovery_inventory_failure_map;
+
+        #! Leaf lock guarding the lightweight producer inventory
+        static Mutex discovery_inventory_lock();
 
         #! Maps from scheme names to apps
         static hash<string, string> samap;
@@ -354,7 +378,28 @@ public class TypeScriptActionInterface {
 
     #! Deregister a dynamic app given the app name
     static deregisterDynamicApp(string name) {
+        TypeScriptActionInterface::deregisterDynamicAppIntern(name);
+    }
+
+    #! Deregisters runtime state while optionally retaining an already-published replacement inventory batch
+    private static deregisterDynamicAppIntern(string name,
+            bool preserve_discovery_inventory = False) {
         *hash<DataProviderAppInfo> app = DataProviderActionCatalog::deregisterDynamicApp(name);
+        bool inventory_changed = False;
+        if (!preserve_discovery_inventory) {
+            AutoLock al(discovery_inventory_lock);
+            inventory_changed = exists discovery_inventory_map{name};
+            remove discovery_inventory_map{name};
+            remove discovery_inventory_batch_map{name};
+            if (inventory_changed) {
+                # Keep the producer mutation and catalog-revision bump under
+                # one lock interval. A concurrent qualification callback can
+                # therefore observe either the old inventory/revision pair or
+                # the new pair, never a mixed snapshot.
+                DataProviderActionCatalog::markDiscoveryInventoryChanged(
+                    DiscoveryInventoryProviderName);
+            }
+        }
         if (!app) {
             return;
         }
@@ -368,7 +413,6 @@ public class TypeScriptActionInterface {
         remove initmap{name};
         remove appmap{name};
         remove initialized_appmap{name};
-
         root.deregisterChild(appname);
 
         string sname = "tsrest-" + appname;
@@ -397,6 +441,194 @@ public class TypeScriptActionInterface {
     #! Returns a list of all pending apps
     static *list<string> getPendingApps() {
         return map $1.lwr(), keys appmap;
+    }
+
+    #! Returns exact app/action identities discovered at the TypeScript producer boundary
+    /** The result contains no action schema data and is safe to collect during ProviderIndex qualification.
+        @return a snapshot of exact app and app/action identities
+
+        @par Example
+        Verify that an installed TypeScript catalogue published identities before generating a release index:
+        @code{.py}
+list<hash<DataProviderDiscoveryExpectedIdentityInfo>> inventory
+    = TypeScriptActionInterface::getDiscoveryInventory();
+if (!inventory) {
+    throw "EMPTY-INVENTORY", "The TypeScript provider catalogue is empty";
+}
+        @endcode
+
+        @since %TypeScriptActionInterface 1.1
+    */
+    static list<hash<DataProviderDiscoveryExpectedIdentityInfo>>
+            getDiscoveryInventory() {
+        list<hash<DataProviderDiscoveryExpectedIdentityInfo>> rv
+            = new list<hash<DataProviderDiscoveryExpectedIdentityInfo>>();
+        AutoLock al(discovery_inventory_lock);
+        if (discovery_inventory_failure_map) {
+            list<hash<auto>> failures = new list<hash<auto>>();
+            foreach string source in (sort(keys
+                    discovery_inventory_failure_map)) {
+                hash<ExceptionInfo> ex
+                    = discovery_inventory_failure_map{source};
+                failures += {
+                    "source": source,
+                    "error": ex.err,
+                    "description": ex.desc,
+                    "argument": ex.arg,
+                };
+            }
+            throw "TYPESCRIPT-PROVIDER-INVENTORY-SOURCE-ERROR", sprintf(
+                "%d TypeScript provider source%s failed before publishing a complete inventory",
+                failures.size(), failures.size() == 1 ? "" : "s"), {
+                    "failures": failures,
+                };
+        }
+        foreach string app in (sort(keys discovery_inventory_map)) {
+            rv += <DataProviderDiscoveryExpectedIdentityInfo>{
+                "app": app,
+            };
+            foreach string action in (sort(keys
+                    discovery_inventory_map{app})) {
+                rv += <DataProviderDiscoveryExpectedIdentityInfo>{
+                    "app": app,
+                    "action": action,
+                };
+            }
+        }
+        return rv;
+    }
+
+    #! Retains a source-level failure that prevents complete producer inventory discovery
+    /** This boundary is used when loading or invoking a TypeScript catalogue fails before a valid app/action
+        identity reaches the per-record registration methods. The inventory callback then fails qualification
+        structurally instead of leaving the error only in diagnostic output.
+
+        @param source stable source path or identity
+        @param ex original exception
+
+        @par Example
+        Preserve a catalogue load error so release qualification cannot mistake it for an empty source:
+        @code{.py}
+try {
+    loadTypeScriptCatalogue(source);
+} catch (hash<ExceptionInfo> ex) {
+    TypeScriptActionInterface::reportDiscoverySourceFailure(source, ex);
+}
+        @endcode
+
+        @since %TypeScriptActionInterface 1.1
+    */
+    static reportDiscoverySourceFailure(string source,
+            hash<ExceptionInfo> ex) {
+        if (!source.val()) {
+            source = "<unknown TypeScript provider source>";
+        }
+        AutoLock al(discovery_inventory_lock);
+        discovery_inventory_failure_map{source} = ex;
+        DataProviderActionCatalog::markDiscoveryInventoryChanged(
+            DiscoveryInventoryProviderName);
+    }
+
+    #! Clears a retained source-level failure after the exact source succeeds
+    /** @param source stable source path or identity
+
+        @par Example
+        Clear only the matching failure after a successful retry:
+        @code{.py}
+loadTypeScriptCatalogue(source);
+TypeScriptActionInterface::clearDiscoverySourceFailure(source);
+        @endcode
+
+        @since %TypeScriptActionInterface 1.1
+    */
+    static clearDiscoverySourceFailure(string source) {
+        AutoLock al(discovery_inventory_lock);
+        if (!exists discovery_inventory_failure_map{source}) {
+            return;
+        }
+        remove discovery_inventory_failure_map{source};
+        DataProviderActionCatalog::markDiscoveryInventoryChanged(
+            DiscoveryInventoryProviderName);
+    }
+
+    #! Publishes a complete lightweight producer identity batch before schema materialization
+    /** The TypeScript catalogue calls this once for one app and all of its actions before invoking the first
+        registration callback. A malformed earlier record therefore cannot hide later action identities from
+        qualified discovery. A later batch for the same app replaces its inventory exactly.
+
+        @param identities exact app and optional action identities
+
+        @throw TYPESCRIPT-PROVIDER-INVENTORY-ERROR if an identity is malformed
+
+        @par Example
+        Publish one app and its complete action set before converting any action schemas:
+        @code{.py}
+TypeScriptActionInterface::registerDiscoveryInventory((
+    {"app": "Example"},
+    {"app": "Example", "action": "create-record"},
+));
+        @endcode
+
+        @since %TypeScriptActionInterface 1.1
+    */
+    static registerDiscoveryInventory(list<auto> identities) {
+        if (_pool_clone_mode) {
+            return;
+        }
+        *string app;
+        bool has_app_identity;
+        hash<string, bool> actions;
+        foreach auto identity_value in (identities) {
+            hash<auto> identity;
+            if (identity_value instanceof JavaScriptObject) {
+                identity = cast<JavaScriptObject>(identity_value).toData();
+            } else if (identity_value.typeCode() == NT_HASH) {
+                identity = identity_value;
+            } else {
+                throw "TYPESCRIPT-PROVIDER-INVENTORY-ERROR", sprintf(
+                    "invalid TypeScript provider inventory identity: %y",
+                    identity_value);
+            }
+            if (identity.app.typeCode() != NT_STRING
+                    || !identity.app.val()
+                    || (identity.hasKey("action")
+                        && (identity.action.typeCode() != NT_STRING
+                            || !identity.action.val()))
+                    || identity - ("app", "action")) {
+                throw "TYPESCRIPT-PROVIDER-INVENTORY-ERROR", sprintf(
+                    "invalid TypeScript provider inventory identity: %y",
+                    identity);
+            }
+            if (app && app != identity.app) {
+                throw "TYPESCRIPT-PROVIDER-INVENTORY-ERROR", sprintf(
+                    "a complete TypeScript provider inventory batch must describe one app; got %y and %y",
+                    app, identity.app);
+            }
+            app = identity.app;
+            if (identity.hasKey("action")) {
+                actions{identity.action} = True;
+            } else {
+                has_app_identity = True;
+            }
+        }
+        if (!app || !has_app_identity) {
+            throw "TYPESCRIPT-PROVIDER-INVENTORY-ERROR",
+                "a complete TypeScript provider inventory batch must contain one app identity";
+        }
+        bool changed;
+        {
+            AutoLock al(discovery_inventory_lock);
+            changed = !exists discovery_inventory_map{app}
+                || discovery_inventory_map{app} != actions;
+            if (changed) {
+                discovery_inventory_map{app} = actions;
+                # Linearize producer inventory replacement with the Qore
+                # catalog revision while readers are excluded by this lock.
+                DataProviderActionCatalog::markDiscoveryInventoryChanged(
+                    DiscoveryInventoryProviderName);
+            }
+            discovery_inventory_batch_map{app} = True;
+        }
     }
 
     #! Returns this module's path for data-provider catalog indexing
@@ -756,12 +988,24 @@ public class TypeScriptActionInterface {
         bool first;
         on_error TSAI::error("TypeScriptActionInterface: error registering app %y: %s", app.name,
             get_exception_string($1));
-        {
-            on_error rethrow "APP-ERROR", sprintf("Error registering app %y: %s", app.name, $1.desc);
+        try {
             pool = JavaScriptProgramPool::getPool(pgm, \first);
+        } catch (hash<ExceptionInfo> ex) {
+            TypeScriptActionInterface::reportProducerRegistrationFailure(
+                "app", app.name, NOTHING, ex);
+            throw "APP-ERROR", sprintf("Error registering app %y: %s",
+                app.name, ex.desc), ex.arg;
         }
         if (first || _pool_clone_mode) {
-            TypeScriptActionInterface::registerApp(app.toData(), pool);
+            hash<auto> app_data;
+            try {
+                app_data = app.toData();
+            } catch (hash<ExceptionInfo> ex) {
+                TypeScriptActionInterface::reportProducerRegistrationFailure(
+                    "app", app.name, NOTHING, ex);
+                rethrow;
+            }
+            TypeScriptActionInterface::registerApp(app_data, pool);
         }
     }
 
@@ -771,12 +1015,24 @@ public class TypeScriptActionInterface {
         bool first;
         on_error TSAI::error("TypeScriptActionInterface: error registering existing app %y: %s", app.name,
             get_exception_string($1));
-        {
-            on_error rethrow "APP-ERROR", sprintf("Error registering existing app %y: %s", app.name, $1.desc);
+        try {
             pool = JavaScriptProgramPool::getPool(pgm, \first);
+        } catch (hash<ExceptionInfo> ex) {
+            TypeScriptActionInterface::reportProducerRegistrationFailure(
+                "app", app.name, NOTHING, ex);
+            throw "APP-ERROR", sprintf("Error registering existing app %y: %s",
+                app.name, ex.desc), ex.arg;
         }
         if (first || _pool_clone_mode) {
-            TypeScriptActionInterface::registerExistingApp(app.toData(), pool);
+            hash<auto> app_data;
+            try {
+                app_data = app.toData();
+            } catch (hash<ExceptionInfo> ex) {
+                TypeScriptActionInterface::reportProducerRegistrationFailure(
+                    "app", app.name, NOTHING, ex);
+                rethrow;
+            }
+            TypeScriptActionInterface::registerExistingApp(app_data, pool);
         }
     }
 
@@ -786,28 +1042,61 @@ public class TypeScriptActionInterface {
         bool first;
         on_error TSAI::error("TypeScriptActionInterface: error registering app %y action %y: %s", action.app,
             action.action, get_exception_string($1));
-        {
-            on_error rethrow "ACTION-ERROR", sprintf("Error registering app %y action %y: %s",
-                action.app, action.action, $1.desc);
+        try {
             pool = JavaScriptProgramPool::getPool(pgm, \first);
+        } catch (hash<ExceptionInfo> ex) {
+            TypeScriptActionInterface::reportProducerRegistrationFailure(
+                "action", action.app, action.action, ex);
+            throw "ACTION-ERROR", sprintf("Error registering app %y action %y: %s",
+                action.app, action.action, ex.desc), ex.arg;
         }
         if (first || _pool_clone_mode) {
-            TypeScriptActionInterface::registerAction(action.toData(), pool);
+            hash<auto> action_data;
+            try {
+                action_data = action.toData();
+            } catch (hash<ExceptionInfo> ex) {
+                TypeScriptActionInterface::reportProducerRegistrationFailure(
+                    "action", action.app, action.action, ex);
+                rethrow;
+            }
+            TypeScriptActionInterface::registerAction(action_data, pool);
             TSAI::debug("Registered TypeScript app %y action %y: %s", action.app, action.action);
         }
     }
 
     static registerApp(hash<auto> app, JavaScriptProgramPool pool) {
+        if (app.name.typeCode() != NT_STRING || !app.name.val()) {
+            throw "APP-ERROR", sprintf(
+                "App name %y is invalid; must be a non-empty string", app.name);
+        }
         string appname = app.name.lwr();
 
+        if (_pool_clone_mode) {
+            TypeScriptActionInterface::normalizeProviderSchemaVersion(\app,
+                "app", app.name);
+        }
+
         if (!_pool_clone_mode) {
+            TypeScriptActionInterface::rememberDiscoveryIdentity(app.name);
+            bool has_complete_inventory_batch
+                = TypeScriptActionInterface::consumeDiscoveryInventoryBatch(
+                    app.name);
+            on_error DataProviderActionCatalog::reportInitializationFailure(
+                "app", app.name, NOTHING, $1,
+                TypeScriptActionInterface::getModulePath());
             # Validation only needed for first registration
             if (app.name =~ / /) {
                 throw "APP-ERROR", sprintf("App name %y is invalid; it contains one or more spaces", app.name);
             }
             *hash<auto> dynamic_info = DynamicAppContextHelper::get(app.name);
             if (dynamic_info && DynamicAppContextHelper::replacing()) {
-                deregisterDynamicApp(app.name);
+                # The JavaScript caller has already published the complete
+                # replacement batch. Preserve it while removing the old
+                # runtime registration so an early replacement failure cannot
+                # erase later expected action identities.
+                TypeScriptActionInterface::deregisterDynamicAppIntern(
+                    app.name, has_complete_inventory_batch);
+                TypeScriptActionInterface::rememberDiscoveryIdentity(app.name);
             }
             if (exists appcasemap{appname}) {
                 if (CompletingPendingAppHelper::get()) {
@@ -832,6 +1121,8 @@ public class TypeScriptActionInterface {
                 DynamicAppContextHelper::addApp(app.name);
                 TSAI::info("Registering dynamic app with info: %N", dynamic_info);
             }
+            TypeScriptActionInterface::normalizeProviderSchemaVersion(\app,
+                "app", app.name);
         }
 
         if (_pool_clone_mode) {
@@ -1010,13 +1301,22 @@ public class TypeScriptActionInterface {
     }
 
     static registerExistingApp(hash<auto> app, JavaScriptProgramPool pool) {
-        if (_pool_clone_mode) {
-            # In clone mode, existing apps have no JS closures to capture; skip
-            return;
-        }
         if (app.name.typeCode() != NT_STRING || !app.name.val()) {
             throw "APP-ERROR", sprintf("App name %y is invalid; must be a non-empty string", app.name);
         }
+        if (_pool_clone_mode) {
+            TypeScriptActionInterface::normalizeProviderSchemaVersion(\app,
+                "existing app", app.name);
+            # In clone mode, existing apps have no JS closures to capture; skip
+            return;
+        }
+        TypeScriptActionInterface::rememberDiscoveryIdentity(app.name);
+        TypeScriptActionInterface::consumeDiscoveryInventoryBatch(app.name);
+        on_error DataProviderActionCatalog::reportInitializationFailure(
+            "app", app.name, NOTHING, $1,
+            TypeScriptActionInterface::getModulePath());
+        TypeScriptActionInterface::normalizeProviderSchemaVersion(\app,
+            "existing app", app.name);
         if (app."module".typeCode() != NT_STRING || !app."module".val()) {
             throw "APP-ERROR", sprintf("App module %y is invalid; must be a non-empty string", app."module");
         }
@@ -1383,12 +1683,18 @@ public class TypeScriptActionInterface {
             *softlist<hash<UiMessageInfo>> messages;
             if (*hash<auto> rest_modifiers = remove app0.rest_modifiers) {
                 foreach hash<auto> i in (rest_modifiers.options.pairIterator()) {
-                    if (i.value.allowed_values) {
-                        i.value.allowed_values = map cast<hash<AllowedValueInfo>>($1), i.value.allowed_values;
+                    if (i.value.hasKey("allowed_values")) {
+                        i.value.allowed_values =
+                            TypeScriptActionInterface::normalizeAllowedValues(
+                                sprintf("app %y REST connection option %y allowed_values",
+                                    app.name, i.key), i.value.allowed_values);
                     }
-                    if (i.value.element_allowed_values) {
-                        i.value.element_allowed_values = map cast<hash<AllowedValueInfo>>($1),
-                            i.value.element_allowed_values;
+                    if (i.value.hasKey("element_allowed_values")) {
+                        i.value.element_allowed_values =
+                            TypeScriptActionInterface::normalizeAllowedValues(
+                                sprintf("app %y REST connection option %y element_allowed_values",
+                                    app.name, i.key),
+                                i.value.element_allowed_values);
                     }
                     opts{i.key} = cast<hash<ConnectionOptionInfo>>(i.value);
                 }
@@ -1907,11 +2213,27 @@ public class TypeScriptActionInterface {
     }
 
     static registerAction(hash<auto> action, JavaScriptProgramPool pool) {
+        if (action.app.typeCode() != NT_STRING || !action.app.val()
+                || action.action.typeCode() != NT_STRING
+                || !action.action.val()) {
+            throw "TYPESCRIPT-ACTION-ERROR", sprintf(
+                "action app/action identity must contain non-empty strings; got %y/%y",
+                action.app, action.action);
+        }
         if (_pool_clone_mode) {
+            TypeScriptActionInterface::normalizeProviderSchemaVersion(\action,
+                "action", action.app + "/" + action.action);
             # In clone mode, only extract async call closures; skip all global state registration
             captureActionClosures(action, pool);
             return;
         }
+        TypeScriptActionInterface::rememberDiscoveryIdentity(action.app,
+            action.action);
+        on_error DataProviderActionCatalog::reportInitializationFailure(
+            "action", action.app, action.action, $1,
+            TypeScriptActionInterface::getModulePath());
+        TypeScriptActionInterface::normalizeProviderSchemaVersion(\action,
+            "action", action.app + "/" + action.action);
         # register the action immediately if the app has already been registered
         if (initmap{action.app}) {
             TypeScriptActionInterface::registerActionIntern(action, pool);
@@ -2025,7 +2347,10 @@ public class TypeScriptActionInterface {
 
             event_info = <DataProviderMessageInfo>{
                 "desc": event.desc,
-                "type": TypeScriptActionInterface::getType("event", event.type, True, NOTHING, fctx),
+                "type": TypeScriptActionInterface::getType(
+                    TypeScriptActionInterface::actionProviderSchemaPath(
+                        app.name, action.action, "event"),
+                    event.type, True, NOTHING, fctx),
             };
         }
 
@@ -2570,14 +2895,20 @@ public class TypeScriptActionInterface {
 
         ActionFunctionContext fctx(app.name, action.action, pool);
         if (*hash<auto> opts = remove action.options) {
-            request_type = TypeScriptActionInterface::getType("request", (map {$1.key: $1.value{TypeKeys}},
-                opts.pairIterator()), NOTHING, NOTHING, fctx);
+            request_type = TypeScriptActionInterface::getType(
+                TypeScriptActionInterface::actionProviderSchemaPath(
+                    app.name, action.action, "request"),
+                (map {$1.key: $1.value{TypeKeys}}, opts.pairIterator()),
+                NOTHING, NOTHING, fctx);
             action.options = TypeScriptActionInterface::getOptions(app, \action, opts, fctx);
         }
 
         *AbstractDataProviderType response_type;
         if (action.response_type.val()) {
-            response_type = TypeScriptActionInterface::getType("response", remove action.response_type, NOTHING,
+            response_type = TypeScriptActionInterface::getType(
+                TypeScriptActionInterface::actionProviderSchemaPath(
+                    app.name, action.action, "response"),
+                remove action.response_type, NOTHING,
                 NOTHING, fctx);
             action.output_type = response_type;
         } else if (action.hasKey("response_type")) {
@@ -2934,7 +3265,11 @@ public class TypeScriptActionInterface {
         hash<string, hash<ActionOptionInfo>> rv;
         foreach hash<auto> i in (opts.pairIterator()) {
             TypeScriptActionInterface::getOptionFunctions(\action, fctx, i.key, \i.value);
-            rv{i.key} = TypeScriptActionInterface::getOptionInfo("option", i.value, fctx);
+            rv{i.key} = TypeScriptActionInterface::getOptionInfo(
+                TypeScriptActionInterface::appendProviderSchemaPath(
+                    TypeScriptActionInterface::actionProviderSchemaPath(
+                        app.name, action.action, "option"),
+                    "option", i.key), i.value, fctx);
             if (fctx.dmap{i.key}) {
                 rv{i.key}.structural_determinate = True;
             }
@@ -2974,15 +3309,144 @@ public class TypeScriptActionInterface {
         opts = new_opts;
     }
 
+    #! Validates and removes the optional producer-boundary schema version
+    /** An absent version is the backward-compatible version 1 contract. Empty, null, non-integral, and unsupported
+        explicit versions are rejected rather than being treated as absence.
+    */
+    static private normalizeProviderSchemaVersion(reference<hash<auto>> record,
+            string kind, string identity) {
+        if (!record.hasKey("provider_schema_version")) {
+            return;
+        }
+        auto version = remove record.provider_schema_version;
+        if (version.typeCode() != NT_INT
+                || version != ProviderSchemaVersion) {
+            throw "TYPESCRIPT-PROVIDER-SCHEMA-VERSION-ERROR", sprintf(
+                "%s %y has unsupported provider_schema_version %y; expected %d",
+                kind, identity, version, ProviderSchemaVersion);
+        }
+    }
+
+    #! Normalizes one structurally declared list of provider choices
+    /** Conversion is intentionally limited to declared allowed-value positions. A choice's exact \c value may be a
+        scalar, list, or arbitrary raw hash (including a hash that itself contains a \c value member).
+    */
+    static private list<hash<AllowedValueInfo>> normalizeAllowedValues(
+            string boundary, auto values) {
+        if (values.typeCode() != NT_LIST) {
+            throw "TYPESCRIPT-PROVIDER-SCHEMA-ERROR", sprintf(
+                "%s must be a list of AllowedValueInfo hashes; got %y",
+                boundary, values.fullType());
+        }
+        list<hash<AllowedValueInfo>> normalized = ();
+        foreach auto value in (values) {
+            if (value.typeCode() != NT_HASH) {
+                throw "TYPESCRIPT-PROVIDER-SCHEMA-ERROR", sprintf(
+                    "%s entry must be an AllowedValueInfo hash with an exact value member; got %y",
+                    boundary, value);
+            }
+            hash<auto> value_hash = value;
+            if (!value_hash.hasKey("value")) {
+                throw "TYPESCRIPT-PROVIDER-SCHEMA-ERROR", sprintf(
+                    "%s entry must be an AllowedValueInfo hash with an exact value member; got %y",
+                    boundary, value);
+            }
+            try {
+                normalized += cast<hash<AllowedValueInfo>>(value_hash);
+            } catch (hash<ExceptionInfo> ex) {
+                throw "TYPESCRIPT-PROVIDER-SCHEMA-ERROR", sprintf(
+                    "%s entry is invalid: %s", boundary, ex.desc), ex.arg;
+            }
+        }
+        return normalized;
+    }
+
+    #! Records one lightweight producer identity before schema materialization
+    static private rememberDiscoveryIdentity(string app,
+            *string action = NOTHING) {
+        bool changed;
+        {
+            AutoLock al(discovery_inventory_lock);
+            if (action) {
+                changed = !exists discovery_inventory_map{app}{action};
+                discovery_inventory_map{app}{action} = True;
+            } else if (!exists discovery_inventory_map{app}) {
+                changed = True;
+                discovery_inventory_map{app} = {};
+            }
+            if (changed) {
+                # Publish the associated revision before a qualification
+                # callback can read the updated producer inventory.
+                DataProviderActionCatalog::markDiscoveryInventoryChanged(
+                    DiscoveryInventoryProviderName);
+            }
+        }
+    }
+
+    #! Consumes the complete-batch marker paired with one app registration attempt
+    static private bool consumeDiscoveryInventoryBatch(string app) {
+        AutoLock al(discovery_inventory_lock);
+        bool rv = exists discovery_inventory_batch_map{app};
+        remove discovery_inventory_batch_map{app};
+        return rv;
+    }
+
+    #! Appends one unambiguous typed component to a producer schema path
+    static private string appendProviderSchemaPath(string path, string kind,
+            string identity) {
+        if (!kind.val() || !identity.val()) {
+            throw "TYPESCRIPT-PROVIDER-SCHEMA-ERROR", sprintf(
+                "provider schema path components cannot be empty: kind=%y identity=%y",
+                kind, identity);
+        }
+        return path + "/" + kind + "/"
+            + convert_encoding(identity, "UTF-8").toBase64Url();
+    }
+
+    #! Returns the canonical path root for one exact app/action schema role
+    static private string actionProviderSchemaPath(string app, string action,
+            string role) {
+        string path = TypeScriptActionInterface::appendProviderSchemaPath(
+            "provider-schema-v1", "app", app);
+        path = TypeScriptActionInterface::appendProviderSchemaPath(path,
+            "action", action);
+        return TypeScriptActionInterface::appendProviderSchemaPath(path,
+            "role", role);
+    }
+
+    #! Retains failures occurring before a JavaScript record reaches the canonical Qore hash boundary
+    static private reportProducerRegistrationFailure(string kind,
+            auto app, auto action, hash<ExceptionInfo> ex) {
+        if (_pool_clone_mode || app.typeCode() != NT_STRING
+                || !app.val() || (kind == "action"
+                    && (action.typeCode() != NT_STRING || !action.val()))) {
+            return;
+        }
+        TypeScriptActionInterface::rememberDiscoveryIdentity(app,
+            kind == "action" ? action : NOTHING);
+        if (kind == "app") {
+            # Pool lookup or JavaScript conversion can fail before registerApp()
+            # consumes the marker. The exact inventory remains authoritative,
+            # but a later legacy per-record retry must not mistake it for a new
+            # replacement batch.
+            TypeScriptActionInterface::consumeDiscoveryInventoryBatch(app);
+        }
+        DataProviderActionCatalog::reportInitializationFailure(
+            kind, app, kind == "action" ? action : NOTHING, ex,
+            TypeScriptActionInterface::getModulePath());
+    }
+
     static hash<auto> getOptionHashInfo(string path, hash<auto> opt, *ActionFunctionContext fctx,
             *bool resolve_dynamic) {
         opt.type = TypeScriptActionInterface::getType(path, opt.type, opt.required, remove opt.element_type, fctx,
             NOTHING, resolve_dynamic);
-        if (opt.allowed_values) {
-            opt.allowed_values = map cast<hash<AllowedValueInfo>>($1), opt.allowed_values;
+        if (opt.hasKey("allowed_values")) {
+            opt.allowed_values = TypeScriptActionInterface::normalizeAllowedValues(
+                path + " allowed_values", opt.allowed_values);
         }
-        if (opt.element_allowed_values) {
-            opt.element_allowed_values = map cast<hash<AllowedValueInfo>>($1), opt.element_allowed_values;
+        if (opt.hasKey("element_allowed_values")) {
+            opt.element_allowed_values = TypeScriptActionInterface::normalizeAllowedValues(
+                path + " element_allowed_values", opt.element_allowed_values);
         }
         if (opt.required_groups) {
             opt.required_groups = cast<list<string>>(opt.required_groups);
@@ -3008,15 +3472,19 @@ public class TypeScriptActionInterface {
             throw "TYPE-ERROR", sprintf("Cannot use an \"or-nothing\" type like %y when \"required\" is set; use "
                 "type %y instead", name, name[1..]);
         }
-        path += "-" + name;
+        path = TypeScriptActionInterface::appendProviderSchemaPath(path,
+            "type", name);
         if (exists element_type) {
-            AbstractDataProviderType et = TypeScriptActionInterface::getType(path + "-element",
+            AbstractDataProviderType et = TypeScriptActionInterface::getType(path + "/element",
                 element_type, NOTHING, NOTHING, fctx, ignore_dup, resolve_dynamic);
             if (name =~ /^\*?list$/) {
-                return new ListDataType(et, !required);
+                ListDataType rv(et, !required);
+                rv.setPath(path);
+                return rv;
             } else if (name =~ /^\*?hash$/) {
                 HashDataType rv(required ? AutoHashType : AutoHashOrNothingType);
                 rv.setDefaultOtherFieldType(et);
+                rv.setPath(path);
                 return rv;
             } else {
                 throw "TYPE-ERROR", sprintf("Cannot use an element type with type %y", name);
@@ -3074,6 +3542,10 @@ public class TypeScriptActionInterface {
             required = h.required;
         }
         hash<auto> orig = h;
+        string type_identity = h.type.typeCode() == NT_STRING
+            ? h.type : "hash";
+        path = TypeScriptActionInterface::appendProviderSchemaPath(path,
+            "type", type_identity);
         hash<auto> tags;
         if (exists h.required) {
             tags.required = remove h.required;
@@ -3108,7 +3580,7 @@ public class TypeScriptActionInterface {
                 TypeScriptActionInterface::getHashTypeIntern(path, ht, f, required, fctx, ignore_dup,
                     resolve_dynamic);
             } else if (exists element_type) {
-                AbstractDataProviderType element_type = TypeScriptActionInterface::getType(path + "-element",
+                AbstractDataProviderType element_type = TypeScriptActionInterface::getType(path + "/element",
                     element_type, NOTHING, NOTHING, fctx, ignore_dup, resolve_dynamic);
                 ht.setDefaultOtherFieldType(element_type);
             }
@@ -3132,6 +3604,7 @@ public class TypeScriptActionInterface {
         if (h) {
             throw "TYPE-ERROR", sprintf("Type description at path %y has unknown keys: %y", path, keys h);
         }
+        rv.setPath(path);
         return rv;
     }
 
@@ -3140,7 +3613,7 @@ public class TypeScriptActionInterface {
             auto default_value, hash<NameDescInfo> attr, *bool resolve_dynamic, *bool soft) {
         AbstractDataProviderType et;
         if (auto t = (remove h.element_type ?? element_type)) {
-            et = TypeScriptActionInterface::getType(path + "-element", t, NOTHING, NOTHING, fctx, ignore_dup,
+            et = TypeScriptActionInterface::getType(path + "/element", t, NOTHING, NOTHING, fctx, ignore_dup,
                 resolve_dynamic);
             if (!required) {
                 et = et.getOrNothingType();
@@ -3156,17 +3629,23 @@ public class TypeScriptActionInterface {
             "default_value": default_value,
         };
         if (soft) {
-            return new SoftListDataType(info, et ?? AutoType);
+            SoftListDataType rv(info, et ?? AutoType);
+            rv.setPath(path);
+            return rv;
         }
-        return new ListDataType(info, et ?? AutoType);
+        ListDataType rv(info, et ?? AutoType);
+        rv.setPath(path);
+        return rv;
     }
 
     static HashDataType getHashType(string path, hash<auto> h, *bool required, *ActionFunctionContext fctx,
             *bool ignore_dup, *hash<auto> tags, *bool resolve_dynamic) {
         on_error rethrow $1.err, sprintf("%s (type: %y)", $1.desc, h);
         HashDataType type(required ? AutoHashType : AutoHashOrNothingType, NOTHING, NOTHING, tags);
-        return TypeScriptActionInterface::getHashTypeIntern(path, type, h, required, fctx, ignore_dup,
-            resolve_dynamic);
+        HashDataType rv = TypeScriptActionInterface::getHashTypeIntern(path,
+            type, h, required, fctx, ignore_dup, resolve_dynamic);
+        rv.setPath(path);
+        return rv;
     }
 
     static HashDataType getHashTypeIntern(string path, HashDataType type, hash<auto> h, *bool required,
@@ -3210,7 +3689,8 @@ public class TypeScriptActionInterface {
             hash<auto> orig = h;
             on_error rethrow $1.err, sprintf("%s (field: %N)", $1.desc, orig);
             *bool req = remove h.required;
-            path += "-" + name;
+            path = TypeScriptActionInterface::appendProviderSchemaPath(path,
+                "field", name);
             AbstractDataProviderType type = TypeScriptActionInterface::getType(path, remove h.type, req,
                 remove h.element_type, fctx, ignore_dup, resolve_dynamic);
             rv = TypeScriptActionInterface::getFieldHash(path, name, type, \h, req, fctx, ignore_dup,
@@ -3288,14 +3768,18 @@ public class TypeScriptActionInterface {
         if (exists (auto v = remove type_hash.on_change)) {
             info.attr.on_change = v;
         }
-        if (auto v = remove type_hash.allowed_values) {
-            info.allowed_values = map cast<hash<AllowedValueInfo>>($1), v;
+        if (type_hash.hasKey("allowed_values")) {
+            info.allowed_values = TypeScriptActionInterface::normalizeAllowedValues(
+                path + "/" + name + " allowed_values",
+                remove type_hash.allowed_values);
         }
         if (remove type_hash.allowed_values_creatable) {
             info.allowed_values_creatable = True;
         }
-        if (auto v = remove type_hash.element_allowed_values) {
-            info.element_allowed_values = map cast<hash<AllowedValueInfo>>($1), v;
+        if (type_hash.hasKey("element_allowed_values")) {
+            info.element_allowed_values = TypeScriptActionInterface::normalizeAllowedValues(
+                path + "/" + name + " element_allowed_values",
+                remove type_hash.element_allowed_values);
         }
         if (remove type_hash.element_allowed_values_creatable) {
             info.element_allowed_values_creatable = True;
@@ -3447,6 +3931,8 @@ public class TypeScriptActionInterface {
     #! Returns a hash that can be used to access these methods in JavaScript
     static hash<string, code> getInterface() {
         return {
+            "registerDiscoveryInventory":
+                \TypeScriptActionInterface::registerDiscoveryInventory(),
             "registerApp": \TypeScriptActionInterface::registerApp(),
             "registerExistingApp": \TypeScriptActionInterface::registerExistingApp(),
             "registerAction": \TypeScriptActionInterface::registerAction(),

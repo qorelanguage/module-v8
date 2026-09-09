@@ -927,6 +927,62 @@
           "source": "Defines the search criteria to use when looking for matching rows.",
           "message": "Defines the search criteria to use when looking for matching rows."
         },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.Y29sdW1u.display_name": {
+          "source": "Column Letter",
+          "message": "Column Letter"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.Y29sdW1u.short_desc": {
+          "source": "Letter of the column to search in (A, B, C, etc.)",
+          "message": "Letter of the column to search in (A, B, C, etc.)"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.Y29sdW1u.desc": {
+          "source": "The letter designation of the column to search in (e.g., A, B, C). Use this or Column Header, not both.",
+          "message": "The letter designation of the column to search in (e.g., A, B, C). Use this or Column Header, not both."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.aGVhZGVy.display_name": {
+          "source": "Column Header",
+          "message": "Column Header"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.aGVhZGVy.short_desc": {
+          "source": "Header of the column to search in",
+          "message": "Header of the column to search in"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.aGVhZGVy.desc": {
+          "source": "The header text of the column to search in. Use this or Column Letter, not both.",
+          "message": "The header text of the column to search in. Use this or Column Letter, not both."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dHlwZQ.display_name": {
+          "source": "Search Type",
+          "message": "Search Type"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dHlwZQ.short_desc": {
+          "source": "Type of search to perform",
+          "message": "Type of search to perform"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dHlwZQ.desc": {
+          "source": "Determines how the search value is matched against the column data. Options include exact match, contains.",
+          "message": "Determines how the search value is matched against the column data. Options include exact match, contains."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dHlwZQ.allowed-value.c3RyaW5nOmV4YWN0.display_name": {
+          "source": "Exact match",
+          "message": "Exact match"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5z.display_name": {
+          "source": "Contains",
+          "message": "Contains"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dmFsdWU.display_name": {
+          "source": "Search Value",
+          "message": "Search Value"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dmFsdWU.short_desc": {
+          "source": "Value to search for",
+          "message": "Value to search for"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.ZmluZF9zcHJlYWRzaGVldF9yb3dz.option.c2VhcmNo.field.dmFsdWU.desc": {
+          "source": "The value to look for in the specified column. Rows with this exact value will be returned.",
+          "message": "The value to look for in the specified column. Rows with this exact value will be returned."
+        },
         "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.display_name": {
           "source": "Format Spreadsheet Rows",
           "message": "Format Spreadsheet Rows"
@@ -987,6 +1043,54 @@
           "source": "The background color to apply to the cells in the specified rows. Uses RGB color format.",
           "message": "The background color to apply to the cells in the specified rows. Uses RGB color format."
         },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.YQ.display_name": {
+          "source": "Alpha",
+          "message": "Alpha"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.YQ.short_desc": {
+          "source": "Alpha (transparency) component as an integer from 0 - 255",
+          "message": "Alpha (transparency) component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.YQ.desc": {
+          "source": "Alpha (transparency) component as an integer from `0` - `255`",
+          "message": "Alpha (transparency) component as an integer from `0` - `255`"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.Yg.display_name": {
+          "source": "Blue",
+          "message": "Blue"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.Yg.short_desc": {
+          "source": "Blue color component as an integer from 0 - 255",
+          "message": "Blue color component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.Yg.desc": {
+          "source": "Blue color component as an integer from `0` - `255`",
+          "message": "Blue color component as an integer from `0` - `255`"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.Zw.display_name": {
+          "source": "Green",
+          "message": "Green"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.Zw.short_desc": {
+          "source": "Green color component as an integer from 0 - 255",
+          "message": "Green color component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.Zw.desc": {
+          "source": "Green color component as an integer from `0` - `255`",
+          "message": "Green color component as an integer from `0` - `255`"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.cg.display_name": {
+          "source": "Red",
+          "message": "Red"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.cg.short_desc": {
+          "source": "Red color component as an integer from 0 - 255",
+          "message": "Red color component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.YmFja2dyb3VuZF9jb2xvcg.field.cg.desc": {
+          "source": "Red color component as an integer from `0` - `255`",
+          "message": "Red color component as an integer from `0` - `255`"
+        },
         "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.display_name": {
           "source": "Text Color",
           "message": "Text Color"
@@ -998,6 +1102,54 @@
         "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.desc": {
           "source": "The color to apply to the text in the cells of the specified rows. Uses RGB color format.",
           "message": "The color to apply to the text in the cells of the specified rows. Uses RGB color format."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.YQ.display_name": {
+          "source": "Alpha",
+          "message": "Alpha"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.YQ.short_desc": {
+          "source": "Alpha (transparency) component as an integer from 0 - 255",
+          "message": "Alpha (transparency) component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.YQ.desc": {
+          "source": "Alpha (transparency) component as an integer from `0` - `255`",
+          "message": "Alpha (transparency) component as an integer from `0` - `255`"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.Yg.display_name": {
+          "source": "Blue",
+          "message": "Blue"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.Yg.short_desc": {
+          "source": "Blue color component as an integer from 0 - 255",
+          "message": "Blue color component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.Yg.desc": {
+          "source": "Blue color component as an integer from `0` - `255`",
+          "message": "Blue color component as an integer from `0` - `255`"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.Zw.display_name": {
+          "source": "Green",
+          "message": "Green"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.Zw.short_desc": {
+          "source": "Green color component as an integer from 0 - 255",
+          "message": "Green color component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.Zw.desc": {
+          "source": "Green color component as an integer from `0` - `255`",
+          "message": "Green color component as an integer from `0` - `255`"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.cg.display_name": {
+          "source": "Red",
+          "message": "Red"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.cg.short_desc": {
+          "source": "Red color component as an integer from 0 - 255",
+          "message": "Red color component as an integer from 0 - 255"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.dGV4dF9jb2xvcg.field.cg.desc": {
+          "source": "Red color component as an integer from `0` - `255`",
+          "message": "Red color component as an integer from `0` - `255`"
         },
         "app.R29vZ2xlU2hlZXRz.action.Zm9ybWF0X3NwcmVhZHNoZWV0X3Jvd3M.option.Ym9sZA.display_name": {
           "source": "Bold",
@@ -1270,6 +1422,58 @@
         "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.desc": {
           "source": "List of sorting criteria to apply to the search results. Each item specifies a field and direction.",
           "message": "List of sorting criteria to apply to the search results. Each item specifies a field and direction."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Direction",
+          "message": "Direction"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.desc": {
+          "source": "The direction to sort - either ascending (asc) or descending (desc).",
+          "message": "The direction to sort - either ascending (asc) or descending (desc)."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.desc": {
+          "source": "The field to sort the results by (e.g., name, modifiedTime, createdTime).",
+          "message": "The field to sort the results by (e.g., name, modifiedTime, createdTime)."
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOmNyZWF0ZWRUaW1l.display_name": {
+          "source": "Created Time",
+          "message": "Created Time"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOm1vZGlmaWVkVGltZQ.display_name": {
+          "source": "Modified Time",
+          "message": "Modified Time"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOm5hbWU.display_name": {
+          "source": "Name",
+          "message": "Name"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOmZvbGRlcg.display_name": {
+          "source": "Folder",
+          "message": "Folder"
+        },
+        "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.b3JkZXJfYnk.field.ZmllbGQ.allowed-value.c3RyaW5nOnJlY2VuY3k.display_name": {
+          "source": "Recency",
+          "message": "Recency"
         },
         "app.R29vZ2xlU2hlZXRz.action.c2VhcmNoX3NwcmVhZHNoZWV0cw.option.cGFnZV9zaXpl.display_name": {
           "source": "Page Size",

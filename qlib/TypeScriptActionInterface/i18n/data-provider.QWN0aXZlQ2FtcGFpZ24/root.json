@@ -1127,6 +1127,66 @@
           "source": "Configure how to sort the contact results",
           "message": "Configure how to sort the contact results"
         },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.display_name": {
+          "source": "Sort Field",
+          "message": "Sort Field"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.desc": {
+          "source": "The field to use for sorting the contacts",
+          "message": "The field to use for sorting the contacts"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmlk.display_name": {
+          "source": "ID",
+          "message": "ID"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmVtYWls.display_name": {
+          "source": "Email",
+          "message": "Email"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmNkYXRl.display_name": {
+          "source": "Created Date",
+          "message": "Created Date"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmZpcnN0X25hbWU.display_name": {
+          "source": "First Name",
+          "message": "First Name"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmxhc3RfbmFtZQ.display_name": {
+          "source": "Last Name",
+          "message": "Last Name"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOm5hbWU.display_name": {
+          "source": "Name",
+          "message": "Name"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnNjb3Jl.display_name": {
+          "source": "Score",
+          "message": "Score"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.b3JkZXI.display_name": {
+          "source": "Sort Order",
+          "message": "Sort Order"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.b3JkZXI.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.b3JkZXI.desc": {
+          "source": "Whether to sort in ascending or descending order",
+          "message": "Whether to sort in ascending or descending order"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.b3JkZXI.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.c29ydA.field.b3JkZXI.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
         "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9jb250YWN0cw.option.bGltaXQ.display_name": {
           "source": "Limit",
           "message": "Limit"
@@ -1198,6 +1258,46 @@
         "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.desc": {
           "source": "Configure how to search for deals by different fields",
           "message": "Configure how to search for deals by different fields"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.display_name": {
+          "source": "Search Field",
+          "message": "Search Field"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.short_desc": {
+          "source": "Field to search in",
+          "message": "Field to search in"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.desc": {
+          "source": "The field to search in (title, contact, organization, or all)",
+          "message": "The field to search in (title, contact, organization, or all)"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.allowed-value.c3RyaW5nOmFsbA.display_name": {
+          "source": "All",
+          "message": "All"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.allowed-value.c3RyaW5nOnRpdGxl.display_name": {
+          "source": "Title",
+          "message": "Title"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.allowed-value.c3RyaW5nOmNvbnRhY3Q.display_name": {
+          "source": "Contact",
+          "message": "Contact"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.ZmllbGQ.allowed-value.c3RyaW5nOm9yZw.display_name": {
+          "source": "Organization",
+          "message": "Organization"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.dmFsdWU.display_name": {
+          "source": "Search Value",
+          "message": "Search Value"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.dmFsdWU.short_desc": {
+          "source": "Value to search for",
+          "message": "Value to search for"
+        },
+        "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9kZWFscw.option.c2VhcmNo.field.dmFsdWU.desc": {
+          "source": "The search term to look for in the specified field",
+          "message": "The search term to look for in the specified field"
         },
         "app.QWN0aXZlQ2FtcGFpZ24.action.bGlzdF9mb3Jtcw.display_name": {
           "source": "List Forms",

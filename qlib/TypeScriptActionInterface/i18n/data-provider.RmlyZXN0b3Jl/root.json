@@ -875,6 +875,82 @@
           "source": "Optional list of filters to apply to the query. Multiple filters are combined with AND logic. Each filter specifies a field, comparison operator, and value to match.",
           "message": "Optional list of filters to apply to the query. Multiple filters are combined with AND logic. Each filter specifies a field, comparison operator, and value to match."
         },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.ZmllbGQ.short_desc": {
+          "source": "The document field to filter on",
+          "message": "The document field to filter on"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.ZmllbGQ.desc": {
+          "source": "The name of the field in the document to apply the filter to. The field must exist in the documents being queried.",
+          "message": "The name of the field in the document to apply the filter to. The field must exist in the documents being queried."
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.desc": {
+          "source": "The comparison operator to use for filtering. Options include equality, inequality, comparison operators, and array operators.",
+          "message": "The comparison operator to use for filtering. Options include equality, inequality, comparison operators, and array operators."
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkVRVUFM.display_name": {
+          "source": "Equal to",
+          "message": "Equal to"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOk5PVF9FUVVBTA.display_name": {
+          "source": "Not equal to",
+          "message": "Not equal to"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkxFU1NfVEhBTg.display_name": {
+          "source": "Less than",
+          "message": "Less than"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkxFU1NfVEhBTl9PUl9FUVVBTA.display_name": {
+          "source": "Less than or equal to",
+          "message": "Less than or equal to"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkdSRUFURVJfVEhBTg.display_name": {
+          "source": "Greater than",
+          "message": "Greater than"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkdSRUFURVJfVEhBTl9PUl9FUVVBTA.display_name": {
+          "source": "Greater than or equal to",
+          "message": "Greater than or equal to"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkFSUkFZX0NPTlRBSU5T.display_name": {
+          "source": "Array contains",
+          "message": "Array contains"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkFSUkFZX0NPTlRBSU5TX0FOWQ.display_name": {
+          "source": "Array contains any",
+          "message": "Array contains any"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOklO.display_name": {
+          "source": "In",
+          "message": "In"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOk5PVF9JTg.display_name": {
+          "source": "Not in",
+          "message": "Not in"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.dmFsdWU.short_desc": {
+          "source": "The value to compare against",
+          "message": "The value to compare against"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.ZmlsdGVycw.field.dmFsdWU.desc": {
+          "source": "The value to use in the comparison. The value type should match the field type in the documents (string, number, boolean, etc.).",
+          "message": "The value to use in the comparison. The value type should match the field type in the documents (string, number, boolean, etc.)."
+        },
         "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.display_name": {
           "source": "Order By",
           "message": "Order By"
@@ -886,6 +962,38 @@
         "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.desc": {
           "source": "Optional list of ordering criteria to apply to the query results. Documents will be sorted by the specified fields in the order they are listed.",
           "message": "Optional list of ordering criteria to apply to the query results. Documents will be sorted by the specified fields in the order they are listed."
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Direction",
+          "message": "Direction"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.desc": {
+          "source": "The direction to sort: ascending (lowest to highest) or descending (highest to lowest).",
+          "message": "The direction to sort: ascending (lowest to highest) or descending (highest to lowest)."
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOkFTQ0VORElORw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOkRFU0NFTkRJTkc.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZmllbGQ.short_desc": {
+          "source": "The field to order by",
+          "message": "The field to order by"
+        },
+        "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.b3JkZXJfYnk.field.ZmllbGQ.desc": {
+          "source": "The name of the field to use for ordering. The field must exist in the documents and be of a comparable type.",
+          "message": "The name of the field to use for ordering. The field must exist in the documents and be of a comparable type."
         },
         "app.RmlyZXN0b3Jl.action.cXVlcnlfZG9jdW1lbnRz.option.bGltaXQ.display_name": {
           "source": "Limit",
@@ -1043,6 +1151,82 @@
           "source": "Define one or more filters to narrow down which documents will trigger the event. Multiple filters are combined with AND logic.",
           "message": "Define one or more filters to narrow down which documents will trigger the event. Multiple filters are combined with AND logic."
         },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.ZmllbGQ.short_desc": {
+          "source": "The document field to filter on",
+          "message": "The document field to filter on"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.ZmllbGQ.desc": {
+          "source": "Select the field name in the document that you want to filter",
+          "message": "Select the field name in the document that you want to filter"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.display_name": {
+          "source": "Operator",
+          "message": "Operator"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.desc": {
+          "source": "The comparison operation to perform between the field value and your specified value",
+          "message": "The comparison operation to perform between the field value and your specified value"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkxFU1NfVEhBTg.display_name": {
+          "source": "Less than (<)",
+          "message": "Less than (<)"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkxFU1NfVEhBTl9PUl9FUVVBTA.display_name": {
+          "source": "Less than or equal (<=)",
+          "message": "Less than or equal (<=)"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkdSRUFURVJfVEhBTg.display_name": {
+          "source": "Greater than (>)",
+          "message": "Greater than (>)"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkdSRUFURVJfVEhBTl9PUl9FUVVBTA.display_name": {
+          "source": "Greater than or equal (>=)",
+          "message": "Greater than or equal (>=)"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkVRVUFM.display_name": {
+          "source": "Equal (==)",
+          "message": "Equal (==)"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOk5PVF9FUVVBTA.display_name": {
+          "source": "Not equal (!=)",
+          "message": "Not equal (!=)"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkFSUkFZX0NPTlRBSU5T.display_name": {
+          "source": "Array contains",
+          "message": "Array contains"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOklO.display_name": {
+          "source": "In",
+          "message": "In"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOkFSUkFZX0NPTlRBSU5TX0FOWQ.display_name": {
+          "source": "Array contains any",
+          "message": "Array contains any"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.b3BlcmF0b3I.allowed-value.c3RyaW5nOk5PVF9JTg.display_name": {
+          "source": "Not in",
+          "message": "Not in"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.dmFsdWU.short_desc": {
+          "source": "The value to compare against",
+          "message": "The value to compare against"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.ZmlsdGVycw.field.dmFsdWU.desc": {
+          "source": "The value to use in the comparison. The value will be automatically converted to the appropriate type (string, number, boolean, or null)",
+          "message": "The value to use in the comparison. The value will be automatically converted to the appropriate type (string, number, boolean, or null)"
+        },
         "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.display_name": {
           "source": "Order By",
           "message": "Order By"
@@ -1054,6 +1238,38 @@
         "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.desc": {
           "source": "Define the ordering criteria for documents. The trigger will activate for documents that appear at the top of the ordered list. If not specified, documents are ordered by creation time in descending order (newest first).",
           "message": "Define the ordering criteria for documents. The trigger will activate for documents that appear at the top of the ordered list. If not specified, documents are ordered by creation time in descending order (newest first)."
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Direction",
+          "message": "Direction"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.desc": {
+          "source": "Choose ascending (oldest/smallest first) or descending (newest/largest first) order",
+          "message": "Choose ascending (oldest/smallest first) or descending (newest/largest first) order"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOkFTQ0VORElORw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOkRFU0NFTkRJTkc.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZmllbGQ.short_desc": {
+          "source": "The field to order by",
+          "message": "The field to order by"
+        },
+        "app.RmlyZXN0b3Jl.action.bmV3X2RvY3VtZW50.option.b3JkZXJfYnk.field.ZmllbGQ.desc": {
+          "source": "Select the document field to use for ordering",
+          "message": "Select the document field to use for ordering"
         }
       }
     }

@@ -28,6 +28,7 @@ if (process.env.TS_DEBUG) {
 }
 
 export interface IQoreApi {
+  registerDiscoveryInventory: (inventory: Array<{ app: string; action?: string }>) => void;
   registerApp: (app: IQoreApp) => void;
   registerExistingApp: (app: IQoreExistingApp) => void;
   registerAction: (action: TQoreAppAction) => void;
@@ -181,7 +182,12 @@ export const withCheckpointSupport = (action: TQoreAppAction): TQoreAppAction =>
       checkpoint: unknown
     ): unknown =>
       runWithTriggerCheckpoint(isTriggerCheckpoint(checkpoint) ? checkpoint : undefined, () =>
-        (event_function as (...args: unknown[]) => unknown)(context, update, should_stop, checkpoint)
+        (event_function as (...args: unknown[]) => unknown)(
+          context,
+          update,
+          should_stop,
+          checkpoint
+        )
       ),
   } as TQoreAppAction;
 };
@@ -200,14 +206,16 @@ export class ActionsCatalogue {
     this.registerAppCollection(
       this.apps,
       (app) => api.registerApp(app),
-      (action) => api.registerAction(action)
+      (action) => api.registerAction(action),
+      api.registerDiscoveryInventory
     );
 
     // Register existing apps
     this.registerAppCollection(
       this.existingApps,
       (app) => api.registerExistingApp(app),
-      (action) => api.registerAction(action)
+      (action) => api.registerAction(action),
+      api.registerDiscoveryInventory
     );
   }
 
@@ -221,7 +229,8 @@ export class ActionsCatalogue {
       this.registerAppCollection(
         { [appFolder]: app },
         (app) => api.registerApp(app),
-        (action) => api.registerAction(action)
+        (action) => api.registerAction(action),
+        api.registerDiscoveryInventory
       );
     } else {
       throw new Error(`Custom app ${appFolder} not found`);
@@ -233,7 +242,8 @@ export class ActionsCatalogue {
   >(
     collection: Record<string, T>,
     registerAppFn: (app: Omit<T, 'actions'>) => void,
-    registerActionFn: (action: TQoreAppAction) => void
+    registerActionFn: (action: TQoreAppAction) => void,
+    registerInventoryFn: (inventory: Array<{ app: string; action?: string }>) => void
   ) {
     Object.keys(collection).forEach((appName) => {
       const collectionApp = collection[appName] as T;
@@ -248,6 +258,17 @@ export class ActionsCatalogue {
         actions = collectionApp.actions;
       }
 
+      // Publish the complete lightweight identity batch before the first Qore
+      // schema conversion. If one app or action record is malformed, later
+      // actions must remain visible to discovery qualification as missing
+      // expected identities rather than disappearing behind the first error.
+      registerInventoryFn([
+        { app: app.name },
+        ...actions.map((action) => ({
+          app: action.app,
+          action: action.action,
+        })),
+      ]);
       registerAppFn(app);
       actions.forEach((action) => registerActionFn(withCheckpointSupport(action)));
     });
@@ -273,9 +294,7 @@ export class ActionsCatalogue {
   /** Apply locale groups, CRUD options and connection messages to a single
       NEW-style app (a locale-function export), producing the fully mapped app
       definition.  Extracted from the former eager initializeCatalogue() loop. */
-  private processNewApp(
-    getApp: (locale: Locales) => TQoreAppWithActions
-  ): TQoreAppWithActions {
+  private processNewApp(getApp: (locale: Locales) => TQoreAppWithActions): TQoreAppWithActions {
     const app = getApp(this.locale);
     const localeGroups = (L[this.locale].apps as any)[app.name]?.groups;
     const localeConnectionMessage = (L[this.locale].apps as any)[app.name]?.connectionMessage;
@@ -286,9 +305,7 @@ export class ActionsCatalogue {
       ? localeConnectionMessage.content()
       : undefined;
 
-    const groups = localeGroups
-      ? Object.values(localeGroups).map((fn: any) => fn())
-      : ['Other'];
+    const groups = localeGroups ? Object.values(localeGroups).map((fn: any) => fn()) : ['Other'];
 
     const crudOptionTypes: { key: string; localeKey: TQoreCrudOptionType }[] = [
       { key: 'search_options', localeKey: 'searchOptions' },
@@ -353,7 +370,8 @@ export class ActionsCatalogue {
     this.registerAppCollection(
       { [app.name]: app },
       (a) => api.registerApp(a),
-      (action) => api.registerAction(action)
+      (action) => api.registerAction(action),
+      api.registerDiscoveryInventory
     );
     // return the app name so the Qore side can build a dir <-> name map
     return app.name;
@@ -377,9 +395,7 @@ export class ActionsCatalogue {
       // caches it the same way the former static imports did
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const mod = require(`../apps/${dir}`);
-      const getApp = (mod && (mod.default || mod)) as (
-        locale: Locales
-      ) => TQoreAppWithActions;
+      const getApp = (mod && (mod.default || mod)) as (locale: Locales) => TQoreAppWithActions;
       this.apps[dir] = this.processNewApp(getApp);
     });
   }

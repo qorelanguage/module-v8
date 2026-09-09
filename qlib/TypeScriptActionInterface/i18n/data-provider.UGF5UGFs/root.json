@@ -1579,6 +1579,30 @@
           "source": "Specify a range of transaction amounts to filter results. Useful for finding transactions within specific value ranges.",
           "message": "Specify a range of transaction amounts to filter results. Useful for finding transactions within specific value ranges."
         },
+        "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fYW1vdW50.field.ZnJvbQ.display_name": {
+          "source": "Minimum Amount",
+          "message": "Minimum Amount"
+        },
+        "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fYW1vdW50.field.ZnJvbQ.short_desc": {
+          "source": "Minimum transaction amount",
+          "message": "Minimum transaction amount"
+        },
+        "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fYW1vdW50.field.ZnJvbQ.desc": {
+          "source": "The minimum transaction amount to include in results.",
+          "message": "The minimum transaction amount to include in results."
+        },
+        "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fYW1vdW50.field.dG8.display_name": {
+          "source": "Maximum Amount",
+          "message": "Maximum Amount"
+        },
+        "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fYW1vdW50.field.dG8.short_desc": {
+          "source": "Maximum transaction amount",
+          "message": "Maximum transaction amount"
+        },
+        "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fYW1vdW50.field.dG8.desc": {
+          "source": "The maximum transaction amount to include in results.",
+          "message": "The maximum transaction amount to include in results."
+        },
         "app.UGF5UGFs.action.bGlzdF90cmFuc2FjdGlvbnM.option.dHJhbnNhY3Rpb25fY3VycmVuY3k.display_name": {
           "source": "Transaction Currency",
           "message": "Transaction Currency"
@@ -2267,6 +2291,114 @@
           "source": "Array of items included in this order. Each item should specify name, quantity, unit price, and optionally description, SKU, category, and tax amount.",
           "message": "Array of items included in this order. Each item should specify name, quantity, unit price, and optionally description, SKU, category, and tax amount."
         },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Category type of the item",
+          "message": "Category type of the item"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category classification for this item, which affects payment processing and compliance requirements.",
+          "message": "The category classification for this item, which affects payment processing and compliance requirements."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOkRJR0lUQUxfR09PRFM.display_name": {
+          "source": "Digital Goods",
+          "message": "Digital Goods"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOlBIWVNJQ0FMX0dPT0RT.display_name": {
+          "source": "Physical Goods",
+          "message": "Physical Goods"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOkRPTkFUSU9O.display_name": {
+          "source": "Donation",
+          "message": "Donation"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.ZGVzY3JpcHRpb24.display_name": {
+          "source": "Item Description",
+          "message": "Item Description"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.ZGVzY3JpcHRpb24.short_desc": {
+          "source": "Detailed description of the item",
+          "message": "Detailed description of the item"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.ZGVzY3JpcHRpb24.desc": {
+          "source": "Optional detailed description providing more information about this item.",
+          "message": "Optional detailed description providing more information about this item."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.bmFtZQ.display_name": {
+          "source": "Item Name",
+          "message": "Item Name"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.bmFtZQ.short_desc": {
+          "source": "Name of the item",
+          "message": "Name of the item"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.bmFtZQ.desc": {
+          "source": "A descriptive name for this item that will be shown to the customer during checkout.",
+          "message": "A descriptive name for this item that will be shown to the customer during checkout."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.cXVhbnRpdHk.display_name": {
+          "source": "Quantity",
+          "message": "Quantity"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.cXVhbnRpdHk.short_desc": {
+          "source": "Number of items",
+          "message": "Number of items"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.cXVhbnRpdHk.desc": {
+          "source": "The quantity of this item being purchased. Must be a positive integer.",
+          "message": "The quantity of this item being purchased. Must be a positive integer."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.c2t1.display_name": {
+          "source": "SKU",
+          "message": "SKU"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.c2t1.short_desc": {
+          "source": "Stock keeping unit identifier",
+          "message": "Stock keeping unit identifier"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.c2t1.desc": {
+          "source": "Your internal stock keeping unit identifier for inventory tracking.",
+          "message": "Your internal stock keeping unit identifier for inventory tracking."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dGF4X2Ftb3VudA.display_name": {
+          "source": "Tax Amount",
+          "message": "Tax Amount"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dGF4X2Ftb3VudA.short_desc": {
+          "source": "Tax amount for this item",
+          "message": "Tax amount for this item"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dGF4X2Ftb3VudA.desc": {
+          "source": "The tax amount specifically for this item, calculated based on quantity and applicable tax rates.",
+          "message": "The tax amount specifically for this item, calculated based on quantity and applicable tax rates."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dW5pdF9wcmljZQ.display_name": {
+          "source": "Unit Price",
+          "message": "Unit Price"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dW5pdF9wcmljZQ.short_desc": {
+          "source": "Price per individual item",
+          "message": "Price per individual item"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dW5pdF9wcmljZQ.desc": {
+          "source": "The cost per individual unit of this item, before taxes and discounts.",
+          "message": "The cost per individual unit of this item, before taxes and discounts."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dXJs.display_name": {
+          "source": "Item URL",
+          "message": "Item URL"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dXJs.short_desc": {
+          "source": "Link to the item page",
+          "message": "Link to the item page"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.aXRlbXM.field.dXJs.desc": {
+          "source": "Optional URL linking to the product page where customers can view more details about this item.",
+          "message": "Optional URL linking to the product page where customers can view more details about this item."
+        },
         "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.c2hpcHBpbmdfdHlwZQ.display_name": {
           "source": "Shipping Type",
           "message": "Shipping Type"
@@ -2383,6 +2515,42 @@
           "source": "Array of platform fees to be collected on this transaction. Used by marketplaces to collect fees from transactions processed on their platform.",
           "message": "Array of platform fees to be collected on this transaction. Used by marketplaces to collect fees from transactions processed on their platform."
         },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.ZmVlX2Ftb3VudA.display_name": {
+          "source": "Fee Amount",
+          "message": "Fee Amount"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.ZmVlX2Ftb3VudA.short_desc": {
+          "source": "Platform fee amount",
+          "message": "Platform fee amount"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.ZmVlX2Ftb3VudA.desc": {
+          "source": "The amount of the platform fee to be collected from this transaction.",
+          "message": "The amount of the platform fee to be collected from this transaction."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.cGF5ZWVfZW1haWw.display_name": {
+          "source": "Fee Recipient Email",
+          "message": "Fee Recipient Email"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.cGF5ZWVfZW1haWw.short_desc": {
+          "source": "Email of fee recipient",
+          "message": "Email of fee recipient"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.cGF5ZWVfZW1haWw.desc": {
+          "source": "Email address of the account that will receive the platform fee.",
+          "message": "Email address of the account that will receive the platform fee."
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.cGF5ZWVfbWVyY2hhbnRfaWQ.display_name": {
+          "source": "Fee Recipient Merchant ID",
+          "message": "Fee Recipient Merchant ID"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.cGF5ZWVfbWVyY2hhbnRfaWQ.short_desc": {
+          "source": "Merchant ID of fee recipient",
+          "message": "Merchant ID of fee recipient"
+        },
+        "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.cGxhdGZvcm1fZmVlcw.field.cGF5ZWVfbWVyY2hhbnRfaWQ.desc": {
+          "source": "PayPal merchant ID of the account that will receive the platform fee.",
+          "message": "PayPal merchant ID of the account that will receive the platform fee."
+        },
         "app.UGF5UGFs.action.Y3JlYXRlX29yZGVy.option.ZGlzYnVyc2VtZW50X21vZGU.display_name": {
           "source": "Disbursement Mode",
           "message": "Disbursement Mode"
@@ -2475,6 +2643,26 @@
           "source": "Special instructions for processing this payment, such as disbursement timing or platform fee collection.",
           "message": "Special instructions for processing this payment, such as disbursement timing or platform fee collection."
         },
+        "app.UGF5UGFs.action.Y2FwdHVyZV9vcmRlcg.option.cGF5bWVudF9pbnN0cnVjdGlvbg.field.ZGlzYnVyc2VtZW50X21vZGU.display_name": {
+          "source": "Disbursement Mode",
+          "message": "Disbursement Mode"
+        },
+        "app.UGF5UGFs.action.Y2FwdHVyZV9vcmRlcg.option.cGF5bWVudF9pbnN0cnVjdGlvbg.field.ZGlzYnVyc2VtZW50X21vZGU.short_desc": {
+          "source": "When to disburse funds",
+          "message": "When to disburse funds"
+        },
+        "app.UGF5UGFs.action.Y2FwdHVyZV9vcmRlcg.option.cGF5bWVudF9pbnN0cnVjdGlvbg.field.ZGlzYnVyc2VtZW50X21vZGU.desc": {
+          "source": "Controls when captured funds are disbursed to the payee. Use INSTANT for immediate disbursement or DELAYED to hold funds.",
+          "message": "Controls when captured funds are disbursed to the payee. Use INSTANT for immediate disbursement or DELAYED to hold funds."
+        },
+        "app.UGF5UGFs.action.Y2FwdHVyZV9vcmRlcg.option.cGF5bWVudF9pbnN0cnVjdGlvbg.field.ZGlzYnVyc2VtZW50X21vZGU.allowed-value.c3RyaW5nOklOU1RBTlQ.display_name": {
+          "source": "Instant",
+          "message": "Instant"
+        },
+        "app.UGF5UGFs.action.Y2FwdHVyZV9vcmRlcg.option.cGF5bWVudF9pbnN0cnVjdGlvbg.field.ZGlzYnVyc2VtZW50X21vZGU.allowed-value.c3RyaW5nOkRFTEFZRUQ.display_name": {
+          "source": "Delayed",
+          "message": "Delayed"
+        },
         "app.UGF5UGFs.action.Z2V0X29yZGVy.display_name": {
           "source": "Get Order",
           "message": "Get Order"
@@ -2558,6 +2746,230 @@
         "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.desc": {
           "source": "The amount to refund. If not specified, the full captured amount will be refunded. For partial refunds, specify the currency and amount.",
           "message": "The amount to refund. If not specified, the full captured amount will be refunded. For partial refunds, specify the currency and amount."
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.display_name": {
+          "source": "Currency Code",
+          "message": "Currency Code"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.short_desc": {
+          "source": "Currency for the refund amount",
+          "message": "Currency for the refund amount"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.desc": {
+          "source": "The three-character ISO currency code for the refund amount.",
+          "message": "The three-character ISO currency code for the refund amount."
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkFVRA.display_name": {
+          "source": "Australian Dollar (AUD)",
+          "message": "Australian Dollar (AUD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkFVRA.desc": {
+          "source": "Australian dollar",
+          "message": "Australian dollar"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkJSTA.display_name": {
+          "source": "Brazilian Real (BRL)",
+          "message": "Brazilian Real (BRL)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkJSTA.desc": {
+          "source": "Brazilian real - supported as payment currency and currency balance for in-country PayPal accounts only",
+          "message": "Brazilian real - supported as payment currency and currency balance for in-country PayPal accounts only"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNBRA.display_name": {
+          "source": "Canadian Dollar (CAD)",
+          "message": "Canadian Dollar (CAD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNBRA.desc": {
+          "source": "Canadian dollar",
+          "message": "Canadian dollar"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNOWQ.display_name": {
+          "source": "Chinese Renminbi (CNY)",
+          "message": "Chinese Renminbi (CNY)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNOWQ.desc": {
+          "source": "Chinese Renminbi - supported as payment currency and currency balance for in-country PayPal accounts only",
+          "message": "Chinese Renminbi - supported as payment currency and currency balance for in-country PayPal accounts only"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNaSw.display_name": {
+          "source": "Czech Koruna (CZK)",
+          "message": "Czech Koruna (CZK)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNaSw.desc": {
+          "source": "Czech koruna",
+          "message": "Czech koruna"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkRLSw.display_name": {
+          "source": "Danish Krone (DKK)",
+          "message": "Danish Krone (DKK)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkRLSw.desc": {
+          "source": "Danish krone",
+          "message": "Danish krone"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkVVUg.display_name": {
+          "source": "Euro (EUR)",
+          "message": "Euro (EUR)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkVVUg.desc": {
+          "source": "Euro",
+          "message": "Euro"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkhLRA.display_name": {
+          "source": "Hong Kong Dollar (HKD)",
+          "message": "Hong Kong Dollar (HKD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkhLRA.desc": {
+          "source": "Hong Kong dollar",
+          "message": "Hong Kong dollar"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkhVRg.display_name": {
+          "source": "Hungarian Forint (HUF)",
+          "message": "Hungarian Forint (HUF)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkhVRg.desc": {
+          "source": "Hungarian forint - does not support decimals",
+          "message": "Hungarian forint - does not support decimals"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOklMUw.display_name": {
+          "source": "Israeli New Shekel (ILS)",
+          "message": "Israeli New Shekel (ILS)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOklMUw.desc": {
+          "source": "Israeli new shekel",
+          "message": "Israeli new shekel"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkpQWQ.display_name": {
+          "source": "Japanese Yen (JPY)",
+          "message": "Japanese Yen (JPY)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkpQWQ.desc": {
+          "source": "Japanese yen - does not support decimals",
+          "message": "Japanese yen - does not support decimals"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk1ZUg.display_name": {
+          "source": "Malaysian Ringgit (MYR)",
+          "message": "Malaysian Ringgit (MYR)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk1ZUg.desc": {
+          "source": "Malaysian ringgit - supported as payment currency and currency balance for in-country PayPal accounts only",
+          "message": "Malaysian ringgit - supported as payment currency and currency balance for in-country PayPal accounts only"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk1YTg.display_name": {
+          "source": "Mexican Peso (MXN)",
+          "message": "Mexican Peso (MXN)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk1YTg.desc": {
+          "source": "Mexican peso",
+          "message": "Mexican peso"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlRXRA.display_name": {
+          "source": "New Taiwan Dollar (TWD)",
+          "message": "New Taiwan Dollar (TWD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlRXRA.desc": {
+          "source": "New Taiwan dollar - does not support decimals",
+          "message": "New Taiwan dollar - does not support decimals"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk5aRA.display_name": {
+          "source": "New Zealand Dollar (NZD)",
+          "message": "New Zealand Dollar (NZD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk5aRA.desc": {
+          "source": "New Zealand dollar",
+          "message": "New Zealand dollar"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk5PSw.display_name": {
+          "source": "Norwegian Krone (NOK)",
+          "message": "Norwegian Krone (NOK)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOk5PSw.desc": {
+          "source": "Norwegian krone",
+          "message": "Norwegian krone"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlBIUA.display_name": {
+          "source": "Philippine Peso (PHP)",
+          "message": "Philippine Peso (PHP)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlBIUA.desc": {
+          "source": "Philippine peso",
+          "message": "Philippine peso"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlBMTg.display_name": {
+          "source": "Polish Złoty (PLN)",
+          "message": "Polish Złoty (PLN)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlBMTg.desc": {
+          "source": "Polish złoty",
+          "message": "Polish złoty"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkdCUA.display_name": {
+          "source": "Pound Sterling (GBP)",
+          "message": "Pound Sterling (GBP)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkdCUA.desc": {
+          "source": "Pound sterling",
+          "message": "Pound sterling"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlJVQg.display_name": {
+          "source": "Russian Ruble (RUB)",
+          "message": "Russian Ruble (RUB)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlJVQg.desc": {
+          "source": "Russian ruble",
+          "message": "Russian ruble"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlNHRA.display_name": {
+          "source": "Singapore Dollar (SGD)",
+          "message": "Singapore Dollar (SGD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlNHRA.desc": {
+          "source": "Singapore dollar",
+          "message": "Singapore dollar"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlNFSw.display_name": {
+          "source": "Swedish Krona (SEK)",
+          "message": "Swedish Krona (SEK)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlNFSw.desc": {
+          "source": "Swedish krona",
+          "message": "Swedish krona"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNIRg.display_name": {
+          "source": "Swiss Franc (CHF)",
+          "message": "Swiss Franc (CHF)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOkNIRg.desc": {
+          "source": "Swiss franc",
+          "message": "Swiss franc"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlRIQg.display_name": {
+          "source": "Thai Baht (THB)",
+          "message": "Thai Baht (THB)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlRIQg.desc": {
+          "source": "Thai baht",
+          "message": "Thai baht"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlVTRA.display_name": {
+          "source": "United States Dollar (USD)",
+          "message": "United States Dollar (USD)"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.Y3VycmVuY3lfY29kZQ.allowed-value.c3RyaW5nOlVTRA.desc": {
+          "source": "United States dollar",
+          "message": "United States dollar"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.dmFsdWU.display_name": {
+          "source": "Refund Value",
+          "message": "Refund Value"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.dmFsdWU.short_desc": {
+          "source": "The refund amount as a string",
+          "message": "The refund amount as a string"
+        },
+        "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.YW1vdW50.field.dmFsdWU.desc": {
+          "source": "The amount to refund, formatted as a string with appropriate decimal precision.",
+          "message": "The amount to refund, formatted as a string with appropriate decimal precision."
         },
         "app.UGF5UGFs.action.cmVmdW5kX3BheW1lbnQ.option.bm90ZV90b19wYXllcg.display_name": {
           "source": "Note to Payer",

@@ -49,6 +49,7 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
         addTestCase("include_response_headers flag", \includeResponseHeadersTest());
         addTestCase("app base dir", \appBaseDirTest());
         addTestCase("structured field choices", \structuredFieldChoicesTest());
+        addTestCase("producer schema boundary", \producerSchemaBoundaryTest());
         addTestCase("eager registration failure reporting", \eagerRegistrationFailureTest());
 
         # Return for compatibility with test harnesses that check the script's return value
@@ -1037,6 +1038,7 @@ var obj = {
         hash<auto> payload = {
             "field": "modifiedTime",
             "direction": "desc",
+            "value": "raw payload member",
         };
         TypeScriptDataField field = TypeScriptActionInterface::getField("repro", "order_by", {
             "type": {
@@ -1046,6 +1048,7 @@ var obj = {
                     "fields": {
                         "field": {"type": "string", "required": True},
                         "direction": {"type": "string", "required": True},
+                        "value": {"type": "string", "required": True},
                     },
                 },
             },
@@ -1062,10 +1065,274 @@ var obj = {
             assertEq("opaque-label", choices[0].display_name);
             assertEq(payload, choices[0].value);
             assertEq((payload,), value.acceptsValue((payload,)));
-            assertEq(({"field": "name", "direction": "asc"},),
-                value.acceptsValue(({"field": "name", "direction": "asc"},)),
+            hash<auto> custom = {
+                "field": "name",
+                "direction": "asc",
+                "value": "custom payload member",
+            };
+            assertEq((custom,), value.acceptsValue((custom,)),
                 "creatable structured choices still accept custom values");
         }
+    }
+
+    #! Provider schemas distinguish absence, emptiness, null, and unsupported versions at one boundary
+    private producerSchemaBoundaryTest() {
+        string inventory_app = "TypeScriptInventory_"
+            + get_random_string(8);
+        int inventory_revision
+            = DataProviderActionCatalog::getCatalogRevision();
+        assertThrows("TYPESCRIPT-PROVIDER-INVENTORY-ERROR", sub () {
+            TypeScriptActionInterface::registerDiscoveryInventory(({
+                "app": inventory_app,
+                "action": "missing-app-record",
+            },));
+        }, NOTHING,
+            "a complete inventory batch requires its app identity");
+        assertThrows("TYPESCRIPT-PROVIDER-INVENTORY-ERROR", sub () {
+            TypeScriptActionInterface::registerDiscoveryInventory(({
+                "app": inventory_app,
+            }, {
+                "app": inventory_app + "_other",
+                "action": "cross-app",
+            }));
+        }, NOTHING,
+            "one inventory batch cannot mix application identities");
+        assertEq(inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "rejected inventory batches do not mutate qualification state");
+        TypeScriptActionInterface::registerDiscoveryInventory(({
+            "app": inventory_app,
+        }, {
+            "app": inventory_app,
+            "action": "declared-before-materialization",
+        }));
+        assertEq(++inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "publishing a new exact inventory batch advances qualification atomically");
+        list<hash<DataProviderDiscoveryExpectedIdentityInfo>> inventory
+            = map $1, TypeScriptActionInterface::getDiscoveryInventory(),
+                $1.app == inventory_app;
+        assertEq(2, inventory.size(),
+            "a producer batch publishes its app and actions before materialization");
+        TypeScriptActionInterface::registerDiscoveryInventory(({
+            "app": inventory_app,
+        }, {
+            "app": inventory_app,
+            "action": "replacement-action",
+        }));
+        assertEq(++inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "replacing an inventory batch advances qualification atomically");
+        inventory = map $1,
+            TypeScriptActionInterface::getDiscoveryInventory(),
+            $1.app == inventory_app;
+        assertEq((inventory_app, inventory_app), map $1.app, inventory,
+            "a replacement batch retains the app and one action identity");
+        assertEq(("replacement-action",),
+            (map $1.action, inventory, exists $1.action),
+            "a replacement batch removes stale action identities exactly");
+        TypeScriptActionInterface::deregisterDynamicApp(inventory_app);
+        assertEq(++inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "inventory deregistration advances qualification atomically");
+
+        string failed_source = "qualification-source-"
+            + get_random_string(8) + ".js";
+        try {
+            throw "TYPESCRIPT-SOURCE-TEST-ERROR",
+                "producer failed before publishing identities";
+        } catch (hash<ExceptionInfo> ex) {
+            TypeScriptActionInterface::reportDiscoverySourceFailure(
+                failed_source, ex);
+        }
+        assertEq(++inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "a pre-inventory source failure advances qualification state");
+        assertThrows("TYPESCRIPT-PROVIDER-INVENTORY-SOURCE-ERROR",
+            "failed before publishing a complete inventory", sub () {
+                TypeScriptActionInterface::getDiscoveryInventory();
+            }, NOTHING,
+            "a source-level failure cannot disappear behind an empty inventory");
+        TypeScriptActionInterface::clearDiscoverySourceFailure(failed_source);
+        assertEq(++inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "a successful exact-source retry advances qualification state");
+        assertTrue(TypeScriptActionInterface::getDiscoveryInventory()
+            instanceof list,
+            "clearing the exact source failure restores inventory collection");
+
+        TypeScriptDataField empty = TypeScriptActionInterface::getField(
+            "boundary", "empty", {
+                "type": "string",
+                "required": False,
+                "allowed_values": (),
+                "element_allowed_values": (),
+            });
+        foreach QoreDataField value in (
+                empty, Serializable::deserialize(empty.serialize())) {
+            assertEq((), value.getAllowedValues());
+            assertEq((), value.getElementAllowedValues());
+        }
+
+        TypeScriptDataField empty_schema
+            = TypeScriptActionInterface::getField("boundary", "empty_schema", {
+                "type": {
+                    "type": "hash",
+                    "fields": {},
+                },
+            });
+        foreach QoreDataField value in (empty_schema,
+                Serializable::deserialize(empty_schema.serialize())) {
+            assertEq(0, value.getDeclaredType().getFields().size(),
+                "an explicitly empty schema remains empty across serialization");
+        }
+
+        TypeScriptDataField flat_path
+            = TypeScriptActionInterface::getField("collision", "a-b", {
+                "type": {
+                    "type": "hash",
+                    "fields": {
+                        "value": {"type": "string"},
+                    },
+                },
+            });
+        TypeScriptDataField nested_path
+            = TypeScriptActionInterface::getField("collision", "a", {
+                "type": {
+                    "type": "hash",
+                    "fields": {
+                        "b": {
+                            "type": {
+                                "type": "hash",
+                                "fields": {
+                                    "value": {"type": "string"},
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        string flat_identity = flat_path.getDeclaredType().getPath();
+        string nested_identity = nested_path.getDeclaredType().getFields(){"b"}
+            .getDeclaredType().getPath();
+        assertNeq(flat_identity, nested_identity,
+            "typed encoded path segments distinguish a flat a-b field from nested a/b fields");
+
+        assertThrows("TYPESCRIPT-PROVIDER-SCHEMA-ERROR",
+            "must be a list", sub () {
+                TypeScriptActionInterface::getField("boundary", "null", {
+                    "type": "string",
+                    "required": False,
+                    "allowed_values": NOTHING,
+                });
+            });
+        assertThrows("TYPESCRIPT-PROVIDER-SCHEMA-ERROR",
+            "exact value member", sub () {
+                TypeScriptActionInterface::getField("boundary", "bare", {
+                    "type": "string",
+                    "required": False,
+                    "allowed_values": ({"display_name": "missing"},),
+                });
+            });
+
+        string app = "TypeScriptVersion_" + get_random_string(8);
+        JavaScriptProgramPool pool("", "version-test.js",
+            sub (JavaScriptProgram pgm) {});
+        hash<auto> app_info = {
+            "name": app,
+            "provider_schema_version": 1,
+            "display_name": app,
+            "short_desc": "schema version test",
+            "desc": "schema version test",
+            "groups": ("Other",),
+            "logo": make_base64_string(<00>),
+            "logo_file_name": "test.svg",
+            "logo_mime_type": MimeTypeSvg,
+            "dynamic": True,
+        };
+        TypeScriptActionInterface::registerApp(app_info, pool);
+        DataProviderActionCatalog::getAppEx(app);
+        on_exit TypeScriptActionInterface::deregisterDynamicApp(app);
+
+        hash<auto> action = {
+            "app": app,
+            "action": "versioned-action",
+            "provider_schema_version": 1,
+            "display_name": "Versioned action",
+            "short_desc": "schema version test",
+            "desc": "schema version test",
+            "action_code": DPAT_API,
+            "api_function": sub () {},
+        };
+        TypeScriptActionInterface::registerAction(action, pool);
+        DataProviderActionCatalog::getAppActionEx(app, "versioned-action");
+
+        app_info.name = app + "_unsupported";
+        app_info.provider_schema_version = 2;
+        assertThrows("TYPESCRIPT-PROVIDER-SCHEMA-VERSION-ERROR",
+            "unsupported", sub () {
+                TypeScriptActionInterface::registerApp(app_info, pool);
+            });
+        assertEq("TYPESCRIPT-PROVIDER-SCHEMA-VERSION-ERROR",
+            DataProviderActionCatalog::getInitializationFailures(
+                (app_info.name,))[0].error,
+            "a rejected producer version remains machine-readable");
+        app_info.provider_schema_version = 1;
+        TypeScriptActionInterface::registerApp(app_info, pool);
+        DataProviderActionCatalog::getAppEx(app_info.name);
+        assertEq((), DataProviderActionCatalog::getInitializationFailures(
+            (app_info.name,)), "a valid retry clears only its own failure");
+        TypeScriptActionInterface::deregisterDynamicApp(app_info.name);
+
+        string invalid_app = app + " invalid";
+        app_info.name = invalid_app;
+        app_info.provider_schema_version = 1;
+        assertThrows("APP-ERROR", "contains one or more spaces", sub () {
+            TypeScriptActionInterface::registerApp(app_info, pool);
+        });
+        assertEq("APP-ERROR",
+            DataProviderActionCatalog::getInitializationFailures(
+                (invalid_app,))[0].error,
+            "validation before materialization remains machine-readable");
+        assertEq(1, (map $1,
+                TypeScriptActionInterface::getDiscoveryInventory(),
+                $1.app == invalid_app && !exists $1.action).size(),
+            "the invalid app remains in the lightweight discovery inventory");
+        TypeScriptActionInterface::deregisterDynamicApp(invalid_app);
+        assertEq((), DataProviderActionCatalog::getInitializationFailures(
+            (invalid_app,)),
+            "deregistering a pre-materialization failure clears retained state");
+        assertEq(0, (map $1,
+                TypeScriptActionInterface::getDiscoveryInventory(),
+                $1.app == invalid_app).size(),
+            "deregistering a pre-materialization failure clears producer inventory");
+
+        app_info.name = app + "_null";
+        app_info.provider_schema_version = NOTHING;
+        assertThrows("TYPESCRIPT-PROVIDER-SCHEMA-VERSION-ERROR",
+            "unsupported", sub () {
+                TypeScriptActionInterface::registerApp(app_info, pool);
+            });
+        app_info.provider_schema_version = 1;
+        TypeScriptActionInterface::registerApp(app_info, pool);
+        DataProviderActionCatalog::getAppEx(app_info.name);
+        TypeScriptActionInterface::deregisterDynamicApp(app_info.name);
+
+        action.action = "unsupported-version-action";
+        action.provider_schema_version = 2;
+        assertThrows("TYPESCRIPT-PROVIDER-SCHEMA-VERSION-ERROR",
+            "unsupported", sub () {
+                TypeScriptActionInterface::registerAction(action, pool);
+            });
+        list<hash<DataProviderInitializationFailureInfo>> failures
+            = DataProviderActionCatalog::getInitializationFailures((app,));
+        assertEq("unsupported-version-action", failures[0].action);
+        assertEq("TYPESCRIPT-PROVIDER-SCHEMA-VERSION-ERROR",
+            failures[0].error);
+        action.provider_schema_version = 1;
+        TypeScriptActionInterface::registerAction(action, pool);
+        assertEq((), DataProviderActionCatalog::getInitializationFailures(
+            (app,)));
     }
 
     #! Eager TypeScript registration failures retain machine-readable action identity without relying on output
@@ -1105,6 +1372,17 @@ var obj = {
         assertEq(app, failures[0].app);
         assertEq("broken-action", failures[0].action);
         assertEq("TYPESCRIPT-ACTION-ERROR", failures[0].error);
+        bool found_expected_identity;
+        foreach hash<DataProviderDiscoveryExpectedIdentityInfo> identity in (
+                TypeScriptActionInterface::getDiscoveryInventory()) {
+            if (identity.app == app
+                    && identity.action == "broken-action") {
+                found_expected_identity = True;
+                break;
+            }
+        }
+        assertTrue(found_expected_identity,
+            "the lightweight producer inventory survives schema materialization failure");
 
         # A successful retry of the same exact identity clears the retained failure.
         action.action_code = DPAT_API;

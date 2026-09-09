@@ -1467,6 +1467,42 @@
           "source": "List of form fields to submit. Each entry must include the internal `name` (matching the field on the form definition) and the `value` to submit. `objectTypeId` is optional and defaults to the contact object (`0-1`).",
           "message": "List of form fields to submit. Each entry must include the internal `name` (matching the field on the form definition) and the `value` to submit. `objectTypeId` is optional and defaults to the contact object (`0-1`)."
         },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.bmFtZQ.display_name": {
+          "source": "Field Name",
+          "message": "Field Name"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.bmFtZQ.short_desc": {
+          "source": "Internal name of the form field",
+          "message": "Internal name of the form field"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.bmFtZQ.desc": {
+          "source": "The internal name of the form field, as defined on the HubSpot form (e.g. `email`, `firstname`).",
+          "message": "The internal name of the form field, as defined on the HubSpot form (e.g. `email`, `firstname`)."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.b2JqZWN0VHlwZUlk.display_name": {
+          "source": "Object Type ID",
+          "message": "Object Type ID"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.b2JqZWN0VHlwZUlk.short_desc": {
+          "source": "Object the field belongs to (e.g. `0-1` for contacts)",
+          "message": "Object the field belongs to (e.g. `0-1` for contacts)"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.b2JqZWN0VHlwZUlk.desc": {
+          "source": "Optional HubSpot object-type identifier the field belongs to. Defaults to the contact object (`0-1`); set explicitly for fields belonging to a different object type.",
+          "message": "Optional HubSpot object-type identifier the field belongs to. Defaults to the contact object (`0-1`); set explicitly for fields belonging to a different object type."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.dmFsdWU.display_name": {
+          "source": "Field Value",
+          "message": "Field Value"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.dmFsdWU.short_desc": {
+          "source": "Value to submit for this field",
+          "message": "Value to submit for this field"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.ZmllbGRz.field.dmFsdWU.desc": {
+          "source": "The value to submit for this field. Must be a string.",
+          "message": "The value to submit for this field. Must be a string."
+        },
         "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.display_name": {
           "source": "Submission Context",
           "message": "Submission Context"
@@ -1478,6 +1514,90 @@
         "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.desc": {
           "source": "Optional submission context, including the HubSpot user-tracking cookie (`hutk`), IP address, page URI/name/ID, Salesforce campaign ID, and GoToWebinar key.",
           "message": "Optional submission context, including the HubSpot user-tracking cookie (`hutk`), IP address, page URI/name/ID, Salesforce campaign ID, and GoToWebinar key."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.Z29Ub1dlYmluYXJXZWJpbmFyS2V5.display_name": {
+          "source": "GoToWebinar Webinar Key",
+          "message": "GoToWebinar Webinar Key"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.Z29Ub1dlYmluYXJXZWJpbmFyS2V5.short_desc": {
+          "source": "GoToWebinar key for webinar registration submissions",
+          "message": "GoToWebinar key for webinar registration submissions"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.Z29Ub1dlYmluYXJXZWJpbmFyS2V5.desc": {
+          "source": "GoToWebinar webinar key. Used when this submission is a webinar registration; HubSpot will register the contact for the corresponding GoToWebinar event.",
+          "message": "GoToWebinar webinar key. Used when this submission is a webinar registration; HubSpot will register the contact for the corresponding GoToWebinar event."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.aHV0aw.display_name": {
+          "source": "HubSpot User Token (hutk)",
+          "message": "HubSpot User Token (hutk)"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.aHV0aw.short_desc": {
+          "source": "Tracking cookie value from the HubSpot script",
+          "message": "Tracking cookie value from the HubSpot script"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.aHV0aw.desc": {
+          "source": "Value of the `hubspotutk` cookie set by the HubSpot tracking script on the visitor browser. Used to associate the submission with an existing visitor.",
+          "message": "Value of the `hubspotutk` cookie set by the HubSpot tracking script on the visitor browser. Used to associate the submission with an existing visitor."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.aXBBZGRyZXNz.display_name": {
+          "source": "IP Address",
+          "message": "IP Address"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.aXBBZGRyZXNz.short_desc": {
+          "source": "Originating IP address of the submitter",
+          "message": "Originating IP address of the submitter"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.aXBBZGRyZXNz.desc": {
+          "source": "IP address from which the submission was made.",
+          "message": "IP address from which the submission was made."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZUlk.display_name": {
+          "source": "Page ID",
+          "message": "Page ID"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZUlk.short_desc": {
+          "source": "HubSpot page ID where the form was submitted",
+          "message": "HubSpot page ID where the form was submitted"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZUlk.desc": {
+          "source": "HubSpot page ID where the form was submitted (only when submitting from a HubSpot-hosted page).",
+          "message": "HubSpot page ID where the form was submitted (only when submitting from a HubSpot-hosted page)."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZU5hbWU.display_name": {
+          "source": "Page Name",
+          "message": "Page Name"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZU5hbWU.short_desc": {
+          "source": "Display name of the page where the form was submitted",
+          "message": "Display name of the page where the form was submitted"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZU5hbWU.desc": {
+          "source": "Display title of the page where the form was submitted.",
+          "message": "Display title of the page where the form was submitted."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZVVyaQ.display_name": {
+          "source": "Page URI",
+          "message": "Page URI"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZVVyaQ.short_desc": {
+          "source": "Full URL of the page where the form was submitted",
+          "message": "Full URL of the page where the form was submitted"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.cGFnZVVyaQ.desc": {
+          "source": "Full URL of the page where the form was submitted.",
+          "message": "Full URL of the page where the form was submitted."
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.c2ZkY0NhbXBhaWduSWQ.display_name": {
+          "source": "Salesforce Campaign ID",
+          "message": "Salesforce Campaign ID"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.c2ZkY0NhbXBhaWduSWQ.short_desc": {
+          "source": "Salesforce campaign to associate the submission with",
+          "message": "Salesforce campaign to associate the submission with"
+        },
+        "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.Y29udGV4dA.field.c2ZkY0NhbXBhaWduSWQ.desc": {
+          "source": "Salesforce campaign ID. Used when the HubSpot account is linked to a Salesforce org to associate this submission with the campaign.",
+          "message": "Salesforce campaign ID. Used when the HubSpot account is linked to a Salesforce org to associate this submission with the campaign."
         },
         "app.SHVic3BvdA.action.c3VibWl0X2Zvcm0.option.bGVnYWxDb25zZW50T3B0aW9ucw.display_name": {
           "source": "Legal Consent Options",

@@ -719,6 +719,38 @@
           "source": "The parent container (space, folder, list, etc.) where the document will be placed",
           "message": "The parent container (space, folder, list, etc.) where the document will be placed"
         },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.display_name": {
+          "source": "Parent Type",
+          "message": "Parent Type"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.short_desc": {
+          "source": "Type of parent container",
+          "message": "Type of parent container"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.desc": {
+          "source": "The type of parent container (4=Space, 5=Folder, 6=List, 7=Everything, 12=Workspace)",
+          "message": "The type of parent container (4=Space, 5=Folder, 6=List, 7=Everything, 12=Workspace)"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.allowed-value.bnVtYmVyOjQ.display_name": {
+          "source": "Space",
+          "message": "Space"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.allowed-value.bnVtYmVyOjU.display_name": {
+          "source": "Folder",
+          "message": "Folder"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.allowed-value.bnVtYmVyOjY.display_name": {
+          "source": "List",
+          "message": "List"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.allowed-value.bnVtYmVyOjc.display_name": {
+          "source": "Everything",
+          "message": "Everything"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.cGFyZW50.field.dHlwZQ.allowed-value.bnVtYmVyOjEy.display_name": {
+          "source": "Workspace",
+          "message": "Workspace"
+        },
         "app.Q2xpY2tVcA.action.Y3JlYXRlX2RvY3VtZW50.option.dmlzaWJpbGl0eQ.display_name": {
           "source": "Visibility",
           "message": "Visibility"
@@ -1182,6 +1214,30 @@
         "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.desc": {
           "source": "Values for custom fields defined in the workspace",
           "message": "Values for custom fields defined in the workspace"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.aWQ.display_name": {
+          "source": "Field ID",
+          "message": "Field ID"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.aWQ.short_desc": {
+          "source": "Custom field identifier",
+          "message": "Custom field identifier"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.aWQ.desc": {
+          "source": "The unique identifier of the custom field",
+          "message": "The unique identifier of the custom field"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.dmFsdWU.display_name": {
+          "source": "Field Value",
+          "message": "Field Value"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.dmFsdWU.short_desc": {
+          "source": "Custom field value",
+          "message": "Custom field value"
+        },
+        "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.dmFsdWU.desc": {
+          "source": "The value to set for this custom field",
+          "message": "The value to set for this custom field"
         },
         "app.Q2xpY2tVcA.action.Y3JlYXRlX3Rhc2s.option.Y3VzdG9tX2l0ZW1faWQ.display_name": {
           "source": "Custom Item ID",
@@ -2514,6 +2570,30 @@
         "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.desc": {
           "source": "Updated values for custom fields",
           "message": "Updated values for custom fields"
+        },
+        "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.aWQ.display_name": {
+          "source": "Field ID",
+          "message": "Field ID"
+        },
+        "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.aWQ.short_desc": {
+          "source": "Custom field identifier",
+          "message": "Custom field identifier"
+        },
+        "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.aWQ.desc": {
+          "source": "The unique identifier of the custom field",
+          "message": "The unique identifier of the custom field"
+        },
+        "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.dmFsdWU.display_name": {
+          "source": "Field Value",
+          "message": "Field Value"
+        },
+        "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.dmFsdWU.short_desc": {
+          "source": "Custom field value",
+          "message": "Custom field value"
+        },
+        "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2ZpZWxkcw.field.dmFsdWU.desc": {
+          "source": "The updated value for this custom field",
+          "message": "The updated value for this custom field"
         },
         "app.Q2xpY2tVcA.action.dXBkYXRlX3Rhc2s.option.Y3VzdG9tX2l0ZW1faWQ.display_name": {
           "source": "Custom Item ID",

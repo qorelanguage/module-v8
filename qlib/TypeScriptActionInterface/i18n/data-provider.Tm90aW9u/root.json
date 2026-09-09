@@ -1075,6 +1075,58 @@
           "source": "Configure how the database items should be sorted in the response",
           "message": "Configure how the database items should be sorted in the response"
         },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Direction",
+          "message": "Direction"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.ZGlyZWN0aW9u.desc": {
+          "source": "The direction to sort: ascending or descending",
+          "message": "The direction to sort: ascending or descending"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmFzY2VuZGluZw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOmRlc2NlbmRpbmc.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.cHJvcGVydHk.display_name": {
+          "source": "Property",
+          "message": "Property"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.cHJvcGVydHk.short_desc": {
+          "source": "Database property to sort by",
+          "message": "Database property to sort by"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.cHJvcGVydHk.desc": {
+          "source": "The name of the database property to use for sorting",
+          "message": "The name of the database property to use for sorting"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.dGltZXN0YW1w.display_name": {
+          "source": "Timestamp",
+          "message": "Timestamp"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.dGltZXN0YW1w.short_desc": {
+          "source": "Timestamp field to sort by",
+          "message": "Timestamp field to sort by"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.dGltZXN0YW1w.desc": {
+          "source": "Sort by a timestamp field: created_time or last_edited_time. Use this instead of property for time-based sorting.",
+          "message": "Sort by a timestamp field: created_time or last_edited_time. Use this instead of property for time-based sorting."
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.dGltZXN0YW1w.allowed-value.c3RyaW5nOmNyZWF0ZWRfdGltZQ.display_name": {
+          "source": "Created Time",
+          "message": "Created Time"
+        },
+        "app.Tm90aW9u.action.bGlzdF9kYXRhc291cmNlX2l0ZW1z.option.c29ydHM.field.dGltZXN0YW1w.allowed-value.c3RyaW5nOmxhc3RfZWRpdGVkX3RpbWU.display_name": {
+          "source": "Last Edited Time",
+          "message": "Last Edited Time"
+        },
         "app.Tm90aW9u.action.bmV3X2RhdGFiYXNlX2l0ZW0.display_name": {
           "source": "New Database Item",
           "message": "New Database Item"

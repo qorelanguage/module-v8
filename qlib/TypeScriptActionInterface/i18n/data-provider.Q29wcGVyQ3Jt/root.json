@@ -471,6 +471,42 @@
           "source": "List of websites associated with the lead",
           "message": "List of websites associated with the lead"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of website",
+          "message": "Type of website"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or purpose of this website (work, personal, or other)",
+          "message": "The category or purpose of this website (work, personal, or other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.dXJs.short_desc": {
+          "source": "Website URL",
+          "message": "Website URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.dXJs.desc": {
+          "source": "The full URL of the website",
+          "message": "The full URL of the website"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.display_name": {
           "source": "Social Media",
           "message": "Social Media"
@@ -483,6 +519,62 @@
           "source": "List of social media profiles for the lead",
           "message": "List of social media profiles for the lead"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Platform",
+          "message": "Platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Social media platform",
+          "message": "Social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The social media platform (LinkedIn, Twitter, Facebook, YouTube, Quora, Instagram, Pinterest, or Other)",
+          "message": "The social media platform (LinkedIn, Twitter, Facebook, YouTube, Quora, Instagram, Pinterest, or Other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmxpbmtlZGlu.display_name": {
+          "source": "LinkedIn",
+          "message": "LinkedIn"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnlvdXR1YmU.display_name": {
+          "source": "YouTube",
+          "message": "YouTube"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnF1b3Jh.display_name": {
+          "source": "Quora",
+          "message": "Quora"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmluc3RhZ3JhbQ.display_name": {
+          "source": "Instagram",
+          "message": "Instagram"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBpbnRlcmVzdA.display_name": {
+          "source": "Pinterest",
+          "message": "Pinterest"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.dXJs.short_desc": {
+          "source": "Social media profile URL",
+          "message": "Social media profile URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.c29jaWFscw.field.dXJs.desc": {
+          "source": "The full URL to the social media profile",
+          "message": "The full URL to the social media profile"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.display_name": {
           "source": "Email",
           "message": "Email"
@@ -492,6 +584,42 @@
           "message": "Email address"
         },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.desc": {
+          "source": "The email address of the lead",
+          "message": "The email address of the lead"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of email",
+          "message": "Type of email"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this email (work, personal, or other)",
+          "message": "The category or type of this email (work, personal, or other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.ZW1haWw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.ZW1haWw.short_desc": {
+          "source": "The email address",
+          "message": "The email address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.ZW1haWw.field.ZW1haWw.desc": {
           "source": "The email address of the lead",
           "message": "The email address of the lead"
         },
@@ -507,6 +635,30 @@
           "source": "List of phone numbers for the lead",
           "message": "List of phone numbers for the lead"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of phone number",
+          "message": "Type of phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this phone number",
+          "message": "The category or type of this phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.short_desc": {
+          "source": "The phone number",
+          "message": "The phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.desc": {
+          "source": "The phone number in any format",
+          "message": "The phone number in any format"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.display_name": {
           "source": "Address",
           "message": "Address"
@@ -518,6 +670,66 @@
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.desc": {
           "source": "The physical address of the lead including street, city, state, postal code, and country",
           "message": "The physical address of the lead including street, city, state, postal code, and country"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y2l0eQ.short_desc": {
+          "source": "City name",
+          "message": "City name"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y2l0eQ.desc": {
+          "source": "The city where the lead is located",
+          "message": "The city where the lead is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y291bnRyeQ.short_desc": {
+          "source": "Country name",
+          "message": "Country name"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y291bnRyeQ.desc": {
+          "source": "The country",
+          "message": "The country"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.short_desc": {
+          "source": "ZIP or postal code",
+          "message": "ZIP or postal code"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.desc": {
+          "source": "The postal code or ZIP code",
+          "message": "The postal code or ZIP code"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RhdGU.display_name": {
+          "source": "State",
+          "message": "State"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RhdGU.short_desc": {
+          "source": "State or province",
+          "message": "State or province"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RhdGU.desc": {
+          "source": "The state or province",
+          "message": "The state or province"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RyZWV0.display_name": {
+          "source": "Street",
+          "message": "Street"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RyZWV0.short_desc": {
+          "source": "Street address",
+          "message": "Street address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RyZWV0.desc": {
+          "source": "The street address",
+          "message": "The street address"
         },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2xlYWQ.option.Y3VzdG9tZXJfc291cmNlX2lk.display_name": {
           "source": "Customer Source",
@@ -711,6 +923,42 @@
           "source": "Updated list of associated websites",
           "message": "Updated list of associated websites"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of website",
+          "message": "Type of website"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or purpose of this website",
+          "message": "The category or purpose of this website"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.dXJs.short_desc": {
+          "source": "Website URL",
+          "message": "Website URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.d2Vic2l0ZXM.field.dXJs.desc": {
+          "source": "The full URL of the website",
+          "message": "The full URL of the website"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.display_name": {
           "source": "Social Media",
           "message": "Social Media"
@@ -722,6 +970,62 @@
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.desc": {
           "source": "Updated list of social media profiles",
           "message": "Updated list of social media profiles"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Platform",
+          "message": "Platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Social media platform",
+          "message": "Social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The social media platform",
+          "message": "The social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmxpbmtlZGlu.display_name": {
+          "source": "LinkedIn",
+          "message": "LinkedIn"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnlvdXR1YmU.display_name": {
+          "source": "YouTube",
+          "message": "YouTube"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnF1b3Jh.display_name": {
+          "source": "Quora",
+          "message": "Quora"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmluc3RhZ3JhbQ.display_name": {
+          "source": "Instagram",
+          "message": "Instagram"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBpbnRlcmVzdA.display_name": {
+          "source": "Pinterest",
+          "message": "Pinterest"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.dXJs.short_desc": {
+          "source": "Social media profile URL",
+          "message": "Social media profile URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.c29jaWFscw.field.dXJs.desc": {
+          "source": "The full URL to the social media profile",
+          "message": "The full URL to the social media profile"
         },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.display_name": {
           "source": "Email",
@@ -735,6 +1039,42 @@
           "source": "The updated email address",
           "message": "The updated email address"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of email",
+          "message": "Type of email"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this email",
+          "message": "The category or type of this email"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.ZW1haWw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.ZW1haWw.short_desc": {
+          "source": "The email address",
+          "message": "The email address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.ZW1haWw.field.ZW1haWw.desc": {
+          "source": "The email address of the lead",
+          "message": "The email address of the lead"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.display_name": {
           "source": "Phone Numbers",
           "message": "Phone Numbers"
@@ -747,6 +1087,30 @@
           "source": "Updated list of phone numbers",
           "message": "Updated list of phone numbers"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of phone number",
+          "message": "Type of phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this phone number",
+          "message": "The category or type of this phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.short_desc": {
+          "source": "The phone number",
+          "message": "The phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.desc": {
+          "source": "The phone number in any format",
+          "message": "The phone number in any format"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.display_name": {
           "source": "Address",
           "message": "Address"
@@ -758,6 +1122,66 @@
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.desc": {
           "source": "The updated physical address",
           "message": "The updated physical address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y2l0eQ.short_desc": {
+          "source": "City name",
+          "message": "City name"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y2l0eQ.desc": {
+          "source": "The city",
+          "message": "The city"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y291bnRyeQ.short_desc": {
+          "source": "Country name",
+          "message": "Country name"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.Y291bnRyeQ.desc": {
+          "source": "The country",
+          "message": "The country"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.short_desc": {
+          "source": "ZIP or postal code",
+          "message": "ZIP or postal code"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.desc": {
+          "source": "The postal code or ZIP code",
+          "message": "The postal code or ZIP code"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RhdGU.display_name": {
+          "source": "State",
+          "message": "State"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RhdGU.short_desc": {
+          "source": "State or province",
+          "message": "State or province"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RhdGU.desc": {
+          "source": "The state or province",
+          "message": "The state or province"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RyZWV0.display_name": {
+          "source": "Street",
+          "message": "Street"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RyZWV0.short_desc": {
+          "source": "Street address",
+          "message": "Street address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.YWRkcmVzcw.field.c3RyZWV0.desc": {
+          "source": "The street address",
+          "message": "The street address"
         },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2xlYWQ.option.Y3VzdG9tZXJfc291cmNlX2lk.display_name": {
           "source": "Customer Source",
@@ -1327,6 +1751,42 @@
           "source": "List of email addresses for the person",
           "message": "List of email addresses for the person"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of email",
+          "message": "Type of email"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this email (work, personal, or other)",
+          "message": "The category or type of this email (work, personal, or other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.ZW1haWw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.ZW1haWw.short_desc": {
+          "source": "The email address",
+          "message": "The email address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.ZW1haWxz.field.ZW1haWw.desc": {
+          "source": "Email address",
+          "message": "Email address"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.display_name": {
           "source": "Phone Numbers",
           "message": "Phone Numbers"
@@ -1339,6 +1799,46 @@
           "source": "List of phone numbers for the person",
           "message": "List of phone numbers for the person"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of phone number",
+          "message": "Type of phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this phone number (work, mobile, home, or other)",
+          "message": "The category or type of this phone number (work, mobile, home, or other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm1vYmlsZQ.display_name": {
+          "source": "Mobile",
+          "message": "Mobile"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmhvbWU.display_name": {
+          "source": "Home",
+          "message": "Home"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.short_desc": {
+          "source": "The phone number",
+          "message": "The phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.desc": {
+          "source": "Phone number",
+          "message": "Phone number"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.display_name": {
           "source": "Social Media",
           "message": "Social Media"
@@ -1350,6 +1850,62 @@
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.desc": {
           "source": "List of social media profiles for the person",
           "message": "List of social media profiles for the person"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Platform",
+          "message": "Platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Social media platform",
+          "message": "Social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.desc": {
+          "source": "Social platform",
+          "message": "Social platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmxpbmtlZGlu.display_name": {
+          "source": "LinkedIn",
+          "message": "LinkedIn"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnlvdXR1YmU.display_name": {
+          "source": "YouTube",
+          "message": "YouTube"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnF1b3Jh.display_name": {
+          "source": "Quora",
+          "message": "Quora"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmluc3RhZ3JhbQ.display_name": {
+          "source": "Instagram",
+          "message": "Instagram"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBpbnRlcmVzdA.display_name": {
+          "source": "Pinterest",
+          "message": "Pinterest"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.dXJs.short_desc": {
+          "source": "Social profile URL",
+          "message": "Social profile URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.c29jaWFscw.field.dXJs.desc": {
+          "source": "Social profile URL",
+          "message": "Social profile URL"
         },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.dGFncw.display_name": {
           "source": "Tags",
@@ -1386,6 +1942,42 @@
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.desc": {
           "source": "List of websites associated with the person",
           "message": "List of websites associated with the person"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of website",
+          "message": "Type of website"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "Website category",
+          "message": "Website category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.dXJs.short_desc": {
+          "source": "Website URL",
+          "message": "Website URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.dXJs.desc": {
+          "source": "Website URL",
+          "message": "Website URL"
         },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3BlcnNvbg.option.Y3VzdG9tX2ZpZWxkcw.display_name": {
           "source": "Custom Fields",
@@ -1639,6 +2231,42 @@
           "source": "Updated list of email addresses",
           "message": "Updated list of email addresses"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of email",
+          "message": "Type of email"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this email",
+          "message": "The category or type of this email"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.ZW1haWw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.ZW1haWw.short_desc": {
+          "source": "The email address",
+          "message": "The email address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.ZW1haWxz.field.ZW1haWw.desc": {
+          "source": "Email address",
+          "message": "Email address"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.display_name": {
           "source": "Phone Numbers",
           "message": "Phone Numbers"
@@ -1651,6 +2279,46 @@
           "source": "Updated list of phone numbers",
           "message": "Updated list of phone numbers"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of phone number",
+          "message": "Type of phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this phone number",
+          "message": "The category or type of this phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm1vYmlsZQ.display_name": {
+          "source": "Mobile",
+          "message": "Mobile"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmhvbWU.display_name": {
+          "source": "Home",
+          "message": "Home"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.short_desc": {
+          "source": "The phone number",
+          "message": "The phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.desc": {
+          "source": "Phone number",
+          "message": "Phone number"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.display_name": {
           "source": "Social Media",
           "message": "Social Media"
@@ -1662,6 +2330,62 @@
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.desc": {
           "source": "Updated list of social media profiles",
           "message": "Updated list of social media profiles"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Platform",
+          "message": "Platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Social media platform",
+          "message": "Social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.desc": {
+          "source": "Social platform",
+          "message": "Social platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmxpbmtlZGlu.display_name": {
+          "source": "LinkedIn",
+          "message": "LinkedIn"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnlvdXR1YmU.display_name": {
+          "source": "YouTube",
+          "message": "YouTube"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnF1b3Jh.display_name": {
+          "source": "Quora",
+          "message": "Quora"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmluc3RhZ3JhbQ.display_name": {
+          "source": "Instagram",
+          "message": "Instagram"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBpbnRlcmVzdA.display_name": {
+          "source": "Pinterest",
+          "message": "Pinterest"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.dXJs.short_desc": {
+          "source": "Social profile URL",
+          "message": "Social profile URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.c29jaWFscw.field.dXJs.desc": {
+          "source": "Social profile URL",
+          "message": "Social profile URL"
         },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.dGFncw.display_name": {
           "source": "Tags",
@@ -1698,6 +2422,42 @@
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.desc": {
           "source": "Updated list of associated websites",
           "message": "Updated list of associated websites"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of website",
+          "message": "Type of website"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "Website category",
+          "message": "Website category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.dXJs.short_desc": {
+          "source": "Website URL",
+          "message": "Website URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.d2Vic2l0ZXM.field.dXJs.desc": {
+          "source": "Website URL",
+          "message": "Website URL"
         },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3BlcnNvbg.option.Y3VzdG9tX2ZpZWxkcw.display_name": {
           "source": "Custom Fields",
@@ -2123,6 +2883,50 @@
           "source": "The CRM record (lead, person, company, opportunity, or project) this task is related to",
           "message": "The CRM record (lead, person, company, opportunity, or project) this task is related to"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.aWQ.display_name": {
+          "source": "Resource ID",
+          "message": "Resource ID"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.aWQ.short_desc": {
+          "source": "ID of the related record",
+          "message": "ID of the related record"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.aWQ.desc": {
+          "source": "The ID of the related CRM record",
+          "message": "The ID of the related CRM record"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.display_name": {
+          "source": "Resource Type",
+          "message": "Resource Type"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.short_desc": {
+          "source": "Type of related record",
+          "message": "Type of related record"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.desc": {
+          "source": "The type of CRM record this task is related to (lead, person, company, opportunity, or project)",
+          "message": "The type of CRM record this task is related to (lead, person, company, opportunity, or project)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOmxlYWQ.display_name": {
+          "source": "Lead",
+          "message": "Lead"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOnBlcnNvbg.display_name": {
+          "source": "Person",
+          "message": "Person"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbXBhbnk.display_name": {
+          "source": "Company",
+          "message": "Company"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOm9wcG9ydHVuaXR5.display_name": {
+          "source": "Opportunity",
+          "message": "Opportunity"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOnByb2plY3Q.display_name": {
+          "source": "Project",
+          "message": "Project"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX3Rhc2s.option.YXNzaWduZWVfaWQ.display_name": {
           "source": "Assignee",
           "message": "Assignee"
@@ -2314,6 +3118,50 @@
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.desc": {
           "source": "The updated CRM record this task is related to",
           "message": "The updated CRM record this task is related to"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.aWQ.display_name": {
+          "source": "Resource ID",
+          "message": "Resource ID"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.aWQ.short_desc": {
+          "source": "ID of the related record",
+          "message": "ID of the related record"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.aWQ.desc": {
+          "source": "The ID of the related CRM record",
+          "message": "The ID of the related CRM record"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.display_name": {
+          "source": "Resource Type",
+          "message": "Resource Type"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.short_desc": {
+          "source": "Type of related record",
+          "message": "Type of related record"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.desc": {
+          "source": "The type of CRM record this task is related to",
+          "message": "The type of CRM record this task is related to"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOmxlYWQ.display_name": {
+          "source": "Lead",
+          "message": "Lead"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOnBlcnNvbg.display_name": {
+          "source": "Person",
+          "message": "Person"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbXBhbnk.display_name": {
+          "source": "Company",
+          "message": "Company"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOm9wcG9ydHVuaXR5.display_name": {
+          "source": "Opportunity",
+          "message": "Opportunity"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.cmVsYXRlZF9yZXNvdXJjZQ.field.dHlwZQ.allowed-value.c3RyaW5nOnByb2plY3Q.display_name": {
+          "source": "Project",
+          "message": "Project"
         },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX3Rhc2s.option.YXNzaWduZWVfaWQ.display_name": {
           "source": "Assignee",
@@ -2827,6 +3675,66 @@
           "source": "The physical address of the company including street, city, state, postal code, and country",
           "message": "The physical address of the company including street, city, state, postal code, and country"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y2l0eQ.short_desc": {
+          "source": "City name",
+          "message": "City name"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y2l0eQ.desc": {
+          "source": "The city where the company is located",
+          "message": "The city where the company is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y291bnRyeQ.short_desc": {
+          "source": "Country name",
+          "message": "Country name"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y291bnRyeQ.desc": {
+          "source": "The country where the company is located",
+          "message": "The country where the company is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.short_desc": {
+          "source": "ZIP or postal code",
+          "message": "ZIP or postal code"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.desc": {
+          "source": "The postal code or ZIP code of the company address",
+          "message": "The postal code or ZIP code of the company address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RhdGU.display_name": {
+          "source": "State",
+          "message": "State"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RhdGU.short_desc": {
+          "source": "State or province",
+          "message": "State or province"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RhdGU.desc": {
+          "source": "The state or province where the company is located",
+          "message": "The state or province where the company is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RyZWV0.display_name": {
+          "source": "Street",
+          "message": "Street"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RyZWV0.short_desc": {
+          "source": "Street address",
+          "message": "Street address"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RyZWV0.desc": {
+          "source": "The street address of the company",
+          "message": "The street address of the company"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.YXNzaWduZWVfaWQ.display_name": {
           "source": "Assignee",
           "message": "Assignee"
@@ -2887,6 +3795,46 @@
           "source": "List of phone numbers associated with the company",
           "message": "List of phone numbers associated with the company"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of phone number",
+          "message": "Type of phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this phone number (work, mobile, home, or other)",
+          "message": "The category or type of this phone number (work, mobile, home, or other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm1vYmlsZQ.display_name": {
+          "source": "Mobile",
+          "message": "Mobile"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmhvbWU.display_name": {
+          "source": "Home",
+          "message": "Home"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.short_desc": {
+          "source": "The phone number",
+          "message": "The phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.desc": {
+          "source": "The phone number in any format",
+          "message": "The phone number in any format"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.cHJpbWFyeV9jb250YWN0X2lk.display_name": {
           "source": "Primary Contact",
           "message": "Primary Contact"
@@ -2911,6 +3859,62 @@
           "source": "List of social media profiles for the company",
           "message": "List of social media profiles for the company"
         },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Platform",
+          "message": "Platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Social media platform",
+          "message": "Social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The social media platform (LinkedIn, Twitter, Facebook, YouTube, Quora, Instagram, Pinterest, or Other)",
+          "message": "The social media platform (LinkedIn, Twitter, Facebook, YouTube, Quora, Instagram, Pinterest, or Other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmxpbmtlZGlu.display_name": {
+          "source": "LinkedIn",
+          "message": "LinkedIn"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnlvdXR1YmU.display_name": {
+          "source": "YouTube",
+          "message": "YouTube"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnF1b3Jh.display_name": {
+          "source": "Quora",
+          "message": "Quora"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmluc3RhZ3JhbQ.display_name": {
+          "source": "Instagram",
+          "message": "Instagram"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBpbnRlcmVzdA.display_name": {
+          "source": "Pinterest",
+          "message": "Pinterest"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.dXJs.short_desc": {
+          "source": "Social media profile URL",
+          "message": "Social media profile URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.c29jaWFscw.field.dXJs.desc": {
+          "source": "The full URL to the social media profile",
+          "message": "The full URL to the social media profile"
+        },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.dGFncw.display_name": {
           "source": "Tags",
           "message": "Tags"
@@ -2934,6 +3938,42 @@
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.desc": {
           "source": "List of websites associated with the company",
           "message": "List of websites associated with the company"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of website",
+          "message": "Type of website"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or purpose of this website (work, personal, or other)",
+          "message": "The category or purpose of this website (work, personal, or other)"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.dXJs.short_desc": {
+          "source": "Website URL",
+          "message": "Website URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.dXJs.desc": {
+          "source": "The full URL of the website",
+          "message": "The full URL of the website"
         },
         "app.Q29wcGVyQ3Jt.action.Y3JlYXRlX2NvbXBhbnk.option.Y3VzdG9tX2ZpZWxkcw.display_name": {
           "source": "Custom Fields",
@@ -3019,6 +4059,66 @@
           "source": "The updated physical address of the company",
           "message": "The updated physical address of the company"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y2l0eQ.short_desc": {
+          "source": "City name",
+          "message": "City name"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y2l0eQ.desc": {
+          "source": "The city where the company is located",
+          "message": "The city where the company is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y291bnRyeQ.display_name": {
+          "source": "Country",
+          "message": "Country"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y291bnRyeQ.short_desc": {
+          "source": "Country name",
+          "message": "Country name"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.Y291bnRyeQ.desc": {
+          "source": "The country where the company is located",
+          "message": "The country where the company is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.short_desc": {
+          "source": "ZIP or postal code",
+          "message": "ZIP or postal code"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.cG9zdGFsX2NvZGU.desc": {
+          "source": "The postal code or ZIP code of the company address",
+          "message": "The postal code or ZIP code of the company address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RhdGU.display_name": {
+          "source": "State",
+          "message": "State"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RhdGU.short_desc": {
+          "source": "State or province",
+          "message": "State or province"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RhdGU.desc": {
+          "source": "The state or province where the company is located",
+          "message": "The state or province where the company is located"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RyZWV0.display_name": {
+          "source": "Street",
+          "message": "Street"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RyZWV0.short_desc": {
+          "source": "Street address",
+          "message": "Street address"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YWRkcmVzcw.field.c3RyZWV0.desc": {
+          "source": "The street address of the company",
+          "message": "The street address of the company"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.YXNzaWduZWVfaWQ.display_name": {
           "source": "Assignee",
           "message": "Assignee"
@@ -3079,6 +4179,46 @@
           "source": "Updated list of phone numbers",
           "message": "Updated list of phone numbers"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of phone number",
+          "message": "Type of phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or type of this phone number",
+          "message": "The category or type of this phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm1vYmlsZQ.display_name": {
+          "source": "Mobile",
+          "message": "Mobile"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmhvbWU.display_name": {
+          "source": "Home",
+          "message": "Home"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.display_name": {
+          "source": "Phone Number",
+          "message": "Phone Number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.short_desc": {
+          "source": "The phone number",
+          "message": "The phone number"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cGhvbmVfbnVtYmVycw.field.bnVtYmVy.desc": {
+          "source": "The phone number in any format",
+          "message": "The phone number in any format"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.cHJpbWFyeV9jb250YWN0X2lk.display_name": {
           "source": "Primary Contact",
           "message": "Primary Contact"
@@ -3103,6 +4243,62 @@
           "source": "Updated list of social media profiles",
           "message": "Updated list of social media profiles"
         },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Platform",
+          "message": "Platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Social media platform",
+          "message": "Social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.desc": {
+          "source": "The social media platform",
+          "message": "The social media platform"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmxpbmtlZGlu.display_name": {
+          "source": "LinkedIn",
+          "message": "LinkedIn"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnR3aXR0ZXI.display_name": {
+          "source": "Twitter",
+          "message": "Twitter"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmZhY2Vib29r.display_name": {
+          "source": "Facebook",
+          "message": "Facebook"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnlvdXR1YmU.display_name": {
+          "source": "YouTube",
+          "message": "YouTube"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnF1b3Jh.display_name": {
+          "source": "Quora",
+          "message": "Quora"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOmluc3RhZ3JhbQ.display_name": {
+          "source": "Instagram",
+          "message": "Instagram"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBpbnRlcmVzdA.display_name": {
+          "source": "Pinterest",
+          "message": "Pinterest"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.dXJs.short_desc": {
+          "source": "Social media profile URL",
+          "message": "Social media profile URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.c29jaWFscw.field.dXJs.desc": {
+          "source": "The full URL to the social media profile",
+          "message": "The full URL to the social media profile"
+        },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.dGFncw.display_name": {
           "source": "Tags",
           "message": "Tags"
@@ -3126,6 +4322,42 @@
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.desc": {
           "source": "Updated list of websites",
           "message": "Updated list of websites"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.display_name": {
+          "source": "Category",
+          "message": "Category"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.short_desc": {
+          "source": "Type of website",
+          "message": "Type of website"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.desc": {
+          "source": "The category or purpose of this website",
+          "message": "The category or purpose of this website"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOndvcms.display_name": {
+          "source": "Work",
+          "message": "Work"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOnBlcnNvbmFs.display_name": {
+          "source": "Personal",
+          "message": "Personal"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.Y2F0ZWdvcnk.allowed-value.c3RyaW5nOm90aGVy.display_name": {
+          "source": "Other",
+          "message": "Other"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.dXJs.display_name": {
+          "source": "URL",
+          "message": "URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.dXJs.short_desc": {
+          "source": "Website URL",
+          "message": "Website URL"
+        },
+        "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.d2Vic2l0ZXM.field.dXJs.desc": {
+          "source": "The full URL of the website",
+          "message": "The full URL of the website"
         },
         "app.Q29wcGVyQ3Jt.action.dXBkYXRlX2NvbXBhbnk.option.Y3VzdG9tX2ZpZWxkcw.display_name": {
           "source": "Custom Fields",

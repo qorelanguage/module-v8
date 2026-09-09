@@ -182,8 +182,10 @@ function setenv(vr, value) {
             setenv("_qore_v8_dirname", dir);
             JavaScriptProgramPool pool(DefaultCode + File::readTextFile(basename(path)), path, init);
             pstore{pool.uniqueHash()} = pool;
+            TypeScriptActionInterface::clearDiscoverySourceFailure(path);
             return pool;
         } catch (hash<ExceptionInfo> ex) {
+            TypeScriptActionInterface::reportDiscoverySourceFailure(path, ex);
             TSAI::error("Error loading TypeScript action script %y: %s", path, get_exception_string(ex));
         }
     }

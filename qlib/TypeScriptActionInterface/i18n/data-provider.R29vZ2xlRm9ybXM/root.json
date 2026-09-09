@@ -399,6 +399,54 @@
           "source": "Configure additional form settings like email collection and quiz mode.",
           "message": "Configure additional form settings like email collection and quiz mode."
         },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.display_name": {
+          "source": "Email Collection",
+          "message": "Email Collection"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.short_desc": {
+          "source": "Email collection settings",
+          "message": "Email collection settings"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.desc": {
+          "source": "Controls how email addresses are collected from form respondents.",
+          "message": "Controls how email addresses are collected from form respondents."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.allowed-value.c3RyaW5nOkRPX05PVF9DT0xMRUNU.display_name": {
+          "source": "Do not collect email addresses",
+          "message": "Do not collect email addresses"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.allowed-value.c3RyaW5nOkRPX05PVF9DT0xMRUNU.desc": {
+          "source": "The form doesn't collect email addresses. Default value if the form owner uses a Google account.",
+          "message": "The form doesn't collect email addresses. Default value if the form owner uses a Google account."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.allowed-value.c3RyaW5nOlZFUklGSUVE.display_name": {
+          "source": "Collect email addresses",
+          "message": "Collect email addresses"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.allowed-value.c3RyaW5nOlZFUklGSUVE.desc": {
+          "source": "\tThe form collects email addresses automatically based on the account of the signed-in user.Default value if the form owner uses a Google Workspace account.",
+          "message": "\tThe form collects email addresses automatically based on the account of the signed-in user.Default value if the form owner uses a Google Workspace account."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.allowed-value.c3RyaW5nOlJFU1BPTkRFUl9JTlBVVA.display_name": {
+          "source": "Collect email addresses from responders",
+          "message": "Collect email addresses from responders"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.ZW1haWxfY29sbGVjdGlvbg.allowed-value.c3RyaW5nOlJFU1BPTkRFUl9JTlBVVA.desc": {
+          "source": "The form collects email addresses using a field that the respondent completes on the form.",
+          "message": "The form collects email addresses using a field that the respondent completes on the form."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.aXNfcXVpeg.display_name": {
+          "source": "Quiz Mode",
+          "message": "Quiz Mode"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.aXNfcXVpeg.short_desc": {
+          "source": "Enable quiz functionality",
+          "message": "Enable quiz functionality"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.c2V0dGluZ3M.field.aXNfcXVpeg.desc": {
+          "source": "When enabled, allows setting correct answers and points for questions.",
+          "message": "When enabled, allows setting correct answers and points for questions."
+        },
         "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.display_name": {
           "source": "Questions",
           "message": "Questions"
@@ -410,6 +458,194 @@
         "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.desc": {
           "source": "List of questions to add to the form. Each question can have different types and properties.",
           "message": "List of questions to add to the form. Each question can have different types and properties."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.Y2hvaWNlcw.display_name": {
+          "source": "Answer Choices",
+          "message": "Answer Choices"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.Y2hvaWNlcw.short_desc": {
+          "source": "List of possible answers",
+          "message": "List of possible answers"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.Y2hvaWNlcw.desc": {
+          "source": "For multiple-choice, checkbox, and dropdown questions, these are the options respondents can select from.",
+          "message": "For multiple-choice, checkbox, and dropdown questions, these are the options respondents can select from."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.Y29ycmVjdF9hbnN3ZXI.display_name": {
+          "source": "Correct Answer",
+          "message": "Correct Answer"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.Y29ycmVjdF9hbnN3ZXI.short_desc": {
+          "source": "The correct answer for quiz questions",
+          "message": "The correct answer for quiz questions"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.Y29ycmVjdF9hbnN3ZXI.desc": {
+          "source": "For quiz questions, specifies the correct answer. For checkbox questions, multiple answers can be provided as a comma-separated list.",
+          "message": "For quiz questions, specifies the correct answer. For checkbox questions, multiple answers can be provided as a comma-separated list."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.ZmVlZGJhY2s.display_name": {
+          "source": "Feedback",
+          "message": "Feedback"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.ZmVlZGJhY2s.short_desc": {
+          "source": "Feedback for quiz answers",
+          "message": "Feedback for quiz answers"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.ZmVlZGJhY2s.desc": {
+          "source": "For quiz questions, feedback to show respondents after they answer.",
+          "message": "For quiz questions, feedback to show respondents after they answer."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.aGVscF90ZXh0.display_name": {
+          "source": "Help Text",
+          "message": "Help Text"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.aGVscF90ZXh0.short_desc": {
+          "source": "Additional guidance text",
+          "message": "Additional guidance text"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.aGVscF90ZXh0.desc": {
+          "source": "Optional text that appears below the question to provide additional guidance to respondents.",
+          "message": "Optional text that appears below the question to provide additional guidance to respondents."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.cG9pbnRz.display_name": {
+          "source": "Points",
+          "message": "Points"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.cG9pbnRz.short_desc": {
+          "source": "Point value for quiz questions",
+          "message": "Point value for quiz questions"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.cG9pbnRz.desc": {
+          "source": "For quiz questions, the number of points awarded for a correct answer.",
+          "message": "For quiz questions, the number of points awarded for a correct answer."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.cmVxdWlyZWQ.display_name": {
+          "source": "Required",
+          "message": "Required"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.cmVxdWlyZWQ.short_desc": {
+          "source": "Make question required",
+          "message": "Make question required"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.cmVxdWlyZWQ.desc": {
+          "source": "When enabled, respondents must answer this question to submit the form.",
+          "message": "When enabled, respondents must answer this question to submit the form."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWF4.display_name": {
+          "source": "Scale Maximum",
+          "message": "Scale Maximum"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWF4.short_desc": {
+          "source": "Maximum value for scale",
+          "message": "Maximum value for scale"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWF4.desc": {
+          "source": "For scale questions, the highest value on the scale. Must be between 0 and 10.",
+          "message": "For scale questions, the highest value on the scale. Must be between 0 and 10."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWF4X2xhYmVs.display_name": {
+          "source": "Scale Maximum Label",
+          "message": "Scale Maximum Label"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWF4X2xhYmVs.short_desc": {
+          "source": "Label for maximum scale value",
+          "message": "Label for maximum scale value"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWF4X2xhYmVs.desc": {
+          "source": "Optional label to describe the highest value on a scale question.",
+          "message": "Optional label to describe the highest value on a scale question."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWlu.display_name": {
+          "source": "Scale Minimum",
+          "message": "Scale Minimum"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWlu.short_desc": {
+          "source": "Minimum value for scale",
+          "message": "Minimum value for scale"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWlu.desc": {
+          "source": "For scale questions, the lowest value on the scale. Must be between 0 and 10.",
+          "message": "For scale questions, the lowest value on the scale. Must be between 0 and 10."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWluX2xhYmVs.display_name": {
+          "source": "Scale Minimum Label",
+          "message": "Scale Minimum Label"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWluX2xhYmVs.short_desc": {
+          "source": "Label for minimum scale value",
+          "message": "Label for minimum scale value"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2NhbGVfbWluX2xhYmVs.desc": {
+          "source": "Optional label to describe the lowest value on a scale question.",
+          "message": "Optional label to describe the lowest value on a scale question."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2h1ZmZsZV9jaG9pY2Vz.display_name": {
+          "source": "Shuffle Choices",
+          "message": "Shuffle Choices"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2h1ZmZsZV9jaG9pY2Vz.short_desc": {
+          "source": "Randomize answer choices",
+          "message": "Randomize answer choices"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.c2h1ZmZsZV9jaG9pY2Vz.desc": {
+          "source": "When enabled, the order of answer choices will be randomized for each respondent.",
+          "message": "When enabled, the order of answer choices will be randomized for each respondent."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dGl0bGU.display_name": {
+          "source": "Question Title",
+          "message": "Question Title"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dGl0bGU.short_desc": {
+          "source": "The question text",
+          "message": "The question text"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dGl0bGU.desc": {
+          "source": "The main text of the question that will be shown to respondents.",
+          "message": "The main text of the question that will be shown to respondents."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.display_name": {
+          "source": "Question Type",
+          "message": "Question Type"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.short_desc": {
+          "source": "Type of question",
+          "message": "Type of question"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.desc": {
+          "source": "The type of question to create (e.g., text, multiple-choice, checkbox, etc.).",
+          "message": "The type of question to create (e.g., text, multiple-choice, checkbox, etc.)."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOlRFWFQ.display_name": {
+          "source": "Short Answer",
+          "message": "Short Answer"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOlBBUkFHUkFQSA.display_name": {
+          "source": "Paragraph",
+          "message": "Paragraph"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOk1VTFRJUExFX0NIT0lDRQ.display_name": {
+          "source": "Multiple Choice",
+          "message": "Multiple Choice"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOkNIRUNLQk9Y.display_name": {
+          "source": "Checkboxes",
+          "message": "Checkboxes"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOkRST1BET1dO.display_name": {
+          "source": "Dropdown",
+          "message": "Dropdown"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOlNDQUxF.display_name": {
+          "source": "Linear Scale",
+          "message": "Linear Scale"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOkRBVEU.display_name": {
+          "source": "Date",
+          "message": "Date"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Y3JlYXRlX2Zvcm0.option.cXVlc3Rpb25z.field.dHlwZQ.allowed-value.c3RyaW5nOlRJTUU.display_name": {
+          "source": "Time",
+          "message": "Time"
         },
         "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm0.display_name": {
           "source": "Get Form",
@@ -586,6 +822,50 @@
         "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.desc": {
           "source": "Filter responses based on specific question answers. Each filter specifies a question ID, filter type, and expected value.",
           "message": "Filter responses based on specific question answers. Each filter specifies a question ID, filter type, and expected value."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.ZmlsdGVyX3R5cGU.display_name": {
+          "source": "Filter Type",
+          "message": "Filter Type"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.ZmlsdGVyX3R5cGU.short_desc": {
+          "source": "Type of filter to apply",
+          "message": "Type of filter to apply"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.ZmlsdGVyX3R5cGU.desc": {
+          "source": "Whether the answer should contain or exactly equal the filter value.",
+          "message": "Whether the answer should contain or exactly equal the filter value."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.ZmlsdGVyX3R5cGU.allowed-value.c3RyaW5nOmNvbnRhaW5z.display_name": {
+          "source": "Contains",
+          "message": "Contains"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.ZmlsdGVyX3R5cGU.allowed-value.c3RyaW5nOmVxdWFscw.display_name": {
+          "source": "Equals",
+          "message": "Equals"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.cXVlc3Rpb25faWQ.display_name": {
+          "source": "Question ID",
+          "message": "Question ID"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.cXVlc3Rpb25faWQ.short_desc": {
+          "source": "The question to filter by",
+          "message": "The question to filter by"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.cXVlc3Rpb25faWQ.desc": {
+          "source": "The unique identifier of the question to filter responses by.",
+          "message": "The unique identifier of the question to filter responses by."
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.dmFsdWU.display_name": {
+          "source": "Filter Value",
+          "message": "Filter Value"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.dmFsdWU.short_desc": {
+          "source": "Value to filter by",
+          "message": "Value to filter by"
+        },
+        "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.ZmlsdGVyX2Fuc3dlcnM.field.dmFsdWU.desc": {
+          "source": "The value to match against the question answers.",
+          "message": "The value to match against the question answers."
         },
         "app.R29vZ2xlRm9ybXM.action.Z2V0X2Zvcm1fcmVzcG9uc2Vz.option.aW5jbHVkZV9xdWVzdGlvbnM.display_name": {
           "source": "Include Questions",

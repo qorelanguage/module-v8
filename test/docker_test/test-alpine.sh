@@ -56,6 +56,17 @@ node --test "${MODULE_SRC_DIR}/test/docker_test/sync-i18n-translations.test.mjs"
 "${MODULE_SRC_DIR}/test/docker_test/check-i18n.sh" \
     "${MODULE_SRC_DIR}/qlib/TypeScriptActionInterface/i18n"
 
+# Build the complete provider index through Qore's qualified publication path
+# using installed modules.  Keep the structured report even when qualification
+# fails so CI never has to infer completeness from logs.
+qualification_dir=${MODULE_SRC_DIR}/qualification
+qualification_index=$(mktemp -d)
+trap 'rm -rf "$qualification_index"' EXIT HUP INT TERM
+mkdir -p "$qualification_dir"
+qore "${MODULE_SRC_DIR}/test/docker_test/qualify-provider-discovery.q" \
+    "$qualification_index" \
+    "$qualification_dir/provider-discovery-${CI_JOB_NAME:-local}.json"
+
 # add Qore user and group
 if ! grep -q "^qore:x:${QORE_GID}" /etc/group; then
     addgroup -g ${QORE_GID} qore

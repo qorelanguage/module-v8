@@ -675,6 +675,38 @@
           "source": "Define how to sort the retrieved rows by specifying a field and sort direction (ascending or descending).",
           "message": "Define how to sort the retrieved rows by specifying a field and sort direction (ascending or descending)."
         },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZGlyZWN0aW9u.display_name": {
+          "source": "Direction",
+          "message": "Direction"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZGlyZWN0aW9u.short_desc": {
+          "source": "Sort direction",
+          "message": "Sort direction"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZGlyZWN0aW9u.desc": {
+          "source": "Choose ascending (+) to sort from lowest to highest, or descending (-) to sort from highest to lowest.",
+          "message": "Choose ascending (+) to sort from lowest to highest, or descending (-) to sort from highest to lowest."
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOis.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZGlyZWN0aW9u.allowed-value.c3RyaW5nOi0.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZmllbGQ.short_desc": {
+          "source": "The field to sort by",
+          "message": "The field to sort by"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.b3JkZXI.field.ZmllbGQ.desc": {
+          "source": "Select the table field used for sorting the results.",
+          "message": "Select the table field used for sorting the results."
+        },
         "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.display_name": {
           "source": "Filter",
           "message": "Filter"
@@ -686,6 +718,110 @@
         "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.desc": {
           "source": "Apply multiple filter conditions to retrieve only rows that match specific criteria. Supports various comparison operators and logical combinations.",
           "message": "Apply multiple filter conditions to retrieve only rows that match specific criteria. Supports various comparison operators and logical combinations."
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.display_name": {
+          "source": "Filter Type",
+          "message": "Filter Type"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.short_desc": {
+          "source": "Logical operator for combining filters",
+          "message": "Logical operator for combining filters"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.desc": {
+          "source": "Choose AND to require all filter conditions to match, or OR to match any filter condition.",
+          "message": "Choose AND to require all filter conditions to match, or OR to match any filter condition."
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.allowed-value.c3RyaW5nOkFORA.display_name": {
+          "source": "AND",
+          "message": "AND"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.allowed-value.c3RyaW5nOk9S.display_name": {
+          "source": "OR",
+          "message": "OR"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVycw.display_name": {
+          "source": "Filters",
+          "message": "Filters"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVycw.short_desc": {
+          "source": "List of filter conditions",
+          "message": "List of filter conditions"
+        },
+        "app.QmFzZXJvdw.action.bGlzdF9yb3dz.option.ZmlsdGVy.field.ZmlsdGVycw.desc": {
+          "source": "Define one or more filter conditions. Each condition specifies a field, operator, and value to match against.",
+          "message": "Define one or more filter conditions. Each condition specifies a field, operator, and value to match against."
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.ZmllbGQ.short_desc": {
+          "source": "The field to filter on",
+          "message": "The field to filter on"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.ZmllbGQ.desc": {
+          "source": "Select the table field to apply this filter condition to.",
+          "message": "Select the table field to apply this filter condition to."
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.display_name": {
+          "source": "Type",
+          "message": "Type"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.desc": {
+          "source": "Choose the comparison operator for this filter condition (equal, contains, empty, etc.).",
+          "message": "Choose the comparison operator for this filter condition (equal, contains, empty, etc.)."
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmVxdWFs.display_name": {
+          "source": "Equal",
+          "message": "Equal"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOm5vdF9lcXVhbA.display_name": {
+          "source": "Not Equal",
+          "message": "Not Equal"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmVtcHR5.display_name": {
+          "source": "Empty",
+          "message": "Empty"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOm5vdF9lbXB0eQ.display_name": {
+          "source": "Not Empty",
+          "message": "Not Empty"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5z.display_name": {
+          "source": "Contains",
+          "message": "Contains"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5zX25vdA.display_name": {
+          "source": "Doesn't contain",
+          "message": "Doesn't contain"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5zX3dvcmQ.display_name": {
+          "source": "Contains Word",
+          "message": "Contains Word"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmRvZXNudF9jb250YWluX3dvcmQ.display_name": {
+          "source": "Doesn't Contain Word",
+          "message": "Doesn't Contain Word"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dHlwZQ.allowed-value.c3RyaW5nOmxlbmd0aF9pc19sb3dlcl90aGFu.display_name": {
+          "source": "Length is lower than",
+          "message": "Length is lower than"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dmFsdWU.short_desc": {
+          "source": "The value to compare against",
+          "message": "The value to compare against"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJHbHpkRjl5YjNkejpIYXNoRGF0YVR5cGU6Kmhhc2g8YXV0bz4jMzQ2ZGM0M2M4YzNjOWFmYjQwZmQ1ZTdmY2VkMTE5YzhjMTY0ZjljNGViMjM4YTUzYjI3MGEzN2YwNjA0ZjQ1ZTpvcHRpb246Wm1sc2RHVnk6ZmllbGQ6Wm1sc2RHVnljdw.field.dmFsdWU.desc": {
+          "source": "The value to compare the field against using the selected operator.",
+          "message": "The value to compare the field against using the selected operator."
         },
         "app.QmFzZXJvdw.action.bGlzdF90YWJsZXM.display_name": {
           "source": "List Tables",
@@ -771,6 +907,126 @@
           "source": "Select or provide the file to upload to Baserow storage. The file will be stored and available for use in file fields.",
           "message": "Select or provide the file to upload to Baserow storage. The file will be stored and available for use in file fields."
         },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.Y29udGVudA.display_name": {
+          "source": "File Data",
+          "message": "File Data"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.Y29udGVudA.short_desc": {
+          "source": "Base64-encoded file data or raw data to be encoded with base64 encoding",
+          "message": "Base64-encoded file data or raw data to be encoded with base64 encoding"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.Y29udGVudA.desc": {
+          "source": "Base64-encoded file data or raw data to be encoded with base64 encoding",
+          "message": "Base64-encoded file data or raw data to be encoded with base64 encoding"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.display_name": {
+          "source": "MIME Type",
+          "message": "MIME Type"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.short_desc": {
+          "source": "The MIME type string for the file",
+          "message": "The MIME type string for the file"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.desc": {
+          "source": "The MIME type string for the file",
+          "message": "The MIME type string for the file"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.display_name": {
+          "source": "Autodetect",
+          "message": "Autodetect"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.short_desc": {
+          "source": "Autodetect from the file name; valid only on input",
+          "message": "Autodetect from the file name; valid only on input"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.desc": {
+          "source": "Autodetect from the file name; valid only on input",
+          "message": "Autodetect from the file name; valid only on input"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.display_name": {
+          "source": "text/plain",
+          "message": "text/plain"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.short_desc": {
+          "source": "Plain text",
+          "message": "Plain text"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.desc": {
+          "source": "Plain text",
+          "message": "Plain text"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.display_name": {
+          "source": "text/html",
+          "message": "text/html"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.short_desc": {
+          "source": "HTML text",
+          "message": "HTML text"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.desc": {
+          "source": "HTML text",
+          "message": "HTML text"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.display_name": {
+          "source": "application/pdf",
+          "message": "application/pdf"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.short_desc": {
+          "source": "PDF file",
+          "message": "PDF file"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.desc": {
+          "source": "PDF file",
+          "message": "PDF file"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "message": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.short_desc": {
+          "source": "MS Word docx document",
+          "message": "MS Word docx document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.desc": {
+          "source": "MS Word `docx` document",
+          "message": "MS Word `docx` document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "message": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.short_desc": {
+          "source": "MS PowerPoint pptx document",
+          "message": "MS PowerPoint pptx document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.desc": {
+          "source": "MS PowerPoint `pptx` document",
+          "message": "MS PowerPoint `pptx` document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "message": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.short_desc": {
+          "source": "MS Excel xlsx document",
+          "message": "MS Excel xlsx document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.desc": {
+          "source": "MS Excel `xlsx` document",
+          "message": "MS Excel `xlsx` document"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bmFtZQ.display_name": {
+          "source": "Filename",
+          "message": "Filename"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bmFtZQ.short_desc": {
+          "source": "The filename",
+          "message": "The filename"
+        },
+        "app.QmFzZXJvdw.action.dXBsb2FkX2ZpbGU.option.ZmlsZQ.field.bmFtZQ.desc": {
+          "source": "The filename",
+          "message": "The filename"
+        },
         "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.display_name": {
           "source": "New Row",
           "message": "New Row"
@@ -818,6 +1074,110 @@
         "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.desc": {
           "source": "Apply filter conditions to trigger only for new rows matching specific criteria. Leave empty to trigger for all new rows.",
           "message": "Apply filter conditions to trigger only for new rows matching specific criteria. Leave empty to trigger for all new rows."
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.display_name": {
+          "source": "Filter Type",
+          "message": "Filter Type"
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.short_desc": {
+          "source": "Logical operator for combining filters",
+          "message": "Logical operator for combining filters"
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.desc": {
+          "source": "Choose AND to require all filter conditions to match, or OR to match any filter condition.",
+          "message": "Choose AND to require all filter conditions to match, or OR to match any filter condition."
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.allowed-value.c3RyaW5nOkFORA.display_name": {
+          "source": "AND",
+          "message": "AND"
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVyX3R5cGU.allowed-value.c3RyaW5nOk9S.display_name": {
+          "source": "OR",
+          "message": "OR"
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVycw.display_name": {
+          "source": "Filters",
+          "message": "Filters"
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVycw.short_desc": {
+          "source": "List of filter conditions",
+          "message": "List of filter conditions"
+        },
+        "app.QmFzZXJvdw.action.bmV3X2RvY3VtZW50.option.ZmlsdGVy.field.ZmlsdGVycw.desc": {
+          "source": "Define one or more filter conditions. Only new rows matching these conditions will trigger the event.",
+          "message": "Define one or more filter conditions. Only new rows matching these conditions will trigger the event."
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.ZmllbGQ.display_name": {
+          "source": "Field",
+          "message": "Field"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.ZmllbGQ.short_desc": {
+          "source": "The field to filter on",
+          "message": "The field to filter on"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.ZmllbGQ.desc": {
+          "source": "Select the table field to apply this filter condition to.",
+          "message": "Select the table field to apply this filter condition to."
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.display_name": {
+          "source": "Type",
+          "message": "Type"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.short_desc": {
+          "source": "The comparison operator",
+          "message": "The comparison operator"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.desc": {
+          "source": "Choose the comparison operator for this filter condition (equal, contains, empty, etc.).",
+          "message": "Choose the comparison operator for this filter condition (equal, contains, empty, etc.)."
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmVxdWFs.display_name": {
+          "source": "Equal",
+          "message": "Equal"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOm5vdF9lcXVhbA.display_name": {
+          "source": "Not Equal",
+          "message": "Not Equal"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmVtcHR5.display_name": {
+          "source": "Empty",
+          "message": "Empty"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOm5vdF9lbXB0eQ.display_name": {
+          "source": "Not Empty",
+          "message": "Not Empty"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5z.display_name": {
+          "source": "Contains",
+          "message": "Contains"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5zX25vdA.display_name": {
+          "source": "Doesn't contain",
+          "message": "Doesn't contain"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmNvbnRhaW5zX3dvcmQ.display_name": {
+          "source": "Contains Word",
+          "message": "Contains Word"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmRvZXNudF9jb250YWluX3dvcmQ.display_name": {
+          "source": "Doesn't Contain Word",
+          "message": "Doesn't Contain Word"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dHlwZQ.allowed-value.c3RyaW5nOmxlbmd0aF9pc19sb3dlcl90aGFu.display_name": {
+          "source": "Length is lower than",
+          "message": "Length is lower than"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dmFsdWU.display_name": {
+          "source": "Value",
+          "message": "Value"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dmFsdWU.short_desc": {
+          "source": "The value to match",
+          "message": "The value to match"
+        },
+        "app.QmFzZXJvdw.type.YWN0aW9uOmJtVjNYMlJ2WTNWdFpXNTA6SGFzaERhdGFUeXBlOipoYXNoPGF1dG8-IzM4YmZjNjljZWE3NzFkYmNhMDI1ZGY4NzE5Y2FiMTUzNDJjNDk3N2U4YjQxMzFlZGQ4OTdkMDlhYTg0ZjM4Njg6b3B0aW9uOlptbHNkR1Z5OmZpZWxkOlptbHNkR1Z5Y3c.field.dmFsdWU.desc": {
+          "source": "The value to compare against. Only new rows matching this condition will trigger the event.",
+          "message": "The value to compare against. Only new rows matching this condition will trigger the event."
         }
       }
     }

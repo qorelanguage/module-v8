@@ -603,6 +603,50 @@
           "source": "Specify how records should be sorted in the response. You can sort by fields like id, Created_Time, or Modified_Time in either ascending (oldest first) or descending (newest first) order.",
           "message": "Specify how records should be sorted in the response. You can sort by fields like id, Created_Time, or Modified_Time in either ascending (oldest first) or descending (newest first) order."
         },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.b3JkZXI.display_name": {
+          "source": "Sort Order",
+          "message": "Sort Order"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.b3JkZXI.short_desc": {
+          "source": "Sort in ascending or descending order",
+          "message": "Sort in ascending or descending order"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.b3JkZXI.desc": {
+          "source": "Choose whether to sort records in ascending order (asc - oldest first) or descending order (desc - newest first). The default value is descending.",
+          "message": "Choose whether to sort records in ascending order (asc - oldest first) or descending order (desc - newest first). The default value is descending."
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.b3JkZXI.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.b3JkZXI.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.c29ydF9ieQ.display_name": {
+          "source": "Sort By Field",
+          "message": "Sort By Field"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.c29ydF9ieQ.short_desc": {
+          "source": "The field to use for sorting records",
+          "message": "The field to use for sorting records"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.c29ydF9ieQ.desc": {
+          "source": "Select or enter the field API name to sort records by. Common options include id, Created_Time, and Modified_Time. You can also use custom field API names that support sorting.",
+          "message": "Select or enter the field API name to sort records by. Common options include id, Created_Time, and Modified_Time. You can also use custom field API names that support sorting."
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.c29ydF9ieQ.allowed-value.c3RyaW5nOmlk.display_name": {
+          "source": "ID",
+          "message": "ID"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.c29ydF9ieQ.allowed-value.c3RyaW5nOkNyZWF0ZWRfVGltZQ.display_name": {
+          "source": "Created Time",
+          "message": "Created Time"
+        },
+        "app.Wm9ob0NSTQ.action.bGlzdF9yZWNvcmRz.option.c29ydA.field.c29ydF9ieQ.allowed-value.c3RyaW5nOk1vZGlmaWVkX1RpbWU.display_name": {
+          "source": "Modified Time",
+          "message": "Modified Time"
+        },
         "app.Wm9ob0NSTQ.action.bGlzdF9tb2R1bGVz.display_name": {
           "source": "List Modules",
           "message": "List Modules"
@@ -987,6 +1031,42 @@
           "source": "Specify the tags you want to add to the records. Each tag should include an ID and name. The tag ID takes precedence over the name if both are provided. You can optionally include a color_code (hex value). Use the List Tags action to retrieve available tags and their IDs.",
           "message": "Specify the tags you want to add to the records. Each tag should include an ID and name. The tag ID takes precedence over the name if both are provided. You can optionally include a color_code (hex value). Use the List Tags action to retrieve available tags and their IDs."
         },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.Y29sb3JfY29kZQ.display_name": {
+          "source": "Color Code",
+          "message": "Color Code"
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.Y29sb3JfY29kZQ.short_desc": {
+          "source": "Optional hexadecimal color code for the tag",
+          "message": "Optional hexadecimal color code for the tag"
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.Y29sb3JfY29kZQ.desc": {
+          "source": "Optional hexadecimal color code for visual identification of the tag (e.g., #F17574, #57B1FD). The allowed color codes are predefined in Zoho CRM. If not specified or set to null, the tag will use its default color.",
+          "message": "Optional hexadecimal color code for visual identification of the tag (e.g., #F17574, #57B1FD). The allowed color codes are predefined in Zoho CRM. If not specified or set to null, the tag will use its default color."
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.aWQ.display_name": {
+          "source": "Tag ID",
+          "message": "Tag ID"
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.aWQ.short_desc": {
+          "source": "The unique identifier of the tag",
+          "message": "The unique identifier of the tag"
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.aWQ.desc": {
+          "source": "The unique ID of an existing tag in the module. This ID takes precedence over the name field. Use the List Tags action to retrieve tag IDs. The tag must already exist in the module.",
+          "message": "The unique ID of an existing tag in the module. This ID takes precedence over the name field. Use the List Tags action to retrieve tag IDs. The tag must already exist in the module."
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.bmFtZQ.display_name": {
+          "source": "Tag Name",
+          "message": "Tag Name"
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.bmFtZQ.short_desc": {
+          "source": "The display name of the tag",
+          "message": "The display name of the tag"
+        },
+        "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.dGFncw.field.bmFtZQ.desc": {
+          "source": "The display name of the tag. When both ID and name are provided, the ID takes precedence. If only the name is provided, the system will look up the tag by name.",
+          "message": "The display name of the tag. When both ID and name are provided, the ID takes precedence. If only the name is provided, the system will look up the tag by name."
+        },
         "app.Wm9ob0NSTQ.action.YWRkX3RhZ3NfdG9fcmVjb3Jkcw.option.cmVjb3Jkcw.display_name": {
           "source": "Record IDs",
           "message": "Record IDs"
@@ -1082,6 +1162,30 @@
         "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.desc": {
           "source": "Optional list of field-value pairs to create search criteria. When specified, only records where ALL specified fields match their corresponding values will trigger the event. Uses the \"equals\" operator for each field comparison.",
           "message": "Optional list of field-value pairs to create search criteria. When specified, only records where ALL specified fields match their corresponding values will trigger the event. Uses the \"equals\" operator for each field comparison."
+        },
+        "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.field.ZmllbGQ.display_name": {
+          "source": "Field Name",
+          "message": "Field Name"
+        },
+        "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.field.ZmllbGQ.short_desc": {
+          "source": "The API name of the field to filter on",
+          "message": "The API name of the field to filter on"
+        },
+        "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.field.ZmllbGQ.desc": {
+          "source": "Select or enter the field API name from the module. Available field names can be retrieved using the Fields Metadata API. The field must be searchable to be used in filtering.",
+          "message": "Select or enter the field API name from the module. Available field names can be retrieved using the Fields Metadata API. The field must be searchable to be used in filtering."
+        },
+        "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.field.dmFsdWU.display_name": {
+          "source": "Field Value",
+          "message": "Field Value"
+        },
+        "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.field.dmFsdWU.short_desc": {
+          "source": "The value that the field must equal",
+          "message": "The value that the field must equal"
+        },
+        "app.Wm9ob0NSTQ.action.bmV3X3JlY29yZA.option.ZmllbGRfZmlsdGVy.field.dmFsdWU.desc": {
+          "source": "Enter the exact value that the field must equal for the record to match. The comparison uses the \"equals\" operator, so the field value must match this value exactly.",
+          "message": "Enter the exact value that the field must equal for the record to match. The comparison uses the \"equals\" operator, so the field value must match this value exactly."
         }
       }
     }

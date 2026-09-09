@@ -387,6 +387,30 @@
           "source": "Enter one or more email addresses for the contact.",
           "message": "Enter one or more email addresses for the contact."
         },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.YWRkcmVzcw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.YWRkcmVzcw.short_desc": {
+          "source": "The email address of the contact.",
+          "message": "The email address of the contact."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.YWRkcmVzcw.desc": {
+          "source": "Enter a valid email address for the contact.",
+          "message": "Enter a valid email address for the contact."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.bmFtZQ.display_name": {
+          "source": "Display Name",
+          "message": "Display Name"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.bmFtZQ.short_desc": {
+          "source": "The display name for this email address.",
+          "message": "The display name for this email address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.bmFtZQ.desc": {
+          "source": "Enter how you want the name to appear for this email address.",
+          "message": "Enter how you want the name to appear for this email address."
+        },
         "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NQaG9uZXM.display_name": {
           "source": "Business Phones",
           "message": "Business Phones"
@@ -470,6 +494,66 @@
         "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.desc": {
           "source": "Enter the full business address details for the contact.",
           "message": "Enter the full business address details for the contact."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y2l0eQ.short_desc": {
+          "source": "City name.",
+          "message": "City name."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y2l0eQ.desc": {
+          "source": "Enter the city or town for the business address.",
+          "message": "Enter the city or town for the business address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y291bnRyeU9yUmVnaW9u.display_name": {
+          "source": "Country/Region",
+          "message": "Country/Region"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y291bnRyeU9yUmVnaW9u.short_desc": {
+          "source": "Country or region.",
+          "message": "Country or region."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y291bnRyeU9yUmVnaW9u.desc": {
+          "source": "Enter the country or region for the business address.",
+          "message": "Enter the country or region for the business address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.cG9zdGFsQ29kZQ.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.cG9zdGFsQ29kZQ.short_desc": {
+          "source": "Postal or zip code.",
+          "message": "Postal or zip code."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.cG9zdGFsQ29kZQ.desc": {
+          "source": "Enter the postal code or zip code for the business address.",
+          "message": "Enter the postal code or zip code for the business address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RhdGU.display_name": {
+          "source": "State/Province",
+          "message": "State/Province"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RhdGU.short_desc": {
+          "source": "State or province.",
+          "message": "State or province."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RhdGU.desc": {
+          "source": "Enter the state, province, or region for the business address.",
+          "message": "Enter the state, province, or region for the business address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RyZWV0.display_name": {
+          "source": "Street",
+          "message": "Street"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RyZWV0.short_desc": {
+          "source": "Street address.",
+          "message": "Street address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RyZWV0.desc": {
+          "source": "Enter the street address including building number and street name.",
+          "message": "Enter the street address including building number and street name."
         },
         "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.display_name": {
           "source": "Create Event",
@@ -566,6 +650,30 @@
         "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.desc": {
           "source": "Add one or more attendees to invite to the event.",
           "message": "Add one or more attendees to invite to the event."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.field.YWRkcmVzcw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.field.YWRkcmVzcw.short_desc": {
+          "source": "The attendee's email address.",
+          "message": "The attendee's email address."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.field.YWRkcmVzcw.desc": {
+          "source": "Enter the email address of the person you want to invite.",
+          "message": "Enter the email address of the person you want to invite."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.field.bmFtZQ.display_name": {
+          "source": "Display Name",
+          "message": "Display Name"
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.field.bmFtZQ.short_desc": {
+          "source": "The attendee's display name.",
+          "message": "The attendee's display name."
+        },
+        "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.YXR0ZW5kZWVz.field.bmFtZQ.desc": {
+          "source": "Optionally enter a display name for the attendee.",
+          "message": "Optionally enter a display name for the attendee."
         },
         "app.T3V0bG9vaw.action.Y3JlYXRlLWV2ZW50.option.Ym9keQ.display_name": {
           "source": "Body",
@@ -1107,6 +1215,62 @@
           "source": "Sort the email results by a specific field. The default is to sort by received date in descending order.",
           "message": "Sort the email results by a specific field. The default is to sort by received date in descending order."
         },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.display_name": {
+          "source": "Sort Field",
+          "message": "Sort Field"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.short_desc": {
+          "source": "Field to sort by",
+          "message": "Field to sort by"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.desc": {
+          "source": "Select the field by which to sort the email results.",
+          "message": "Select the field by which to sort the email results."
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnJlY2VpdmVkRGF0ZVRpbWU.display_name": {
+          "source": "Received Date",
+          "message": "Received Date"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnNlbnREYXRlVGltZQ.display_name": {
+          "source": "Sent Date",
+          "message": "Sent Date"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmNyZWF0ZWREYXRlVGltZQ.display_name": {
+          "source": "Created Date",
+          "message": "Created Date"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmxhc3RNb2RpZmllZERhdGVUaW1l.display_name": {
+          "source": "Last Modified Date",
+          "message": "Last Modified Date"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOnN1YmplY3Q.display_name": {
+          "source": "Subject",
+          "message": "Subject"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.ZmllbGQ.allowed-value.c3RyaW5nOmltcG9ydGFuY2U.display_name": {
+          "source": "Importance",
+          "message": "Importance"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.b3JkZXI.display_name": {
+          "source": "Sort Order",
+          "message": "Sort Order"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.b3JkZXI.short_desc": {
+          "source": "Order of sorting",
+          "message": "Order of sorting"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.b3JkZXI.desc": {
+          "source": "Choose the order in which to sort the results. Options include Ascending and Descending.",
+          "message": "Choose the order in which to sort the results. Options include Ascending and Descending."
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.b3JkZXI.allowed-value.c3RyaW5nOmFzYw.display_name": {
+          "source": "Ascending",
+          "message": "Ascending"
+        },
+        "app.T3V0bG9vaw.action.c2VhcmNoLWVtYWlscw.option.c29ydA.field.b3JkZXI.allowed-value.c3RyaW5nOmRlc2M.display_name": {
+          "source": "Descending",
+          "message": "Descending"
+        },
         "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.display_name": {
           "source": "Send Email",
           "message": "Send Email"
@@ -1131,6 +1295,30 @@
           "source": "Enter one or more email addresses for the primary recipients of the email.",
           "message": "Enter one or more email addresses for the primary recipients of the email."
         },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.dG9SZWNpcGllbnRz.field.YWRkcmVzcw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.dG9SZWNpcGllbnRz.field.YWRkcmVzcw.short_desc": {
+          "source": "Recipient's email address.",
+          "message": "Recipient's email address."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.dG9SZWNpcGllbnRz.field.YWRkcmVzcw.desc": {
+          "source": "Enter the email address of the recipient.",
+          "message": "Enter the email address of the recipient."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.dG9SZWNpcGllbnRz.field.bmFtZQ.display_name": {
+          "source": "Display Name",
+          "message": "Display Name"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.dG9SZWNpcGllbnRz.field.bmFtZQ.short_desc": {
+          "source": "Recipient's display name.",
+          "message": "Recipient's display name."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.dG9SZWNpcGllbnRz.field.bmFtZQ.desc": {
+          "source": "Optionally enter a display name for the recipient.",
+          "message": "Optionally enter a display name for the recipient."
+        },
         "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.display_name": {
           "source": "CC Recipients",
           "message": "CC Recipients"
@@ -1143,6 +1331,30 @@
           "source": "Optionally enter one or more email addresses for recipients to be copied on the email.",
           "message": "Optionally enter one or more email addresses for recipients to be copied on the email."
         },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.field.YWRkcmVzcw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.field.YWRkcmVzcw.short_desc": {
+          "source": "CC recipient's email address.",
+          "message": "CC recipient's email address."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.field.YWRkcmVzcw.desc": {
+          "source": "Enter the email address of the CC recipient.",
+          "message": "Enter the email address of the CC recipient."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.field.bmFtZQ.display_name": {
+          "source": "Display Name",
+          "message": "Display Name"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.field.bmFtZQ.short_desc": {
+          "source": "CC recipient's display name.",
+          "message": "CC recipient's display name."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.Y2NSZWNpcGllbnRz.field.bmFtZQ.desc": {
+          "source": "Optionally enter a display name for the CC recipient.",
+          "message": "Optionally enter a display name for the CC recipient."
+        },
         "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.display_name": {
           "source": "BCC Recipients",
           "message": "BCC Recipients"
@@ -1154,6 +1366,30 @@
         "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.desc": {
           "source": "Optionally enter one or more email addresses for recipients to be blind copied on the email.",
           "message": "Optionally enter one or more email addresses for recipients to be blind copied on the email."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.field.YWRkcmVzcw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.field.YWRkcmVzcw.short_desc": {
+          "source": "BCC recipient's email address.",
+          "message": "BCC recipient's email address."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.field.YWRkcmVzcw.desc": {
+          "source": "Enter the email address of the BCC recipient.",
+          "message": "Enter the email address of the BCC recipient."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.field.bmFtZQ.display_name": {
+          "source": "Display Name",
+          "message": "Display Name"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.field.bmFtZQ.short_desc": {
+          "source": "BCC recipient's display name.",
+          "message": "BCC recipient's display name."
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YmNjUmVjaXBpZW50cw.field.bmFtZQ.desc": {
+          "source": "Optionally enter a display name for the BCC recipient.",
+          "message": "Optionally enter a display name for the BCC recipient."
         },
         "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.c3ViamVjdA.display_name": {
           "source": "Subject",
@@ -1223,6 +1459,126 @@
           "source": "Optionally attach files to the email. You can add one or more files to be sent with the email.",
           "message": "Optionally attach files to the email. You can add one or more files to be sent with the email."
         },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.Y29udGVudA.display_name": {
+          "source": "File Data",
+          "message": "File Data"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.Y29udGVudA.short_desc": {
+          "source": "Base64-encoded file data or raw data to be encoded with base64 encoding",
+          "message": "Base64-encoded file data or raw data to be encoded with base64 encoding"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.Y29udGVudA.desc": {
+          "source": "Base64-encoded file data or raw data to be encoded with base64 encoding",
+          "message": "Base64-encoded file data or raw data to be encoded with base64 encoding"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.display_name": {
+          "source": "MIME Type",
+          "message": "MIME Type"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.short_desc": {
+          "source": "The MIME type string for the file",
+          "message": "The MIME type string for the file"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.desc": {
+          "source": "The MIME type string for the file",
+          "message": "The MIME type string for the file"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.display_name": {
+          "source": "Autodetect",
+          "message": "Autodetect"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.short_desc": {
+          "source": "Autodetect from the file name; valid only on input",
+          "message": "Autodetect from the file name; valid only on input"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmF1dG8.desc": {
+          "source": "Autodetect from the file name; valid only on input",
+          "message": "Autodetect from the file name; valid only on input"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.display_name": {
+          "source": "text/plain",
+          "message": "text/plain"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.short_desc": {
+          "source": "Plain text",
+          "message": "Plain text"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvcGxhaW4.desc": {
+          "source": "Plain text",
+          "message": "Plain text"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.display_name": {
+          "source": "text/html",
+          "message": "text/html"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.short_desc": {
+          "source": "HTML text",
+          "message": "HTML text"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOnRleHQvaHRtbA.desc": {
+          "source": "HTML text",
+          "message": "HTML text"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.display_name": {
+          "source": "application/pdf",
+          "message": "application/pdf"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.short_desc": {
+          "source": "PDF file",
+          "message": "PDF file"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3BkZg.desc": {
+          "source": "PDF file",
+          "message": "PDF file"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "message": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.short_desc": {
+          "source": "MS Word docx document",
+          "message": "MS Word docx document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC53b3JkcHJvY2Vzc2luZ21sLmRvY3VtZW50.desc": {
+          "source": "MS Word `docx` document",
+          "message": "MS Word `docx` document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "message": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.short_desc": {
+          "source": "MS PowerPoint pptx document",
+          "message": "MS PowerPoint pptx document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5wcmVzZW50YXRpb25tbC5wcmVzZW50YXRpb24.desc": {
+          "source": "MS PowerPoint `pptx` document",
+          "message": "MS PowerPoint `pptx` document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.display_name": {
+          "source": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "message": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.short_desc": {
+          "source": "MS Excel xlsx document",
+          "message": "MS Excel xlsx document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bWltZV90eXBl.allowed-value.c3RyaW5nOmFwcGxpY2F0aW9uL3ZuZC5vcGVueG1sZm9ybWF0cy1vZmZpY2Vkb2N1bWVudC5zcHJlYWRzaGVldG1sLnNoZWV0.desc": {
+          "source": "MS Excel `xlsx` document",
+          "message": "MS Excel `xlsx` document"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bmFtZQ.display_name": {
+          "source": "Filename",
+          "message": "Filename"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bmFtZQ.short_desc": {
+          "source": "The filename",
+          "message": "The filename"
+        },
+        "app.T3V0bG9vaw.action.c2VuZC1lbWFpbA.option.YXR0YWNobWVudHM.field.bmFtZQ.desc": {
+          "source": "The filename",
+          "message": "The filename"
+        },
         "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.display_name": {
           "source": "Update Contact",
           "message": "Update Contact"
@@ -1282,6 +1638,30 @@
         "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.desc": {
           "source": "Update one or more email addresses for the contact.",
           "message": "Update one or more email addresses for the contact."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.YWRkcmVzcw.display_name": {
+          "source": "Email Address",
+          "message": "Email Address"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.YWRkcmVzcw.short_desc": {
+          "source": "The email address of the contact.",
+          "message": "The email address of the contact."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.YWRkcmVzcw.desc": {
+          "source": "Enter a valid email address for the contact.",
+          "message": "Enter a valid email address for the contact."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.bmFtZQ.display_name": {
+          "source": "Display Name",
+          "message": "Display Name"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.bmFtZQ.short_desc": {
+          "source": "The display name for this email address.",
+          "message": "The display name for this email address."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.ZW1haWxBZGRyZXNzZXM.field.bmFtZQ.desc": {
+          "source": "Enter how you want the name to appear for this email address.",
+          "message": "Enter how you want the name to appear for this email address."
         },
         "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NQaG9uZXM.display_name": {
           "source": "Business Phones",
@@ -1366,6 +1746,66 @@
         "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.desc": {
           "source": "Update the full business address details for the contact.",
           "message": "Update the full business address details for the contact."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y2l0eQ.display_name": {
+          "source": "City",
+          "message": "City"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y2l0eQ.short_desc": {
+          "source": "City name.",
+          "message": "City name."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y2l0eQ.desc": {
+          "source": "Update the city or town for the business address.",
+          "message": "Update the city or town for the business address."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y291bnRyeU9yUmVnaW9u.display_name": {
+          "source": "Country/Region",
+          "message": "Country/Region"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y291bnRyeU9yUmVnaW9u.short_desc": {
+          "source": "Country or region.",
+          "message": "Country or region."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.Y291bnRyeU9yUmVnaW9u.desc": {
+          "source": "Update the country or region for the business address.",
+          "message": "Update the country or region for the business address."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.cG9zdGFsQ29kZQ.display_name": {
+          "source": "Postal Code",
+          "message": "Postal Code"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.cG9zdGFsQ29kZQ.short_desc": {
+          "source": "Postal or zip code.",
+          "message": "Postal or zip code."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.cG9zdGFsQ29kZQ.desc": {
+          "source": "Update the postal code or zip code for the business address.",
+          "message": "Update the postal code or zip code for the business address."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RhdGU.display_name": {
+          "source": "State/Province",
+          "message": "State/Province"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RhdGU.short_desc": {
+          "source": "State or province.",
+          "message": "State or province."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RhdGU.desc": {
+          "source": "Update the state, province, or region for the business address.",
+          "message": "Update the state, province, or region for the business address."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RyZWV0.display_name": {
+          "source": "Street",
+          "message": "Street"
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RyZWV0.short_desc": {
+          "source": "Street address.",
+          "message": "Street address."
+        },
+        "app.T3V0bG9vaw.action.dXBkYXRlLWNvbnRhY3Q.option.YnVzaW5lc3NBZGRyZXNz.field.c3RyZWV0.desc": {
+          "source": "Update the street address including building number and street name.",
+          "message": "Update the street address including building number and street name."
         },
         "app.T3V0bG9vaw.action.bmV3LWNvbnRhY3Q.display_name": {
           "source": "New Contact",

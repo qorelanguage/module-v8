@@ -1,6 +1,6 @@
 # -*- mode: qore; indent-tabs-mode: nil -*-
 
-/*  TypeScriptDataField.qc Copyright (C) 2023 - 2024 Qore Technologies s.r.o.
+/*  TypeScriptDataField.qc Copyright (C) 2023 - 2026 Qore Technologies s.r.o.
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -54,6 +54,22 @@ public class TypeScriptDataField inherits DataProvider::QoreDataField {
                     get_exception_string(ex));
             }
         }
+        return QoreDataField::getType();
+    }
+
+    #! Returns the declared fallback type without invoking a context-dependent dynamic type callback
+    /** Used by presentation catalog extraction, which must remain deterministic and connection-free.
+        @return the static fallback type declared by the producer
+
+        @par Example
+        Inspect a field for a release catalog without invoking its dynamic type callback:
+        @code{.py}
+AbstractDataProviderType declared_type = field.getDeclaredType();
+        @endcode
+
+        @since %TypeScriptActionInterface 1.1
+    */
+    AbstractDataProviderType getDeclaredType() {
         return QoreDataField::getType();
     }
 

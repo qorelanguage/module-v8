@@ -47,11 +47,16 @@ yarn build
 echo "export QORE_TYPESCRIPT_MASTER_ACTION_SCRIPT=${MODULE_SRC_DIR}/ts/dist/index.js" >> ${ENV_FILE}
 . ${ENV_FILE}
 
+# Installed release qualification covers this checkout's master catalogue, never ambient developer/runner fixtures.
+unset QORE_TYPESCRIPT_ACTION_SCRIPTS QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS
+
 # Ensure that every provider presentation string exported by the TypeScript
 # catalogue has a current source-owned native i18n entry, and that no catalog
 # survives for an app that has been removed from the catalogue. Run this only
 # after rebuilding dist/index.js so the base image cannot hide source drift.
-node --test "${MODULE_SRC_DIR}/test/docker_test/sync-i18n-translations.test.mjs"
+node --test \
+    "${MODULE_SRC_DIR}/test/docker_test/sync-i18n-translations.test.mjs" \
+    "${MODULE_SRC_DIR}/test/docker_test/qualification-environment.test.mjs"
 "${MODULE_SRC_DIR}/test/docker_test/check-i18n.sh" \
     "${MODULE_SRC_DIR}/qlib/TypeScriptActionInterface/i18n"
 
@@ -62,7 +67,8 @@ qualification_dir=${MODULE_SRC_DIR}/qualification
 qualification_index=$(mktemp -d)
 trap 'rm -rf "$qualification_index"' EXIT HUP INT TERM
 mkdir -p "$qualification_dir"
-qore "${MODULE_SRC_DIR}/test/docker_test/qualify-provider-discovery.q" \
+env -u QORE_TYPESCRIPT_ACTION_SCRIPTS -u QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS \
+    qore "${MODULE_SRC_DIR}/test/docker_test/qualify-provider-discovery.q" \
     "$qualification_index" \
     "$qualification_dir/provider-discovery-${CI_JOB_NAME:-local}.json"
 

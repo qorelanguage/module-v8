@@ -18,5 +18,11 @@ fi
 # source-tree check validates current roots and translations and rejects missing, duplicate, or
 # orphaned domains without relying on an English app list or a directory-count heuristic.
 export QORE_MODULE_DIR="${src_dir}/qlib${QORE_MODULE_DIR:+:${QORE_MODULE_DIR}}"
+
+# Source-catalog qualification must describe this repository's master catalogue only. Developer and runner
+# environments can point these variables at unrelated Qorus fixtures; loading them here would make test-only apps
+# appear source-owned and could allow an orphan catalog to pass locally.
+unset QORE_TYPESCRIPT_ACTION_SCRIPTS QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS
+
 qore-data-provider-i18n --no-color --check-source-tree --require-standard-locales \
     --require-complete-locales --output "${i18n_dir}"

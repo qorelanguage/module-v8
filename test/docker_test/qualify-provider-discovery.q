@@ -53,6 +53,21 @@ class ProviderDiscoveryQualification {
         }
 
         try {
+            # Qore modules receive their own startup environment snapshot, so
+            # clearing these extension points after process launch cannot
+            # sanitize the TypeScript module. Fail closed if a caller did not
+            # launch this qualification in a clean release environment.
+            if (ENV.QORE_TYPESCRIPT_ACTION_SCRIPTS
+                    || ENV.QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS) {
+                throw "TYPESCRIPT-PROVIDER-QUALIFICATION-UNSANITIZED-ENV",
+                    "release provider qualification must be launched without TypeScript action fixture paths", {
+                        "variables": (
+                            "QORE_TYPESCRIPT_ACTION_SCRIPTS",
+                            "QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS",
+                        ),
+                    };
+            }
+
             # Establish ProviderIndex's eager-discovery mode before loading the
             # TypeScript module, then materialize its exact inventory before a
             # qualification generation takes its revision snapshot.

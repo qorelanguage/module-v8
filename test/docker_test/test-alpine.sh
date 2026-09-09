@@ -50,6 +50,8 @@ echo "export QORE_TYPESCRIPT_MASTER_ACTION_SCRIPT=${MODULE_SRC_DIR}/ts/dist/inde
 
 # Installed release qualification covers this checkout's master catalogue, never ambient developer/runner fixtures.
 unset QORE_TYPESCRIPT_ACTION_SCRIPTS QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS
+unset QORE_DATA_PROVIDERS QORE_CONNECTION_PROVIDERS QORE_DATASOURCE_PROVIDERS
+unset QORE_PROVIDER_INDEX_DIR
 
 # Ensure that every provider presentation string exported by the TypeScript
 # catalogue has a current source-owned native i18n entry, and that no catalog
@@ -69,6 +71,8 @@ qualification_index=$(mktemp -d)
 trap 'rm -rf "$qualification_index"' EXIT HUP INT TERM
 mkdir -p "$qualification_dir"
 env -u QORE_TYPESCRIPT_ACTION_SCRIPTS -u QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS \
+    -u QORE_DATA_PROVIDERS -u QORE_CONNECTION_PROVIDERS -u QORE_DATASOURCE_PROVIDERS \
+    -u QORE_PROVIDER_INDEX_DIR \
     qore "${MODULE_SRC_DIR}/test/docker_test/qualify-provider-discovery.q" \
     "$qualification_index" \
     "$qualification_dir/provider-discovery-${CI_JOB_NAME:-local}.json"

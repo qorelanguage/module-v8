@@ -58,12 +58,20 @@ class ProviderDiscoveryQualification {
             # sanitize the TypeScript module. Fail closed if a caller did not
             # launch this qualification in a clean release environment.
             if (ENV.QORE_TYPESCRIPT_ACTION_SCRIPTS
-                    || ENV.QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS) {
+                    || ENV.QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS
+                    || ENV.QORE_DATA_PROVIDERS
+                    || ENV.QORE_CONNECTION_PROVIDERS
+                    || ENV.QORE_DATASOURCE_PROVIDERS
+                    || ENV.QORE_PROVIDER_INDEX_DIR) {
                 throw "TYPESCRIPT-PROVIDER-QUALIFICATION-UNSANITIZED-ENV",
-                    "release provider qualification must be launched without TypeScript action fixture paths", {
+                    "release provider qualification must be launched without fixture or provider auto-load paths", {
                         "variables": (
                             "QORE_TYPESCRIPT_ACTION_SCRIPTS",
                             "QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS",
+                            "QORE_DATA_PROVIDERS",
+                            "QORE_CONNECTION_PROVIDERS",
+                            "QORE_DATASOURCE_PROVIDERS",
+                            "QORE_PROVIDER_INDEX_DIR",
                         ),
                     };
             }

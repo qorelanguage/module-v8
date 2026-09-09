@@ -91,7 +91,11 @@ When changing the producer boundary:
 7. build the AOT qmod against the matching Qore `DataProvider` version and run normal, AST, and AOT test modes.
 
 Release CI then runs `test/docker_test/qualify-provider-discovery.q` against the installed module set, with ambient
-`QORE_DATA_PROVIDERS` source discovery disabled. Before opening a qualification generation, the script selects the
+TypeScript fixture paths and the `QORE_DATA_PROVIDERS`, `QORE_CONNECTION_PROVIDERS`, and
+`QORE_DATASOURCE_PROVIDERS` auto-load paths plus the `QORE_PROVIDER_INDEX_DIR` cached-index overlay removed before
+the Qore process starts. Qore modules receive their own startup environment snapshots, so clearing these variables
+inside the qualification script would be too late; the script also fails closed if a caller launches it without the
+clean boundary. Before opening a qualification generation, the script selects the
 same eager-discovery options as `ProviderIndex`, loads `TypeScriptActionInterface` inside the structured error
 boundary, completes its static initializer, and dynamically verifies that the exact TypeScript inventory is non-empty
 before ProviderIndex can publish. After ProviderIndex returns, the script verifies that the qualified app/action sets

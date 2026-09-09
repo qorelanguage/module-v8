@@ -21,7 +21,7 @@ afterEach(() => {
   }
 });
 
-test("release qualification rejects ambient action fixture paths", () => {
+test("release qualification rejects ambient fixture and provider paths", () => {
   const work = mkdtempSync(
     join(tmpdir(), "module-v8-qualification-environment-"),
   );
@@ -36,6 +36,10 @@ test("release qualification rejects ambient action fixture paths", () => {
         ...process.env,
         QORE_TYPESCRIPT_ACTION_SCRIPTS: "/tmp/unrelated-actions.js",
         QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS: "/tmp/unrelated-test-actions.js",
+        QORE_DATA_PROVIDERS: "UnrelatedDataProvider",
+        QORE_CONNECTION_PROVIDERS: "UnrelatedConnectionProvider",
+        QORE_DATASOURCE_PROVIDERS: "UnrelatedDatasourceProvider",
+        QORE_PROVIDER_INDEX_DIR: "/tmp/unrelated-provider-index",
       },
     },
   );
@@ -50,5 +54,9 @@ test("release qualification rejects ambient action fixture paths", () => {
   assert.deepEqual(report.error.argument.variables, [
     "QORE_TYPESCRIPT_ACTION_SCRIPTS",
     "QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS",
+    "QORE_DATA_PROVIDERS",
+    "QORE_CONNECTION_PROVIDERS",
+    "QORE_DATASOURCE_PROVIDERS",
+    "QORE_PROVIDER_INDEX_DIR",
   ]);
 });

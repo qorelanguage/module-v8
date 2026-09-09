@@ -105,10 +105,14 @@ the base image cannot hide source drift), runs
 `qlib/TypeScriptActionInterface/i18n`. It prepends this checkout to
 `QORE_MODULE_DIR` so that an installed `TypeScriptActionInterface` cannot hide
 source drift, and fails on any catalog that is stale, missing, duplicated, or
-not owned by this module. The comparison is semantic (parsed JSON), so message
-ordering does not matter.
+not owned by this module. It also removes ambient TypeScript fixture paths and
+data-, connection-, and datasource-provider auto-load paths, as well as the
+cached provider-index path, before Qore starts. This prevents developer Qorus
+settings from changing the observed release catalog. The comparison is
+semantic (parsed JSON), so message ordering does not matter.
 
 Both container jobs also run the synchronization utility's Node unit and
 integration tests. They cover preservation, stale-entry and orphan removal, new
 domains, extra locales, malformed catalogs, locale mismatches, missing inputs,
-and the command-line interface.
+the command-line interface, and rejection of an unsanitized qualification
+environment.

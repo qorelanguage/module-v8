@@ -20,9 +20,11 @@ fi
 export QORE_MODULE_DIR="${src_dir}/qlib${QORE_MODULE_DIR:+:${QORE_MODULE_DIR}}"
 
 # Source-catalog qualification must describe this repository's master catalogue only. Developer and runner
-# environments can point these variables at unrelated Qorus fixtures; loading them here would make test-only apps
-# appear source-owned and could allow an orphan catalog to pass locally.
+# environments can point these variables at unrelated Qorus fixtures or provider modules; loading them here would
+# make test-only or foreign registrations affect the release catalog.
 unset QORE_TYPESCRIPT_ACTION_SCRIPTS QORE_TYPESCRIPT_ACTION_TEST_SCRIPTS
+unset QORE_DATA_PROVIDERS QORE_CONNECTION_PROVIDERS QORE_DATASOURCE_PROVIDERS
+unset QORE_PROVIDER_INDEX_DIR
 
 qore-data-provider-i18n --no-color --check-source-tree --require-standard-locales \
     --require-complete-locales --output "${i18n_dir}"

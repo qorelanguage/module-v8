@@ -89,6 +89,14 @@ module TypeScriptActionInterface {
       \c AllowedValueInfo conversion, and a lightweight app/action identity inventory for qualified provider-index
       discovery; raw payload hashes containing a \c value member remain opaque, and source failures before identity
       publication remain structural qualification failures until the exact source succeeds
+    - a revision mismatch between this module and the TypeScript action script it loads no longer fails
+      obscurely in either direction: the action catalogue asserts the registration API it requires before
+      registering anything, naming exactly what an older module does not provide, and this module reports an
+      action script that predates \c registerDiscoveryInventory() and therefore leaves qualified discovery
+      with no exact inventory for its apps. The latter is reported once per action script and retained by
+      TypeScriptActionInterface::getIncompleteInventorySources(); such scripts keep working unchanged
+    - fixed TypeScriptActionInterface::registerDiscoveryInventory() to accept an app-only identity batch, as
+      published for an app with no actions; it previously failed with a runtime type error
     - HubSpot requests optional CMS page and domain-read scopes without adding required CRM installation
       permissions. Its synchronous REST client verifies current token grants before CMS calls and reports
       actionable capability and account-entitlement errors. Existing connections need reauthorization to

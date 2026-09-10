@@ -34,6 +34,38 @@ export interface IQoreApi {
   registerAction: (action: TQoreAppAction) => void;
 }
 
+// Every callback this catalogue needs from the TypeScriptActionInterface module.
+// The module builds the API hash from its own source, so a module older than this
+// bundle simply omits the members it does not know about.  Asserting the whole set
+// up front turns that into one line naming what is missing, instead of a TypeError
+// raised many frames deep in a per-app registration loop (or, for a callback that
+// is only used on some paths, a failure that appears much later).
+const REQUIRED_QORE_API: ReadonlyArray<keyof IQoreApi> = [
+  'registerDiscoveryInventory',
+  'registerApp',
+  'registerExistingApp',
+  'registerAction',
+];
+
+/** Asserts that the Qore side provides every registration callback this bundle uses.
+    Throws before anything is registered, so a version-skewed pair cannot half-register
+    a catalogue. */
+export const assertQoreApi = (api: IQoreApi): void => {
+  const present = api ? Object.keys(api) : [];
+  const missing = REQUIRED_QORE_API.filter(
+    (name) => typeof (api as unknown as Record<string, unknown>)?.[name] !== 'function'
+  );
+  if (missing.length) {
+    throw new Error(
+      `the TypeScriptActionInterface module does not provide the registration ` +
+        `${missing.length === 1 ? 'callback' : 'callbacks'} ${missing.join(', ')} required by this ` +
+        `action catalogue build (provided: ${present.length ? present.join(', ') : '<none>'}); the module ` +
+        `is older than this bundle -- rebuild and install the module, or rebuild this bundle from the ` +
+        `same source revision as the module`
+    );
+  }
+};
+
 // Curated list of the app directories that make up NEW_APPS. These apps are
 // loaded lazily by path on demand (loadAppFromPath) instead of being imported
 // eagerly; this list is the lazy equivalent of the former NEW_APPS object and
@@ -200,6 +232,7 @@ export class ActionsCatalogue {
 
   @Log('Initializing the Actions Catalogue')
   registerAppActions(api: IQoreApi) {
+    assertQoreApi(api);
     this.initializeCatalogue();
 
     // Register new apps
@@ -220,6 +253,7 @@ export class ActionsCatalogue {
   }
 
   registerCustomApp(api: IQoreApi, appFolder: string) {
+    assertQoreApi(api);
     const appPath = path.resolve(appsDir, appFolder);
     const indexPath = path.join(appPath, 'index.js');
 
@@ -359,6 +393,7 @@ export class ActionsCatalogue {
       registered pending from the manifest, so only used apps are ever loaded
       (and only then is the app's SDK pulled in). */
   loadAppFromPath(api: IQoreApi, appPath: string): string {
+    assertQoreApi(api);
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require(appPath);
     const getApp = mod && (mod.default || mod);

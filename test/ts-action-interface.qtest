@@ -51,6 +51,7 @@ public class TypeScriptActionInterfaceTest inherits QUnit::Test {
         addTestCase("structured field choices", \structuredFieldChoicesTest());
         addTestCase("producer schema boundary", \producerSchemaBoundaryTest());
         addTestCase("eager registration failure reporting", \eagerRegistrationFailureTest());
+        addTestCase("producer identity contract skew", \inventoryContractSkewTest());
 
         # Return for compatibility with test harnesses that check the script's return value
         set_return_value(main());
@@ -1131,6 +1132,19 @@ var obj = {
         assertEq(("replacement-action",),
             (map $1.action, inventory, exists $1.action),
             "a replacement batch removes stale action identities exactly");
+        # an app with no actions publishes an app-only batch, whose action set is empty and not absent
+        TypeScriptActionInterface::registerDiscoveryInventory(({
+            "app": inventory_app,
+        },));
+        assertEq(++inventory_revision,
+            DataProviderActionCatalog::getCatalogRevision(),
+            "an app-only batch replaces the inventory atomically");
+        inventory = map $1,
+            TypeScriptActionInterface::getDiscoveryInventory(),
+            $1.app == inventory_app;
+        assertEq((inventory_app,), (map $1.app, inventory),
+            "an app-only batch records the app with an empty action set");
+
         TypeScriptActionInterface::deregisterDynamicApp(inventory_app);
         assertEq(++inventory_revision,
             DataProviderActionCatalog::getCatalogRevision(),
@@ -1336,6 +1350,89 @@ var obj = {
     }
 
     #! Eager TypeScript registration failures retain machine-readable action identity without relying on output
+    #! Returns the JavaScript literal for a minimal dynamic app named \a app
+    private string appSource(string app) {
+        return sprintf("{
+                'name': '%s',
+                'display_name': '%s',
+                'short_desc': 'producer contract test',
+                'desc': 'producer contract test',
+                'groups': ['Other'],
+                'logo': 'AA==',
+                'logo_file_name': 'test.svg',
+                'logo_mime_type': 'image/svg+xml',
+                'dynamic': true,
+            }", app, app);
+    }
+
+    #! Returns a pool whose action script registers \a apps, optionally publishing identity batches
+    private JavaScriptProgramPool contractPool(string path, bool publish_inventory, list<string> apps) {
+        string body;
+        foreach string app in (apps) {
+            if (publish_inventory) {
+                body += sprintf("            api.registerDiscoveryInventory([{'app': '%s'}]);\n", app);
+            }
+            body += sprintf("            api.registerApp(%s);\n", appSource(app));
+        }
+        return new JavaScriptProgramPool(sprintf("var exports = {};
+var obj = {
+    'actionsCatalogue': {
+        'registerAppActions': function (api) {
+%s        }
+    }
+};", body), path, sub (JavaScriptProgram pgm) {
+            pgm.getGlobal().obj.actionsCatalogue.registerAppActions(TypeScriptActionInterface::Api);
+        });
+    }
+
+    #! A module and an action script built from different revisions must not fail silently
+    /** Both directions of the skew are covered: an action script older than the module never publishes
+        identity batches, which is reported but must keep working; a script newer than the module asserts the
+        registration API it needs, which is covered by the catalogue's own test suite.
+    */
+    private inventoryContractSkewTest() {
+        # a current action script publishes each complete identity batch before registering its app
+        string current_app = "TypeScriptCurrentBundle_" + get_random_string(8);
+        string current_path = "current-bundle-" + get_random_string(8) + ".js";
+        {
+            JavaScriptProgramPool current_pool = contractPool(current_path, True, (current_app,));
+            on_exit TypeScriptActionInterface::deregisterDynamicApp(current_app);
+            assertEq(current_app,
+                DataProviderActionCatalog::getAppEx(current_app).name,
+                "an action script observing the producer contract registers its app");
+            assertEq((current_app,),
+                (map $1.app, TypeScriptActionInterface::getDiscoveryInventory(),
+                    $1.app == current_app),
+                "the published identity batch reaches the producer inventory");
+            assertEq((),
+                (map $1, TypeScriptActionInterface::getIncompleteInventorySources(),
+                    $1 == current_path),
+                "a script observing the producer contract is not reported as incomplete");
+        }
+
+        # an action script built before registerDiscoveryInventory() existed publishes no batch at all
+        string legacy_app = "TypeScriptLegacyBundle_" + get_random_string(8);
+        string legacy_other_app = "TypeScriptLegacyOther_" + get_random_string(8);
+        string legacy_path = "legacy-bundle-" + get_random_string(8) + ".js";
+        {
+            JavaScriptProgramPool legacy_pool = contractPool(legacy_path, False,
+                (legacy_app, legacy_other_app));
+            on_exit {
+                TypeScriptActionInterface::deregisterDynamicApp(legacy_app);
+                TypeScriptActionInterface::deregisterDynamicApp(legacy_other_app);
+            }
+            assertEq(legacy_app, DataProviderActionCatalog::getAppEx(legacy_app).name,
+                "an action script predating the inventory API still registers its apps");
+            assertEq(legacy_other_app,
+                DataProviderActionCatalog::getAppEx(legacy_other_app).name,
+                "reporting the skew does not abort the rest of the catalogue");
+            assertEq((legacy_path,),
+                (map $1, TypeScriptActionInterface::getIncompleteInventorySources(),
+                    $1 == legacy_path),
+                "the skewed action script is reported exactly once, not once per app");
+        }
+    }
+
     private eagerRegistrationFailureTest() {
         string app = "TypeScriptFailure_" + get_random_string(8);
         JavaScriptProgramPool pool("", "failure-test.js", sub (JavaScriptProgram pgm) {});

@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { forEach } from 'lodash';
 import { join } from 'node:path';
-import { ActionsCatalogue, actionsCatalogue } from '../ActionsCatalogue';
+import { ActionsCatalogue, actionsCatalogue, assertQoreApi, IQoreApi } from '../ActionsCatalogue';
 import en from '../i18n/en';
 import { APP_GROUPS, isValidAppGroup } from '../i18n/groups';
 
@@ -47,6 +47,48 @@ describe('Qorus Apps Catalogue tests', () => {
         expect(declared).toContain(`${action.app}/${action.action}`);
       },
     });
+  });
+
+  it('Asserts the Qore registration API before registering anything', () => {
+    const catalogue = new ActionsCatalogue();
+    const registerApp = jest.fn();
+    const registerAction = jest.fn();
+    // a TypeScriptActionInterface module older than this bundle omits the API members it
+    // does not know about; the catalogue must say so instead of failing deep in a loop
+    const legacyApi = {
+      registerApp,
+      registerExistingApp: jest.fn(),
+      registerAction,
+    } as unknown as IQoreApi;
+
+    expect(() => catalogue.registerAppActions(legacyApi)).toThrow(/registerDiscoveryInventory/);
+    expect(() => catalogue.registerAppActions(legacyApi)).toThrow(
+      /module is older than this bundle/
+    );
+    expect(registerApp).not.toHaveBeenCalled();
+    expect(registerAction).not.toHaveBeenCalled();
+
+    // every missing callback is named in one error, not discovered one at a time
+    expect(() => assertQoreApi({} as unknown as IQoreApi)).toThrow(
+      /registerDiscoveryInventory, registerApp, registerExistingApp, registerAction/
+    );
+    // a non-function member is as unusable as an absent one
+    expect(() =>
+      assertQoreApi({
+        registerDiscoveryInventory: 'nope',
+        registerApp,
+        registerExistingApp: jest.fn(),
+        registerAction,
+      } as unknown as IQoreApi)
+    ).toThrow(/registerDiscoveryInventory/);
+    expect(() =>
+      assertQoreApi({
+        registerDiscoveryInventory: jest.fn(),
+        registerApp,
+        registerExistingApp: jest.fn(),
+        registerAction,
+      })
+    ).not.toThrow();
   });
 
   it('Should register the apps', () => {

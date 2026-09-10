@@ -243,6 +243,14 @@ public class TypeScriptActionInterface {
         #! Source-load failures that prevent a complete producer inventory from being published
         static hash<string, hash<ExceptionInfo>> discovery_inventory_failure_map;
 
+        #! Action script sources that registered an app without publishing its identity batch first
+        /** Such a script predates registerDiscoveryInventory() in this module; its apps still work, but
+            qualified discovery has no exact inventory for them, which is otherwise silent.
+
+            @see getIncompleteInventorySources()
+        */
+        static hash<string, bool> incomplete_inventory_source_map;
+
         #! Leaf lock guarding the lightweight producer inventory
         static Mutex discovery_inventory_lock();
 
@@ -551,6 +559,25 @@ TypeScriptActionInterface::clearDiscoverySourceFailure(source);
             DiscoveryInventoryProviderName);
     }
 
+    #! Returns action script sources that register apps without publishing identity batches
+    /** A script built before registerDiscoveryInventory() existed never publishes a complete identity batch,
+        so its apps register and work normally while qualified discovery has no exact inventory to check them
+        against.  That combination -- a module newer than the action script it loads -- is otherwise silent, so
+        each such source is reported once as a warning and retained here for diagnostics.
+
+        The opposite skew (a script newer than the module) is not silent: the script asserts the registration
+        API it needs before registering anything and names what the module does not provide.
+
+        @return the action script paths seen registering an app without a complete identity batch, sorted; an
+            empty list when every registration observed the current producer contract
+
+        @since %TypeScriptActionInterface 1.1
+    */
+    static list<string> getIncompleteInventorySources() {
+        AutoLock al(discovery_inventory_lock);
+        return sort(keys incomplete_inventory_source_map);
+    }
+
     #! Publishes a complete lightweight producer identity batch before schema materialization
     /** The TypeScript catalogue calls this once for one app and all of its actions before invoking the first
         registration callback. A malformed earlier record therefore cannot hide later action identities from
@@ -577,7 +604,9 @@ TypeScriptActionInterface::registerDiscoveryInventory((
         }
         *string app;
         bool has_app_identity;
-        hash<string, bool> actions;
+        # explicitly empty: declared values are not auto-initialized, and an app with no actions
+        # publishes an app-only batch, which must record an empty action set rather than no value
+        hash<string, bool> actions = {};
         foreach auto identity_value in (identities) {
             hash<auto> identity;
             if (identity_value instanceof JavaScriptObject) {
@@ -1005,6 +1034,7 @@ TypeScriptActionInterface::registerDiscoveryInventory((
                     "app", app.name, NOTHING, ex);
                 rethrow;
             }
+            TypeScriptActionInterface::checkDiscoveryInventoryContract(app_data, pool, first);
             TypeScriptActionInterface::registerApp(app_data, pool);
         }
     }
@@ -1032,6 +1062,7 @@ TypeScriptActionInterface::registerDiscoveryInventory((
                     "app", app.name, NOTHING, ex);
                 rethrow;
             }
+            TypeScriptActionInterface::checkDiscoveryInventoryContract(app_data, pool, first);
             TypeScriptActionInterface::registerExistingApp(app_data, pool);
         }
     }
@@ -3389,6 +3420,59 @@ TypeScriptActionInterface::registerDiscoveryInventory((
         bool rv = exists discovery_inventory_batch_map{app};
         remove discovery_inventory_batch_map{app};
         return rv;
+    }
+
+    #! Checks one JavaScript app registration against the producer identity contract
+    /** Called only from the JavaScript registration boundary, where the action script is the caller and the
+        contract applies: the complete identity batch must already have been published for \a app_data.
+        Registrations made directly from %Qore (dynamic apps, tests) do not go through here.
+
+        @param app_data the app hash converted from JavaScript
+        @param pool the pool whose action script is registering the app
+        @param first whether this is the first registration for the pool's program
+    */
+    static private checkDiscoveryInventoryContract(hash<auto> app_data, JavaScriptProgramPool pool,
+            *bool first) {
+        # clone-mode registrations intentionally skip inventory publication
+        if (!first || _pool_clone_mode || app_data.name.typeCode() != NT_STRING || !app_data.name.val()) {
+            return;
+        }
+        if (TypeScriptActionInterface::hasDiscoveryInventoryBatch(app_data.name)) {
+            return;
+        }
+        TypeScriptActionInterface::reportMissingDiscoveryInventoryBatch(app_data.name, pool.getPath());
+    }
+
+    #! Returns whether a complete identity batch is waiting for \a app, leaving the marker in place
+    /** Used at the JavaScript registration boundary to detect an action script that predates
+        registerDiscoveryInventory(); the marker itself is consumed later by the app registration.
+    */
+    static private bool hasDiscoveryInventoryBatch(string app) {
+        AutoLock al(discovery_inventory_lock);
+        return exists discovery_inventory_batch_map{app};
+    }
+
+    #! Reports one action script registering an app without publishing its identity batch first
+    /** Reported once per source: the condition is a property of the script, not of the app, and a catalogue
+        registers many apps.  This is a warning and not an error because such a script is otherwise
+        functional -- raising here would break action scripts built against an earlier producer contract.
+
+        @param app the app being registered without a complete identity batch
+        @param source the action script path registering it
+    */
+    static private reportMissingDiscoveryInventoryBatch(string app, string source) {
+        {
+            AutoLock al(discovery_inventory_lock);
+            if (incomplete_inventory_source_map{source}) {
+                return;
+            }
+            incomplete_inventory_source_map{source} = True;
+        }
+        # logged outside the inventory lock: the logger is not in this lock's order
+        TSAI::warn("TypeScriptActionInterface: action script %y registered app %y without publishing a "
+            "complete producer identity batch first; it predates the registerDiscoveryInventory() API in "
+            "this module, so qualified discovery has no exact inventory for its apps; rebuild the action "
+            "script from the same source revision as this module", source, app);
     }
 
     #! Appends one unambiguous typed component to a producer schema path
